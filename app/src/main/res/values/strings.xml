@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EmaishaAgentsApp</string>
+    <string name="app_name">eMaisha-Agent</string>
     <string name="don_t_have_an_account_swipe_right_to">Don’t have an account? Swipe right to</string>
     <string name="create_a_new_account">Create a New Account.</string>
     <string name="welcome_please_login_to_your_account">Welcome, Please Login to your Account</string>
@@ -8,4 +8,37 @@
     <string name="next">Next</string>
     <string name="forgot_password">Forgot password</string>
     <string name="logo">logo</string>
+    <string name="sign_up">Sign up</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email_address">Email Address</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="next_of_kin">Next of Kin</string>
+    <string name="next_of_kin_relation">Next of Kin Relation</string>
+    <string name="next_of_kin_contact">Next of Kin Contact</string>
+    <string name="nin">National ID NIN</string>
+    <string name="submit">Submit</string>
+    <string name="upload_your_photo">Upload Your Photo</string>
+    <string name="upload_your_nid">Upload Your National ID</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="we_sent_a_code">We sent a code via SMS to verify your mobile number</string>
+    <string name="enter_otp_number">Enter Your OTP Number</string>
+    <string name="didnt_receive_code">I didn\'t recieve a code!</string>
+    <string name="resend_code">Resend Code</string>
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="enter_the_phone_number_you_used_to_create_your_account_and_we_will_send_you_an_otp_to_reset_your_password">Enter the Phone number you used to create your account and we will send you an OTP to reset your password</string>
+    <string name="send_otp">Send OTP</string>
+    <array name="district_array">
+        <item>District</item>
+        <item>Wakiso</item>
+    </array>
+    <array name="sub_county_array">
+        <item>Sub County</item>
+        <item>Wakiso</item>
+    </array>
+    <array name="village_array">
+        <item>Village</item>
+        <item>Wakiso</item>
+    </array>
 </resources>

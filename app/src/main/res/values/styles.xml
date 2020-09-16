@@ -7,9 +7,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="button_style" parent="TextAppearance.AppCompat.Button">
+    <style name="button_style" parent="Widget.AppCompat.Button">
 
-
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/rounded_rectangle_button</item>
     </style>
 
 </resources>
