@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">EmaishaAgentsApp</string>
+    <string name="don_t_have_an_account_swipe_right_to">Don’t have an account? Swipe right to</string>
+    <string name="create_a_new_account">Create a New Account.</string>
+    <string name="welcome_please_login_to_your_account">Welcome, Please Login to your Account</string>
+    <string name="email_address_mobile_number">Email Address / Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="next">Next</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="logo">logo</string>
+</resources>
