@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.cabraltech.emaishaagentsapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 TextView createAccountTv, forgotPasswordTv;
+Button nextBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,7 @@ TextView createAccountTv, forgotPasswordTv;
 
         createAccountTv = findViewById(R.id.create_new_account_tv);
         forgotPasswordTv = findViewById(R.id.forgot_password_tv);
+        nextBtn = findViewById(R.id.next_button);
 
         createAccountTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +35,13 @@ TextView createAccountTv, forgotPasswordTv;
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
                 v.getContext().startActivity(intent);
             }
         });

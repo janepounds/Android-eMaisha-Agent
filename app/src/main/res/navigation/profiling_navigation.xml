@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profiling_navigation"
+    app:startDestination="@id/profilingHomeFragment">
+
+    <fragment
+        android:id="@+id/profilingHomeFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingHomeFragment"
+        android:label="Profiling"
+        tools:layout="@layout/fragment_profiling_home" />
+    <fragment
+        android:id="@+id/profilingFarmerFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingFarmerFragment"
+        android:label="farmer"
+        tools:layout="@layout/fragment_profiling_farmer"/>
+    <fragment
+        android:id="@+id/profilingAssociationFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAssociationFragment"
+        android:label="@string/label_association"
+        tools:layout="@layout/fragment_profiling_association"/>
+    <fragment
+        android:id="@+id/profilingAgroInputDealersFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAgroInputDealerFragment"
+        android:label="@string/label_agro_input_dealer"
+        tools:layout="@layout/fragment_profiling_agro_input_dealer"/>
+    <fragment
+        android:id="@+id/profilingBulkBuyersFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingBulkBuyersFragment"
+        android:label="@string/label_bulk_buyers"
+        tools:layout="@layout/fragment_profiling_bulk_buyers"/>
+</navigation>

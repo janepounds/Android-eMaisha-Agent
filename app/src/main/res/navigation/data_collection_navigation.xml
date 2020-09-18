@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/data_collection_navigation"
+    app:startDestination="@id/dataCollectionHomeFragment">
+
+    <fragment
+        android:id="@+id/dataCollectionHomeFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionHomeFragment"
+        android:label="fragment_data_collection_home"
+        tools:layout="@layout/fragment_data_collection_home" />
+</navigation>
