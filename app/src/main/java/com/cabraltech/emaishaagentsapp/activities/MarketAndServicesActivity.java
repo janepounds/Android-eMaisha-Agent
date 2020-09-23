@@ -13,8 +13,8 @@ public class MarketAndServicesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_and_services);
-        getSupportActionBar().setTitle(R.string.label_market_services);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setItemIconTintList(null);
+       // getSupportActionBar().setTitle(R.string.label_market_services);
+        // navView = findViewById(R.id.nav_view);
+        //navView.setItemIconTintList(null);
     }
 }

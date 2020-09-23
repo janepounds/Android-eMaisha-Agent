@@ -21,12 +21,14 @@ public class ProfilingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profiling);
         getSupportActionBar().setTitle(R.string.label_profiling);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setItemIconTintList(null);
-        navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+      //  BottomNavigationView navView = findViewById(R.id.nav_view);
+       // navView.setItemIconTintList(null);
+       // navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
     }
-    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+   /* private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
@@ -49,5 +51,5 @@ public class ProfilingActivity extends AppCompatActivity {
             ProfilingActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
             return true;
         }
-    };
+    };*/
 }

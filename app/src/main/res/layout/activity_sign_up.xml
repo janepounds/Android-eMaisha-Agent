@@ -155,7 +155,7 @@
                             android:id="@+id/village_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:entries="@array/district_array"
+                            android:entries="@array/village_array"
                             />
 
                     </LinearLayout>

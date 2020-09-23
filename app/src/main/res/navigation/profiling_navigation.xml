@@ -10,12 +10,29 @@
         android:id="@+id/profilingHomeFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingHomeFragment"
         android:label="Profiling"
-        tools:layout="@layout/fragment_profiling_home" />
+        tools:layout="@layout/fragment_profiling_home" >
+        <action
+            android:id="@+id/action_profilingHomeFragment_to_profilingFarmerFragment3"
+            app:destination="@id/profilingFarmerFragment" />
+        <action
+            android:id="@+id/action_profilingHomeFragment_to_profilingAssociationFragment2"
+            app:destination="@id/profilingAssociationFragment" />
+        <action
+            android:id="@+id/action_profilingHomeFragment_to_profilingAgroInputDealersFragment2"
+            app:destination="@id/profilingAgroInputDealersFragment" />
+        <action
+            android:id="@+id/action_profilingHomeFragment_to_profilingBulkBuyersFragment2"
+            app:destination="@id/profilingBulkBuyersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilingFarmerFragment"
-        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingFarmerFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingFarmerStep1Fragment"
         android:label="farmer"
-        tools:layout="@layout/fragment_profiling_farmer"/>
+        tools:layout="@layout/fragment_profiling_farmer_step1">
+        <action
+            android:id="@+id/action_profilingFarmerFragment_to_profilingFarmerStep2Fragment"
+            app:destination="@id/profilingFarmerStep2Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilingAssociationFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAssociationFragment"
@@ -31,4 +48,18 @@
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingBulkBuyersFragment"
         android:label="@string/label_bulk_buyers"
         tools:layout="@layout/fragment_profiling_bulk_buyers"/>
+    <fragment
+        android:id="@+id/profilingFarmerStep2Fragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingFarmerStep2Fragment"
+        android:label="fragment_profiling_farmer_step2"
+        tools:layout="@layout/fragment_profiling_farmer_step2" >
+        <action
+            android:id="@+id/action_profilingFarmerStep2Fragment_to_profilingFarmerStep3Fragment"
+            app:destination="@id/profilingFarmerStep3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilingFarmerStep3Fragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingFarmerStep3Fragment"
+        android:label="fragment_profiling_farmer_step3"
+        tools:layout="@layout/fragment_profiling_farmer_step3" />
 </navigation>

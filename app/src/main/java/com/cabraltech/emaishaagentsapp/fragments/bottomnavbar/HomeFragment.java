@@ -30,7 +30,11 @@ LinearLayout profilingLayout, walletLayout, dataCollectionLayout, marketServices
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("eMaisha Agent");
+
 
         InitializeDashboard(view);
         return view;

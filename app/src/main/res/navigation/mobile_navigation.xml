@@ -8,7 +8,17 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.cabraltech.emaishaagentsapp.fragments.bottomnavbar.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_offers"
+            app:destination="@id/navigation_offers" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_transactions"
+            app:destination="@id/navigation_transactions" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_offers"

@@ -5,7 +5,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
+        <item name="editTextStyle">@style/Widget.AppCompat.EditText</item>
+
     </style>
+    <style name="AppTheme.Widget"/>
+    <style name="AppTheme.Widget.TextView" parent="android:Widget.TextView">
+        <item name="fontPath">fonts/JosefinSans-Regular.ttf</item>
+    </style>
+
 
     <style name="button_style" parent="Widget.AppCompat.Button">
 
@@ -15,6 +23,20 @@
         <item name="android:background">@drawable/rounded_rectangle_button</item>
     </style>
 
+    <style name="button_style_previous" parent="Widget.AppCompat.Button">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">#505050</item>
+    </style>
+    <style name="button_style_next" parent="Widget.AppCompat.Button">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:fontFamily">@font/josefin_sans</item>
     </style>
