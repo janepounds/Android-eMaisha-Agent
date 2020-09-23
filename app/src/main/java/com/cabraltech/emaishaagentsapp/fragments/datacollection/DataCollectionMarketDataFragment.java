@@ -1,5 +1,6 @@
 package com.cabraltech.emaishaagentsapp.fragments.datacollection;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,9 +21,14 @@ import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionMarketD
 public class DataCollectionMarketDataFragment extends Fragment {
 
     private FragmentDataCollectionMarketDataBinding fragmentDataCollectionMarketDataBinding;
+    private Context context;
     private NavController navController;
 
-
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
     public DataCollectionMarketDataFragment() {
         // Required empty public constructor
     }

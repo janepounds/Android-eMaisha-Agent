@@ -30,15 +30,15 @@
     <string name="enter_the_phone_number_you_used_to_create_your_account_and_we_will_send_you_an_otp_to_reset_your_password">Enter the Phone number you used to create your account and we will send you an OTP to reset your password</string>
     <string name="send_otp">Send OTP</string>
     <array name="district_array">
-        <item>District</item>
+        <item> </item>
         <item>Wakiso</item>
     </array>
     <array name="sub_county_array">
-        <item>Sub County</item>
+        <item> </item>
         <item>Wakiso</item>
     </array>
     <array name="village_array">
-        <item>Village</item>
+        <item> </item>
         <item>Wakiso</item>
     </array>
     <string name="title_activity_dashboard">MainActivity</string>
@@ -121,6 +121,41 @@
     <string name="date">Date</string>
     <string name="wholesale_price">Wholesale Price</string>
     <string name="retail_price">Retail Price</string>
+    <string name="farmer_name">Farmer Name</string>
+    <string name="district">District</string>
+    <string name="sub_county">Sub-County</string>
+    <string name="village">Village</string>
+    <string name="farmer_phone_number">Farmer Phone No</string>
+    <string name="signs_and_symptoms">Signs and Symptoms</string>
+    <string name="damage_assessment">Damage Assessment</string>
+    <string name="suspected_pest_disease">Suspected Pest/Disease</string>
+    <string name="recommendation">Recommendation</string>
+    <string name="browse">Browse</string>
+    <string name="photo_of_the_damage">Photo of the Damage</string>
+    <string name="infested">Infested</string>
+    <string name="infestation_type">Infestation Type</string>
+    <string name="infestation">Infestation</string>
+    <string name="infestation_level">Infestation Level</string>
+    <string name="edit">Edit</string>
+    <string name="default_user_name">Sserubiri Joseph</string>
+    <string name="user_image_placeholder">user_image</string>
+    <string name="default_user_phone_number">+256-987654312</string>
+    <string name="default_user_location1">Nakibinge, Rd, Kampala,</string>
+    <string name="default_user_location2">Uganda</string>
+    <string name="delivery_addresses">Delivery Addresses</string>
+    <string name="my_orders">My Orders</string>
+    <string name="my_cart">My Cart</string>
+    <string name="my_favorites">My Favorites</string>
+    <string name="my_rating_reviews"><![CDATA[My Rating & Reviews]]></string>
+    <string name="change_password">Change Password</string>
+    <string name="customer_support">Customer Support</string>
+    <string name="official_website">Official Website</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="refund_policy">Refund Policy</string>
+    <string name="news">News</string>
+    <string name="share_app">Share App</string>
+    <string name="rate_app">Rate App</string>
+    <string name="logout">Logout</string>
     <array name="gender_array">
         <item>Gender</item>
         <item>Female</item>
@@ -225,5 +260,10 @@
         <item>Measurement Units</item>
         <item>Kgs</item>
         <item>Tonnes</item>
+    </array>
+    <array name="infested_array">
+        <item> </item>
+        <item>Yes</item>
+        <item>No</item>
     </array>
 </resources>

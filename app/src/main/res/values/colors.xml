@@ -6,4 +6,6 @@
     <color name="splashBg">#EDE7D4</color>
     <color name="activityBg">#F5F6F8</color>
     <color name="lightGray">#f5f5f5</color>
+    <color name="textColor">#929292</color>
+    <color name="activity2Bg">#F9F9F9</color>
 </resources>

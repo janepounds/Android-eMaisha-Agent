@@ -1,27 +1,26 @@
 package com.cabraltech.emaishaagentsapp.fragments.datacollection;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cabraltech.emaishaagentsapp.R;
-import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionFarmDataBinding;
+import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionReportPestBinding;
 
+public class DataCollectionReportPestFragment extends Fragment {
 
-public class DataCollectionFarmDataFragment extends Fragment {
-
-    private FragmentDataCollectionFarmDataBinding binding;
+    private FragmentDataCollectionReportPestBinding binding;
     private Context context;
     private NavController navController;
 
@@ -30,7 +29,7 @@ public class DataCollectionFarmDataFragment extends Fragment {
         super.onAttach(context);
         this.context = context;
     }
-    public DataCollectionFarmDataFragment() {
+    public DataCollectionReportPestFragment() {
         // Required empty public constructor
     }
 
@@ -46,34 +45,27 @@ public class DataCollectionFarmDataFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_data_collection_farm_data, container, false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_data_collection_report_pest, container, false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Farm Data");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Report Pest");
 
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        navController = Navigation.findNavController(view);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
 
-        binding.layoutReportPest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //navigation to step 1
-                navController.navigate(R.id.action_dataCollectionFarmDataFragment_to_dataCollectionReportPestFragment);
+                Intent intent = new Intent(getContext(), DataCollectionMarketDataFragment.class);
+                startActivity(intent);
+                getActivity().finish();
+                return true;
 
-            }
-        });
-
-        binding.layoutScouting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_dataCollectionFarmDataFragment_to_dataCollectionAddScoutingFragment);
-            }
-        });
-
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

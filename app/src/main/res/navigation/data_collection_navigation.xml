@@ -33,7 +33,14 @@
         android:id="@+id/dataCollectionFarmDataFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionFarmDataFragment"
         android:label="fragment_data_collection_farm_data"
-        tools:layout="@layout/fragment_data_collection_farm_data" />
+        tools:layout="@layout/fragment_data_collection_farm_data" >
+        <action
+            android:id="@+id/action_dataCollectionFarmDataFragment_to_dataCollectionReportPestFragment"
+            app:destination="@id/dataCollectionReportPestFragment" />
+        <action
+            android:id="@+id/action_dataCollectionFarmDataFragment_to_dataCollectionAddScoutingFragment"
+            app:destination="@id/dataCollectionAddScoutingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dataCollectionAddMarketFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionAddMarketFragment"
@@ -44,4 +51,14 @@
         android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionAddMarketPriceFragment"
         android:label="fragment_data_collection_add_market_price"
         tools:layout="@layout/fragment_data_collection_add_market_price" />
+    <fragment
+        android:id="@+id/dataCollectionReportPestFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionReportPestFragment"
+        android:label="fragment_data_collection_report_pest"
+        tools:layout="@layout/fragment_data_collection_report_pest" />
+    <fragment
+        android:id="@+id/dataCollectionAddScoutingFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionAddScoutingFragment"
+        android:label="fragment_data_collection_add_scouting"
+        tools:layout="@layout/fragment_data_collection_add_scouting" />
 </navigation>

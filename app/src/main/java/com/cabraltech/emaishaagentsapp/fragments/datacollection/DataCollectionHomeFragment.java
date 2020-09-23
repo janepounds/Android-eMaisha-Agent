@@ -46,6 +46,7 @@ public class DataCollectionHomeFragment extends Fragment {
         fragmentDataCollectionHomeBinding= DataBindingUtil.inflate(inflater,R.layout.fragment_data_collection_home, container, false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         return fragmentDataCollectionHomeBinding.getRoot();
     }
     @Override
