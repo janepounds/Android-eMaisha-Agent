@@ -60,6 +60,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             public void onClick(View v) {
                 //navigation to step 1
 
+                navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment);
 
             }
         });

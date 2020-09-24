@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
         <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
         <item name="editTextStyle">@style/Widget.AppCompat.EditText</item>
 
@@ -21,6 +23,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/rounded_rectangle_button</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
     </style>
 
     <style name="button_style_previous" parent="Widget.AppCompat.Button">
@@ -28,7 +31,8 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">#505050</item>
+        <item name="android:background">@drawable/rounded_rectangle_button_previous</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
     </style>
     <style name="button_style_next" parent="Widget.AppCompat.Button">
 
@@ -36,6 +40,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:fontFamily">@font/josefin_sans</item>
@@ -48,6 +53,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
     </style>
 
 </resources>

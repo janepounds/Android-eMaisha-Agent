@@ -30,15 +30,15 @@
     <string name="enter_the_phone_number_you_used_to_create_your_account_and_we_will_send_you_an_otp_to_reset_your_password">Enter the Phone number you used to create your account and we will send you an OTP to reset your password</string>
     <string name="send_otp">Send OTP</string>
     <array name="district_array">
-        <item> </item>
+        <item></item>
         <item>Wakiso</item>
     </array>
     <array name="sub_county_array">
-        <item> </item>
+        <item></item>
         <item>Wakiso</item>
     </array>
     <array name="village_array">
-        <item> </item>
+        <item></item>
         <item>Wakiso</item>
     </array>
     <string name="title_activity_dashboard">MainActivity</string>
@@ -156,58 +156,94 @@
     <string name="share_app">Share App</string>
     <string name="rate_app">Rate App</string>
     <string name="logout">Logout</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="nationality">Nationality</string>
+    <string name="religion">Religion</string>
+    <string name="level_of_education">Level of Education</string>
+    <string name="marital_status">Marital Status</string>
+    <string name="language_used">Language Used</string>
+    <string name="main_crop">Main Crop</string>
+    <string name="second_crop">Second Crop</string>
+    <string name="third_crop">Third Crop</string>
+    <string name="main_livestock">Main Livestock</string>
+    <string name="crop_value_chain">Crop Value Chain</string>
+    <string name="livestock_value_chain">Livestock Value Chain</string>
+    <string name="main_source_of_funding">Main Source of Funding</string>
+    <string name="certificate_type">Certificate Type</string>
+    <string name="category">Category</string>
+    <string name="commodities">Commodities</string>
+    <string name="market_name">Market Name</string>
+    <string name="town">Town</string>
+    <string name="variety">Variety</string>
+    <string name="measurement_units">Measurement Units</string>
+    <string name="default_percentage_offer">30% OFF</string>
+    <string name="img_placeholder">img_placeholder</string>
+    <string name="exclusive_offers">EXCLUSIVE OFFERS</string>
+    <string name="default_expiry_period">Expires in 20 days</string>
+    <string name="recommended_for_you">Recommended for you</string>
+    <string name="flat_discounts_on_every_purchase">Flat Discounts on Every Purchase</string>
+    <string name="placeholder_text2">10-40% OFF</string>
+    <string name="placeholder_text3">Discount Coupon : 146761</string>
+    <string name="placeholder_text4">15 Days</string>
+    <string name="default_market_price_date">Sep 08, 2020</string>
+    <string name="default_market_price_variety">Yellow Maize</string>
+    <string name="default_market_price_market">Gulu Market</string>
+    <string name="default_market_price_retail_price">UGX 800/Kg</string>
+    <string name="default_market_price_wholesale_price">UGX 500/Kg</string>
+    <string name="confirm_details">Confirm Details</string>
     <array name="gender_array">
-        <item>Gender</item>
+        <item></item>
         <item>Female</item>
         <item>Male</item>
     </array>
     <array name="nationality_array">
-        <item>Nationality</item>
+        <item></item>
         <item>Ugandan</item>
         <item>Rwandan</item>
     </array>
     <array name="religion_array">
-        <item>Religion</item>
+        <item></item>
         <item>Anglican</item>
         <item>Catholic</item>
         <item>Muslim</item>
     </array>
     <array name="level_of_education_array">
-        <item>Level of Education</item>
+        <item></item>
         <item>PLE</item>
         <item>UCE</item>
         <item>UACE</item>
         <item>Degree</item>
     </array>
     <array name="marital_status_array">
-        <item>Marital Status</item>
+        <item></item>
         <item>Single</item>
         <item>Married</item>
         <item>Divorced</item>
         <item>Widowed</item>
     </array>
     <array name="language_used_array">
-        <item>Language Used</item>
+        <item></item>
         <item>English</item>
         <item>Luganda</item>
     </array>
     <array name="main_crop_array">
-        <item>Main Crop</item>
+        <item></item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="second_crop_array">
-        <item>Second Crop</item>
+        <item></item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="third_crop_array">
-        <item>Third Crop</item>
+        <item></item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="main_livestock_array">
-        <item>Main Livestock</item>
+        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
@@ -217,52 +253,52 @@
         <item>Sheep</item>
     </array>
     <array name="livestock_value_chain_array">
-        <item>Livestock Value Chains</item>
+        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="main_source_of_funding_array">
-        <item>Main Source of Funding</item>
+        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="certificate_type_array">
-        <item>Certificate Type</item>
+        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="category_array">
-        <item>Category</item>
+        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="commodities_array">
-        <item>Commodities</item>
+        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="market_name_array">
-        <item>Market Name</item>
+        <item></item>
         <item>Kabusu Market</item>
         <item>Nakulabye Market</item>
     </array>
     <array name="town_array">
-        <item>Town</item>
+        <item></item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="variety_array">
-        <item>Variety</item>
+        <item></item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="measurement_units_array">
-        <item>Measurement Units</item>
+        <item></item>
         <item>Kgs</item>
         <item>Tonnes</item>
     </array>
     <array name="infested_array">
-        <item> </item>
+        <item></item>
         <item>Yes</item>
         <item>No</item>
     </array>

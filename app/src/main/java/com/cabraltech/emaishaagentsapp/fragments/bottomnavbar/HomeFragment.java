@@ -34,7 +34,7 @@ LinearLayout profilingLayout, walletLayout, dataCollectionLayout, marketServices
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("eMaisha Agent");
-
+       // ((AppCompatActivity)getActivity()).getSupportActionBar().getTitle().
 
         InitializeDashboard(view);
         return view;

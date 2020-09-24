@@ -4,10 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.profiling.ProfilingFarmerStep2Fragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activityBg">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_progress_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/enter_contact_details_tv"
             android:layout_width="match_parent"
@@ -49,90 +54,190 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginBottom="@dimen/dimen_20dp"
             app:layout_constraintTop_toBottomOf="@id/farmer_profiling_state_progress_bar">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    android:padding="6dp"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rounded_rectangle_spinner">
-                    <Spinner
-                        android:id="@+id/district_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:entries="@array/district_array"
-                        />
-
-
-                </LinearLayout>
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:padding="6dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rounded_rectangle_spinner">
-
-                    <Spinner
-                        android:id="@+id/sub_county_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/sub_county_array" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    android:padding="6dp"
-                    android:orientation="horizontal"
-
-                    android:background="@drawable/rounded_rectangle_spinner">
-                    <Spinner
-                        android:id="@+id/village_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/village_array"
-                        />
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/phone_number_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/rounded_rectangle_edit_text"
-                    android:hint="@string/phone_number"
-                    android:textSize="14sp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/district"
+                        android:layout_marginBottom="4dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_rectangle_spinner"
+                        android:padding="8dp">
+                        <Spinner
+                            android:id="@+id/district_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:entries="@array/district_array" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginLeft="@dimen/dimen_10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sub_county"
+                        android:layout_marginBottom="4dp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_rectangle_spinner"
+                        android:padding="8dp">
+                        <Spinner
+                            android:id="@+id/sub_county_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:entries="@array/sub_county_array" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/village"
+                        android:layout_marginBottom="4dp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_rectangle_spinner"
+                        android:padding="8dp">
+                        <Spinner
+                            android:id="@+id/village_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:entries="@array/village_array" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginLeft="@dimen/dimen_10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_number"
+                        android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:id="@+id/phone_number_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:inputType="phone"
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_marginEnd="@dimen/dimen_10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next_of_kin"
+                        android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:id="@+id/next_of_kin_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textSize="14sp"
+                        android:background="@drawable/rounded_rectangle_edit_text" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginLeft="@dimen/dimen_10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next_of_kin_relation"
+                        android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:id="@+id/next_of_kin_relation_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textSize="14sp"
+                        android:background="@drawable/rounded_rectangle_edit_text" />
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -141,81 +246,80 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp">
-                <EditText
-                    android:id="@+id/next_of_kin_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/rounded_rectangle_edit_text"
-                    android:hint="@string/next_of_kin"
-                    android:textSize="14sp"
-                    android:layout_weight="1"/>
 
-                <EditText
-                    android:id="@+id/next_of_kin_relation_et"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/rounded_rectangle_edit_text"
-                    android:hint="@string/next_of_kin_relation"
-                    android:textSize="14sp"
+                    android:orientation="vertical"
                     android:layout_weight="1"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp">
-                <EditText
-                    android:id="@+id/next_of_kin_contact_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/rounded_rectangle_edit_text"
-                    android:hint="@string/next_of_kin_contact"
-                    android:textSize="14sp"
-                    android:layout_weight="1"/>
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_marginEnd="@dimen/dimen_10dp">
 
-                <EditText
-                    android:id="@+id/next_of_kin_address_et"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next_of_kin_contact"
+                        android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:id="@+id/next_of_kin_contact_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textSize="14sp"
+                        android:background="@drawable/rounded_rectangle_edit_text" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/rounded_rectangle_edit_text"
-                    android:hint="@string/next_of_kin_address"
-                    android:textSize="14sp"
-                    android:layout_weight="1"/>
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginLeft="@dimen/dimen_10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next_of_kin_address"
+                        android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:id="@+id/next_of_kin_address_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:background="@drawable/rounded_rectangle_edit_text" />
+
+                </LinearLayout>
             </LinearLayout>
+
             </LinearLayout>
+
         <LinearLayout
             android:id="@+id/buttons_farmer_profiling_step2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/farmer_profiling_form_step2">
             <Button
                 android:layout_weight="1"
                 android:id="@+id/previous_button"
                 style="@style/button_style_previous"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 android:text="@string/previous" />
 
             <Button
                 android:layout_weight="1"
                 android:id="@+id/next_button"
-                style="@style/button_style_next"
+                style="@style/button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 android:text="@string/next" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </ScrollView>
 </layout>

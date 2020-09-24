@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SignUpActivity">
+    tools:context=".activities.SignUpActivity"
+    android:background="@color/activityBg">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,7 +57,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@color/lightGray"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginEnd="6dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,201 +69,177 @@
                     android:layout_marginBottom="15dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp">
-                    <EditText
-                        android:id="@+id/first_name_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/first_name"
-                        android:textSize="14sp"
-                        android:layout_weight="1"
-                         />
 
-                    <EditText
-                        android:id="@+id/last_name_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/last_name"
-                        android:textSize="14sp"
-                        android:layout_weight="1"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
                         android:layout_weight="1"
-                        android:padding="6dp"
-                        android:orientation="horizontal"
-                        android:background="@drawable/rounded_rectangle_spinner">
-                    <Spinner
-                        android:id="@+id/district_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp">
 
-                        android:entries="@array/district_array"
-                        />
-
-
-                    </LinearLayout>
-
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginStart="10dp"
-                            android:padding="6dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:background="@drawable/rounded_rectangle_spinner">
-
-                        <Spinner
-                            android:id="@+id/sub_county_spinner"
+                            android:layout_height="wrap_content"
+                            android:text="@string/first_name"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/first_name_et"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:entries="@array/sub_county_array" />
-
-
-                        </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:padding="6dp"
-                        android:orientation="horizontal"
-
-                        android:background="@drawable/rounded_rectangle_spinner">
-                        <Spinner
-                            android:id="@+id/village_spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:entries="@array/village_array"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text"
+                            android:textSize="14sp"
                             />
 
                     </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/phone_number_et"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/phone_number"
-                        android:textSize="14sp"
-                        android:layout_weight="1"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
-                    <EditText
-                        android:id="@+id/email_address_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/email_address"
-                        android:textSize="14sp"
+                        android:orientation="vertical"
                         android:layout_weight="1"
-                        />
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginLeft="@dimen/dimen_10dp">
 
-                    <EditText
-                        android:id="@+id/password_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/password"
-                        android:textSize="14sp"
-                        android:layout_weight="1"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/last_name"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/last_name_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginBottom="15dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
-                    <EditText
-                        android:id="@+id/confirm_password_et"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/confirm_password"
-                        android:textSize="14sp"
                         android:layout_weight="1"
-                        />
-
-                    <EditText
-                        android:id="@+id/next_of_kin_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/next_of_kin"
-                        android:textSize="14sp"
-                        android:layout_weight="1"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
-                    <EditText
-                        android:id="@+id/next_of_kin_relation_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
                         android:layout_marginRight="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/next_of_kin_relation"
-                        android:textSize="14sp"
-                        android:layout_weight="1"
-                        />
+                        android:layout_marginEnd="10dp">
 
-                    <EditText
-                        android:id="@+id/next_of_kin_contact_et"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/district"
+                            android:layout_marginBottom="4dp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_spinner"
+                            android:padding="6dp">
+                            <Spinner
+                                android:id="@+id/district_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:entries="@array/district_array" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/next_of_kin_contact"
-                        android:textSize="14sp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sub_county"
+                            android:layout_marginBottom="4dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_spinner"
+                            android:padding="6dp">
+                            <Spinner
+                                android:id="@+id/sub_county_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:entries="@array/sub_county_array" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/village"
+                            android:layout_marginBottom="4dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rounded_rectangle_spinner"
+                            android:padding="6dp">
+                            <Spinner
+                                android:id="@+id/village_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:entries="@array/village_array" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/phone_number"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/phone_number_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:inputType="phone"
+                            android:background="@drawable/rounded_rectangle_edit_text"
+                            />
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -269,16 +249,174 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp">
 
-
-                    <EditText
-                        android:id="@+id/nin_et"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:hint="@string/nin"
-                        android:textSize="14sp"
-                        android:layout_weight="1"/>
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/email_address"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/email_address_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/password"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/password_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text" />
+
+                    </LinearLayout>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/confirm_password"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/confirm_password_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/next_of_kin"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/next_of_kin_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text" />
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/next_of_kin_relation"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/next_of_kin_relation_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/next_of_kin_contact"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/next_of_kin_contact_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/nin"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/nin_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text" />
+
+                    </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

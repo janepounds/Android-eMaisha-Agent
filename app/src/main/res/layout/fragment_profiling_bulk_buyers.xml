@@ -2,6 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragments.profiling.ProfilingBulkBuyersFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activityBg">
 
     <LinearLayout
         android:id="@+id/agro_trader_form"
@@ -10,81 +14,63 @@
         android:layout_marginTop="15dp"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="15dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_rectangle_spinner"
-                android:orientation="horizontal"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp">
 
-                android:padding="6dp">
-
-                <Spinner
-                    android:id="@+id/category_spinner"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category"
+                    android:layout_marginBottom="4dp"
+                    />
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:entries="@array/category_array" />
-
+                    android:background="@drawable/rounded_rectangle_spinner"
+                    android:padding="8dp">
+                    <Spinner
+                        android:id="@+id/category_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:entries="@array/category_array" />
+                </LinearLayout>
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/business_name_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_rectangle_edit_text"
-                android:hint="@string/business_name"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="15dp"
-            android:orientation="horizontal">
-
-
-            <EditText
-                android:id="@+id/proprietor_name_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_rectangle_edit_text"
-                android:hint="@string/proprietor_name"
-                android:textSize="14sp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_rectangle_spinner"
-                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_10dp">
 
-                android:padding="6dp">
-
-                <Spinner
-                    android:id="@+id/commodities_spinner"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/commodities_array" />
+                    android:layout_height="wrap_content"
+                    android:text="@string/business_name"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/business_name_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:background="@drawable/rounded_rectangle_edit_text"
+                    />
 
             </LinearLayout>
         </LinearLayout>
@@ -92,98 +78,203 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-
-            android:layout_marginEnd="10dp"
             android:layout_marginBottom="15dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/phone_number_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_rectangle_edit_text"
-                android:hint="@string/phone_number"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/email_address_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_rectangle_edit_text"
-                android:hint="@string/email_address"
-                android:inputType="text"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="15dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_rectangle_spinner"
-                android:orientation="horizontal"
-                android:padding="6dp">
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp">
 
-                <Spinner
-                    android:id="@+id/district_spinner"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:entries="@array/district_array" />
-
+                    android:layout_height="wrap_content"
+                    android:text="@string/proprietor_name"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/proprietor_name_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:background="@drawable/rounded_rectangle_edit_text" />
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_rectangle_spinner"
-                android:orientation="horizontal"
-                android:padding="6dp">
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_10dp">
 
-                <Spinner
-                    android:id="@+id/sub_county_spinner"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/sub_county_array" />
-
-
+                    android:layout_height="wrap_content"
+                    android:text="@string/commodities"
+                    android:layout_marginBottom="4dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_spinner"
+                    android:padding="8dp">
+                    <Spinner
+                        android:id="@+id/commodities_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:entries="@array/commodities_array" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_number"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/phone_number_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textSize="14sp"
+                    android:background="@drawable/rounded_rectangle_edit_text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_address"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/email_address_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/rounded_rectangle_edit_text" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/district"
+                    android:layout_marginBottom="4dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_spinner"
+                    android:padding="8dp">
+                    <Spinner
+                        android:id="@+id/district_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:entries="@array/district_array" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sub_county"
+                    android:layout_marginBottom="4dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_spinner"
+                    android:padding="8dp">
+                    <Spinner
+                        android:id="@+id/sub_county_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:entries="@array/sub_county_array" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/actual_address"
+                android:layout_marginBottom="4dp"/>
             <EditText
                 android:id="@+id/actual_address_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle_edit_text"
-                android:hint="@string/actual_address"
                 android:textSize="14sp"
-                android:layout_weight="1"/>
+                android:background="@drawable/rounded_rectangle_edit_text" />
+
         </LinearLayout>
         <Button
             android:id="@+id/submit_button"
@@ -193,5 +284,5 @@
             android:layout_margin="16dp"
             android:text="@string/submit" />
     </LinearLayout>
-
+    </ScrollView>
 </layout>

@@ -50,7 +50,11 @@
         android:id="@+id/dataCollectionAddMarketPriceFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionAddMarketPriceFragment"
         android:label="fragment_data_collection_add_market_price"
-        tools:layout="@layout/fragment_data_collection_add_market_price" />
+        tools:layout="@layout/fragment_data_collection_add_market_price" >
+        <action
+            android:id="@+id/action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment"
+            app:destination="@id/dataCollectionConfirmMarketPriceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dataCollectionReportPestFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionReportPestFragment"
@@ -61,4 +65,9 @@
         android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionAddScoutingFragment"
         android:label="fragment_data_collection_add_scouting"
         tools:layout="@layout/fragment_data_collection_add_scouting" />
+    <fragment
+        android:id="@+id/dataCollectionConfirmMarketPriceFragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionConfirmMarketPriceFragment"
+        android:label="fragment_data_collection_confirm_market_price"
+        tools:layout="@layout/fragment_data_collection_confirm_market_price" />
 </navigation>

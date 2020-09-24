@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-    tools:context=".activities.OTPVerificationActivity">
+    tools:context=".activities.OTPVerificationActivity"
+    android:background="@color/activityBg">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
@@ -66,7 +67,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@color/lightGray"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginEnd="6dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"

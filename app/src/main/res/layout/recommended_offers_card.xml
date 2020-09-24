@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dimen_20dp"
+    android:layout_marginTop="@dimen/dimen_10dp"
+    android:layout_marginBottom="@dimen/dimen_10dp"
+    android:background="@drawable/recommended_card_backgroud"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<ImageView
+    android:id="@+id/recommended_offer_img"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:src="@drawable/agriculture"/>
+    <TextView
+        android:id="@+id/placeholder_text1_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flat_discounts_on_every_purchase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#3D3D3D"
+        android:textSize="17sp"/>
+
+    <TextView
+        android:id="@+id/placeholder_text2_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/placeholder_text2"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/recommended_offer_img"
+        app:layout_constraintTop_toBottomOf="@id/placeholder_text1_tv" />
+    <TextView
+        android:id="@+id/placeholder_text3_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_10dp"
+        android:gravity="center_vertical"
+        android:text="@string/placeholder_text3"
+        android:textColor="#272727"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/recommended_offer_img"
+        app:layout_constraintTop_toBottomOf="@id/placeholder_text2_tv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

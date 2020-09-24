@@ -12,6 +12,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
     buildFeatures {
         dataBinding true
@@ -42,5 +44,7 @@ dependencies {
     //calligraphy for default font change
     implementation 'io.github.inflationx:calligraphy3:3.1.1'
     implementation 'io.github.inflationx:viewpump:2.0.3'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
 
 }

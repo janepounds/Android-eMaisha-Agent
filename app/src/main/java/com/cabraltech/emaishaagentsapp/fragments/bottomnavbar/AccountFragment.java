@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentAccountBinding;
 import com.cabraltech.emaishaagentsapp.models.AccountViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccountFragment extends Fragment {
 
