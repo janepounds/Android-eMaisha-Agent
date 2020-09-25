@@ -39,7 +39,7 @@
             app:spb_animateToCurrentProgressState="true"
             app:spb_checkStateCompleted="true"
             app:spb_stateLineThickness="3dp"
-            app:spb_stateDescriptionSize="15sp"
+            app:spb_stateDescriptionSize="18sp"
             app:spb_maxDescriptionLines="2"
             app:spb_animationDuration="500"
             android:layout_marginTop="@dimen/dimen_20dp"
@@ -248,7 +248,7 @@
             android:id="@+id/buttons_farmer_profiling_step3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_margin="16dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/farmer_profiling_form_step3">
             <Button

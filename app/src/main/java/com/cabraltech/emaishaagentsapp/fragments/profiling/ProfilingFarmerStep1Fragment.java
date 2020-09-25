@@ -53,6 +53,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         //setting the state progress bar labels
         StateProgressBar stateProgressBar = (StateProgressBar) binding.farmerProfilingStateProgressBar;
         stateProgressBar.setStateDescriptionData(descriptionData);
+        stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Regular.ttf");
 
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);

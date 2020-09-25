@@ -14,6 +14,7 @@
     <style name="AppTheme.Widget"/>
     <style name="AppTheme.Widget.TextView" parent="android:Widget.TextView">
         <item name="fontPath">fonts/JosefinSans-Regular.ttf</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
     </style>
 
 
@@ -25,6 +26,7 @@
         <item name="android:background">@drawable/rounded_rectangle_button</item>
         <item name="android:fontFamily">@font/josefin_sans</item>
     </style>
+
 
     <style name="button_style_previous" parent="Widget.AppCompat.Button">
 
