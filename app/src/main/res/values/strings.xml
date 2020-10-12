@@ -192,6 +192,7 @@
     <string name="default_market_price_retail_price">UGX 800/Kg</string>
     <string name="default_market_price_wholesale_price">UGX 500/Kg</string>
     <string name="confirm_details">Confirm Details</string>
+    <string name="app_terms_services">By creating an account, you agree to our</string>
     <array name="gender_array">
         <item></item>
         <item>Female</item>
