@@ -24,40 +24,14 @@
             android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/category"
-                    android:layout_marginBottom="4dp"
-                    />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/rounded_rectangle_spinner"
-                    android:padding="8dp">
-                    <Spinner
-                        android:id="@+id/category_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:entries="@array/category_array" />
-                </LinearLayout>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_10dp">
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -72,6 +46,33 @@
                     android:background="@drawable/rounded_rectangle_edit_text"
                     />
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/business_type"
+                    android:layout_marginBottom="4dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rounded_rectangle_spinner"
+                    android:padding="8dp">
+                    <Spinner
+                        android:id="@+id/business_type_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:entries="@array/type_of_business_array" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -94,7 +95,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/proprietor_name"
+                    android:text="@string/owner"
                     android:layout_marginBottom="4dp"/>
                 <EditText
                     android:id="@+id/proprietor_name_et"
@@ -107,48 +108,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/commodities"
-                    android:layout_marginBottom="4dp"
-                    />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_spinner"
-                    android:padding="8dp">
-                    <Spinner
-                        android:id="@+id/commodities_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:entries="@array/commodities_array" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="15dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:layout_marginEnd="@dimen/dimen_10dp">
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginStart="@dimen/dimen_10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -164,30 +127,32 @@
                     android:background="@drawable/rounded_rectangle_edit_text" />
 
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_10dp">
+                android:text="@string/email_address"
+                android:layout_marginBottom="4dp"/>
+            <EditText
+                android:id="@+id/email_address_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/rounded_rectangle_edit_text" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/email_address"
-                    android:layout_marginBottom="4dp"/>
-                <EditText
-                    android:id="@+id/email_address_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:inputType="textEmailAddress"
-                    android:background="@drawable/rounded_rectangle_edit_text" />
-
-            </LinearLayout>
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -257,24 +222,429 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/village"
+                    android:layout_marginBottom="4dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rounded_rectangle_spinner"
+                    android:padding="8dp">
+                    <Spinner
+                        android:id="@+id/village_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:entries="@array/village_array" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/full_address"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/full_address_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:background="@drawable/rounded_rectangle_edit_text"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_marginBottom="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/actual_address"
-                android:layout_marginBottom="4dp"/>
-            <EditText
-                android:id="@+id/actual_address_et"
+                android:text="@string/commodities"
+                android:layout_marginBottom="4dp"
+                />
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:background="@drawable/rounded_rectangle_edit_text" />
+                android:background="@drawable/rounded_rectangle_spinner"
+                android:padding="8dp">
+                <Spinner
+                    android:id="@+id/commodities_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:entries="@array/commodities_array" />
+            </LinearLayout>
 
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/supply_source"
+                android:layout_marginBottom="4dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/check_box_bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/supply_source_individual_farmer_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/individual_farmer"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/supply_source_rural_traders_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/rural_traders"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/supply_source_farmer_organizations_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/farmer_organizations"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/supplier_location"
+                android:layout_marginBottom="4dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/check_box_bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/supplier_location_within_district_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/within_the_district"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/supplier_location_outside_district_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/outside_the_district"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/supplier_location_outside_country_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/outside_the_country"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/funding_source"
+                android:layout_marginBottom="4dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/check_box_bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/funding_source_friends_relatives_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/friends_relatives"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/funding_source_private_equity_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/private_equity"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/funding_source_private_money_lender_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/private_money_lender"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/funding_source_commercial_bank_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/commercial_bank"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/funding_source_saccos_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/saccos"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/funding_source_micro_finance_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/micro_finance_institutions"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/funding_source_village_savings_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/village_savings_lending_associations"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/marketing_channels"
+                android:layout_marginBottom="4dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/check_box_bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/marketing_channels_internet_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/internet"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/marketing_channels_radio_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/radio"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/marketing_channels_television_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/television"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/marketing_channels_extension_workers_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/extension_workers"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/marketing_channels_call_center_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/call_center"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+
+                    <CheckBox
+                        android:id="@+id/marketing_channels_traders_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/fellow_traders"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/marketing_channels_ngo_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/ngo"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+
+                    <CheckBox
+                        android:id="@+id/marketing_channels_govt_agency_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/government_agency"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/marketing_channels_buyers_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/buyers_fom_bigger_markets"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
         <Button
             android:id="@+id/submit_button"
