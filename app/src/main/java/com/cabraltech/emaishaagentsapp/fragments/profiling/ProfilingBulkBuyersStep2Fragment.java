@@ -17,13 +17,14 @@ import android.view.ViewGroup;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingBulkBuyersBinding;
+import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingBulkBuyersStep2Binding;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 
-public class ProfilingBulkBuyersFragment extends Fragment {
+public class ProfilingBulkBuyersStep2Fragment extends Fragment {
     private Context context;
     private NavController navController;
-    private FragmentProfilingBulkBuyersBinding binding;
+    private FragmentProfilingBulkBuyersStep2Binding binding;
 
     String[] descriptionData = {"Contact\nDetails", "Business\nDetails"};
 
@@ -34,7 +35,7 @@ public class ProfilingBulkBuyersFragment extends Fragment {
         this.context = context;
     }
 
-    public ProfilingBulkBuyersFragment() {
+    public ProfilingBulkBuyersStep2Fragment() {
         // Required empty public constructor
     }
 
@@ -50,7 +51,7 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_bulk_buyers,container,false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_bulk_buyers_step2,container,false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -67,12 +68,18 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
 
-        binding.nextButton.setOnClickListener(new View.OnClickListener() {
+        binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //navigation to step 2
-                navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment);
+                //submit
 
+            }
+        });
+        binding.previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //submit
+                navController.popBackStack();
             }
         });
 

@@ -283,6 +283,17 @@
     <string name="traders">Traders</string>
     <string name="processors">Processors</string>
     <string name="final_consumer">Final Consumer</string>
+    <string name="training_or_technical_assistance_in_agricultural_practices_of_technology">Training or technical assistance in agricultural practices of technology</string>
+    <string name="training_on_institutional_development">Training on institutional development</string>
+    <string name="training_on_business_development">Training on business development</string>
+    <string name="agricultural_inputs_on_credit">Agricultural inputs on credit</string>
+    <string name="cash_loans_for_agriculture_purposes">Cash loans for agriculture purposes</string>
+    <string name="cash_loans_for_non_agriculture_purposes">Cash loans for non-agriculture purposes</string>
+    <string name="subsidized_inputs">Subsidized inputs</string>
+    <string name="crop_insurance">Crop insurance</string>
+    <string name="access_to_agricultural_equipment">Access to agricultural equipment</string>
+    <string name="market_intelligence">Market Intelligence</string>
+    <string name="secretary">Secretary</string>
     <array name="gender_array">
         <item>Female</item>
         <item>Male</item>
@@ -348,8 +359,9 @@
         <item>Sheep</item>
     </array>
     <array name="certificate_type_array">
-        <item>Cattle</item>
-        <item>Sheep</item>
+        <item>Crop Inputs</item>
+        <item>Vet Drugs</item>
+        <item>Both</item>
     </array>
     <array name="category_array">
         <item>Cattle</item>
@@ -390,9 +402,9 @@
         <item>Cooperative</item>
     </array>
     <array name="association_membership_array">
-    <item>Yes</item>
-    <item>No</item>
-</array>
+        <item>Yes</item>
+        <item>No</item>
+    </array>
     <array name="type_of_sales_array">
         <item>Wholesale</item>
         <item>Retail</item>

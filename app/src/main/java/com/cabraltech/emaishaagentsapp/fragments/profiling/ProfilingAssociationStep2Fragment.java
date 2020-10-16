@@ -16,26 +16,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cabraltech.emaishaagentsapp.R;
-import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingBulkBuyersBinding;
+import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAssociationBinding;
+import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAssociationStep2Binding;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 
-public class ProfilingBulkBuyersFragment extends Fragment {
+public class ProfilingAssociationStep2Fragment extends Fragment {
+
     private Context context;
     private NavController navController;
-    private FragmentProfilingBulkBuyersBinding binding;
+    private FragmentProfilingAssociationStep2Binding binding;
 
-    String[] descriptionData = {"Contact\nDetails", "Business\nDetails"};
+    String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
 
+
+    public ProfilingAssociationStep2Fragment() {
+        // Required empty public constructor
+    }
     @Override
     public void onAttach(@NonNull Context context) {
 
         super.onAttach(context);
         this.context = context;
-    }
-
-    public ProfilingBulkBuyersFragment() {
-        // Required empty public constructor
     }
 
 
@@ -50,14 +52,14 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_bulk_buyers,container,false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_association_step2,container,false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Enroll Agro Trader");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Onboarding Association");
 
         //setting the state progress bar labels
-        StateProgressBar stateProgressBar = (StateProgressBar) binding.bulkBuyersProfilingStateProgressBar;
+        StateProgressBar stateProgressBar = (StateProgressBar) binding.associationProfilingStateProgressBar;
         stateProgressBar.setStateDescriptionData(descriptionData);
         stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Bold.ttf");
         return binding.getRoot();
@@ -70,9 +72,16 @@ public class ProfilingBulkBuyersFragment extends Fragment {
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //navigation to step 2
-                navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment);
+                //navigation to step 3
+                navController.navigate(R.id.action_profilingAssociationStep2Fragment_to_profilingAssociationStep3Fragment);
 
+            }
+        });
+        binding.previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //popback stack to step 1
+                navController.popBackStack();
             }
         });
 
