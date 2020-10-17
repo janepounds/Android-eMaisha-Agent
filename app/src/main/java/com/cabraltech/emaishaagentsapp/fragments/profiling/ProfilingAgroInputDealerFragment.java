@@ -21,20 +21,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAgroInputDealerBinding;
+import com.kofigyan.stateprogressbar.StateProgressBar;
 
 
 public class ProfilingAgroInputDealerFragment extends Fragment {
     private Context context;
     private NavController navController;
     private FragmentProfilingAgroInputDealerBinding binding;
+<<<<<<< HEAD
     String district, sub_county, village, certification_type, certification_status;
     private RadioGroup radioGroup;
     private RadioButton certification_radioButton;
+=======
+    String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
+>>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -58,16 +64,30 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+<<<<<<< HEAD
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_agro_input_dealer, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Enrolling Aqro Input Retailer");
+=======
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_agro_input_dealer,container,false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Enrolling Aqro Input Retailer");
+
+        //setting the state progress bar labels
+        StateProgressBar stateProgressBar = (StateProgressBar) binding.agroInputDealerProfilingStateProgressBar;
+        stateProgressBar.setStateDescriptionData(descriptionData);
+        stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Bold.ttf");
+>>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+<<<<<<< HEAD
         super.onViewCreated(view, savedInstanceState);
 
         final EditText etxtBusinessName = view.findViewById(R.id.business_name_et);
@@ -160,6 +180,15 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
 
                 }
 
+=======
+        navController = Navigation.findNavController(view);
+
+        binding.nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //navigation to step 2
+                navController.navigate(R.id.action_profilingAgroInputDealersFragment_to_profilingAgroInputDealerStep2Fragment);
+>>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
 
             }
         });

@@ -30,15 +30,12 @@
     <string name="enter_the_phone_number_you_used_to_create_your_account_and_we_will_send_you_an_otp_to_reset_your_password">Enter the Phone number you used to create your account and we will send you an OTP to reset your password</string>
     <string name="send_otp">Send OTP</string>
     <array name="district_array">
-        <item></item>
         <item>Wakiso</item>
     </array>
     <array name="sub_county_array">
-        <item></item>
         <item>Wakiso</item>
     </array>
     <array name="village_array">
-        <item></item>
         <item>Wakiso</item>
     </array>
     <string name="title_activity_dashboard">MainActivity</string>
@@ -98,7 +95,7 @@
     <string name="farming_land_size">Farming Land Size</string>
     <string name="second_livestock">Second Livestock</string>
     <string name="default_pop_up_content">Farmer JOHN ZIMULA A based in\nARUA bas been successfully\nRegistered and his profile created</string>
-    <string name="association_name">Name of Association</string>
+    <string name="association_name">Association Name</string>
     <string name="year_of_registration">Year of Registration</string>
     <string name="full_address">Full Address</string>
     <string name="association_telephone">Association Telephone</string>
@@ -107,13 +104,12 @@
     <string name="chairperson">Chairperson</string>
     <string name="contact">Contact</string>
     <string name="vice_chairperson">Vice Chairperson</string>
-    <string name="proprietor_contact">Proprietor Contact</string>
+    <string name="owner_contact">Owner Contact</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="certification">Certification</string>
     <string name="certificate_number">Certificate Number</string>
     <string name="business_name">Business Name</string>
-    <string name="proprietor_name">Proprietor Name</string>
     <string name="actual_address">Actual Address</string>
     <string name="street_address">Street Address</string>
     <string name="contact_person">Contact Person</string>
@@ -192,58 +188,160 @@
     <string name="default_market_price_retail_price">UGX 800/Kg</string>
     <string name="default_market_price_wholesale_price">UGX 500/Kg</string>
     <string name="confirm_details">Confirm Details</string>
+    <string name="app_terms_services">By creating an account, you agree to our</string>
+    <string name="registration_status">Registration Status</string>
+    <string name="registration_body">Registration Body</string>
+    <string name="registration_year">Registration Year</string>
+    <string name="owner">Owner</string>
+    <string name="business_type">Business Type</string>
+    <string name="number_of_outlets">Number of Outlets</string>
+    <string name="items_sold">Items Sold</string>
+    <string name="seed">Seed</string>
+    <string name="fertilizer">Fertilizer</string>
+    <string name="pesticide">Pesticide</string>
+    <string name="hardware">Hardware</string>
+    <string name="farm_equipment">Farm Equipment</string>
+    <string name="food_stuff">Food Stuff</string>
+    <string name="general_merchandise">General Merchandise</string>
+    <string name="type_of_sales">Type of Sales</string>
+    <string name="wholesale">Wholesale</string>
+    <string name="retail">Retail</string>
+    <string name="both">Both</string>
+    <string name="source_of_funding">Source of Funding</string>
+    <string name="commercial_banking">Commercial Banking</string>
+    <string name="micro_finance_institutes">Micro-finance Institutes</string>
+    <string name="credit">Credit</string>
+    <string name="additional_services">Additional Services</string>
+    <string name="technology_demonstration">Technology Demonstration</string>
+    <string name="training">Training</string>
+    <string name="dissemination_of_printed_material">Dissemination of Printed Material</string>
+    <string name="provision_of_market_information">Provision of Market Information</string>
+    <string name="advisory">Advisory</string>
+    <string name="credit_input">Credit(Input)</string>
+    <string name="association_membership">Association Membership</string>
+    <string name="marketing_channels">Marketing Channels</string>
+    <string name="internet">Internet</string>
+    <string name="radio">Radio</string>
+    <string name="television">Television</string>
+    <string name="extension_workers">Extension Workers</string>
+    <string name="fellow_traders">Fellow Traders</string>
+    <string name="buyers_fom_bigger_markets">Buyers fom bigger markets</string>
+    <string name="call_center">Call Center</string>
+    <string name="personal_equity">Personal Equity</string>
+    <string name="supply_source">Supply Source</string>
+    <string name="individual_farmer">Individual Farmer</string>
+    <string name="rural_traders">Rural Traders</string>
+    <string name="farmer_organizations">Farmer Organizations</string>
+    <string name="supplier_location">Supplier Location</string>
+    <string name="within_the_district">Within The District</string>
+    <string name="outside_the_district">Outside The District</string>
+    <string name="outside_the_country">Outside The Country</string>
+    <string name="funding_source">Funding Source</string>
+    <string name="friends_relatives">Friends / Relatives</string>
+    <string name="private_equity">Private Equity</string>
+    <string name="private_money_lender">Private Money Lender</string>
+    <string name="commercial_bank">Commercial Bank</string>
+    <string name="saccos">SACCOs</string>
+    <string name="micro_finance_institutions">Micro-Finance Institutions</string>
+    <string name="village_savings_lending_associations"><![CDATA[Village Savings & Lending Associations]]></string>
+    <string name="ngo">NGO</string>
+    <string name="government_agency">Government Agency</string>
+    <string name="vet_drugs">Vet Drugs</string>
+    <string name="registration_level">Registration Level</string>
+    <string name="organisation_type">Organisation Type</string>
+    <string name="respondent">Respondent</string>
+    <string name="respondent_position_held">Respondent Position Held</string>
+    <string name="males">Males</string>
+    <string name="females">Females</string>
+    <string name="membership_fees">Membership Fees</string>
+    <string name="grants">Grants</string>
+    <string name="sales">Sales</string>
+    <string name="processing_fees">Processing Fees</string>
+    <string name="main_activities">Main Activities</string>
+    <string name="production">Production</string>
+    <string name="bulking">Bulking</string>
+    <string name="storage">Storage</string>
+    <string name="processing">Processing</string>
+    <string name="agricultural_marketing">Agricultural Marketing</string>
+    <string name="asset_ownership">Asset Ownership</string>
+    <string name="spray_pump">Spray Pump</string>
+    <string name="dryer">Dryer</string>
+    <string name="sheller">Sheller</string>
+    <string name="milling_machine">Milling Machine</string>
+    <string name="tractor">Tractor</string>
+    <string name="ox_plough">Ox-Plough</string>
+    <string name="weeder">Weeder</string>
+    <string name="planter">Planter</string>
+    <string name="combined_harvester">Combined Harvester</string>
+    <string name="none">None</string>
+    <string name="buyer">Buyer</string>
+    <string name="radio_tv">Radio/TV</string>
+    <string name="media_online">Media/Online</string>
+    <string name="gov_t_extension_workers">Government Extension Workers</string>
+    <string name="private_extension_workers">Private Extension Workers</string>
+    <string name="farmer_organisation_marketeers">Farmer Organisation Marketeers</string>
+    <string name="traders">Traders</string>
+    <string name="processors">Processors</string>
+    <string name="final_consumer">Final Consumer</string>
+    <string name="training_or_technical_assistance_in_agricultural_practices_of_technology">Training or technical assistance in agricultural practices of technology</string>
+    <string name="training_on_institutional_development">Training on institutional development</string>
+    <string name="training_on_business_development">Training on business development</string>
+    <string name="agricultural_inputs_on_credit">Agricultural inputs on credit</string>
+    <string name="cash_loans_for_agriculture_purposes">Cash loans for agriculture purposes</string>
+    <string name="cash_loans_for_non_agriculture_purposes">Cash loans for non-agriculture purposes</string>
+    <string name="subsidized_inputs">Subsidized inputs</string>
+    <string name="crop_insurance">Crop insurance</string>
+    <string name="access_to_agricultural_equipment">Access to agricultural equipment</string>
+    <string name="market_intelligence">Market Intelligence</string>
+    <string name="secretary">Secretary</string>
     <array name="gender_array">
-        <item></item>
         <item>Female</item>
         <item>Male</item>
     </array>
     <array name="nationality_array">
-        <item></item>
-        <item>Ugandan</item>
-        <item>Rwandan</item>
+        <item>National</item>
+        <item>Refugee</item>
+
     </array>
     <array name="religion_array">
-        <item></item>
         <item>Anglican</item>
         <item>Catholic</item>
         <item>Muslim</item>
+        <item>Pentecostal</item>
+        <item>SDA</item>
+        <item>Orthodox</item>
+        <item>Bahai</item>
     </array>
     <array name="level_of_education_array">
-        <item></item>
+        <item>None</item>
         <item>PLE</item>
         <item>UCE</item>
         <item>UACE</item>
         <item>Degree</item>
     </array>
     <array name="marital_status_array">
-        <item></item>
         <item>Single</item>
         <item>Married</item>
         <item>Divorced</item>
         <item>Widowed</item>
     </array>
     <array name="language_used_array">
-        <item></item>
         <item>English</item>
         <item>Luganda</item>
     </array>
     <array name="main_crop_array">
-        <item></item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="second_crop_array">
-        <item></item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="third_crop_array">
-        <item></item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="main_livestock_array">
-        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
@@ -253,53 +351,82 @@
         <item>Sheep</item>
     </array>
     <array name="livestock_value_chain_array">
-        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="main_source_of_funding_array">
-        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="certificate_type_array">
-        <item></item>
-        <item>Cattle</item>
-        <item>Sheep</item>
+        <item>Crop Inputs</item>
+        <item>Vet Drugs</item>
+        <item>Both</item>
     </array>
     <array name="category_array">
-        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="commodities_array">
-        <item></item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="market_name_array">
-        <item></item>
         <item>Kabusu Market</item>
         <item>Nakulabye Market</item>
     </array>
     <array name="town_array">
-        <item></item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="variety_array">
-        <item></item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="measurement_units_array">
-        <item></item>
         <item>Kgs</item>
         <item>Tonnes</item>
     </array>
     <array name="infested_array">
-        <item></item>
         <item>Yes</item>
         <item>No</item>
+    </array>
+    <array name="registration_status_array">
+        <item>Yes</item>
+        <item>No</item>
+    </array>
+    <array name="type_of_business_array">
+        <item>Sole Proprietorship</item>
+        <item>Partnership</item>
+        <item>Limited Liability Company</item>
+        <item>Cooperative</item>
+    </array>
+    <array name="association_membership_array">
+        <item>Yes</item>
+        <item>No</item>
+    </array>
+    <array name="type_of_sales_array">
+        <item>Wholesale</item>
+        <item>Retail</item>
+        <item>Both</item>
+    </array>
+    <array name="registration_level_array">
+        <item>Local Govt</item>
+        <item>District</item>
+        <item>National</item>
+        <item>NGO</item>
+    </array>
+    <array name="organisation_type_array">
+        <item>Farmer Group</item>
+        <item>Rural Producer Organisation</item>
+        <item>Cooperative</item>
+    </array>
+    <array name="respondent_position_array">
+        <item>Chairman</item>
+        <item>Secretary</item>
+        <item>Treasurer</item>
+        <item>Manager/Coordinator</item>
+        <item>Operator</item>
+
     </array>
 </resources>

@@ -77,7 +77,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         //setting the state progress bar labels
         StateProgressBar stateProgressBar = (StateProgressBar) binding.farmerProfilingStateProgressBar;
         stateProgressBar.setStateDescriptionData(descriptionData);
-        stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Regular.ttf");
+        stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Bold.ttf");
         //inflating pop up
         // ConstraintLayout constraintLayout = (ConstraintLayout) binding.
         // ((AppCompatActivity)getActivity()).getLayoutInflater().  getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

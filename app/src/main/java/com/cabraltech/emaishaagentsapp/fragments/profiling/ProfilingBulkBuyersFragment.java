@@ -18,11 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingBulkBuyersBinding;
+import com.kofigyan.stateprogressbar.StateProgressBar;
 
 
 public class ProfilingBulkBuyersFragment extends Fragment {
@@ -31,6 +33,8 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     private FragmentProfilingBulkBuyersBinding binding;
     String district, sub_county, category, commodities;
 
+
+    String[] descriptionData = {"Contact\nDetails", "Business\nDetails"};
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -54,16 +58,30 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+<<<<<<< HEAD
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_bulk_buyers, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Enroll Agro Trader");
+=======
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_bulk_buyers,container,false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Enroll Agro Trader");
+
+        //setting the state progress bar labels
+        StateProgressBar stateProgressBar = (StateProgressBar) binding.bulkBuyersProfilingStateProgressBar;
+        stateProgressBar.setStateDescriptionData(descriptionData);
+        stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Bold.ttf");
+>>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+<<<<<<< HEAD
         super.onViewCreated(view, savedInstanceState);
 
         Spinner spinCategory = view.findViewById(R.id.category_spinner);
@@ -147,6 +165,15 @@ public class ProfilingBulkBuyersFragment extends Fragment {
                     Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
                 }
+=======
+        navController = Navigation.findNavController(view);
+
+        binding.nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //navigation to step 2
+                navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment);
+>>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
 
             }
         });

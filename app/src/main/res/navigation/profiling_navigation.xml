@@ -37,17 +37,29 @@
         android:id="@+id/profilingAssociationFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAssociationFragment"
         android:label="@string/label_association"
-        tools:layout="@layout/fragment_profiling_association"/>
+        tools:layout="@layout/fragment_profiling_association">
+        <action
+            android:id="@+id/action_profilingAssociationFragment_to_profilingAssociationStep2Fragment"
+            app:destination="@id/profilingAssociationStep2Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilingAgroInputDealersFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAgroInputDealerFragment"
         android:label="@string/label_agro_input_dealer"
-        tools:layout="@layout/fragment_profiling_agro_input_dealer"/>
+        tools:layout="@layout/fragment_profiling_agro_input_dealer">
+        <action
+            android:id="@+id/action_profilingAgroInputDealersFragment_to_profilingAgroInputDealerStep2Fragment"
+            app:destination="@id/profilingAgroInputDealerStep2Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilingBulkBuyersFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingBulkBuyersFragment"
         android:label="@string/label_bulk_buyers"
-        tools:layout="@layout/fragment_profiling_bulk_buyers"/>
+        tools:layout="@layout/fragment_profiling_bulk_buyers">
+        <action
+            android:id="@+id/action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment"
+            app:destination="@id/profilingBulkBuyersStep2Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilingFarmerStep2Fragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingFarmerStep2Fragment"
@@ -62,4 +74,37 @@
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingFarmerStep3Fragment"
         android:label="fragment_profiling_farmer_step3"
         tools:layout="@layout/fragment_profiling_farmer_step3" />
+    <fragment
+        android:id="@+id/profilingAssociationStep2Fragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAssociationStep2Fragment"
+        android:label="fragment_profiling_association_step2"
+        tools:layout="@layout/fragment_profiling_association_step2" >
+        <action
+            android:id="@+id/action_profilingAssociationStep2Fragment_to_profilingAssociationStep3Fragment"
+            app:destination="@id/profilingAssociationStep3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilingAssociationStep3Fragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAssociationStep3Fragment"
+        android:label="fragment_profiling_association_step3"
+        tools:layout="@layout/fragment_profiling_association_step3" />
+    <fragment
+        android:id="@+id/profilingAgroInputDealerStep2Fragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAgroInputDealerStep2Fragment"
+        android:label="fragment_profiling_agro_input_dealer_step2"
+        tools:layout="@layout/fragment_profiling_agro_input_dealer_step2" >
+        <action
+            android:id="@+id/action_profilingAgroInputDealerStep2Fragment_to_profilingAgroInputDealerStep3Fragment"
+            app:destination="@id/profilingAgroInputDealerStep3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilingAgroInputDealerStep3Fragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAgroInputDealerStep3Fragment"
+        android:label="fragment_profiling_agro_input_dealer_step3"
+        tools:layout="@layout/fragment_profiling_agro_input_dealer_step3" />
+    <fragment
+        android:id="@+id/profilingBulkBuyersStep2Fragment"
+        android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingBulkBuyersStep2Fragment"
+        android:label="fragment_profiling_bulk_buyers_step2"
+        tools:layout="@layout/fragment_profiling_bulk_buyers_step2" />
 </navigation>

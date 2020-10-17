@@ -18,17 +18,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAssociationBinding;
+import com.kofigyan.stateprogressbar.StateProgressBar;
 
 public class ProfilingAssociationFragment extends Fragment {
     private Context context;
     private NavController navController;
     private FragmentProfilingAssociationBinding binding;
     String district, sub_county, village, crop_value_chain, livestock_value_chain, source_of_funding;
+
+    String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
+
 
     public ProfilingAssociationFragment() {
         // Required empty public constructor
@@ -52,16 +57,30 @@ public class ProfilingAssociationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+<<<<<<< HEAD
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_association, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Onboarding Association");
+=======
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_association,container,false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Onboarding Association");
+
+        //setting the state progress bar labels
+        StateProgressBar stateProgressBar = (StateProgressBar) binding.associationProfilingStateProgressBar;
+        stateProgressBar.setStateDescriptionData(descriptionData);
+        stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Bold.ttf");
+>>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+<<<<<<< HEAD
         super.onViewCreated(view, savedInstanceState);
 
 
@@ -184,6 +203,15 @@ public class ProfilingAssociationFragment extends Fragment {
                 }
 
 
+=======
+        navController = Navigation.findNavController(view);
+
+        binding.nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //navigation to step 2
+                navController.navigate(R.id.action_profilingAssociationFragment_to_profilingAssociationStep2Fragment);
+>>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
 
             }
         });
