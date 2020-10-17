@@ -1,4 +1,677 @@
 package com.cabraltech.emaishaagentsapp.database;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DatabaseAccess {
+    private SQLiteOpenHelper openHelper;
+    private SQLiteDatabase database;
+    private static DatabaseAccess instance;
+
+    /**
+     * Private constructor to avoid object creation from outside classes.
+     *
+     * @param context
+     */
+    private DatabaseAccess(Context context) {
+        this.openHelper = new DatabaseOpenHelper(context);
+    }
+
+    /**
+     * Return a singleton instance of DatabaseAccess.
+     *
+     * @param context the Context
+     * @return the instance of DabaseAccess
+     */
+    public static DatabaseAccess getInstance(Context context) {
+
+        if (instance == null) {
+            instance = new DatabaseAccess(context);
+        }
+        return instance;
+    }
+
+    /**
+     * Open the database connection.
+     */
+    public void open() {
+        this.database = openHelper.getWritableDatabase();
+    }
+
+    /**
+     * Close the database connection.
+     */
+    public void close() {
+        if (database != null) {
+            this.database.close();
+        }
+    }
+
+    private int getFarmerID(String id) {
+        this.database = openHelper.getWritableDatabase();
+        Cursor c = database.query("farmers", new String[]{"id"}, "id =? ", new String[]{id}, null, null, null, null);
+        if (c.moveToFirst()) //if the row exist then return the id
+            return c.getInt(c.getColumnIndex("id"));
+
+        c.close();
+        return -1;
+    }
+
+
+    //insert farmer
+    public boolean addFarmer(String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String level_of_education, String marital_status, String household_size, String language_used, String source_of_income, String household_head, String district, String sub_county, String village, String phone_number, String next_of_kin, String next_of_kin_relation, String next_of_kin_contact, String next_of_kin_address, String farming_land_size, String main_crop, String second_crop, String third_crop, String main_livestock, String second_livestock) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("first_name", first_name);
+        values.put("last_name", last_name);
+        values.put("dob", dob);
+        values.put("age", age);
+        values.put("gender", gender);
+        values.put("nationality", nationality);
+        values.put("religion", religion);
+        values.put("level_of_education", level_of_education);
+        values.put("marital_status", marital_status);
+        values.put("household_size", household_size);
+        values.put("language_used", language_used);
+        values.put("source_of_income", source_of_income);
+        values.put("household_head", household_head);
+        values.put("district", district);
+        values.put("sub_county", sub_county);
+        values.put("village", village);
+        values.put("phone_number", phone_number);
+        values.put("next_of_kin", next_of_kin);
+        values.put("next_of_kin_relation", next_of_kin_relation);
+        values.put("next_of_kin_contact", next_of_kin_contact);
+        values.put("next_of_kin_address", next_of_kin_address);
+        values.put("farming_land_size", farming_land_size);
+        values.put("main_crop", main_crop);
+        values.put("second_crop", second_crop);
+        values.put("third_crop", third_crop);
+        values.put("main_livestock", main_livestock);
+        values.put("second_livestock", second_livestock);
+
+        long check = database.insert("farmers", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    //update farmer sync status
+    public boolean updateFarmerSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("farmers", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+    //get un synced farmers
+    public ArrayList<HashMap<String, String>> getUnSyncedFarmers() {
+        ArrayList<HashMap<String, String>> farmers = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM farmers WHERE sync_status='0'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("first_name", cursor.getString(1));
+                map.put("last_name", cursor.getString(2));
+                map.put("dob", cursor.getString(3));
+                map.put("age", cursor.getString(4));
+                map.put("gender", cursor.getString(5));
+                map.put("nationality", cursor.getString(6));
+                map.put("religion", cursor.getString(7));
+                map.put("level_of_education", cursor.getString(8));
+                map.put("marital_status", cursor.getString(9));
+                map.put("household_size", cursor.getString(10));
+                map.put("language_used", cursor.getString(11));
+                map.put("source_of_income", cursor.getString(12));
+                map.put("household_head", cursor.getString(13));
+                map.put("district", cursor.getString(14));
+                map.put("sub_county", cursor.getString(15));
+                map.put("village", cursor.getString(16));
+                map.put("phone_number", cursor.getString(17));
+                map.put("next_of_kin", cursor.getString(18));
+                map.put("next_of_kin_relation", cursor.getString(19));
+                map.put("next_of_kin_contact", cursor.getString(20));
+                map.put("next_of_kin_address", cursor.getString(21));
+                map.put("farming_land_size", cursor.getString(22));
+                map.put("main_crop", cursor.getString(23));
+                map.put("second_crop", cursor.getString(24));
+                map.put("third_crop", cursor.getString(25));
+                map.put("main_livestock", cursor.getString(26));
+                map.put("second_livestock", cursor.getString(27));
+
+                farmers.add(map);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return farmers;
+    }
+
+    //insert association
+    public boolean addAssociation(String name, String year_of_registration, String district, String sub_county, String village, String full_address, String telephone, String email, String number_of_members, String crop_chain_value, String livestock_chain_value, String main_source_of_funding, String chairperson, String chairperson_contact, String vice_chairperson, String vice_chairperson_contact) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("name", name);
+        values.put("year_of_registration", year_of_registration);
+        values.put("district", district);
+        values.put("sub_county", sub_county);
+        values.put("village", village);
+        values.put("full_address", full_address);
+        values.put("association_telephone", telephone);
+        values.put("association_email", email);
+        values.put("number_of_members", number_of_members);
+        values.put("crop_value_chain", crop_chain_value);
+        values.put("livestock_value_chain", livestock_chain_value);
+        values.put("main_source_of_funding", main_source_of_funding);
+        values.put("chairperson", chairperson);
+        values.put("chairperson_contact", chairperson_contact);
+        values.put("vice_chairperson", vice_chairperson);
+        values.put("vice_chairperson_contact", vice_chairperson_contact);
+
+
+        long check = database.insert("associations", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    //get un synced associations
+    public ArrayList<HashMap<String, String>> getUnSyncedAssociations() {
+        ArrayList<HashMap<String, String>> associations = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM associations WHERE sync_status='0'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("name", cursor.getString(1));
+                map.put("year_of_registration", cursor.getString(2));
+                map.put("district", cursor.getString(3));
+                map.put("sub_county", cursor.getString(4));
+                map.put("village", cursor.getString(5));
+                map.put("association_telephone", cursor.getString(6));
+                map.put("association_email", cursor.getString(7));
+                map.put("number_of_members", cursor.getString(8));
+                map.put("crop_value_chain", cursor.getString(9));
+                map.put("livestock_value_chain", cursor.getString(10));
+                map.put("main_source_of_funding", cursor.getString(11));
+                map.put("chairperson", cursor.getString(12));
+                map.put("chairperson_contact", cursor.getString(13));
+                map.put("vice_chairperson", cursor.getString(14));
+                map.put("vice_chairperson_contact", cursor.getString(15));
+
+
+                associations.add(map);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return associations;
+    }
+
+    //update association sync status
+    public boolean updateAssociationSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("associations", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+    //insert dealer
+    public boolean addDealer(String name, String proprietor_name, String district, String sub_county, String village, String full_address, String proprietor_contact, String certification, String certification_type, String certification_number) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("business_name", name);
+        values.put("proprietor_name", proprietor_name);
+        values.put("district", district);
+        values.put("sub_county", sub_county);
+        values.put("village", village);
+        values.put("full_address", full_address);
+        values.put("proprietor_contact", proprietor_contact);
+        values.put("certification", certification);
+        values.put("certification_type", certification_type);
+        values.put("certification_number", certification_number);
+        long check = database.insert("agro_input_dealers", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    //get un synced dealers
+    public ArrayList<HashMap<String, String>> getUnSyncedDealers() {
+        ArrayList<HashMap<String, String>> agro_dealers = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM agro_input_dealers WHERE sync_status='0'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("business_name", cursor.getString(1));
+                map.put("proprietor_name", cursor.getString(2));
+                map.put("district", cursor.getString(3));
+                map.put("sub_county", cursor.getString(4));
+                map.put("village", cursor.getString(5));
+                map.put("full_address", cursor.getString(6));
+                map.put("proprietor_contact", cursor.getString(7));
+                map.put("certification", cursor.getString(8));
+                map.put("certification_type", cursor.getString(9));
+                map.put("certification_number", cursor.getString(10));
+                agro_dealers.add(map);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return agro_dealers;
+    }
+
+
+    //update dealer sync status
+    public boolean updateDealerSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("agro_input_dealers", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+    //insert trader
+    public boolean addTrader(String category, String business_name, String proprietor_name, String commodities, String phone_number, String email_address, String district, String sub_county, String actual_address) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("category", category);
+        values.put("business_name", business_name);
+        values.put("proprietor_name", proprietor_name);
+        values.put("commodities", commodities);
+        values.put("phone_number", phone_number);
+        values.put("email_address", email_address);
+        values.put("district", district);
+        values.put("sub_county", sub_county);
+        values.put("actual_address", actual_address);
+        long check = database.insert("agro_traders", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //get un synced traders
+    public ArrayList<HashMap<String, String>> getUnSyncedTrader() {
+        ArrayList<HashMap<String, String>> agro_traders = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM agro_traders WHERE sync_status='0'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("category", cursor.getString(1));
+                map.put("business_name", cursor.getString(2));
+                map.put("proprietor_name", cursor.getString(3));
+                map.put("commodities", cursor.getString(4));
+                map.put("phone_number", cursor.getString(5));
+                map.put("email_address", cursor.getString(6));
+                map.put("district", cursor.getString(7));
+                map.put("sub_county", cursor.getString(8));
+                map.put("actual_address", cursor.getString(9));
+                agro_traders.add(map);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return agro_traders;
+    }
+
+
+    //update trader sync status
+    public boolean updateTraderSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("agro_traders", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+    //insert market
+    public boolean addMarket(String name, String street_address, String phone_number, String district, String sub_county, String village, String contact_person) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("name", name);
+        values.put("street_address", street_address);
+        values.put("phone_number", phone_number);
+        values.put("district", district);
+        values.put("sub_county", sub_county);
+        values.put("town", village);
+        values.put("contact_person", contact_person);
+        long check = database.insert("markets", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //get un synced traders
+    public ArrayList<HashMap<String, String>> getUnSyncedMarkets() {
+        ArrayList<HashMap<String, String>> markets = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM markets WHERE sync_status='0'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("name", cursor.getString(1));
+                map.put("street_address", cursor.getString(2));
+                map.put("district", cursor.getString(3));
+                map.put("sub_county", cursor.getString(4));
+                map.put("contact_person", cursor.getString(5));
+                map.put("phone_number", cursor.getString(6));
+                markets.add(map);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return markets;
+    }
+
+    //update dealer sync status
+    public boolean updateMarketSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("markets", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+    //insert market price
+    public boolean addMarketPrice(String date,String commodities, String variety, String market, String measurement_units, String wholesale_price, String retail_price) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("date", date);
+        values.put("commodities", commodities);
+        values.put("variety", variety);
+        values.put("market", market);
+        values.put("measurement_units", measurement_units);
+        values.put("wholesale_price", wholesale_price);
+        values.put("retail_price", retail_price);
+        long check = database.insert("market_prices", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    //get un synced market prices
+    public ArrayList<HashMap<String, String>> getUnSyncedMarketprices() {
+        ArrayList<HashMap<String, String>> market_prices = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM market_prices WHERE sync_status='0'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("date", cursor.getString(1));
+                map.put("variety", cursor.getString(2));
+                map.put("market", cursor.getString(3));
+                map.put("measurement_units", cursor.getString(4));
+                map.put("wholesale_price", cursor.getString(5));
+                map.put("retail_price", cursor.getString(6));
+                market_prices.add(map);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return market_prices;
+    }
+
+    //update dealer sync status
+    public boolean updateMarketPriceSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("market_prices", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    //insert pest reports
+    public boolean addPestReport(String date, String name, String district, String sub_county, String village, String farmer_phone, String signs_and_symptoms, String suspected_pest, String damage_assesment, String recommendation, String photo_of_damage) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("date", date);
+        values.put("farmer_name", name);
+        values.put("district", district);
+        values.put("sub_county", sub_county);
+        values.put("village", village);
+        values.put("farmer_phone", farmer_phone);
+        values.put("signs_and_symptoms", signs_and_symptoms);
+        values.put("suspected_pest", suspected_pest);
+        values.put("damage_assesment", damage_assesment);
+        values.put("recommendation", recommendation);
+        values.put("photo_of_damage", photo_of_damage);
+        long check = database.insert("pest_reports", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //get un synced pest reports
+    public ArrayList<HashMap<String, String>> getUnSyncedPestReports() {
+        ArrayList<HashMap<String, String>> pest_reports = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM pest_reports WHERE sync_status='0'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("date", cursor.getString(1));
+                map.put("district", cursor.getString(2));
+                map.put("sub_county", cursor.getString(3));
+                map.put("village", cursor.getString(4));
+                map.put("farmer_phone", cursor.getString(5));
+                map.put("sign_and_symptoms", cursor.getString(6));
+                map.put("suspected_pest", cursor.getString(7));
+                map.put("damage_assesment", cursor.getString(8));
+                map.put("recommendation", cursor.getString(9));
+                map.put("photo_of_damage", cursor.getString(10));
+                pest_reports.add(map);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return pest_reports;
+    }
+
+    //update dealer sync status
+    public boolean updatePestReportSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("pest_reports", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    //insert scouting reports
+    public boolean addScoutingReport(String date, String farmer_name, String district, String sub_county, String village, String farmer_phone, String infested, String infestation_type, String infestation, String infestation_level, String recommendation) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("date", date);
+        values.put("farmer_name", farmer_name);
+        values.put("district", district);
+        values.put("sub_county", sub_county);
+        values.put("village", village);
+        values.put("phone_number", farmer_phone);
+        values.put("infested", infested);
+        values.put("infestation_type", infestation_type);
+        values.put("infestation", infestation);
+        values.put("infestation_level", infestation_level);
+        values.put("recommendation", recommendation);
+        long check = database.insert("scouting_reports", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //get un synced market prices
+    public ArrayList<HashMap<String, String>> getUnSyncedScoutingReports() {
+        ArrayList<HashMap<String, String>> scouting_reports = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM scouting_reports WHERE sync_status='0'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("date", cursor.getString(1));
+                map.put("farmer_name", cursor.getString(2));
+                map.put("district", cursor.getString(3));
+                map.put("sub_county", cursor.getString(4));
+                map.put("village", cursor.getString(5));
+                map.put("phone_number", cursor.getString(6));
+                map.put("infested", cursor.getString(7));
+                map.put("infestation_type", cursor.getString(8));
+                map.put("infestation", cursor.getString(9));
+                map.put("infestation_level", cursor.getString(10));
+                map.put("recommendation", cursor.getString(11));
+                scouting_reports.add(map);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return scouting_reports;
+    }
+
+    //update dealer sync status
+    public boolean updateScoutingReportSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("scouting_reports", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
 }

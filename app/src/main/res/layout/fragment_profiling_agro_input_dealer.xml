@@ -239,7 +239,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/yes"
-               android:checked="false"
+               android:checked="true"
                 android:layout_weight="1"/>
             <RadioButton
                 android:id="@+id/certification_no_radio_button"

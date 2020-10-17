@@ -255,10 +255,11 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
+
                         <Spinner
                             android:id="@+id/religion_spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:entries="@array/religion_array" />
                     </LinearLayout>

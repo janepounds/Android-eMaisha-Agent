@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.cabraltech.emaishaagentsapp"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -46,5 +46,10 @@ dependencies {
     implementation 'io.github.inflationx:viewpump:2.0.3'
 
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
+    implementation 'com.github.maayyaannkk:ImagePicker:1.0.9'
+    implementation 'com.karumi:dexter:6.2.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 }
