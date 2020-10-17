@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 .idea/*
+.idea/gradle.xml
+.idea/codeStyles/Project.xml
