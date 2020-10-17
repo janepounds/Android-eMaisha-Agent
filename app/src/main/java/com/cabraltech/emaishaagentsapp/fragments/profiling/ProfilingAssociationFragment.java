@@ -57,13 +57,6 @@ public class ProfilingAssociationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-<<<<<<< HEAD
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_association, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Onboarding Association");
-=======
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_association,container,false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,13 +67,11 @@ public class ProfilingAssociationFragment extends Fragment {
         StateProgressBar stateProgressBar = (StateProgressBar) binding.associationProfilingStateProgressBar;
         stateProgressBar.setStateDescriptionData(descriptionData);
         stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Bold.ttf");
->>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-<<<<<<< HEAD
         super.onViewCreated(view, savedInstanceState);
 
 
@@ -92,13 +83,13 @@ public class ProfilingAssociationFragment extends Fragment {
         final EditText etxtFull_address = view.findViewById(R.id.full_address_et);
         final EditText etxtTelephone = view.findViewById(R.id.association_telephone_et);
         final EditText etxtEmail = view.findViewById(R.id.association_email_et);
-        final EditText etxtNumberOfMembers = view.findViewById(R.id.number_of_members_et);
+//        final EditText etxtNumberOfMembers = view.findViewById(R.id.number_of_members_et);
         Spinner spinCropValueChain = view.findViewById(R.id.crop_value_chains_spinner);
         Spinner spinLivestockValueChain = view.findViewById(R.id.livestock_value_chain_spinner);
-        Spinner spinSourceOfFunding = view.findViewById(R.id.main_source_of_funding_spinner);
+//        Spinner spinSourceOfFunding = view.findViewById(R.id.main_source_of_funding_spinner);
         final EditText etxtChairperson = view.findViewById(R.id.chairperson_et);
         final EditText etxtChairpersonContact = view.findViewById(R.id.chairperson_contact_et);
-        final EditText etxtViceChairperson = view.findViewById(R.id.vice_chairperson_et);
+//        final EditText etxtViceChairperson = view.findViewById(R.id.vice_chairperson_et);
         EditText etxtViceChairpersonContact = view.findViewById(R.id.vice_chairperson_contact_et);
 
         Button next_button = view.findViewById(R.id.next_button);
@@ -138,42 +129,42 @@ public class ProfilingAssociationFragment extends Fragment {
 
             }
         });
+//
+//        spinCropValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                crop_value_chain = adapterView.getItemAtPosition(i).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
-        spinCropValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                crop_value_chain = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        spinLivestockValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                livestock_value_chain = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        spinSourceOfFunding.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                source_of_funding = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//        spinLivestockValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                livestock_value_chain = adapterView.getItemAtPosition(i).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+//
+//        spinSourceOfFunding.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                source_of_funding = adapterView.getItemAtPosition(i).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,16 +174,16 @@ public class ProfilingAssociationFragment extends Fragment {
                 String full_address = etxtFull_address.getText().toString().trim();
                 String telephone = etxtTelephone.getText().toString().trim();
                 String email = etxtEmail.getText().toString().trim();
-                String number_of_members = etxtNumberOfMembers.getText().toString().trim();
+//                String number_of_members = etxtNumberOfMembers.getText().toString().trim();
                 String chairperson = etxtChairperson.getText().toString().trim();
                 String chairperson_contact = etxtChairpersonContact.getText().toString().trim();
-                String vice_chairperson = etxtViceChairperson.getText().toString().trim();
+//                String vice_chairperson = etxtViceChairperson.getText().toString().trim();
                 String vice_chairperson_contact = etxtChairpersonContact.getText().toString().trim();
 
                 DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                 databaseAccess.open();
 
-                boolean check = databaseAccess.addAssociation(name,year_of_registration,district,sub_county,village,full_address,telephone,email,number_of_members,crop_value_chain,livestock_value_chain,source_of_funding,chairperson,chairperson_contact,vice_chairperson,vice_chairperson_contact);
+                boolean check = databaseAccess.addAssociation(name,year_of_registration,district,sub_county,village,full_address,telephone,email,"number_of_members",crop_value_chain,livestock_value_chain,source_of_funding,chairperson,chairperson_contact,"vice_chairperson",vice_chairperson_contact);
                 if (check) {
                     Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), DashboardActivity.class);
@@ -201,9 +192,9 @@ public class ProfilingAssociationFragment extends Fragment {
                     Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
                 }
+            }
+        });
 
-
-=======
         navController = Navigation.findNavController(view);
 
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +202,6 @@ public class ProfilingAssociationFragment extends Fragment {
             public void onClick(View v) {
                 //navigation to step 2
                 navController.navigate(R.id.action_profilingAssociationFragment_to_profilingAssociationStep2Fragment);
->>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
 
             }
         });

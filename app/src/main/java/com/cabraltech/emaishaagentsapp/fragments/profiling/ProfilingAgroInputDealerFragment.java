@@ -34,13 +34,10 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
     private Context context;
     private NavController navController;
     private FragmentProfilingAgroInputDealerBinding binding;
-<<<<<<< HEAD
     String district, sub_county, village, certification_type, certification_status;
     private RadioGroup radioGroup;
     private RadioButton certification_radioButton;
-=======
     String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
->>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -64,13 +61,6 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-<<<<<<< HEAD
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_agro_input_dealer, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Enrolling Aqro Input Retailer");
-=======
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_agro_input_dealer,container,false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -81,13 +71,11 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         StateProgressBar stateProgressBar = (StateProgressBar) binding.agroInputDealerProfilingStateProgressBar;
         stateProgressBar.setStateDescriptionData(descriptionData);
         stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Bold.ttf");
->>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-<<<<<<< HEAD
         super.onViewCreated(view, savedInstanceState);
 
         final EditText etxtBusinessName = view.findViewById(R.id.business_name_et);
@@ -96,7 +84,7 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         Spinner spinSubCounty = view.findViewById(R.id.sub_county_spinner);
         Spinner spinVillage = view.findViewById(R.id.village_spinner);
         final EditText etxtFull_address = view.findViewById(R.id.full_address_et);
-        final EditText etxtProprietorContact = view.findViewById(R.id.proprietor_contact_et);
+       // final EditText etxtProprietorContact = view.findViewById(R.id.proprietor_contact_et);
         Spinner spinCertificationType = view.findViewById(R.id.certificate_type_spinner);
         final EditText etxtCertificationNumber = view.findViewById(R.id.certificate_number_et);
         radioGroup = view.findViewById(R.id.certification_radioGroup);
@@ -138,49 +126,51 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
             }
         });
 
-        spinCertificationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                certification_type = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//        spinCertificationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                certification_type = adapterView.getItemAtPosition(i).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
         Button btnSubmit = view.findViewById(R.id.submit_button);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                String business_name = etxtBusinessName.getText().toString().trim();
-                String proprietor_name = etxtProprietorName.getText().toString().trim();
-                String full_address = etxtFull_address.getText().toString().trim();
-                String proprietor_contact = etxtProprietorContact.getText().toString().trim();
-                String certification_number = etxtCertificationNumber.getText().toString().trim();
+//        btnSubmit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int selectedId = radioGroup.getCheckedRadioButtonId();
+//                String business_name = etxtBusinessName.getText().toString().trim();
+//                String proprietor_name = etxtProprietorName.getText().toString().trim();
+//                String full_address = etxtFull_address.getText().toString().trim();
+//               // String proprietor_contact = etxtProprietorContact.getText().toString().trim();
+//                String certification_number = etxtCertificationNumber.getText().toString().trim();
+//
+//                View radioButton = radioGroup.findViewById(selectedId);
+//                int radioId = radioGroup.indexOfChild(radioButton);
+//                certification_radioButton = (RadioButton) radioGroup.getChildAt(radioId);;
+//                certification_status = (String) certification_radioButton.getText();
+//
+//
+//                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+//                databaseAccess.open();
+//
+//                boolean check = databaseAccess.addDealer(business_name,proprietor_name,district,sub_county,village,full_address,"proprietor_contact",certification_status,certification_type,certification_number);
+//                if (check) {
+//                    Toast.makeText(getActivity(), "Agro Input Dealer Added Successfully", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
+//                    startActivity(intent);
+//                } else {
+//                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+//
+//                }
+//
+//            }
+//            });
 
-                View radioButton = radioGroup.findViewById(selectedId);
-                int radioId = radioGroup.indexOfChild(radioButton);
-                certification_radioButton = (RadioButton) radioGroup.getChildAt(radioId);;
-                certification_status = (String) certification_radioButton.getText();
-
-
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
-
-                boolean check = databaseAccess.addDealer(business_name,proprietor_name,district,sub_county,village,full_address,proprietor_contact,certification_status,certification_type,certification_number);
-                if (check) {
-                    Toast.makeText(getActivity(), "Agro Input Dealer Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
-
-                }
-
-=======
         navController = Navigation.findNavController(view);
 
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +178,6 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
             public void onClick(View v) {
                 //navigation to step 2
                 navController.navigate(R.id.action_profilingAgroInputDealersFragment_to_profilingAgroInputDealerStep2Fragment);
->>>>>>> 7825cece90212e46d2eaabaad99d0848e3b0e215
 
             }
         });
