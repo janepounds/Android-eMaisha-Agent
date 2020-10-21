@@ -35,9 +35,7 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
     private NavController navController;
     private FragmentProfilingAgroInputDealerBinding binding;
     String district, sub_county, village, certification_type, certification_status;
-    private RadioGroup radioGroup;
-    private RadioButton certification_radioButton;
-    String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
+     String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -87,8 +85,6 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
        // final EditText etxtProprietorContact = view.findViewById(R.id.proprietor_contact_et);
         Spinner spinCertificationType = view.findViewById(R.id.certificate_type_spinner);
         final EditText etxtCertificationNumber = view.findViewById(R.id.certificate_number_et);
-        radioGroup = view.findViewById(R.id.certification_radioGroup);
-        certification_radioButton = view.findViewById(R.id.certification_yes_radio_button);
 
         spinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
