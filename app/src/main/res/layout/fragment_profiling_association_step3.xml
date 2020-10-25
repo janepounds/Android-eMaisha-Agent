@@ -84,6 +84,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="14sp" />
                     <EditText
+                        android:id="@+id/etxt_number_of_males"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/josefin_sans"
@@ -118,6 +119,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="14sp" />
                     <EditText
+                        android:id="@+id/etxt_number_of_females"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/josefin_sans"
@@ -733,9 +735,9 @@
                         android:id="@+id/additional_services_agricultural_inputs_cb"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/agricultural_inputs_on_credit"
+                        android:layout_weight="1"
                         android:checked="false"
-                        android:layout_weight="1"/>
+                        android:text="@string/agricultural_inputs_on_credit" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

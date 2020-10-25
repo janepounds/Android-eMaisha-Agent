@@ -10,7 +10,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("farmer/save")
-    Call<ResponseBody> posFarmer(
+    Call<ResponseBody> postFarmer(
             @Field("first_name") String first_name,
             @Field("last_name") String last_name,
             @Field("dob") String dob,
@@ -51,14 +51,24 @@ public interface Api {
             @Field("full_address") String full_address,
             @Field("association_telephone") String association_telephone,
             @Field("association_email") String association_email,
-            @Field("number_of_members") String number_of_members,
+            @Field("number_of_male_members") String number_of_male_members,
             @Field("crop_value_chain") String crop_value_chain,
             @Field("livestock_value_chain") String livestock_value_chain,
-            @Field("main_source_of_funding") String main_source_of_funding,
             @Field("chairperson") String chairperson,
             @Field("chairperson_contact") String chairperson_contact,
-            @Field("vice_chairperson") String vice_chairperson,
-            @Field("vice_chairperson_contact") String vice_chairperson_contact
+            @Field("secretary") String secretary,
+            @Field("secretary_contact") String secretary_contact,
+            @Field("number_of_female_members") String number_of_female_members,
+            @Field("organisation_type") String organisation_type,
+            @Field("respondent") String registration_level,
+            @Field("respondent_contact") String respondent_contact,
+            @Field("main_activities") String main_activities,
+            @Field("asset_ownership") String asset_ownership,
+            @Field("market") String market,
+            @Field("funding_source") String funding_source,
+            @Field("additional_services") String additional_services
+
+
     );
 
 
@@ -66,29 +76,44 @@ public interface Api {
     @POST("dealer/save")
     Call<ResponseBody> postDealer(
             @Field("business_name") String business_name,
-            @Field("proprietor_name") String proprietor_name,
             @Field("district") String district,
             @Field("sub_county") String sub_county,
             @Field("village") String village,
             @Field("full_address") String full_address,
-            @Field("proprietor_contact") String proprietor_contact,
             @Field("certification") String certification,
             @Field("certification_type") String certification_type,
-            @Field("certification_number") String certification_number
+            @Field("certification_number") String certification_number,
+            @Field("registration_body") String registration_body,
+            @Field("registration_year") String registration_year,
+            @Field("registration_status") String registration_status,
+            @Field("association_membership") String association_membership,
+            @Field("association_name") String association_name,
+            @Field("business_type") String business_type,
+            @Field("number_of_outlets") String number_of_outlets,
+            @Field("types_of_sales") String types_of_sales,
+            @Field("items_sold") String items_sold,
+            @Field("marketing_channels") String marketing_channels,
+            @Field("funding_source") String funding_source,
+            @Field("additional_services") String additional_services
+
     );
 
     @FormUrlEncoded
     @POST("dealer/save")
     Call<ResponseBody> postTrader(
-            @Field("category") String category,
             @Field("business_name") String business_name,
-            @Field("proprietor_name") String proprietor_name,
+            @Field("owner") String owner,
             @Field("commodities") String commodities,
             @Field("phone_number") String phone_number,
             @Field("email_address") String email_address,
             @Field("district") String district,
             @Field("sub_county") String sub_county,
-            @Field("actual_address") String actual_address
+            @Field("full_address") String full_address,
+            @Field("business_type") String business_type,
+            @Field("supply_source") String supply_source,
+            @Field("supplier_location") String supplier_location,
+            @Field("marketing_channels") String marketing_channels,
+            @Field("village") String village
     );
 
 

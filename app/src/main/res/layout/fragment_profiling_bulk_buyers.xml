@@ -126,12 +126,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/owner"
                     android:layout_marginBottom="4dp"/>
+
                 <EditText
                     android:id="@+id/proprietor_name_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:background="@drawable/rounded_rectangle_edit_text" />
+                    android:background="@drawable/rounded_rectangle_edit_text"
+                    android:textSize="14sp" />
 
             </LinearLayout>
             <LinearLayout

@@ -173,7 +173,7 @@ public class DatabaseAccess {
     }
 
     //insert association
-    public boolean addAssociation(String name, String year_of_registration, String district, String sub_county, String village, String full_address, String telephone, String email, String number_of_members, String crop_chain_value, String livestock_chain_value, String main_source_of_funding, String chairperson, String chairperson_contact, String vice_chairperson, String vice_chairperson_contact) {
+    public boolean addAssociation(String name, String year_of_registration, String district, String sub_county, String village, String full_address, String telephone, String email, String crop_chain_value, String livestock_chain_value, String chairperson, String chairperson_contact, String vice_chairperson, String vice_chairperson_contact, String number_of_male_members, String number_of_female_members, String registration_level, String respondent, String respondent_contact, String asset_ownership, String organisation_type, String main_activities, String market, String market_channels, String funding_source, String additional_services) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
@@ -185,14 +185,24 @@ public class DatabaseAccess {
         values.put("full_address", full_address);
         values.put("association_telephone", telephone);
         values.put("association_email", email);
-        values.put("number_of_members", number_of_members);
+        values.put("number_of_female_members", number_of_female_members);
+        values.put("number_of_male_members", number_of_male_members);
         values.put("crop_value_chain", crop_chain_value);
         values.put("livestock_value_chain", livestock_chain_value);
-        values.put("main_source_of_funding", main_source_of_funding);
         values.put("chairperson", chairperson);
         values.put("chairperson_contact", chairperson_contact);
-        values.put("vice_chairperson", vice_chairperson);
-        values.put("vice_chairperson_contact", vice_chairperson_contact);
+        values.put("secretary", vice_chairperson);
+        values.put("secretary_contact", vice_chairperson_contact);
+        values.put("organisation_type", organisation_type);
+        values.put("registration_level", registration_level);
+        values.put("respondent", respondent);
+        values.put("respondent_contact", respondent_contact);
+        values.put("main_activities", main_activities);
+        values.put("asset_ownership", asset_ownership);
+        values.put("market", market);
+        values.put("marketing_channels", market_channels);
+        values.put("funding_source", funding_source);
+        values.put("additional_services", additional_services);
 
 
         long check = database.insert("associations", null, values);
@@ -220,16 +230,26 @@ public class DatabaseAccess {
                 map.put("district", cursor.getString(3));
                 map.put("sub_county", cursor.getString(4));
                 map.put("village", cursor.getString(5));
-                map.put("association_telephone", cursor.getString(6));
-                map.put("association_email", cursor.getString(7));
-                map.put("number_of_members", cursor.getString(8));
-                map.put("crop_value_chain", cursor.getString(9));
-                map.put("livestock_value_chain", cursor.getString(10));
-                map.put("main_source_of_funding", cursor.getString(11));
+                map.put("full_address", cursor.getString(6));
+                map.put("association_telephone", cursor.getString(7));
+                map.put("association_email", cursor.getString(8));
+                map.put("number_of_male_members", cursor.getString(9));
+                map.put("crop_value_chain", cursor.getString(10));
+                map.put("livestock_value_chain", cursor.getString(11));
                 map.put("chairperson", cursor.getString(12));
                 map.put("chairperson_contact", cursor.getString(13));
-                map.put("vice_chairperson", cursor.getString(14));
-                map.put("vice_chairperson_contact", cursor.getString(15));
+                map.put("secretary", cursor.getString(14));
+                map.put("secretary_contact", cursor.getString(15));
+                map.put("number_of_female_members", cursor.getString(17));
+                map.put("organisation_type", cursor.getString(18));
+                map.put("registration_level", cursor.getString(19));
+                map.put("respondent", cursor.getString(20));
+                map.put("respondent_contact", cursor.getString(21));
+                map.put("main_activities", cursor.getString(22));
+                map.put("asset_ownership", cursor.getString(23));
+                map.put("market", cursor.getString(24));
+                map.put("funding_source", cursor.getString(25));
+                map.put("additional_services", cursor.getString(26));
 
 
                 associations.add(map);
@@ -260,20 +280,30 @@ public class DatabaseAccess {
 
 
     //insert dealer
-    public boolean addDealer(String name, String proprietor_name, String district, String sub_county, String village, String full_address, String proprietor_contact, String certification, String certification_type, String certification_number) {
+    public boolean addDealer(String name, String district, String sub_county, String village, String full_address, String certification, String certification_type, String certification_number, String registration_body, String registration_year, String registration_status, String association_membership, String association_name, String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
         values.put("business_name", name);
-        values.put("proprietor_name", proprietor_name);
         values.put("district", district);
         values.put("sub_county", sub_county);
         values.put("village", village);
         values.put("full_address", full_address);
-        values.put("proprietor_contact", proprietor_contact);
         values.put("certification", certification);
         values.put("certification_type", certification_type);
         values.put("certification_number", certification_number);
+        values.put("registration_body", registration_body);
+        values.put("registration_year", registration_year);
+        values.put("registration_status", registration_status);
+        values.put("association_membership", association_membership);
+        values.put("association_name", association_name);
+        values.put("business_type", business_type);
+        values.put("number_of_outlets", number_of_outlets);
+        values.put("types_of_sales", types_of_sales);
+        values.put("items_sold", items_sold);
+        values.put("marketing_channels", marketing_channels);
+        values.put("funding_source", funding_source);
+        values.put("additional_services", additional_services);
         long check = database.insert("agro_input_dealers", null, values);
         database.close();
 
@@ -295,15 +325,25 @@ public class DatabaseAccess {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
                 map.put("business_name", cursor.getString(1));
-                map.put("proprietor_name", cursor.getString(2));
-                map.put("district", cursor.getString(3));
-                map.put("sub_county", cursor.getString(4));
-                map.put("village", cursor.getString(5));
-                map.put("full_address", cursor.getString(6));
-                map.put("proprietor_contact", cursor.getString(7));
-                map.put("certification", cursor.getString(8));
-                map.put("certification_type", cursor.getString(9));
-                map.put("certification_number", cursor.getString(10));
+                map.put("district", cursor.getString(2));
+                map.put("sub_county", cursor.getString(2));
+                map.put("village", cursor.getString(4));
+                map.put("full_address", cursor.getString(5));
+                map.put("certification", cursor.getString(6));
+                map.put("certification_type", cursor.getString(7));
+                map.put("certification_number", cursor.getString(8));
+                map.put("registration_body", cursor.getString(10));
+                map.put("registration_year", cursor.getString(11));
+                map.put("registration_status", cursor.getString(12));
+                map.put("association_membership", cursor.getString(13));
+                map.put("association_name", cursor.getString(14));
+                map.put("business_type", cursor.getString(15));
+                map.put("number_of_outlets", cursor.getString(16));
+                map.put("types_of_sales", cursor.getString(17));
+                map.put("items_sold", cursor.getString(18));
+                map.put("marketing_channels", cursor.getString(19));
+                map.put("funding_source", cursor.getString(20));
+                map.put("additional_services", cursor.getString(21));
                 agro_dealers.add(map);
             } while (cursor.moveToNext());
         }
@@ -333,19 +373,24 @@ public class DatabaseAccess {
 
 
     //insert trader
-    public boolean addTrader(String category, String business_name, String proprietor_name, String commodities, String phone_number, String email_address, String district, String sub_county, String actual_address) {
+    public boolean addTrader(String business_type, String business_name,String owner, String commodities, String phone_number, String email_address, String district, String sub_county, String village, String actual_address, String supplier_location, String supply_source, String funding_source, String marketing_channels) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
-        values.put("category", category);
+        values.put("business_type", business_type);
         values.put("business_name", business_name);
-        values.put("proprietor_name", proprietor_name);
+        values.put("owner", owner);
         values.put("commodities", commodities);
         values.put("phone_number", phone_number);
         values.put("email_address", email_address);
         values.put("district", district);
         values.put("sub_county", sub_county);
-        values.put("actual_address", actual_address);
+        values.put("village", village);
+        values.put("supply_source", supply_source);
+        values.put("supplier_location", supplier_location);
+        values.put("funding_source", funding_source);
+        values.put("marketing_channels", marketing_channels);
+        values.put("full_address", actual_address);
         long check = database.insert("agro_traders", null, values);
         database.close();
 
@@ -365,15 +410,19 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("category", cursor.getString(1));
-                map.put("business_name", cursor.getString(2));
-                map.put("proprietor_name", cursor.getString(3));
-                map.put("commodities", cursor.getString(4));
-                map.put("phone_number", cursor.getString(5));
-                map.put("email_address", cursor.getString(6));
-                map.put("district", cursor.getString(7));
-                map.put("sub_county", cursor.getString(8));
-                map.put("actual_address", cursor.getString(9));
+                map.put("business_name", cursor.getString(1));
+                map.put("owner", cursor.getString(2));
+                map.put("commodities", cursor.getString(3));
+                map.put("phone_number", cursor.getString(4));
+                map.put("email_address", cursor.getString(5));
+                map.put("district", cursor.getString(6));
+                map.put("sub_county", cursor.getString(7));
+                map.put("full_address", cursor.getString(8));
+                map.put("business_type", cursor.getString(10));
+                map.put("supply_source", cursor.getString(11));
+                map.put("supplier_location", cursor.getString(12));
+                map.put("marketing_channels", cursor.getString(13));
+                map.put("village", cursor.getString(9));
                 agro_traders.add(map);
             } while (cursor.moveToNext());
         }
@@ -467,7 +516,7 @@ public class DatabaseAccess {
 
 
     //insert market price
-    public boolean addMarketPrice(String date,String commodities, String variety, String market, String measurement_units, String wholesale_price, String retail_price) {
+    public boolean addMarketPrice(String date, String commodities, String variety, String market, String measurement_units, String wholesale_price, String retail_price) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
