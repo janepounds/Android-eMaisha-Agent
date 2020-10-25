@@ -29,10 +29,15 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
     private Context context;
     private NavController navController;
     private FragmentProfilingAgroInputDealerBinding binding;
+<<<<<<< HEAD
     String district, sub_county, village, certification_status;
     private RadioGroup radioGroup;
     private RadioButton certification_radioButton;
     String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
+=======
+    String district, sub_county, village, certification_type, certification_status;
+     String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
+>>>>>>> 5f18bf881273cc031aba4147dfe6428bdf9bffeb
 
 
     @Override
@@ -79,8 +84,14 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         Spinner spinSubCounty = view.findViewById(R.id.sub_county_spinner);
         Spinner spinVillage = view.findViewById(R.id.village_spinner);
         final EditText etxtFull_address = view.findViewById(R.id.full_address_et);
+<<<<<<< HEAD
         radioGroup = view.findViewById(R.id.certification_radioGroup);
         certification_radioButton = view.findViewById(R.id.certification_yes_radio_button);
+=======
+       // final EditText etxtProprietorContact = view.findViewById(R.id.proprietor_contact_et);
+        Spinner spinCertificationType = view.findViewById(R.id.certificate_type_spinner);
+        final EditText etxtCertificationNumber = view.findViewById(R.id.certificate_number_et);
+>>>>>>> 5f18bf881273cc031aba4147dfe6428bdf9bffeb
 
         spinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
