@@ -37,8 +37,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="13"
                         android:orientation="vertical"
-                        android:background="@drawable/ic_dashboard_bg"
-                        >
+                        android:background="@drawable/ic_dashboard_bg">
 
                         <LinearLayout
                             android:layout_width="match_parent"
