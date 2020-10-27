@@ -30,7 +30,7 @@ public class ProfilingAssociationFragment extends Fragment {
     private Context context;
     private NavController navController;
     private FragmentProfilingAssociationBinding binding;
-    String district, sub_county, village, crop_value_chain, livestock_value_chain, source_of_funding;
+    String district, sub_county, village, organisation_type,registration_level;
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
 
@@ -83,14 +83,9 @@ public class ProfilingAssociationFragment extends Fragment {
         final EditText etxtFull_address = view.findViewById(R.id.full_address_et);
         final EditText etxtTelephone = view.findViewById(R.id.association_telephone_et);
         final EditText etxtEmail = view.findViewById(R.id.association_email_et);
-//        final EditText etxtNumberOfMembers = view.findViewById(R.id.number_of_members_et);
-        Spinner spinCropValueChain = view.findViewById(R.id.crop_value_chains_spinner);
-        Spinner spinLivestockValueChain = view.findViewById(R.id.livestock_value_chain_spinner);
-//        Spinner spinSourceOfFunding = view.findViewById(R.id.main_source_of_funding_spinner);
-        final EditText etxtChairperson = view.findViewById(R.id.chairperson_et);
-        final EditText etxtChairpersonContact = view.findViewById(R.id.chairperson_contact_et);
-//        final EditText etxtViceChairperson = view.findViewById(R.id.vice_chairperson_et);
-        EditText etxtViceChairpersonContact = view.findViewById(R.id.vice_chairperson_contact_et);
+        Spinner spinOrganisationType = view.findViewById(R.id.organisation_type_spinner);
+        Spinner spinRegistrationLevel = view.findViewById(R.id.registration_level_spinner);
+
 
         Button next_button = view.findViewById(R.id.next_button);
 
@@ -129,42 +124,32 @@ public class ProfilingAssociationFragment extends Fragment {
 
             }
         });
-//
-//        spinCropValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                crop_value_chain = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
 
-//        spinLivestockValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                livestock_value_chain = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//
-//        spinSourceOfFunding.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                source_of_funding = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
+        spinOrganisationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                organisation_type = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinRegistrationLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                registration_level = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        navController = Navigation.findNavController(view);
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,37 +159,25 @@ public class ProfilingAssociationFragment extends Fragment {
                 String full_address = etxtFull_address.getText().toString().trim();
                 String telephone = etxtTelephone.getText().toString().trim();
                 String email = etxtEmail.getText().toString().trim();
-//                String number_of_members = etxtNumberOfMembers.getText().toString().trim();
-                String chairperson = etxtChairperson.getText().toString().trim();
-                String chairperson_contact = etxtChairpersonContact.getText().toString().trim();
-//                String vice_chairperson = etxtViceChairperson.getText().toString().trim();
-                String vice_chairperson_contact = etxtChairpersonContact.getText().toString().trim();
-
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
-
-                boolean check = databaseAccess.addAssociation(name,year_of_registration,district,sub_county,village,full_address,telephone,email,"number_of_members",crop_value_chain,livestock_value_chain,source_of_funding,chairperson,chairperson_contact,"vice_chairperson",vice_chairperson_contact);
-                if (check) {
-                    Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
-
-        navController = Navigation.findNavController(view);
-
-        binding.nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //navigation to step 2
-                navController.navigate(R.id.action_profilingAssociationFragment_to_profilingAssociationStep2Fragment);
+                Bundle bundle = new Bundle();
+                bundle.putString("name",name);
+                bundle.putString("year_of_registration",year_of_registration);
+                bundle.putString("full_address",full_address);
+                bundle.putString("telephone",telephone);
+                bundle.putString("email",email);
+                bundle.putString("district",district);
+                bundle.putString("sub_county",sub_county);
+                bundle.putString("village",village);
+                bundle.putString("registration_level",registration_level);
+                bundle.putString("organisation_type",organisation_type);
+                navController.navigate(R.id.action_profilingAssociationFragment_to_profilingAssociationStep2Fragment,bundle);
 
             }
         });
+
+
+
+
 
 
     }

@@ -31,7 +31,7 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     private Context context;
     private NavController navController;
     private FragmentProfilingBulkBuyersBinding binding;
-    String district, sub_county, category, commodities;
+    String district, sub_county,village, business_type;
 
 
     String[] descriptionData = {"Contact\nDetails", "Business\nDetails"};
@@ -75,16 +75,16 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        Spinner spinCategory = view.findViewById(R.id.category_spinner);
+        Spinner spinBusinessType = view.findViewById(R.id.business_type_spinner);
         final EditText etxtBusinessName = view.findViewById(R.id.business_name_et);
-        final EditText etxtProprietorName = view.findViewById(R.id.proprietor_name_et);
-        Spinner spinCommodities = view.findViewById(R.id.commodities_spinner);
+        final EditText etxtOwner = view.findViewById(R.id.proprietor_name_et);
         final EditText etxtPhone = view.findViewById(R.id.phone_number_et);
         final EditText etxtEmail = view.findViewById(R.id.email_address_et);
         Spinner spinDistrict = view.findViewById(R.id.district_spinner);
         Spinner spinSubcounty = view.findViewById(R.id.sub_county_spinner);
-//        final EditText etxtActualAddress = view.findViewById(R.id.actual_address_et);
-        Button btnSubmit = view.findViewById(R.id.submit_button);
+        Spinner spinVillage = view.findViewById(R.id.village_spinner);
+        final EditText etxtFullAddress = view.findViewById(R.id.full_address_et);
+        Button btnSubmit = view.findViewById(R.id.next_button);
 
         spinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -109,66 +109,57 @@ public class ProfilingBulkBuyersFragment extends Fragment {
 
             }
         });
+        spinVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                village = adapterView.getItemAtPosition(i).toString();
+            }
 
-//        spinCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                category = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-//        spinCommodities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                commodities = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
+            }
+        });
 
-//        btnSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String business_name = etxtBusinessName.getText().toString().trim();
-//                String proprietor_name = etxtProprietorName.getText().toString().trim();
-//                String phone = etxtPhone.getText().toString().trim();
-//                String email = etxtEmail.getText().toString().trim();
-////                String actual_address = etxtActualAddress.getText().toString().trim();
-//
-//
-//                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-//                databaseAccess.open();
-//
-//                boolean check = databaseAccess.addTrader(category, business_name, proprietor_name, commodities, phone, email, district, sub_county, "actual_address");
-//                if (check) {
-//                    Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
-//
-//                }
-//
-//
-//            }
-//        });
+        spinBusinessType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                business_type = adapterView.getItemAtPosition(i).toString();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         navController = Navigation.findNavController(view);
 
-        binding.nextButton.setOnClickListener(new View.OnClickListener() {
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //navigation to step 2
-                navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment);
+            public void onClick(View view) {
+                String business_name = etxtBusinessName.getText().toString().trim();
+                String phone = etxtPhone.getText().toString().trim();
+                String email = etxtEmail.getText().toString().trim();
+                String full_address = etxtFullAddress.getText().toString().trim();
+                String owner = etxtOwner.getText().toString().trim();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("business_name",business_name);
+                bundle.putString("phone",phone);
+                bundle.putString("owner",owner);
+                bundle.putString("full_address",full_address);
+                bundle.putString("email",email);
+                bundle.putString("district",district);
+                bundle.putString("sub_country",sub_county);
+                bundle.putString("village",village);
+                bundle.putString("business_type",business_type);
+
+
+                navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment,bundle);
+
+
 
             }
         });
