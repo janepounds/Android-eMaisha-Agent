@@ -5,9 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.cabraltech.emaishaagentsapp.models.RegionDetails;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class DatabaseAccess {
     private SQLiteOpenHelper openHelper;
@@ -106,6 +112,118 @@ public class DatabaseAccess {
         } else {
             return true;
         }
+    }
+
+    //////////**************GET LAST ENTERED REGION ID**************///////////////////
+    public int getMaxRegionId() {
+        this.database = openHelper.getWritableDatabase();
+
+        Cursor cur = database.rawQuery("SELECT MAX(id) FROM  regions", null);
+        cur.moveToFirst();
+
+        int regionId = cur.getInt(0);
+
+        // close cursor and DB
+        cur.close();
+        database.close();
+
+        return regionId;
+
+    }
+
+    ///**********************insert regions**************************//////////////////
+    public void insertRegionDetails(List<RegionDetails> regionDetails) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        for(RegionDetails regionDetail : regionDetails) {
+            contentValues.put("id", regionDetail.getId());
+            contentValues.put("regionType", regionDetail.getRegionType());
+            contentValues.put("region", regionDetail.getRegion());
+            contentValues.put("belongs_to", regionDetail.getBelongs_to());
+            database.insert("regions", null, contentValues);
+        }
+        database.close();
+    }
+
+    //******GET DISTRICTS*****//
+
+    public ArrayList<RegionDetails> getRegionDetails( String district) throws JSONException {
+        this.database = openHelper.getWritableDatabase();
+        ArrayList<RegionDetails> array_list = new ArrayList();
+
+        Cursor res = database.rawQuery("select * from regions where  regionType = '" + district + "'", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            RegionDetails regionDetails = new RegionDetails();
+            regionDetails.setTableId(Integer.parseInt(res.getString(res.getColumnIndex("table_id"))));
+            regionDetails.setId(Integer.parseInt(res.getString(res.getColumnIndex("id"))));
+            regionDetails.setRegionType(res.getString(res.getColumnIndex("regionType")));
+            regionDetails.setRegion(res.getString(res.getColumnIndex("region")));
+            regionDetails.setBelongs_to(res.getString(res.getColumnIndex("belongs_to")));
+            array_list.add(regionDetails);
+            res.moveToNext();
+        }
+
+        res.close();
+        database.close();
+        Log.d("RegionDetails ", array_list.size() + "");
+
+        return array_list;
+    }
+
+    //******GET SUB COUNTY*****//
+
+    public ArrayList<RegionDetails> getSubcountyDetails( String belongs_to, String subcounty) throws JSONException {
+        this.database = openHelper.getWritableDatabase();
+        ArrayList<RegionDetails> array_list = new ArrayList();
+
+        Cursor res = database.rawQuery("select * from regions where  belongs_to   = '" + belongs_to + "'" + " AND  regionType  = '" + subcounty + "'", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            RegionDetails regionDetails = new RegionDetails();
+            regionDetails.setTableId(Integer.parseInt(res.getString(res.getColumnIndex("table_id"))));
+            regionDetails.setId(Integer.parseInt(res.getString(res.getColumnIndex("id"))));
+            regionDetails.setRegionType(res.getString(res.getColumnIndex("regionType")));
+            regionDetails.setRegion(res.getString(res.getColumnIndex("region")));
+            regionDetails.setBelongs_to(res.getString(res.getColumnIndex("belongs_to")));
+            array_list.add(regionDetails);
+            res.moveToNext();
+        }
+
+        res.close();
+        database.close();
+        Log.d("RegionDetails ", array_list.size() + "");
+
+        return array_list;
+    }
+
+    //******GET VILLAGES*****//
+
+    public ArrayList<RegionDetails> getVillageDetails( String belongs_to, String subcounty) throws JSONException {
+        this.database = openHelper.getWritableDatabase();
+        ArrayList<RegionDetails> array_list = new ArrayList();
+
+        Cursor res = database.rawQuery("select * from regions where  belongs_to   = '" + belongs_to + "'" + " AND  regionType  = '" + subcounty + "'", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            RegionDetails regionDetails = new RegionDetails();
+            regionDetails.setTableId(Integer.parseInt(res.getString(res.getColumnIndex("table_id"))));
+            regionDetails.setId(Integer.parseInt(res.getString(res.getColumnIndex("id"))));
+            regionDetails.setRegionType(res.getString(res.getColumnIndex("regionType")));
+            regionDetails.setRegion(res.getString(res.getColumnIndex("region")));
+            regionDetails.setBelongs_to(res.getString(res.getColumnIndex("belongs_to")));
+            array_list.add(regionDetails);
+            res.moveToNext();
+        }
+
+        res.close();
+        database.close();
+        Log.d("RegionDetails ", array_list.size() + "");
+
+        return array_list;
     }
 
 
