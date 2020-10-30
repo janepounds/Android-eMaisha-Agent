@@ -259,6 +259,9 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
                 String next_of_kin_relation = etxt_next_of_kin_relation.getText().toString().trim();
                 String next_of_kin_contact = etxt_next_of_kin_contact.getText().toString().trim();
                 String next_of_kin_address = etxt_next_of_kin_address.getText().toString().trim();
+                String district = spinDistrict.getText().toString();
+                String subcounty = spinSubCounty.getText().toString();
+                String village = spinVillage.getText().toString();
 
 
                 Bundle bundle = new Bundle();
@@ -281,6 +284,9 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
                 bundle.putString("next_of_kin_relation",next_of_kin_relation);
                 bundle.putString("next_of_kin_contact",next_of_kin_contact);
                 bundle.putString("next_of_kin_address",next_of_kin_address);
+                bundle.putString("district",district);
+                bundle.putString("subcounty",subcounty);
+                bundle.putString("village",village);
                 //navigate to step 3
                 navController.navigate(R.id.action_profilingFarmerStep2Fragment_to_profilingFarmerStep3Fragment,bundle);
 
