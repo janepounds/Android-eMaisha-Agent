@@ -1,36 +1,35 @@
-package com.cabraltech.emaishaagentsapp;
+package com.cabraltech.emaishaagentsapp.network;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import androidx.multidex.MultiDexApplication;
-
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
-import com.cabraltech.emaishaagentsapp.network.APIClient;
 
 import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Field;
 
-public class MyApp extends MultiDexApplication {
-    private static final String TAG = "MyApp";
+public class NetworkStateChecker extends BroadcastReceiver {
+    private static final String TAG = "NetworkStateChecker";
     private Context context;
     private List<HashMap<String, String>> farmersList, pestReport, scoutingReport, marketPrices, marketDetails, association, agroInputDealers,bulkBuyers;
     private String sync_status;
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        context=getApplicationContext();
-        Log.d(TAG, "onCreate: MyApp onCreate");
-        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/JosefinSans-Regular.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        this.context = context;
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
@@ -216,8 +215,8 @@ public class MyApp extends MultiDexApplication {
 
 
         }
-    
-    
+
+
     }
 
 
@@ -314,7 +313,7 @@ public class MyApp extends MultiDexApplication {
                         Log.d(TAG, "onResponse: status updated succesfully");
 
                     }else{
-                        Log.d(TAG, "onResponse: status update failed"+id + response.body().getStatus());
+                        Log.d(TAG, "onResponse: status update failed");
                     }
 
                 } else {
@@ -443,14 +442,14 @@ public class MyApp extends MultiDexApplication {
     }
 
     private void saveAssociation(
-           String id, String name, String year_of_registration, String district, String sub_county, String village, String full_address, String association_telephone,
+            String id, String name, String year_of_registration, String district, String sub_county, String village, String full_address, String association_telephone,
             String association_email, String number_of_male_members, String crop_value_chain, String livestock_value_chain, String main_source_of_funding, String chairperson,
             String chairperson_contact, String secretary, String secretary_contact, String number_of_female_members, String organisation_type, String registration_level,
-            String respondent, String respondent_contact, String main_activities, String asset_ownership, String market,  String marketing_channels,String funding_source, String additional_services) {
+            String respondent, String respondent_contact, String main_activities, String asset_ownership, String market, String funding_source, String marketing_channels, String additional_services) {
         Call<ResponseData> call = APIClient.getInstance()
                 .postAssociation(name, year_of_registration, district, sub_county, village, full_address,association_telephone, association_email, Integer.parseInt(number_of_male_members), crop_value_chain,
                         livestock_value_chain, main_source_of_funding, chairperson, chairperson_contact, secretary,secretary_contact, Integer.parseInt(number_of_female_members), organisation_type,
-                        registration_level, respondent, respondent_contact, main_activities, asset_ownership, market,  marketing_channels, funding_source,additional_services);
+                        registration_level, respondent, respondent_contact, main_activities, asset_ownership, market, funding_source, marketing_channels, additional_services);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
@@ -486,7 +485,7 @@ public class MyApp extends MultiDexApplication {
                                      String registration_body, String registration_year, String registration_status, String association_membership, String association_name,
                                      String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services) {
         Call<ResponseData> call = APIClient.getInstance()
-                .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_type,certification_number, registration_body, Integer.parseInt(registration_year), registration_status, association_membership, association_name, business_type, Integer.parseInt(number_of_outlets), types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
+                .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_type, certification_number, registration_body, Integer.parseInt(registration_year), registration_status, association_membership, association_name, business_type, Integer.parseInt(number_of_outlets), types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {

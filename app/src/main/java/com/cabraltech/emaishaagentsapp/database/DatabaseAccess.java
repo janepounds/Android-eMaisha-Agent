@@ -102,6 +102,7 @@ public class DatabaseAccess {
         values.put("third_crop", third_crop);
         values.put("main_livestock", main_livestock);
         values.put("second_livestock", second_livestock);
+        values.put("sync_status",0);
 
         long check = database.insert("farmers", null, values);
         database.close();
@@ -253,6 +254,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("first_name", cursor.getString(1));
                 map.put("last_name", cursor.getString(2));
                 map.put("dob", cursor.getString(3));
@@ -321,6 +323,7 @@ public class DatabaseAccess {
         values.put("marketing_channels", market_channels);
         values.put("funding_source", funding_source);
         values.put("additional_services", additional_services);
+        values.put("sync_status", 0);
 
 
         long check = database.insert("associations", null, values);
@@ -343,6 +346,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("name", cursor.getString(1));
                 map.put("year_of_registration", cursor.getString(2));
                 map.put("district", cursor.getString(3));
@@ -354,10 +358,11 @@ public class DatabaseAccess {
                 map.put("number_of_male_members", cursor.getString(9));
                 map.put("crop_value_chain", cursor.getString(10));
                 map.put("livestock_value_chain", cursor.getString(11));
-                map.put("chairperson", cursor.getString(12));
-                map.put("chairperson_contact", cursor.getString(13));
-                map.put("secretary", cursor.getString(14));
-                map.put("secretary_contact", cursor.getString(15));
+                map.put("main_source_of_funding", cursor.getString(12));
+                map.put("chairperson", cursor.getString(13));
+                map.put("chairperson_contact", cursor.getString(14));
+                map.put("secretary", cursor.getString(15));
+                map.put("secretary_contact", cursor.getString(16));
                 map.put("number_of_female_members", cursor.getString(17));
                 map.put("organisation_type", cursor.getString(18));
                 map.put("registration_level", cursor.getString(19));
@@ -422,6 +427,7 @@ public class DatabaseAccess {
         values.put("marketing_channels", marketing_channels);
         values.put("funding_source", funding_source);
         values.put("additional_services", additional_services);
+        values.put("sync_status", 0);
         long check = database.insert("agro_input_dealers", null, values);
         database.close();
 
@@ -442,6 +448,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("business_name", cursor.getString(1));
                 map.put("district", cursor.getString(2));
                 map.put("sub_county", cursor.getString(2));
@@ -509,6 +516,7 @@ public class DatabaseAccess {
         values.put("funding_source", funding_source);
         values.put("marketing_channels", marketing_channels);
         values.put("full_address", actual_address);
+        values.put("sync_status", 0);
         long check = database.insert("agro_traders", null, values);
         database.close();
 
@@ -581,6 +589,7 @@ public class DatabaseAccess {
         values.put("sub_county", sub_county);
         values.put("town", village);
         values.put("contact_person", contact_person);
+        values.put("sync_status", 0);
         long check = database.insert("markets", null, values);
         database.close();
 
@@ -600,12 +609,14 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("name", cursor.getString(1));
                 map.put("street_address", cursor.getString(2));
                 map.put("district", cursor.getString(3));
                 map.put("sub_county", cursor.getString(4));
-                map.put("contact_person", cursor.getString(5));
-                map.put("phone_number", cursor.getString(6));
+                map.put("town", cursor.getString(5));
+                map.put("contact_person", cursor.getString(6));
+                map.put("phone_number", cursor.getString(7));
                 markets.add(map);
             } while (cursor.moveToNext());
         }
@@ -645,6 +656,7 @@ public class DatabaseAccess {
         values.put("measurement_units", measurement_units);
         values.put("wholesale_price", wholesale_price);
         values.put("retail_price", retail_price);
+        values.put("sync_status", 0);
         long check = database.insert("market_prices", null, values);
         database.close();
 
@@ -665,6 +677,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("variety", cursor.getString(2));
                 map.put("market", cursor.getString(3));
@@ -713,6 +726,7 @@ public class DatabaseAccess {
         values.put("damage_assesment", damage_assesment);
         values.put("recommendation", recommendation);
         values.put("photo_of_damage", photo_of_damage);
+        values.put("sync_status",0);
         long check = database.insert("pest_reports", null, values);
         database.close();
 
@@ -732,16 +746,18 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("district", cursor.getString(2));
                 map.put("sub_county", cursor.getString(3));
                 map.put("village", cursor.getString(4));
                 map.put("farmer_phone", cursor.getString(5));
-                map.put("sign_and_symptoms", cursor.getString(6));
+                map.put("signs_and_symptoms", cursor.getString(6));
                 map.put("suspected_pest", cursor.getString(7));
                 map.put("damage_assesment", cursor.getString(8));
                 map.put("recommendation", cursor.getString(9));
                 map.put("photo_of_damage", cursor.getString(10));
+                map.put("farmer_name",cursor.getString(11));
                 pest_reports.add(map);
             } while (cursor.moveToNext());
         }
@@ -784,6 +800,7 @@ public class DatabaseAccess {
         values.put("infestation", infestation);
         values.put("infestation_level", infestation_level);
         values.put("recommendation", recommendation);
+        values.put("sync_status", 0);
         long check = database.insert("scouting_reports", null, values);
         database.close();
 
@@ -803,6 +820,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("farmer_name", cursor.getString(2));
                 map.put("district", cursor.getString(3));
