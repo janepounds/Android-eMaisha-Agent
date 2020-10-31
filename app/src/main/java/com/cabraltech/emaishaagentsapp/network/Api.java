@@ -1,6 +1,7 @@
 package com.cabraltech.emaishaagentsapp.network;
 
 import com.cabraltech.emaishaagentsapp.models.Regions;
+import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -9,6 +10,24 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface Api {
+    @FormUrlEncoded
+    @POST("register")
+    Call<RegistrationResponse> register(
+            @Field("first_name") String firstName,
+            @Field("last_name") String lastName,
+            @Field("district") String district,
+            @Field("sub_county") String subCounty,
+            @Field("village") String village,
+            @Field("phone_number") int phoneNumber,
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("next_of_kin") String nextOfKin,
+            @Field("next_of_kin_relation") String nextOfKinRelation,
+            @Field("next_of_kin_contact") String nextOfKinContact,
+            @Field("nin") String nin,
+            @Field("picture") String picture,
+            @Field("national_id_picture") String nationalIdPicture
+    );
 
     @FormUrlEncoded
     @POST("farmer/save")

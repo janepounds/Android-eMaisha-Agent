@@ -9,7 +9,6 @@ import retrofit2.http.POST;
 
 public interface APIRequests {
 
-
     @FormUrlEncoded
     @POST("getregions")
     Call<Regions> getAllRegions(@Field("latest_id") int latest_id);

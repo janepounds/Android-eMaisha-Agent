@@ -19,12 +19,10 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         submitBtn = findViewById(R.id.submit_button);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUpActivity.this,OTPVerificationActivity.class);
-                v.getContext().startActivity(intent);
-            }
+
+        submitBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpActivity.this,OTPVerificationActivity.class);
+            v.getContext().startActivity(intent);
         });
     }
 }
