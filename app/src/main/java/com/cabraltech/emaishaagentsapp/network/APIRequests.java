@@ -6,6 +6,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface APIRequests {
@@ -18,6 +19,7 @@ public interface APIRequests {
     @FormUrlEncoded
     @POST("agent/store/farmer")
     Call<ResponseBody>postFarmersList(
+
          @Field("first_name") String first_name,
          @Field("last_name") String last_name,
          @Field("dob") String dob,

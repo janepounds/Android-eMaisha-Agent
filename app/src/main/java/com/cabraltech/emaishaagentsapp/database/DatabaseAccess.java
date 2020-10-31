@@ -102,6 +102,7 @@ public class DatabaseAccess {
         values.put("third_crop", third_crop);
         values.put("main_livestock", main_livestock);
         values.put("second_livestock", second_livestock);
+        values.put("sync_status",0);
 
         long check = database.insert("farmers", null, values);
         database.close();
@@ -713,6 +714,7 @@ public class DatabaseAccess {
         values.put("damage_assesment", damage_assesment);
         values.put("recommendation", recommendation);
         values.put("photo_of_damage", photo_of_damage);
+        values.put("sync");
         long check = database.insert("pest_reports", null, values);
         database.close();
 

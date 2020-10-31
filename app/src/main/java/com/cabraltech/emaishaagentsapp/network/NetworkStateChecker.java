@@ -243,20 +243,20 @@ public class NetworkStateChecker extends BroadcastReceiver {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("Farmers List Sync", "Farmer List Synced");
+                    Log.d(TAG, "Farmer List Synced");
                     //update synced status
 //                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
 //                    databaseAccess.open();
 //                    databaseAccess.updateFarmerSyncStatus()
                 } else {
-                    Log.d("Farmers Sync Failure", "Farmers List Synced Failed");
-                    Log.d("Error", String.valueOf(response));
+                    Log.d(TAG, "Farmers List Synced Failed");
+                    Log.d(TAG, String.valueOf(response));
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Farmers Sync Failure", "Farmers List Synced Failed");
+                Log.d(TAG, "Farmers List Synced Failed");
                 t.printStackTrace();
             }
         });
@@ -271,18 +271,18 @@ public class NetworkStateChecker extends BroadcastReceiver {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("Pest Report Sync", "Pest Report Synced");
+                    Log.d(TAG, "Pest Report Synced");
 
                     //update status locally
                 } else {
-                    Log.d("PestReport Sync Failure", "Pest Report Sync Failed");
-                    Log.d("Error", String.valueOf(response));
+                    Log.d(TAG, "Pest Report Sync Failed");
+                    Log.d(TAG, String.valueOf(response));
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("PestReport Sync Failure", "Pest Report Sync failed");
+                Log.d(TAG, "Pest Report Sync failed");
 
             }
         });
@@ -298,18 +298,18 @@ public class NetworkStateChecker extends BroadcastReceiver {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("Scouting Report Sync", "Scouting Report Synced");
+                    Log.d(TAG, "Scouting Report Synced");
 
                     //update status locally
                 } else {
-                    Log.d("Scouting Sync Failure", "Scouting Report Sync Failed");
-                    Log.d("Error", String.valueOf(response));
+                    Log.d(TAG, "Scouting Report Sync Failed");
+                    Log.d(TAG, String.valueOf(response));
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Scouting Sync Failure", "Scouting Report Sync failed");
+                Log.d(TAG, "Scouting Report Sync failed");
             }
         });
 
@@ -323,18 +323,18 @@ public class NetworkStateChecker extends BroadcastReceiver {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("Market Price Sync", "Market prices Synced");
+                    Log.d(TAG, "Market prices Synced");
 
                     //update status locally
                 } else {
-                    Log.d("Market Price Failure", "Market Prices Sync Failed");
-                    Log.d("Error", String.valueOf(response));
+                    Log.d(TAG, "Market Prices Sync Failed");
+                    Log.d(TAG, String.valueOf(response));
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Market Price Failure", "Market Price Sync failed");
+                Log.d(TAG, "Market Price Sync failed");
             }
         });
 
@@ -348,18 +348,18 @@ public class NetworkStateChecker extends BroadcastReceiver {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("Market Sync", "Market  Synced");
+                    Log.d(TAG, "Market  Synced");
 
                     //update status locally
                 } else {
-                    Log.d("Market sync Failure", "Market Sync Failed");
-                    Log.d("Error", String.valueOf(response));
+                    Log.d(TAG, "Market Sync Failed");
+                    Log.d(TAG, String.valueOf(response));
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Market sync Failure", "Market  Sync failed");
+                Log.d(TAG, "Market  Sync failed");
             }
         });
 
@@ -378,18 +378,18 @@ public class NetworkStateChecker extends BroadcastReceiver {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("Association Sync", "Association  Synced");
+                    Log.d(TAG, "Association  Synced");
 
                     //update status locally
                 } else {
-                    Log.d("Assoc sync Failure", "AAssociation sync Failed");
-                    Log.d("Error", String.valueOf(response));
+                    Log.d(TAG, "AAssociation sync Failed");
+                    Log.d(TAG, String.valueOf(response));
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Assoc sync Failure", "Association Sync failed");
+                Log.d(TAG, "Association Sync failed");
             }
         });
 
@@ -404,18 +404,18 @@ public class NetworkStateChecker extends BroadcastReceiver {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("AgroInput Sync", "Agro Input Dealer  Synced");
+                    Log.d(TAG, "Agro Input Dealer  Synced");
 
                     //update status locally
                 } else {
-                    Log.d("AgroInput sync Failure", "Agro Input Dealer Failed");
-                    Log.d("Error", String.valueOf(response));
+                    Log.d(TAG, "Agro Input Dealer Failed");
+                    Log.d(TAG, String.valueOf(response));
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("AgroInput sync Failure", "Agro Input Dealer   Sync failed");
+                Log.d(TAG, "Agro Input Dealer   Sync failed");
             }
         });
 
