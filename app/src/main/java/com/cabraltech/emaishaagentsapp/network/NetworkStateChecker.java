@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
+import com.cabraltech.emaishaagentsapp.models.ResponseData;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
     private static final String TAG = "NetworkStateChecker";
     private Context context;
     private List<HashMap<String, String>> farmersList, pestReport, scoutingReport, marketPrices, marketDetails, association, agroInputDealers,bulkBuyers;
-
+    private String sync_status;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -34,10 +35,12 @@ public class NetworkStateChecker extends BroadcastReceiver {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
         databaseAccess.open();
         farmersList = databaseAccess.getUnSyncedFarmers();
+        Log.d(TAG, "onCreate: MyApp onCreate" +farmersList);
 
         if (activeNetwork != null && activeNetwork.isConnected()) {
             for (int i = 0; i < farmersList.size(); i++) {
                 saveFarmersList(
+                        farmersList.get(i).get("id"),
                         farmersList.get(i).get("first_name"),
                         farmersList.get(i).get("last_name"),
                         farmersList.get(i).get("dob"),
@@ -67,11 +70,15 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         farmersList.get(i).get("second_livestock")
 
 
+
+
                 );
             }
             pestReport = databaseAccess.getUnSyncedPestReports();
+            Log.d(TAG, "onCreate: MyApp onCreate" +pestReport);
             for (int i = 0; i < pestReport.size(); i++) {
                 savePestReports(
+                        pestReport.get(i).get("id"),
                         pestReport.get(i).get("date"),
                         pestReport.get(i).get("district"),
                         pestReport.get(i).get("sub_county"),
@@ -84,11 +91,14 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         pestReport.get(i).get("photo_of_damage"),
                         pestReport.get(i).get("farmer_name")
 
+
                 );
+
             }
             scoutingReport = databaseAccess.getUnSyncedScoutingReports();
             for (int i = 0; i < scoutingReport.size(); i++) {
                 saveScoutingReport(
+                        scoutingReport.get(i).get("id"),
                         scoutingReport.get(i).get("date"),
                         scoutingReport.get(i).get("farmer_name"),
                         scoutingReport.get(i).get("district"),
@@ -108,6 +118,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             marketPrices = databaseAccess.getUnSyncedMarketprices();
             for (int i = 0; i < marketPrices.size(); i++) {
                 saveMarketPrices(
+                        marketPrices.get(i).get("id"),
                         marketPrices.get(i).get("date"),
                         marketPrices.get(i).get("variety"),
                         marketPrices.get(i).get("market"),
@@ -122,6 +133,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             marketDetails = databaseAccess.getUnSyncedMarkets();
             for (int i = 0; i < marketDetails.size(); i++) {
                 saveMarket(
+                        marketDetails.get(i).get("id"),
                         marketDetails.get(i).get("name"),
                         marketDetails.get(i).get("street_address"),
                         marketDetails.get(i).get("district"),
@@ -136,6 +148,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             association = databaseAccess.getUnSyncedAssociations();
             for (int i = 0; i < association.size(); i++) {
                 saveAssociation(
+                        association.get(i).get("id"),
                         association.get(i).get("name"),
                         association.get(i).get("year_of_registration"),
                         association.get(i).get("district"),
@@ -172,6 +185,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             agroInputDealers = databaseAccess.getUnSyncedDealers();
             for (int i = 0; i < agroInputDealers.size(); i++) {
                 saveAgroInputDealer(
+                        agroInputDealers.get(i).get("id"),
                         agroInputDealers.get(i).get("business_name"),
                         agroInputDealers.get(i).get("district"),
                         agroInputDealers.get(i).get("sub_county"),
@@ -201,9 +215,12 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
         }
 
+
     }
 
+
     private void saveFarmersList(
+            String id,
             String first_name,
             String last_name,
             String dob,
@@ -231,23 +248,35 @@ public class NetworkStateChecker extends BroadcastReceiver {
             String third_crop,
             String main_livestock,
             String second_livestock
+
     ) {
-        Call<ResponseBody> call = APIClient.getInstance()
+        Call<ResponseData> call = APIClient.getInstance()
                 .postFarmersList(
                         first_name, last_name, dob, Integer.parseInt(age), gender, nationality, religion, level_of_education, marital_status, Integer.parseInt(household_size), language_used, source_of_income,
                         household_head, district, sub_county, village, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address, Integer.parseInt(farming_land_size),
                         main_crop, second_crop, third_crop, main_livestock, second_livestock
 
                 );
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseData>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                Log.d(TAG, "onResponse: "+response.body());
+                Log.d(TAG, "onResponse: "+response.message());
+
+                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Farmer List Synced");
+
                     //update synced status
-//                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
-//                    databaseAccess.open();
-//                    databaseAccess.updateFarmerSyncStatus()
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+
+
+                    if(databaseAccess.updateFarmerSyncStatus(id,response.body().getStatus())){
+                        Log.d(TAG, "onResponse: status updated succesfully");
+
+                    }else{
+                        Log.d(TAG, "onResponse: status update failed");
+                    }
                 } else {
                     Log.d(TAG, "Farmers List Synced Failed");
                     Log.d(TAG, String.valueOf(response));
@@ -255,25 +284,37 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ResponseData> call, Throwable t) {
                 Log.d(TAG, "Farmers List Synced Failed");
                 t.printStackTrace();
             }
         });
     }
 
-    private void savePestReports(String date, String district, String sub_county, String village, String farmer_phone, String signs_and_symptoms, String suspected_pest,
+    private void savePestReports(String id,String date, String district, String sub_county, String village, String farmer_phone, String signs_and_symptoms, String suspected_pest,
                                  String damage_assesment, String recommendation, String photo_f_damage, String farmer_name) {
-        Call<ResponseBody> call = APIClient.getInstance()
+        Call<ResponseData> call = APIClient.getInstance()
                 .postPestReport(date, district, sub_county, village, farmer_phone, signs_and_symptoms, suspected_pest, damage_assesment, recommendation, photo_f_damage, farmer_name
                 );
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseData>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                Log.d(TAG, "onResponse: "+response.body().getMessage());
+                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Pest Report Synced");
 
                     //update status locally
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+                    sync_status = "1";
+
+                    if(databaseAccess.updatePestReportSyncStatus(id,response.body().getStatus())){
+                        Log.d(TAG, "onResponse: status updated succesfully");
+
+                    }else{
+                        Log.d(TAG, "onResponse: status update failed");
+                    }
+
                 } else {
                     Log.d(TAG, "Pest Report Sync Failed");
                     Log.d(TAG, String.valueOf(response));
@@ -281,7 +322,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ResponseData> call, Throwable t) {
                 Log.d(TAG, "Pest Report Sync failed");
 
             }
@@ -289,18 +330,30 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
     }
 
-    private void saveScoutingReport(String date, String farmer_name, String district, String sub_county, String village, String phone_number, String infested, String infestation_type,
+    private void saveScoutingReport(String id,String date, String farmer_name, String district, String sub_county, String village, String phone_number, String infested, String infestation_type,
                                     String infestation, String infestation_level, String recommendation) {
-        Call<ResponseBody> call = APIClient.getInstance()
+        Call<ResponseData> call = APIClient.getInstance()
                 .postScoutingReport(date, farmer_name, district, sub_county, village, phone_number, infested, infestation_type, infestation, infestation_level, recommendation
                 );
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseData>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Scouting Report Synced");
 
+
                     //update status locally
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+                    sync_status = "1";
+
+                    if(databaseAccess.updateScoutingReportSyncStatus(id,response.body().getStatus())){
+                        Log.d(TAG, "onResponse: status updated succesfully");
+
+                    }else{
+                        Log.d(TAG, "onResponse: status update failed");
+                    }
+
                 } else {
                     Log.d(TAG, "Scouting Report Sync Failed");
                     Log.d(TAG, String.valueOf(response));
@@ -308,7 +361,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ResponseData> call, Throwable t) {
                 Log.d(TAG, "Scouting Report Sync failed");
             }
         });
@@ -316,16 +369,27 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
     }
 
-    private void saveMarketPrices(String date, String variety, String market, String measurement_units, String wholesale_price, String retail_price) {
-        Call<ResponseBody> call = APIClient.getInstance()
+    private void saveMarketPrices(String id,String date, String variety, String market, String measurement_units, String wholesale_price, String retail_price) {
+        Call<ResponseData> call = APIClient.getInstance()
                 .postMarketPrice(date, variety, market, measurement_units, Integer.parseInt(wholesale_price), Integer.parseInt(retail_price));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseData>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Market prices Synced");
 
                     //update status locally
+                    //update status locally
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+                    sync_status = "1";
+
+                    if(databaseAccess.updateMarketPriceSyncStatus(id,response.body().getStatus())){
+                        Log.d(TAG, "onResponse: status updated succesfully");
+
+                    }else{
+                        Log.d(TAG, "onResponse: status update failed");
+                    }
                 } else {
                     Log.d(TAG, "Market Prices Sync Failed");
                     Log.d(TAG, String.valueOf(response));
@@ -333,7 +397,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ResponseData> call, Throwable t) {
                 Log.d(TAG, "Market Price Sync failed");
             }
         });
@@ -341,16 +405,27 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
     }
 
-    private void saveMarket(String name, String street_adress, String district, String sub_county, String town, String contact_person, String phone_number) {
-        Call<ResponseBody> call = APIClient.getInstance()
+    private void saveMarket(String id,String name, String street_adress, String district, String sub_county, String town, String contact_person, String phone_number) {
+        Call<ResponseData> call = APIClient.getInstance()
                 .postMarketDetails(name, street_adress, district, sub_county, town, contact_person, phone_number);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseData>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Market  Synced");
 
                     //update status locally
+                    //update status locally
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+                    sync_status = "1";
+
+                    if(databaseAccess.updateMarketSyncStatus(id,response.body().getStatus())){
+                        Log.d(TAG, "onResponse: status updated succesfully");
+
+                    }else{
+                        Log.d(TAG, "onResponse: status update failed");
+                    }
                 } else {
                     Log.d(TAG, "Market Sync Failed");
                     Log.d(TAG, String.valueOf(response));
@@ -358,7 +433,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ResponseData> call, Throwable t) {
                 Log.d(TAG, "Market  Sync failed");
             }
         });
@@ -366,21 +441,31 @@ public class NetworkStateChecker extends BroadcastReceiver {
     }
 
     private void saveAssociation(
-            String name, String year_of_registration, String district, String sub_county, String village, String full_address, String association_telephone,
+            String id, String name, String year_of_registration, String district, String sub_county, String village, String full_address, String association_telephone,
             String association_email, String number_of_male_members, String crop_value_chain, String livestock_value_chain, String main_source_of_funding, String chairperson,
             String chairperson_contact, String secretary, String secretary_contact, String number_of_female_members, String organisation_type, String registration_level,
             String respondent, String respondent_contact, String main_activities, String asset_ownership, String market, String funding_source, String marketing_channels, String additional_services) {
-        Call<ResponseBody> call = APIClient.getInstance()
+        Call<ResponseData> call = APIClient.getInstance()
                 .postAssociation(name, Integer.parseInt(year_of_registration), district, sub_county, village, full_address,association_telephone, association_email, Integer.parseInt(number_of_male_members), crop_value_chain,
                         livestock_value_chain, main_source_of_funding, chairperson, chairperson_contact, secretary,secretary_contact, Integer.parseInt(number_of_female_members), organisation_type,
                         registration_level, respondent, respondent_contact, main_activities, asset_ownership, market, funding_source, marketing_channels, additional_services);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseData>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Association  Synced");
 
                     //update status locally
+                    //update status locally
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+
+                    if(databaseAccess.updateAssociationSyncStatus(id,response.body().getStatus())){
+                        Log.d(TAG, "onResponse: status updated succesfully");
+
+                    }else{
+                        Log.d(TAG, "onResponse: status update failed");
+                    }
                 } else {
                     Log.d(TAG, "AAssociation sync Failed");
                     Log.d(TAG, String.valueOf(response));
@@ -388,25 +473,36 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ResponseData> call, Throwable t) {
                 Log.d(TAG, "Association Sync failed");
             }
         });
 
     }
 
-    private void saveAgroInputDealer(String business_name, String district, String sub_county, String village, String full_address, String certification, String certification_number,
+    private void saveAgroInputDealer(String id,String business_name, String district, String sub_county, String village, String full_address, String certification, String certification_number,
                                      String registration_body, String registration_year, String registration_status, String association_membership, String association_name,
                                      String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services) {
-        Call<ResponseBody> call = APIClient.getInstance()
+        Call<ResponseData> call = APIClient.getInstance()
                 .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_number, registration_body, Integer.parseInt(registration_year), registration_status, association_membership, association_name, business_type, Integer.parseInt(number_of_outlets), types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseData>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Agro Input Dealer  Synced");
 
                     //update status locally
+                    //update status locally
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+
+
+                    if(databaseAccess.updateDealerSyncStatus(id,response.body().getStatus())){
+                        Log.d(TAG, "onResponse: status updated succesfully");
+
+                    }else{
+                        Log.d(TAG, "onResponse: status update failed");
+                    }
                 } else {
                     Log.d(TAG, "Agro Input Dealer Failed");
                     Log.d(TAG, String.valueOf(response));
@@ -414,11 +510,12 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ResponseData> call, Throwable t) {
                 Log.d(TAG, "Agro Input Dealer   Sync failed");
             }
         });
 
 
     }
+
 }

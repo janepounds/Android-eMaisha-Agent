@@ -322,6 +322,7 @@ public class DatabaseAccess {
         values.put("marketing_channels", market_channels);
         values.put("funding_source", funding_source);
         values.put("additional_services", additional_services);
+        values.put("sync_status", 0);
 
 
         long check = database.insert("associations", null, values);
@@ -423,6 +424,7 @@ public class DatabaseAccess {
         values.put("marketing_channels", marketing_channels);
         values.put("funding_source", funding_source);
         values.put("additional_services", additional_services);
+        values.put("sync_status", 0);
         long check = database.insert("agro_input_dealers", null, values);
         database.close();
 
@@ -510,6 +512,7 @@ public class DatabaseAccess {
         values.put("funding_source", funding_source);
         values.put("marketing_channels", marketing_channels);
         values.put("full_address", actual_address);
+        values.put("sync_status", 0);
         long check = database.insert("agro_traders", null, values);
         database.close();
 
@@ -582,6 +585,7 @@ public class DatabaseAccess {
         values.put("sub_county", sub_county);
         values.put("town", village);
         values.put("contact_person", contact_person);
+        values.put("sync_status", 0);
         long check = database.insert("markets", null, values);
         database.close();
 
@@ -646,6 +650,7 @@ public class DatabaseAccess {
         values.put("measurement_units", measurement_units);
         values.put("wholesale_price", wholesale_price);
         values.put("retail_price", retail_price);
+        values.put("sync_status", 0);
         long check = database.insert("market_prices", null, values);
         database.close();
 
@@ -714,7 +719,7 @@ public class DatabaseAccess {
         values.put("damage_assesment", damage_assesment);
         values.put("recommendation", recommendation);
         values.put("photo_of_damage", photo_of_damage);
-        values.put("sync");
+        values.put("sync_status",0);
         long check = database.insert("pest_reports", null, values);
         database.close();
 
@@ -739,11 +744,12 @@ public class DatabaseAccess {
                 map.put("sub_county", cursor.getString(3));
                 map.put("village", cursor.getString(4));
                 map.put("farmer_phone", cursor.getString(5));
-                map.put("sign_and_symptoms", cursor.getString(6));
+                map.put("signs_and_symptoms", cursor.getString(6));
                 map.put("suspected_pest", cursor.getString(7));
                 map.put("damage_assesment", cursor.getString(8));
                 map.put("recommendation", cursor.getString(9));
                 map.put("photo_of_damage", cursor.getString(10));
+                map.put("farmer_name",cursor.getString(11));
                 pest_reports.add(map);
             } while (cursor.moveToNext());
         }
@@ -786,6 +792,7 @@ public class DatabaseAccess {
         values.put("infestation", infestation);
         values.put("infestation_level", infestation_level);
         values.put("recommendation", recommendation);
+        values.put("sync_status", 0);
         long check = database.insert("scouting_reports", null, values);
         database.close();
 

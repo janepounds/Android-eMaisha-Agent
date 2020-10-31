@@ -1,6 +1,7 @@
 package com.cabraltech.emaishaagentsapp.network;
 
 import com.cabraltech.emaishaagentsapp.models.Regions;
+import com.cabraltech.emaishaagentsapp.models.ResponseData;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -18,7 +19,7 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/farmer")
-    Call<ResponseBody>postFarmersList(
+    Call<ResponseData>postFarmersList(
 
          @Field("first_name") String first_name,
          @Field("last_name") String last_name,
@@ -54,7 +55,7 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/pestreport")
-    Call<ResponseBody> postPestReport(
+    Call<ResponseData> postPestReport(
             @Field("date") String date,
             @Field("district") String district,
             @Field("sub_county") String sub_county,
@@ -73,7 +74,7 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/scountingreport")
-    Call<ResponseBody> postScoutingReport(
+    Call<ResponseData> postScoutingReport(
             @Field("date") String date,
             @Field("farmer_name") String farmer_name,
             @Field("district") String district,
@@ -92,7 +93,7 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/marketprice")
-    Call<ResponseBody> postMarketPrice(
+    Call<ResponseData> postMarketPrice(
             @Field("date") String date,
             @Field("variety") String variety,
             @Field("market") String market,
@@ -105,7 +106,7 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/market")
-    Call<ResponseBody> postMarketDetails(
+    Call<ResponseData> postMarketDetails(
             @Field("name") String name,
             @Field("street_address") String street_address,
             @Field("district") String district,
@@ -120,7 +121,7 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/association")
-    Call<ResponseBody> postAssociation(
+    Call<ResponseData> postAssociation(
             @Field("name") String name,
             @Field("year_of_registration") int year_of_registration,
             @Field("district") String district,
@@ -154,7 +155,7 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/agroInputdealer")
-    Call<ResponseBody> postAgroInputDealer(
+    Call<ResponseData> postAgroInputDealer(
             @Field("business_name") String business_name,
             @Field("district") String district,
             @Field("sub_county") String sub_county,
@@ -182,7 +183,7 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/bulkbuyer")
-    Call<ResponseBody> postBulkBuyer(
+    Call<ResponseData> postBulkBuyer(
             @Field("business_name") String business_name,
             @Field("business_type") String business_type,
             @Field("owner") String owner,
