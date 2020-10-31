@@ -123,7 +123,7 @@ public interface APIRequests {
     @POST("agent/store/association")
     Call<ResponseData> postAssociation(
             @Field("name") String name,
-            @Field("year_of_registration") int year_of_registration,
+            @Field("year_of_registration") String year_of_registration,
             @Field("district") String district,
             @Field("sub_county") String sub_county,
             @Field("village") String village,
@@ -162,6 +162,7 @@ public interface APIRequests {
             @Field("village") String village,
             @Field("full_address") String full_address,
             @Field("certification") String certification,
+            @Field("certification_type") String certification_type,
             @Field("certification_number") String certification_number,
             @Field("registration_body") String registration_body,
             @Field("registration_year") int registration_year,

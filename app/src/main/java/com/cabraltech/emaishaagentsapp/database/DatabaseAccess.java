@@ -254,6 +254,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("first_name", cursor.getString(1));
                 map.put("last_name", cursor.getString(2));
                 map.put("dob", cursor.getString(3));
@@ -345,6 +346,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("name", cursor.getString(1));
                 map.put("year_of_registration", cursor.getString(2));
                 map.put("district", cursor.getString(3));
@@ -356,10 +358,11 @@ public class DatabaseAccess {
                 map.put("number_of_male_members", cursor.getString(9));
                 map.put("crop_value_chain", cursor.getString(10));
                 map.put("livestock_value_chain", cursor.getString(11));
-                map.put("chairperson", cursor.getString(12));
-                map.put("chairperson_contact", cursor.getString(13));
-                map.put("secretary", cursor.getString(14));
-                map.put("secretary_contact", cursor.getString(15));
+                map.put("main_source_of_funding", cursor.getString(12));
+                map.put("chairperson", cursor.getString(13));
+                map.put("chairperson_contact", cursor.getString(14));
+                map.put("secretary", cursor.getString(15));
+                map.put("secretary_contact", cursor.getString(16));
                 map.put("number_of_female_members", cursor.getString(17));
                 map.put("organisation_type", cursor.getString(18));
                 map.put("registration_level", cursor.getString(19));
@@ -445,6 +448,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("business_name", cursor.getString(1));
                 map.put("district", cursor.getString(2));
                 map.put("sub_county", cursor.getString(2));
@@ -605,12 +609,14 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("name", cursor.getString(1));
                 map.put("street_address", cursor.getString(2));
                 map.put("district", cursor.getString(3));
                 map.put("sub_county", cursor.getString(4));
-                map.put("contact_person", cursor.getString(5));
-                map.put("phone_number", cursor.getString(6));
+                map.put("town", cursor.getString(5));
+                map.put("contact_person", cursor.getString(6));
+                map.put("phone_number", cursor.getString(7));
                 markets.add(map);
             } while (cursor.moveToNext());
         }
@@ -671,6 +677,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("variety", cursor.getString(2));
                 map.put("market", cursor.getString(3));
@@ -739,6 +746,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("district", cursor.getString(2));
                 map.put("sub_county", cursor.getString(3));
@@ -812,6 +820,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("farmer_name", cursor.getString(2));
                 map.put("district", cursor.getString(3));

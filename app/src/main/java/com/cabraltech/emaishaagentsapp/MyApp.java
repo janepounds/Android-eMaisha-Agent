@@ -193,6 +193,7 @@ public class MyApp extends MultiDexApplication {
                         agroInputDealers.get(i).get("village"),
                         agroInputDealers.get(i).get("full_address"),
                         agroInputDealers.get(i).get("certification"),
+                        agroInputDealers.get(i).get("certification_type"),
                         agroInputDealers.get(i).get("certification_number"),
                         agroInputDealers.get(i).get("registration_body"),
                         agroInputDealers.get(i).get("registration_year"),
@@ -313,7 +314,7 @@ public class MyApp extends MultiDexApplication {
                         Log.d(TAG, "onResponse: status updated succesfully");
 
                     }else{
-                        Log.d(TAG, "onResponse: status update failed");
+                        Log.d(TAG, "onResponse: status update failed"+id + response.body().getStatus());
                     }
 
                 } else {
@@ -445,11 +446,11 @@ public class MyApp extends MultiDexApplication {
            String id, String name, String year_of_registration, String district, String sub_county, String village, String full_address, String association_telephone,
             String association_email, String number_of_male_members, String crop_value_chain, String livestock_value_chain, String main_source_of_funding, String chairperson,
             String chairperson_contact, String secretary, String secretary_contact, String number_of_female_members, String organisation_type, String registration_level,
-            String respondent, String respondent_contact, String main_activities, String asset_ownership, String market, String funding_source, String marketing_channels, String additional_services) {
+            String respondent, String respondent_contact, String main_activities, String asset_ownership, String market,  String marketing_channels,String funding_source, String additional_services) {
         Call<ResponseData> call = APIClient.getInstance()
-                .postAssociation(name, Integer.parseInt(year_of_registration), district, sub_county, village, full_address,association_telephone, association_email, Integer.parseInt(number_of_male_members), crop_value_chain,
+                .postAssociation(name, year_of_registration, district, sub_county, village, full_address,association_telephone, association_email, Integer.parseInt(number_of_male_members), crop_value_chain,
                         livestock_value_chain, main_source_of_funding, chairperson, chairperson_contact, secretary,secretary_contact, Integer.parseInt(number_of_female_members), organisation_type,
-                        registration_level, respondent, respondent_contact, main_activities, asset_ownership, market, funding_source, marketing_channels, additional_services);
+                        registration_level, respondent, respondent_contact, main_activities, asset_ownership, market,  marketing_channels, funding_source,additional_services);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
@@ -481,11 +482,11 @@ public class MyApp extends MultiDexApplication {
 
     }
 
-    private void saveAgroInputDealer(String id,String business_name, String district, String sub_county, String village, String full_address, String certification, String certification_number,
+    private void saveAgroInputDealer(String id,String business_name, String district, String sub_county, String village, String full_address, String certification,String certification_type, String certification_number,
                                      String registration_body, String registration_year, String registration_status, String association_membership, String association_name,
                                      String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services) {
         Call<ResponseData> call = APIClient.getInstance()
-                .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_number, registration_body, Integer.parseInt(registration_year), registration_status, association_membership, association_name, business_type, Integer.parseInt(number_of_outlets), types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
+                .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_type,certification_number, registration_body, Integer.parseInt(registration_year), registration_status, association_membership, association_name, business_type, Integer.parseInt(number_of_outlets), types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
