@@ -21,6 +21,7 @@ import retrofit2.Response;
 import retrofit2.http.Field;
 
 public class NetworkStateChecker extends BroadcastReceiver {
+    private static final String TAG = "NetworkStateChecker";
     private Context context;
     private List<HashMap<String, String>> farmersList, pestReport, scoutingReport, marketPrices, marketDetails, association, agroInputDealers,bulkBuyers;
 
@@ -234,7 +235,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
         Call<ResponseBody> call = APIClient.getInstance()
                 .postFarmersList(
                         first_name, last_name, dob, Integer.parseInt(age), gender, nationality, religion, level_of_education, marital_status, Integer.parseInt(household_size), language_used, source_of_income,
-                        household_head, district, sub_county, village, Integer.parseInt(phone_number), next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address, Integer.parseInt(farming_land_size),
+                        household_head, district, sub_county, village, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address, Integer.parseInt(farming_land_size),
                         main_crop, second_crop, third_crop, main_livestock, second_livestock
 
                 );
@@ -264,7 +265,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
     private void savePestReports(String date, String district, String sub_county, String village, String farmer_phone, String signs_and_symptoms, String suspected_pest,
                                  String damage_assesment, String recommendation, String photo_f_damage, String farmer_name) {
         Call<ResponseBody> call = APIClient.getInstance()
-                .postPestReport(date, district, sub_county, village, Integer.parseInt(farmer_phone), signs_and_symptoms, suspected_pest, damage_assesment, recommendation, photo_f_damage, farmer_name
+                .postPestReport(date, district, sub_county, village, farmer_phone, signs_and_symptoms, suspected_pest, damage_assesment, recommendation, photo_f_damage, farmer_name
                 );
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -291,7 +292,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
     private void saveScoutingReport(String date, String farmer_name, String district, String sub_county, String village, String phone_number, String infested, String infestation_type,
                                     String infestation, String infestation_level, String recommendation) {
         Call<ResponseBody> call = APIClient.getInstance()
-                .postScoutingReport(date, farmer_name, district, sub_county, village, Integer.parseInt(phone_number), infested, infestation_type, infestation, infestation_level, recommendation
+                .postScoutingReport(date, farmer_name, district, sub_county, village, phone_number, infested, infestation_type, infestation, infestation_level, recommendation
                 );
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -342,7 +343,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
     private void saveMarket(String name, String street_adress, String district, String sub_county, String town, String contact_person, String phone_number) {
         Call<ResponseBody> call = APIClient.getInstance()
-                .postMarketDetails(name, street_adress, district, sub_county, town, contact_person, Integer.parseInt(phone_number));
+                .postMarketDetails(name, street_adress, district, sub_county, town, contact_person, phone_number);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -370,9 +371,9 @@ public class NetworkStateChecker extends BroadcastReceiver {
             String chairperson_contact, String secretary, String secretary_contact, String number_of_female_members, String organisation_type, String registration_level,
             String respondent, String respondent_contact, String main_activities, String asset_ownership, String market, String funding_source, String marketing_channels, String additional_services) {
         Call<ResponseBody> call = APIClient.getInstance()
-                .postAssociation(name, Integer.parseInt(year_of_registration), district, sub_county, village, full_address, Integer.parseInt(association_telephone), association_email, Integer.parseInt(number_of_male_members), crop_value_chain,
-                        livestock_value_chain, main_source_of_funding, chairperson, Integer.parseInt(chairperson_contact), secretary, Integer.parseInt(secretary_contact), Integer.parseInt(number_of_female_members), organisation_type,
-                        registration_level, respondent, Integer.parseInt(respondent_contact), main_activities, asset_ownership, market, funding_source, marketing_channels, additional_services);
+                .postAssociation(name, Integer.parseInt(year_of_registration), district, sub_county, village, full_address,association_telephone, association_email, Integer.parseInt(number_of_male_members), crop_value_chain,
+                        livestock_value_chain, main_source_of_funding, chairperson, chairperson_contact, secretary,secretary_contact, Integer.parseInt(number_of_female_members), organisation_type,
+                        registration_level, respondent, respondent_contact, main_activities, asset_ownership, market, funding_source, marketing_channels, additional_services);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
