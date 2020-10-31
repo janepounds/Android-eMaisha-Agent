@@ -69,12 +69,9 @@ public class MyApp extends MultiDexApplication {
                         farmersList.get(i).get("third_crop"),
                         farmersList.get(i).get("main_livestock"),
                         farmersList.get(i).get("second_livestock")
-
-
-
-
                 );
             }
+
             pestReport = databaseAccess.getUnSyncedPestReports();
             Log.d(TAG, "onCreate: MyApp onCreate" +pestReport);
             for (int i = 0; i < pestReport.size(); i++) {
@@ -91,11 +88,9 @@ public class MyApp extends MultiDexApplication {
                         pestReport.get(i).get("recommendation"),
                         pestReport.get(i).get("photo_of_damage"),
                         pestReport.get(i).get("farmer_name")
-
-
                 );
-
             }
+
             scoutingReport = databaseAccess.getUnSyncedScoutingReports();
             for (int i = 0; i < scoutingReport.size(); i++) {
                 saveScoutingReport(
@@ -111,11 +106,9 @@ public class MyApp extends MultiDexApplication {
                         scoutingReport.get(i).get("infestation"),
                         scoutingReport.get(i).get("infestation_level"),
                         scoutingReport.get(i).get("recommendation")
-
                 );
-
-
             }
+
             marketPrices = databaseAccess.getUnSyncedMarketprices();
             for (int i = 0; i < marketPrices.size(); i++) {
                 saveMarketPrices(
@@ -127,8 +120,6 @@ public class MyApp extends MultiDexApplication {
                         marketPrices.get(i).get("wholesale_price"),
                         marketPrices.get(i).get("retail_price")
                 );
-
-
             }
 
             marketDetails = databaseAccess.getUnSyncedMarkets();
@@ -143,9 +134,8 @@ public class MyApp extends MultiDexApplication {
                         marketDetails.get(i).get("contact_person"),
                         marketDetails.get(i).get("phone_number")
                 );
-
-
             }
+
             association = databaseAccess.getUnSyncedAssociations();
             for (int i = 0; i < association.size(); i++) {
                 saveAssociation(
@@ -177,12 +167,9 @@ public class MyApp extends MultiDexApplication {
                         association.get(i).get("marketing_channels"),
                         association.get(i).get("funding_source"),
                         association.get(i).get("additional_services")
-
-
                 );
-
-
             }
+
             agroInputDealers = databaseAccess.getUnSyncedDealers();
             for (int i = 0; i < agroInputDealers.size(); i++) {
                 saveAgroInputDealer(
@@ -207,19 +194,11 @@ public class MyApp extends MultiDexApplication {
                         agroInputDealers.get(i).get("marketing_channels"),
                         agroInputDealers.get(i).get("funding_source"),
                         agroInputDealers.get(i).get("additional_services")
-
                 );
-
-
             }
 
-
-
         }
-    
-    
     }
-
 
     private void saveFarmersList(
             String id,

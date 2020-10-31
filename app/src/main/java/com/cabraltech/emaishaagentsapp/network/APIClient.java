@@ -22,13 +22,8 @@ public class APIClient {
     public static APIRequests getInstance() {
     if (apiRequests == null) {
 
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override public void log(String message) {
-                Log.e("Retrofit2 Errors", "message: "+message);
-            }
-        });
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> Log.e("Retrofit2 Errors", "message: "+message));
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(5, TimeUnit.MINUTES)
@@ -36,14 +31,11 @@ public class APIClient {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 //.addInterceptor(apiInterceptor)
                 .addInterceptor(httpLoggingInterceptor)
-                .addNetworkInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request request = chain.request().newBuilder()
-                                // .addHeader(Constant.Header, authToken)
-                                .build();
-                        return chain.proceed(request);
-                    }
+                .addNetworkInterceptor(chain -> {
+                    Request request = chain.request().newBuilder()
+                            // .addHeader(Constant.Header, authToken)
+                            .build();
+                    return chain.proceed(request);
                 })
                 .build();
 

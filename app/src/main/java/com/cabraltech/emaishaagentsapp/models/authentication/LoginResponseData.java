@@ -3,7 +3,11 @@ package com.cabraltech.emaishaagentsapp.models.authentication;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RegistrationResponseData {
+public class LoginResponseData {
+    @SerializedName("id")
+    @Expose
+    private String id;
+
     @SerializedName("first_name")
     @Expose
     private String firstName;
@@ -60,6 +64,14 @@ public class RegistrationResponseData {
     @Expose
     private String nationalIdPicture;
 
+    @SerializedName("agent_date_of_last_logon")
+    @Expose
+    private String agentDateOfLastLogon;
+
+    @SerializedName("agent_number_of_logons")
+    @Expose
+    private String agentNumberOfLogons;
+
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
@@ -68,9 +80,13 @@ public class RegistrationResponseData {
     @Expose
     private String createdAt;
 
-    @SerializedName("id")
-    @Expose
-    private String id;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -184,6 +200,22 @@ public class RegistrationResponseData {
         this.nationalIdPicture = nationalIdPicture;
     }
 
+    public String getAgentDateOfLastLogon() {
+        return agentDateOfLastLogon;
+    }
+
+    public void setAgentDateOfLastLogon(String agentDateOfLastLogon) {
+        this.agentDateOfLastLogon = agentDateOfLastLogon;
+    }
+
+    public String getAgentNumberOfLogons() {
+        return agentNumberOfLogons;
+    }
+
+    public void setAgentNumberOfLogons(String agentNumberOfLogons) {
+        this.agentNumberOfLogons = agentNumberOfLogons;
+    }
+
     public String getUpdatedAt() {
         return updatedAt;
     }
@@ -198,13 +230,5 @@ public class RegistrationResponseData {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

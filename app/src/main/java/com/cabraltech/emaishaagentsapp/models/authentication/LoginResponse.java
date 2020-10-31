@@ -3,10 +3,10 @@ package com.cabraltech.emaishaagentsapp.models.authentication;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RegistrationResponse {
-    @SerializedName("status")
+public class LoginResponse {
+    @SerializedName("success")
     @Expose
-    private String status;
+    private String success;
 
     @SerializedName("message")
     @Expose
@@ -14,14 +14,14 @@ public class RegistrationResponse {
 
     @SerializedName("data")
     @Expose
-    private RegistrationResponseData data;
+    private LoginResponseData data;
 
-    public String getStatus() {
-        return status;
+    public String getSuccess() {
+        return success;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSuccess(String success) {
+        this.success = success;
     }
 
     public String getMessage() {
@@ -32,11 +32,11 @@ public class RegistrationResponse {
         this.message = message;
     }
 
-    public RegistrationResponseData getData() {
+    public LoginResponseData getData() {
         return data;
     }
 
-    public void setData(RegistrationResponseData data) {
+    public void setData(LoginResponseData data) {
         this.data = data;
     }
 }
