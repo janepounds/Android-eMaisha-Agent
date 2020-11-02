@@ -307,17 +307,20 @@
     <string name="title"> Title </string>
     <string name="cancel">Cancel</string>
     <string name="description">Description</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <array name="gender_array">
+        <item>Select</item>
         <item>Female</item>
         <item>Male</item>
     </array>
     <array name="nationality_array">
+        <item>Select</item>
         <item>National</item>
         <item>Refugee</item>
 
     </array>
     <array name="religion_array">
+        <item>Select</item>
         <item>Anglican</item>
         <item>Catholic</item>
         <item>Muslim</item>
@@ -327,6 +330,7 @@
         <item>Bahai</item>
     </array>
     <array name="level_of_education_array">
+        <item>Select</item>
         <item>None</item>
         <item>PLE</item>
         <item>UCE</item>
@@ -334,108 +338,131 @@
         <item>Degree</item>
     </array>
     <array name="marital_status_array">
+        <item>Select</item>
         <item>Single</item>
         <item>Married</item>
         <item>Divorced</item>
         <item>Widowed</item>
     </array>
     <array name="language_used_array">
+        <item>Select</item>
         <item>English</item>
         <item>Luganda</item>
     </array>
     <array name="main_crop_array">
+        <item>Select</item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="second_crop_array">
+        <item>Select</item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="third_crop_array">
+        <item>Select</item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="main_livestock_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="crop_value_chain_array">
-        <item>Crop Value Chain</item>
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="livestock_value_chain_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="main_source_of_funding_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="certificate_type_array">
+        <item>Select</item>
         <item>Crop Inputs</item>
         <item>Vet Drugs</item>
         <item>Both</item>
     </array>
     <array name="category_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="commodities_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="market_name_array">
+        <item>Select</item>
         <item>Kabusu Market</item>
         <item>Nakulabye Market</item>
     </array>
     <array name="town_array">
+        <item>Select</item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="variety_array">
+        <item>Select</item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="measurement_units_array">
+        <item>Select</item>
         <item>Kgs</item>
         <item>Tonnes</item>
     </array>
     <array name="infested_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="registration_status_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="type_of_business_array">
+        <item>Select</item>
         <item>Sole Proprietorship</item>
         <item>Partnership</item>
         <item>Limited Liability Company</item>
         <item>Cooperative</item>
     </array>
     <array name="association_membership_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="type_of_sales_array">
+        <item>Select</item>
         <item>Wholesale</item>
         <item>Retail</item>
         <item>Both</item>
     </array>
     <array name="registration_level_array">
+        <item>Select</item>
         <item>Local Govt</item>
         <item>District</item>
         <item>National</item>
         <item>NGO</item>
     </array>
     <array name="organisation_type_array">
+        <item>Select</item>
         <item>Farmer Group</item>
         <item>Rural Producer Organisation</item>
         <item>Cooperative</item>
     </array>
     <array name="respondent_position_array">
+        <item>Select</item>
         <item>Chairman</item>
         <item>Secretary</item>
         <item>Treasurer</item>
