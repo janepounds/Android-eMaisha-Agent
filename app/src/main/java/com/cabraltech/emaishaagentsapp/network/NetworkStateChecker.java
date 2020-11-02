@@ -124,7 +124,8 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         marketPrices.get(i).get("market"),
                         marketPrices.get(i).get("measurement_units"),
                         marketPrices.get(i).get("wholesale_price"),
-                        marketPrices.get(i).get("retail_price")
+                        marketPrices.get(i).get("retail_price"),
+                        marketPrices.get(i).get("commodity")
                 );
 
 
@@ -160,7 +161,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         association.get(i).get("number_of_male_members"),
                         association.get(i).get("crop_value_chain"),
                         association.get(i).get("livestock_value_chain"),
-                        association.get(i).get("main_source_of_funding"),
                         association.get(i).get("chairperson"),
                         association.get(i).get("chairperson_contact"),
                         association.get(i).get("secretary"),
@@ -313,7 +313,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         Log.d(TAG, "onResponse: status updated succesfully");
 
                     }else{
-                        Log.d(TAG, "onResponse: status update failed");
+                        Log.d(TAG, "onResponse: status update failed"+id + response.body().getStatus());
                     }
 
                 } else {
@@ -370,9 +370,9 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
     }
 
-    private void saveMarketPrices(String id,String date, String variety, String market, String measurement_units, String wholesale_price, String retail_price) {
+    private void saveMarketPrices(String id,String date, String variety, String market, String measurement_units, String wholesale_price, String retail_price, String commodity) {
         Call<ResponseData> call = APIClient.getInstance()
-                .postMarketPrice(date, variety, market, measurement_units, Integer.parseInt(wholesale_price), Integer.parseInt(retail_price));
+                .postMarketPrice(date, variety, market, measurement_units, Integer.parseInt(wholesale_price), Integer.parseInt(retail_price),commodity);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
@@ -443,13 +443,13 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
     private void saveAssociation(
             String id, String name, String year_of_registration, String district, String sub_county, String village, String full_address, String association_telephone,
-            String association_email, String number_of_male_members, String crop_value_chain, String livestock_value_chain, String main_source_of_funding, String chairperson,
+            String association_email, String number_of_male_members, String crop_value_chain, String livestock_value_chain, String chairperson,
             String chairperson_contact, String secretary, String secretary_contact, String number_of_female_members, String organisation_type, String registration_level,
-            String respondent, String respondent_contact, String main_activities, String asset_ownership, String market, String funding_source, String marketing_channels, String additional_services) {
+            String respondent, String respondent_contact, String main_activities, String asset_ownership, String market,  String marketing_channels,String funding_source, String additional_services) {
         Call<ResponseData> call = APIClient.getInstance()
                 .postAssociation(name, year_of_registration, district, sub_county, village, full_address,association_telephone, association_email, Integer.parseInt(number_of_male_members), crop_value_chain,
-                        livestock_value_chain, main_source_of_funding, chairperson, chairperson_contact, secretary,secretary_contact, Integer.parseInt(number_of_female_members), organisation_type,
-                        registration_level, respondent, respondent_contact, main_activities, asset_ownership, market, funding_source, marketing_channels, additional_services);
+                        livestock_value_chain, chairperson, chairperson_contact, secretary,secretary_contact, Integer.parseInt(number_of_female_members), organisation_type,
+                        registration_level, respondent, respondent_contact, main_activities, asset_ownership, market,  marketing_channels, funding_source,additional_services);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
@@ -485,7 +485,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                      String registration_body, String registration_year, String registration_status, String association_membership, String association_name,
                                      String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services) {
         Call<ResponseData> call = APIClient.getInstance()
-                .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_type, certification_number, registration_body, Integer.parseInt(registration_year), registration_status, association_membership, association_name, business_type, Integer.parseInt(number_of_outlets), types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
+                .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_type,certification_number, registration_body, Integer.parseInt(registration_year), registration_status, association_membership, association_name, business_type, Integer.parseInt(number_of_outlets), types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {

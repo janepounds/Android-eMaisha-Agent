@@ -99,7 +99,8 @@ public interface APIRequests {
             @Field("market") String market,
             @Field("measurement_units") String measurement_units,
             @Field("wholesale_price") int wholesale_price,
-            @Field("retail_price") int retail_price
+            @Field("retail_price") int retail_price,
+            @Field("commodity") String commodity
 
 
     );
@@ -133,7 +134,6 @@ public interface APIRequests {
             @Field("number_of_male_members") int number_of_male_members,
             @Field("crop_value_chain") String crop_value_chain,
             @Field("livestock_value_chain") String livestock_value_chain,
-            @Field("main_source_of_funding") String main_source_of_funding,
             @Field("chairperson") String chairperson,
             @Field("chairperson_contact") String chairperson_contact,
             @Field("secretary") String secretary,

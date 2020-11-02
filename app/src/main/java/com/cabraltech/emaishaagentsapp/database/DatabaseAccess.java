@@ -358,11 +358,10 @@ public class DatabaseAccess {
                 map.put("number_of_male_members", cursor.getString(9));
                 map.put("crop_value_chain", cursor.getString(10));
                 map.put("livestock_value_chain", cursor.getString(11));
-                map.put("main_source_of_funding", cursor.getString(12));
-                map.put("chairperson", cursor.getString(13));
-                map.put("chairperson_contact", cursor.getString(14));
-                map.put("secretary", cursor.getString(15));
-                map.put("secretary_contact", cursor.getString(16));
+                map.put("chairperson", cursor.getString(12));
+                map.put("chairperson_contact", cursor.getString(13));
+                map.put("secretary", cursor.getString(14));
+                map.put("secretary_contact", cursor.getString(15));
                 map.put("number_of_female_members", cursor.getString(17));
                 map.put("organisation_type", cursor.getString(18));
                 map.put("registration_level", cursor.getString(19));
@@ -371,8 +370,9 @@ public class DatabaseAccess {
                 map.put("main_activities", cursor.getString(22));
                 map.put("asset_ownership", cursor.getString(23));
                 map.put("market", cursor.getString(24));
-                map.put("funding_source", cursor.getString(25));
-                map.put("additional_services", cursor.getString(26));
+                map.put("marketing_channels", cursor.getString(25));
+                map.put("funding_source", cursor.getString(26));
+                map.put("additional_services", cursor.getString(27));
 
 
                 associations.add(map);
@@ -650,13 +650,13 @@ public class DatabaseAccess {
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
         values.put("date", date);
-        values.put("commodities", commodities);
         values.put("variety", variety);
         values.put("market", market);
         values.put("measurement_units", measurement_units);
         values.put("wholesale_price", wholesale_price);
         values.put("retail_price", retail_price);
         values.put("sync_status", 0);
+        values.put("commodity", commodities);
         long check = database.insert("market_prices", null, values);
         database.close();
 
@@ -684,6 +684,7 @@ public class DatabaseAccess {
                 map.put("measurement_units", cursor.getString(4));
                 map.put("wholesale_price", cursor.getString(5));
                 map.put("retail_price", cursor.getString(6));
+//                map.put("commodity", cursor.getString(8));
                 market_prices.add(map);
             } while (cursor.moveToNext());
         }
