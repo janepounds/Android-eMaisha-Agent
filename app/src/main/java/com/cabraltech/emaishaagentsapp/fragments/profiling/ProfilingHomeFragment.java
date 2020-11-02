@@ -58,7 +58,8 @@ public class ProfilingHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //navigation to step 1
-                navController.navigate(R.id.action_profilingHomeFragment_to_profilingFarmerFragment3);
+                navController.navigate(R.id.action_profilingHomeFragment_to_profilingFarmerFragment3)
+                ;
 
             }
         });
