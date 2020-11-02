@@ -151,8 +151,8 @@
                                 android:id="@+id/district_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
                                 android:layout_gravity="center"
-                                android:background="@drawable/rounded_rectangle_edit_text"
                                 android:entries="@array/district_array" />
 
                         </LinearLayout>
@@ -181,8 +181,8 @@
                                 android:id="@+id/sub_county_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
                                 android:layout_gravity="center"
-                                android:background="@drawable/rounded_rectangle_edit_text"
                                 android:entries="@array/sub_county_array" />
                         </LinearLayout>
                     </LinearLayout>
@@ -221,8 +221,8 @@
                                 android:id="@+id/village_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
                                 android:layout_gravity="center"
-                                android:background="@drawable/rounded_rectangle_edit_text"
                                 android:entries="@array/village_array" />
 
                         </LinearLayout>

@@ -93,15 +93,14 @@
                     android:textSize="16sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="6dp">
                     <AutoCompleteTextView
                         android:id="@+id/district_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        />
+                        android:background="@android:color/transparent"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -120,15 +119,14 @@
                     android:textSize="16sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="6dp">
                     <AutoCompleteTextView
                         android:id="@+id/sub_county_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        />
+                        android:background="@android:color/transparent"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -159,15 +157,14 @@
                     android:textSize="16sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="6dp">
                     <AutoCompleteTextView
                         android:id="@+id/village_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                       />
+                        android:background="@android:color/transparent"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -219,7 +216,7 @@
                     android:textSize="14sp"
                     android:inputType="textMultiLine"
                     android:background="@drawable/rounded_rectangle_edit_text"
-                    />
+                    android:isScrollContainer="true"/>
 
             </LinearLayout>
 
@@ -299,7 +296,7 @@
                 android:textSize="14sp"
                 android:inputType="textMultiLine"
                 android:background="@drawable/rounded_rectangle_edit_text"
-                />
+                android:isScrollContainer="true"/>
 
         </LinearLayout>
 
