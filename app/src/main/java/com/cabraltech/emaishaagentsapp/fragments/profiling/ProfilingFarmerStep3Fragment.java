@@ -41,7 +41,8 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     private ConstraintLayout constraintLayout;
     String[] descriptionData = {"Personal\nDetails", "Contact\nDetails", "Farming\nDetails"};
     String farming_size, second_livestock, main_crop, second_crop, third_crop, main_livestock, district, sub_county, village, gender, marital_status, religion, education_level, language_used, nationality, first_name, last_name, dob, age, household_size, household_head, source_of_income, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address;
-
+    private EditText etxtFarmingSize,etxtSecondLivestock;
+    private Spinner spinMainCrop,spinSecondCrop,spinThirdCrop,spinMainLivestock;
     public ProfilingFarmerStep3Fragment() {
         // Required empty public constructor
     }
@@ -93,12 +94,12 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
 
-        final EditText etxtFarmingSize = view.findViewById(R.id.farming_land_size_et);
-        final EditText etxtSecondLivestock = view.findViewById(R.id.second_livestock_et);
-        Spinner spinMainCrop = view.findViewById(R.id.main_crop_spinner);
-        Spinner spinSecondCrop = view.findViewById(R.id.second_crop_spinner);
-        Spinner spinThirdCrop = view.findViewById(R.id.third_crop_spinner);
-        Spinner spinMainLivestock = view.findViewById(R.id.main_livestock_spinner);
+         etxtFarmingSize = view.findViewById(R.id.farming_land_size_et);
+         etxtSecondLivestock = view.findViewById(R.id.second_livestock_et);
+         spinMainCrop = view.findViewById(R.id.main_crop_spinner);
+         spinSecondCrop = view.findViewById(R.id.second_crop_spinner);
+         spinThirdCrop = view.findViewById(R.id.third_crop_spinner);
+         spinMainLivestock = view.findViewById(R.id.main_livestock_spinner);
 
 
         spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -153,27 +154,28 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                farming_size = etxtFarmingSize.getText().toString().trim();
-                second_livestock = etxtSecondLivestock.getText().toString().trim();
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                if(validateEntries()) {
+                    farming_size = etxtFarmingSize.getText().toString().trim();
+                    second_livestock = etxtSecondLivestock.getText().toString().trim();
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                boolean check = databaseAccess.addFarmer(first_name, last_name, dob, age, gender, nationality, religion, education_level, marital_status, household_size, language_used, source_of_income, household_head, district, sub_county, village, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address, farming_size, main_crop, second_crop, third_crop, main_livestock, second_livestock);
-                if (check) {
+                    boolean check = databaseAccess.addFarmer(first_name, last_name, dob, age, gender, nationality, religion, education_level, marital_status, household_size, language_used, source_of_income, household_head, district, sub_county, village, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address, farming_size, main_crop, second_crop, third_crop, main_livestock, second_livestock);
+                    if (check) {
 
-                    Toast.makeText(getActivity(), "Farmer Profiled Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Farmer Profiled Successfully", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occur red", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occur red", Toast.LENGTH_SHORT).show();
 
-                }
+                    }
 
 
 //                //pop up window
 //                showPopup();
-
+                }
             }
         });
         binding.previousButton.setOnClickListener(new View.OnClickListener() {
@@ -217,5 +219,40 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         // popupWindow.showAtLocation(anchorView, Gravity.NO_GRAVITY,
         //        location[0], location[1] + anchorView.getHeight());
 
+    }
+
+    public boolean validateEntries() {
+        String message = null;
+        if (etxtFarmingSize.getText().toString().isEmpty()) {
+            etxtFarmingSize.setError(getString(R.string.enter_farm_size));
+            return false;
+        } else if (etxtSecondLivestock.getText().toString().isEmpty()) {
+            etxtSecondLivestock.setError(getString(R.string.enter_second_livestock));
+            return false;
+        } else if (spinMainCrop.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_main_crop);
+            spinMainCrop.requestFocus();
+            return false;
+        } else if (spinSecondCrop.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_second_crop);
+            spinSecondCrop.requestFocus();
+            return false;
+        } else if (spinThirdCrop.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_third_crop);
+            spinThirdCrop.requestFocus();
+            return false;
+        } else if (spinMainLivestock.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_main_livestock);
+            spinMainLivestock.requestFocus();
+            return false;
+        } else if (message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            etxtFarmingSize.setError(null);
+            etxtSecondLivestock.setError(null);
+
+            return true;
+        }
     }
 }

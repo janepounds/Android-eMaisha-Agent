@@ -307,17 +307,48 @@
     <string name="title"> Title </string>
     <string name="cancel">Cancel</string>
     <string name="description">Description</string>
-    <string name="ok">Ok</string>
+    <string name="enter_first_name">please enter first name</string>
+    <string name="enter_last_name">please enter last name</string>
+    <string name="enter_dob">please enter date of birth</string>
+    <string name="enter_age">please enter age</string>
+    <string name="enter_house_hold_size">please enter house hold size</string>
+    <string name="enter_house_hold_head">please enter house hold head</string>
+    <string name="enter_source_of_icome">please enter source of income</string>
+    <string name="missing_fields_message">enter missing fields</string>
+    <string name="select_religion">please select religion</string>
+    <string name="select_nationality">please select nationality</string>
+    <string name="select_marital_status">please select marital status</string>
+    <string name="select_language">please select language</string>
+    <string name="select_education_level">please select education level</string>
+    <string name="select_gender">please select gender</string>
+    <string name="enter_phone_number">enter phone number</string>
+    <string name="enter_kin">enter next of kin</string>
+    <string name="enter_kin_relation">enter kin relation\\</string>
+    <string name="enter_kin_contact">enter kin contact</string>
+    <string name="enter_kin_address">enter kin address</string>
+    <string name="enter_district">enter district</string>
+    <string name="enter_sub_county">enter sub county</string>
+    <string name="enter_village">enter village</string>
+    <string name="enter_farm_size">enter farm size</string>
+    <string name="enter_second_livestock">enter second livestock</string>
+    <string name="select_main_crop">select main crop</string>
+    <string name="select_second_crop">selct second crop</string>
+    <string name="select_third_crop">select third crop</string>
+    <string name="select_main_livestock">select main livestock</string>
+    <string name="ok">OK</string>
     <array name="gender_array">
+        <item>Select</item>
         <item>Female</item>
         <item>Male</item>
     </array>
     <array name="nationality_array">
+        <item>Select</item>
         <item>National</item>
         <item>Refugee</item>
 
     </array>
     <array name="religion_array">
+        <item>Select</item>
         <item>Anglican</item>
         <item>Catholic</item>
         <item>Muslim</item>
@@ -327,6 +358,7 @@
         <item>Bahai</item>
     </array>
     <array name="level_of_education_array">
+        <item>Select</item>
         <item>None</item>
         <item>PLE</item>
         <item>UCE</item>
@@ -334,108 +366,131 @@
         <item>Degree</item>
     </array>
     <array name="marital_status_array">
+        <item>Select</item>
         <item>Single</item>
         <item>Married</item>
         <item>Divorced</item>
         <item>Widowed</item>
     </array>
     <array name="language_used_array">
+        <item>Select</item>
         <item>English</item>
         <item>Luganda</item>
     </array>
     <array name="main_crop_array">
+        <item>Select</item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="second_crop_array">
+        <item>Select</item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="third_crop_array">
+        <item>Select</item>
         <item>Cassava</item>
         <item>Beans</item>
     </array>
     <array name="main_livestock_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="crop_value_chain_array">
-        <item>Crop Value Chain</item>
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="livestock_value_chain_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="main_source_of_funding_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="certificate_type_array">
+        <item>Select</item>
         <item>Crop Inputs</item>
         <item>Vet Drugs</item>
         <item>Both</item>
     </array>
     <array name="category_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="commodities_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="market_name_array">
+        <item>Select</item>
         <item>Kabusu Market</item>
         <item>Nakulabye Market</item>
     </array>
     <array name="town_array">
+        <item>Select</item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="variety_array">
+        <item>Select</item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="measurement_units_array">
+        <item>Select</item>
         <item>Kgs</item>
         <item>Tonnes</item>
     </array>
     <array name="infested_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="registration_status_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="type_of_business_array">
+        <item>Select</item>
         <item>Sole Proprietorship</item>
         <item>Partnership</item>
         <item>Limited Liability Company</item>
         <item>Cooperative</item>
     </array>
     <array name="association_membership_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="type_of_sales_array">
+        <item>Select</item>
         <item>Wholesale</item>
         <item>Retail</item>
         <item>Both</item>
     </array>
     <array name="registration_level_array">
+        <item>Select</item>
         <item>Local Govt</item>
         <item>District</item>
         <item>National</item>
         <item>NGO</item>
     </array>
     <array name="organisation_type_array">
+        <item>Select</item>
         <item>Farmer Group</item>
         <item>Rural Producer Organisation</item>
         <item>Cooperative</item>
     </array>
     <array name="respondent_position_array">
+        <item>Select</item>
         <item>Chairman</item>
         <item>Secretary</item>
         <item>Treasurer</item>

@@ -245,6 +245,22 @@ public class DatabaseAccess {
 
     }
 
+    //delete farmer
+    public boolean deleteFarmer(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("farmers",  "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
 
     //get un synced farmers
     public ArrayList<HashMap<String, String>> getUnSyncedFarmers() {
@@ -401,6 +417,21 @@ public class DatabaseAccess {
 
     }
 
+    //delete association
+    public boolean deleteAssociation(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("associations", "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     //insert dealer
     public boolean addDealer(String name, String district, String sub_county, String village, String full_address, String certification, String certification_type, String certification_number, String registration_body, String registration_year, String registration_status, String association_membership, String association_name, String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services) {
@@ -494,6 +525,21 @@ public class DatabaseAccess {
             return true;
         }
 
+    }
+
+    //delete agro dealer input
+    public boolean deleteAgroInputDealer(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("agro_input_dealers", "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
@@ -643,6 +689,21 @@ public class DatabaseAccess {
 
     }
 
+    //delete market
+    public boolean deleteMarket(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("markets", "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     //insert market price
     public boolean addMarketPrice(String date, String commodities, String variety, String market, String measurement_units, String wholesale_price, String retail_price) {
@@ -709,6 +770,21 @@ public class DatabaseAccess {
             return true;
         }
 
+    }
+
+    //delete market prices
+    public boolean deleteMarketPrice(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("market_prices", "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //insert pest reports
@@ -785,6 +861,22 @@ public class DatabaseAccess {
 
     }
 
+    //delete pest report
+    public boolean deletePestReport(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("pest_reports",  "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     //insert scouting reports
     public boolean addScoutingReport(String date, String farmer_name, String district, String sub_county, String village, String farmer_phone, String infested, String infestation_type, String infestation, String infestation_level, String recommendation) {
         this.database = openHelper.getWritableDatabase();
@@ -850,6 +942,22 @@ public class DatabaseAccess {
         values.put("sync_status", sync_status);
         long check = -1;
         check = database.update("scouting_reports", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    //delete scouting report
+    public boolean deleteScoutingReport(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("scouting_reports",  "id = ?", new String[]{id});
 
         if (check == -1) {
             return false;

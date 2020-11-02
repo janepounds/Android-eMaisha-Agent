@@ -273,6 +273,12 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                     if(databaseAccess.updateFarmerSyncStatus(id,response.body().getStatus())){
                         Log.d(TAG, "onResponse: status updated succesfully");
+                        //delete local database copy
+                        if(databaseAccess.deleteFarmer(id)){
+                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        }else {
+                            Log.d(TAG, "onResponse: database record delete failed");
+                        }
 
                     }else{
                         Log.d(TAG, "onResponse: status update failed");
@@ -310,6 +316,12 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                     if(databaseAccess.updatePestReportSyncStatus(id,response.body().getStatus())){
                         Log.d(TAG, "onResponse: status updated succesfully");
+                        //delete local database copy
+                        if(databaseAccess.deletePestReport(id)){
+                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        }else {
+                            Log.d(TAG, "onResponse: database record delete failed");
+                        }
 
                     }else{
                         Log.d(TAG, "onResponse: status update failed"+id + response.body().getStatus());
@@ -350,6 +362,13 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     if(databaseAccess.updateScoutingReportSyncStatus(id,response.body().getStatus())){
                         Log.d(TAG, "onResponse: status updated succesfully");
 
+                        //delete local database copy
+                        if(databaseAccess.deleteScoutingReport(id)){
+                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        }else {
+                            Log.d(TAG, "onResponse: database record delete failed");
+                        }
+
                     }else{
                         Log.d(TAG, "onResponse: status update failed");
                     }
@@ -386,6 +405,12 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                     if(databaseAccess.updateMarketPriceSyncStatus(id,response.body().getStatus())){
                         Log.d(TAG, "onResponse: status updated succesfully");
+                        //delete local database copy
+                        if(databaseAccess.deleteMarketPrice(id)){
+                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        }else {
+                            Log.d(TAG, "onResponse: database record delete failed");
+                        }
 
                     }else{
                         Log.d(TAG, "onResponse: status update failed");
@@ -422,6 +447,13 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                     if(databaseAccess.updateMarketSyncStatus(id,response.body().getStatus())){
                         Log.d(TAG, "onResponse: status updated succesfully");
+
+                        //delete local database copy
+                        if(databaseAccess.deleteMarket(id)){
+                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        }else {
+                            Log.d(TAG, "onResponse: database record delete failed");
+                        }
 
                     }else{
                         Log.d(TAG, "onResponse: status update failed");
@@ -462,6 +494,12 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                     if(databaseAccess.updateAssociationSyncStatus(id,response.body().getStatus())){
                         Log.d(TAG, "onResponse: status updated succesfully");
+                        //delete local database copy
+                        if(databaseAccess.deleteAssociation(id)){
+                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        }else {
+                            Log.d(TAG, "onResponse: database record delete failed");
+                        }
 
                     }else{
                         Log.d(TAG, "onResponse: status update failed");
@@ -491,7 +529,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Agro Input Dealer  Synced");
 
-                    //update status locally
+
                     //update status locally
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
                     databaseAccess.open();
@@ -499,6 +537,12 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                     if(databaseAccess.updateDealerSyncStatus(id,response.body().getStatus())){
                         Log.d(TAG, "onResponse: status updated succesfully");
+                        //delete local database copy
+                        if(databaseAccess.deleteAgroInputDealer(id)){
+                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        }else {
+                            Log.d(TAG, "onResponse: database record delete failed");
+                        }
 
                     }else{
                         Log.d(TAG, "onResponse: status update failed");

@@ -66,7 +66,7 @@
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/edittext_corner"
                     android:orientation="horizontal"
@@ -89,20 +89,17 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/josefin_sans"
                         android:inputType="number"
-                        android:paddingStart="@dimen/dimen_10dp"
+                        android:padding="8dp"
                         android:layout_weight="0.7"
                         android:background="@android:color/transparent"
                         android:textAlignment="viewStart"
                         android:layout_gravity="start"
                         android:gravity="start"
-                        android:textColor="@android:color/black"
-                        android:textColorHint="@android:color/black"
-                        android:paddingLeft="@dimen/dimen_10dp" />
+                        android:textSize="14sp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:layout_alignParentTop="true"
+                    android:layout_height="40dp"
                     android:background="@drawable/edittext_corner"
                     android:orientation="horizontal"
                     android:layout_weight="1"
@@ -124,15 +121,13 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/josefin_sans"
                         android:inputType="number"
-                        android:paddingStart="@dimen/dimen_10dp"
+                        android:padding="8dp"
                         android:layout_weight="0.7"
                         android:background="@android:color/transparent"
                         android:textAlignment="viewStart"
                         android:layout_gravity="start"
                         android:gravity="start"
-                        android:textColor="@android:color/black"
-                        android:textColorHint="@android:color/black"
-                        android:paddingLeft="@dimen/dimen_10dp" />
+                        android:textSize="14sp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -841,7 +836,8 @@
             android:id="@+id/buttons_association_profiling_step3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal">
             <Button
                 android:layout_weight="1"
@@ -849,7 +845,8 @@
                 style="@style/button_style_previous"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:text="@string/previous" />
 
             <Button
@@ -858,7 +855,8 @@
                 style="@style/button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
                 android:text="@string/submit" />
         </LinearLayout>
 

@@ -6,10 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -42,8 +45,7 @@ public class ProfilingHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_home,container,false);
-        this.setHasOptionsMenu(true);
-        setHasOptionsMenu(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Profiling");
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -87,25 +89,6 @@ public class ProfilingHomeFragment extends Fragment {
 
     }
 
-    public  void onNavigationItemSelected (int itemPosition,
-                                                      long itemId){
-        navController.popBackStack();
 
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == android.R.id.home) {
-
-            navController.popBackStack();
-            //getActivity().getSupportFragmentManager().popBackStack();
-
-
-          //  getFragmentManager().popBackStack();
-          getActivity().onBackPressed();
-            Toast.makeText(getContext(), "Back", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 }
