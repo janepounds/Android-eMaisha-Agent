@@ -1,6 +1,7 @@
 package com.cabraltech.emaishaagentsapp.network;
 
 import com.cabraltech.emaishaagentsapp.models.Regions;
+import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

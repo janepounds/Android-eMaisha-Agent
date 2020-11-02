@@ -2,6 +2,8 @@ package com.cabraltech.emaishaagentsapp.network;
 
 import com.cabraltech.emaishaagentsapp.models.Regions;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
+import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
+import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -12,6 +14,31 @@ import retrofit2.http.POST;
 
 public interface APIRequests {
 
+    @FormUrlEncoded
+    @POST("agent/register")
+    Call<RegistrationResponse> register(
+            @Field("first_name") String firstName,
+            @Field("last_name") String lastName,
+            @Field("district") String district,
+            @Field("sub_county") String subCounty,
+            @Field("village") String village,
+            @Field("phone_number") String phoneNumber,
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("next_of_kin") String nextOfKin,
+            @Field("next_of_kin_relation") String nextOfKinRelation,
+            @Field("next_of_kin_contact") String nextOfKinContact,
+            @Field("nin") String nin,
+            @Field("picture") String picture,
+            @Field("national_id_picture") String nationalIdPicture
+    );
+
+    @FormUrlEncoded
+    @POST("agent/processlogin")
+    Call<LoginResponse> login(
+            @Field("email") String email,
+            @Field("password") String password
+    );
 
     @FormUrlEncoded
     @POST("getregions")
@@ -19,37 +46,34 @@ public interface APIRequests {
 
     @FormUrlEncoded
     @POST("agent/store/farmer")
-    Call<ResponseData>postFarmersList(
-
-         @Field("first_name") String first_name,
-         @Field("last_name") String last_name,
-         @Field("dob") String dob,
-         @Field("age") int age,
-         @Field("gender") String gender,
-         @Field("nationality") String nationality,
-         @Field("religion") String religion,
-         @Field("level_of_education") String level_of_education,
-         @Field("marital_status") String marital_status,
-         @Field("household_size") int household_size,
-         @Field("language_used") String language_used,
-         @Field("source_of_income") String source_of_income,
-         @Field("household_head") String household_head,
-         @Field("district") String district,
-         @Field("sub_county") String sub_county,
-         @Field("village") String village,
-         @Field("phone_number") String phone_number,
-         @Field("next_of_kin") String next_of_kin,
-         @Field("next_of_kin_relation") String next_of_kin_relation,
-         @Field("next_of_kin_contact") String next_of_kin_contact,
-         @Field("next_of_kin_address") String next_of_kin_address,
-         @Field("farming_land_size") int farming_land_size,
-         @Field("main_crop") String main_crop,
-         @Field("second_crop") String second_crop,
-         @Field("third_crop") String third_crop,
-         @Field("main_livestock") String main_livestock,
-         @Field("second_livestock") String second_livestock
-
-
+    Call<ResponseData> postFarmersList(
+            @Field("first_name") String first_name,
+            @Field("last_name") String last_name,
+            @Field("dob") String dob,
+            @Field("age") int age,
+            @Field("gender") String gender,
+            @Field("nationality") String nationality,
+            @Field("religion") String religion,
+            @Field("level_of_education") String level_of_education,
+            @Field("marital_status") String marital_status,
+            @Field("household_size") int household_size,
+            @Field("language_used") String language_used,
+            @Field("source_of_income") String source_of_income,
+            @Field("household_head") String household_head,
+            @Field("district") String district,
+            @Field("sub_county") String sub_county,
+            @Field("village") String village,
+            @Field("phone_number") String phone_number,
+            @Field("next_of_kin") String next_of_kin,
+            @Field("next_of_kin_relation") String next_of_kin_relation,
+            @Field("next_of_kin_contact") String next_of_kin_contact,
+            @Field("next_of_kin_address") String next_of_kin_address,
+            @Field("farming_land_size") int farming_land_size,
+            @Field("main_crop") String main_crop,
+            @Field("second_crop") String second_crop,
+            @Field("third_crop") String third_crop,
+            @Field("main_livestock") String main_livestock,
+            @Field("second_livestock") String second_livestock
     );
 
 
@@ -67,10 +91,7 @@ public interface APIRequests {
             @Field("recommendation") String recommendation,
             @Field("photo_of_damage") String photo_of_damage,
             @Field("farmer_name") String farmer_name
-
-
     );
-
 
     @FormUrlEncoded
     @POST("agent/store/scountingreport")
@@ -86,9 +107,6 @@ public interface APIRequests {
             @Field("infestation") String infestation,
             @Field("infestation_level") String infestation_level,
             @Field("recommendation") String recommendation
-
-
-
     );
 
     @FormUrlEncoded
@@ -115,9 +133,6 @@ public interface APIRequests {
             @Field("town") String town,
             @Field("contact_person") String contact_person,
             @Field("phone_number") String phone_number
-
-
-
     );
 
     @FormUrlEncoded
@@ -149,8 +164,6 @@ public interface APIRequests {
             @Field("marketing_channels") String funding_source,
             @Field("funding_source") String marketing_channels,
             @Field("additional_services") String additional_services
-
-
     );
 
     @FormUrlEncoded
@@ -176,11 +189,7 @@ public interface APIRequests {
             @Field("marketing_channels") String marketing_channels,
             @Field("funding_source") String funding_source,
             @Field("additional_services") String additional_services
-
-
-
     );
-
 
     @FormUrlEncoded
     @POST("agent/store/bulkbuyer")
@@ -199,14 +208,5 @@ public interface APIRequests {
             @Field("supplier_location") String supplier_location,
             @Field("funding_source") String funding_source,
             @Field("marketing_channels") String marketing_channels
-
-
-
-
     );
-
-
-
-
-
 }
