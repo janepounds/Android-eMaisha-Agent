@@ -17,6 +17,7 @@ import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponseData;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -90,6 +91,11 @@ public class LoginActivity extends AppCompatActivity {
                     loginUser(response.body().getData());
                 } else {
                     Log.d(TAG, "onResponse: " + response.code());
+                    Log.d(TAG, "onResponse: " + response.message());
+
+                    if (response.code() == 400) {
+                        Snackbar.make(findViewById(android.R.id.content), "Invalid email or password", Snackbar.LENGTH_SHORT).show();
+                    }
                 }
             }
 
