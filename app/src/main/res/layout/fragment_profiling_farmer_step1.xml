@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_edit_text"
                         android:textSize="14sp"
-                        />
+                        android:inputType="text"/>
 
                 </LinearLayout>
 
@@ -104,7 +104,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_edit_text"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:inputType="text"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -135,10 +136,10 @@
                     <TextView
                         android:id="@+id/date_of_birth_tv"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40sp"
                         android:background="@drawable/rounded_rectangle_edit_text"
                         android:textSize="14sp"
-                        />
+                        app:drawableEndCompat="@drawable/calendar" />
 
                 </LinearLayout>
 
@@ -161,7 +162,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:background="@drawable/rounded_rectangle_edit_text"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:maxLength="2"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -348,7 +350,7 @@
                         android:textSize="14sp"
                         android:inputType="number"
                         android:background="@drawable/rounded_rectangle_edit_text"
-                        />
+                        android:maxLength="2"/>
 
                 </LinearLayout>
 
@@ -409,7 +411,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:background="@drawable/rounded_rectangle_edit_text"
-                        />
+                        android:inputType="text"/>
 
                 </LinearLayout>
 
@@ -433,6 +435,8 @@
                     android:id="@+id/household_head_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="14sp"
                     android:background="@drawable/rounded_rectangle_edit_text" />
 
             </LinearLayout>
@@ -442,7 +446,10 @@
                 style="@style/button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
                 android:text="@string/next" />
 
         </LinearLayout>

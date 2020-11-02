@@ -519,7 +519,8 @@
             android:id="@+id/buttons_association_profiling_step3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal">
             <Button
                 android:layout_weight="1"
@@ -527,7 +528,8 @@
                 style="@style/button_style_previous"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:text="@string/previous" />
 
             <Button
@@ -536,7 +538,8 @@
                 style="@style/button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/submit" />
         </LinearLayout>
 
