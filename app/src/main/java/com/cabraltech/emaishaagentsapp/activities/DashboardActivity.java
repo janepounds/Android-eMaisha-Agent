@@ -40,6 +40,8 @@ public class DashboardActivity extends AppCompatActivity {
     public static String PREFERENCES_USER_ID = "userId";
     public static final String PREFERENCES_USER_EMAIL = "email";
     public static final String PREFERENCES_PHONE_NUMBER = "phoneNumber";
+    public static final String PREFERENCES_USER_PHOTO = "userPhoto";
+    public static final String PREFERENCES_USER_NATIONAL_ID = "userNationalId";
 
     public static final String PREFERENCES_FIREBASE_TOKEN_SUBMITTED = "tokenSubmitted";
     public static final String PREFERENCES_USER_BACKED_UP = "userBackedUp";

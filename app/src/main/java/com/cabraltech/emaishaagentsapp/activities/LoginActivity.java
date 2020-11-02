@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 emailOrPhone.setError("Required");
             } else if (password.getText().toString().trim().isEmpty()) {
                 password.setError("Required");
-            }else{
+            } else {
                 progressDialog.show();
                 processLogin();
             }
@@ -102,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(LoginResponseData userDetails) {
+        Log.d(TAG, "loginUser: Profile Picture = " + userDetails.getPicture());
         // Save User Data to Local Databases
         if (userInfoDB.getUserData(userDetails.getId()) != null) {
             // User already exists
@@ -122,6 +123,9 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("addressStreet", userDetails.getVillage());
         editor.putString("addressCityOrTown", userDetails.getSubCounty());
         editor.putString("address_district", userDetails.getDistrict());
+
+        editor.putString(DashboardActivity.PREFERENCES_USER_PHOTO, userDetails.getPicture());
+        editor.putString(DashboardActivity.PREFERENCES_USER_NATIONAL_ID, userDetails.getNationalIdPicture());
 
         editor.putBoolean("isLogged_in", true);
         editor.apply();
