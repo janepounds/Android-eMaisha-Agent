@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,9 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     private NavController navController;
     private FragmentProfilingFarmerStep1Binding binding;
     String gender, marital_status, religion, education_level, language_used, nationality;
+    private EditText etxtFirstName,etxtLastName,etxtAge,etxtHouseholdSize,etxtSourceOfIncome,etxtHouseholdHead;
+    private Spinner spinGender,spinNationality,spinReligion,spinEducation,spinLanguage,spinMarital;
+    private TextView txtDob;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -80,19 +84,19 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        final EditText etxtFirstName = view.findViewById(R.id.first_name_et);
-        final EditText etxtLastName = view.findViewById(R.id.last_name_et);
-        final TextView txtDob = view.findViewById(R.id.date_of_birth_tv);
-        final EditText etxtAge = view.findViewById(R.id.age_et);
-        Spinner spinGender = view.findViewById(R.id.gender_spinner);
-        Spinner spinNationality = view.findViewById(R.id.nationality_spinner);
-        Spinner spinReligion = view.findViewById(R.id.religion_spinner);
-        Spinner spinEducation = view.findViewById(R.id.level_of_education_spinner);
-        Spinner spinMarital = view.findViewById(R.id.marital_status_spinner);
-        Spinner spinLanguage = view.findViewById(R.id.language_used_spinner);
-        final EditText etxtHouseholdSize = view.findViewById(R.id.household_size_et);
-        final EditText etxtSourceOfIncome = view.findViewById(R.id.source_of_income_et);
-        final EditText etxtHouseholdHead = view.findViewById(R.id.household_head_et);
+         etxtFirstName = view.findViewById(R.id.first_name_et);
+         etxtLastName = view.findViewById(R.id.last_name_et);
+         txtDob = view.findViewById(R.id.date_of_birth_tv);
+         etxtAge = view.findViewById(R.id.age_et);
+         spinGender = view.findViewById(R.id.gender_spinner);
+         spinNationality = view.findViewById(R.id.nationality_spinner);
+         spinReligion = view.findViewById(R.id.religion_spinner);
+         spinEducation = view.findViewById(R.id.level_of_education_spinner);
+         spinMarital = view.findViewById(R.id.marital_status_spinner);
+         spinLanguage = view.findViewById(R.id.language_used_spinner);
+         etxtHouseholdSize = view.findViewById(R.id.household_size_et);
+         etxtSourceOfIncome = view.findViewById(R.id.source_of_income_et);
+         etxtHouseholdHead = view.findViewById(R.id.household_head_et);
 
 
         txtDob.setOnClickListener(new View.OnClickListener() {
@@ -182,33 +186,35 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String first_name = etxtFirstName.getText().toString().trim();
-                String last_name = etxtLastName.getText().toString().trim();
-                String dob = txtDob.getText().toString().toString().trim();
-                String age = etxtAge.getText().toString().trim();
-                String household_size = etxtHouseholdSize.getText().toString().trim();
-                String household_head = etxtHouseholdHead.getText().toString().trim();
-                String source_of_income = etxtSourceOfIncome.getText().toString().trim();
+                if (validateEntries()) {
+                    String first_name = etxtFirstName.getText().toString().trim();
+                    String last_name = etxtLastName.getText().toString().trim();
+                    String dob = txtDob.getText().toString().toString().trim();
+                    String age = etxtAge.getText().toString().trim();
+                    String household_size = etxtHouseholdSize.getText().toString().trim();
+                    String household_head = etxtHouseholdHead.getText().toString().trim();
+                    String source_of_income = etxtSourceOfIncome.getText().toString().trim();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("first_name", first_name);
-                bundle.putString("last_name", last_name);
-                bundle.putString("dob", dob);
-                bundle.putString("age", age);
-                bundle.putString("gender", gender);
-                bundle.putString("religion", religion);
-                bundle.putString("nationality", nationality);
-                bundle.putString("level_of_education", education_level);
-                bundle.putString("marital_status", marital_status);
-                bundle.putString("language_used", language_used);
-                bundle.putString("nationality", nationality);
-                bundle.putString("household_size", household_size);
-                bundle.putString("household_head", household_head);
-                bundle.putString("source_of_income", source_of_income);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("first_name", first_name);
+                    bundle.putString("last_name", last_name);
+                    bundle.putString("dob", dob);
+                    bundle.putString("age", age);
+                    bundle.putString("gender", gender);
+                    bundle.putString("religion", religion);
+                    bundle.putString("nationality", nationality);
+                    bundle.putString("level_of_education", education_level);
+                    bundle.putString("marital_status", marital_status);
+                    bundle.putString("language_used", language_used);
+                    bundle.putString("nationality", nationality);
+                    bundle.putString("household_size", household_size);
+                    bundle.putString("household_head", household_head);
+                    bundle.putString("source_of_income", source_of_income);
 
-                //navigation to step 2
-                navController.navigate(R.id.action_profilingFarmerFragment_to_profilingFarmerStep2Fragment, bundle);
+                    //navigation to step 2
+                    navController.navigate(R.id.action_profilingFarmerFragment_to_profilingFarmerStep2Fragment, bundle);
 
+                }
             }
         });
 
@@ -236,6 +242,68 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             }
         });
         ed_.setInputType(InputType.TYPE_NULL);
+    }
+
+    public boolean validateEntries() {
+        String message = null;
+        if (etxtFirstName.getText().toString().isEmpty()) {
+            etxtFirstName.setError(getString(R.string.enter_first_name));
+            return false;
+        }else if (etxtLastName.getText().toString().isEmpty()) {
+            etxtLastName.setError(getString(R.string.enter_last_name));
+            return false;
+        }else  if (txtDob.getText().toString().isEmpty()) {
+            txtDob.setError(getString(R.string.enter_dob));
+            return false;
+        }else  if (etxtAge.getText().toString().isEmpty()) {
+            etxtAge.setError(getString(R.string.enter_age));
+            return false;
+        }else if(etxtHouseholdSize.getText().toString().isEmpty()) {
+            etxtHouseholdSize.setError(getString(R.string.enter_house_hold_size));
+            return false;
+        }
+        else if(etxtHouseholdHead.getText().toString().isEmpty()) {
+            etxtHouseholdHead.setError(getString(R.string.enter_house_hold_head));
+            return false;
+        } else if(etxtSourceOfIncome.getText().toString().isEmpty()) {
+            etxtSourceOfIncome.setError(getString(R.string.enter_source_of_icome));
+            return false;
+        }else if(spinGender.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_gender);
+            spinGender.requestFocus();
+            return false;
+        }else if(spinEducation.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_education_level);
+            spinEducation.requestFocus();
+            return false;
+        }else if(spinLanguage.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_language);
+            spinLanguage.requestFocus();
+            return false;
+        }
+        else if(spinMarital.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_marital_status);
+            spinMarital.requestFocus();
+            return false;
+        }
+        else if(spinNationality.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_nationality);
+            spinNationality.requestFocus();
+            return false;
+        }
+        else if(spinReligion.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_religion);
+            spinReligion.requestFocus();
+            return false;
+        }
+
+        if(message != null){
+            Toast.makeText(context, getString(R.string.missing_fields_message)+message, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+            return true;
+
     }
 
 }

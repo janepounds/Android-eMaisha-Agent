@@ -308,6 +308,34 @@
     <string name="cancel">Cancel</string>
     <string name="description">Description</string>
     <string name="ok">Ok</string>
+    <string name="enter_first_name">please enter first name</string>
+    <string name="enter_last_name">please enter last name</string>
+    <string name="enter_dob">please enter date of birth</string>
+    <string name="enter_age">please enter age</string>
+    <string name="enter_house_hold_size">please enter house hold size</string>
+    <string name="enter_house_hold_head">please enter house hold head</string>
+    <string name="enter_source_of_icome">please enter source of income</string>
+    <string name="missing_fields_message">enter missing fields</string>
+    <string name="select_religion">please select religion</string>
+    <string name="select_nationality">please select nationality</string>
+    <string name="select_marital_status">please select marital status</string>
+    <string name="select_language">please select language</string>
+    <string name="select_education_level">please select education level</string>
+    <string name="select_gender">please select gender</string>
+    <string name="enter_phone_number">enter phone number</string>
+    <string name="enter_kin">enter next of kin</string>
+    <string name="enter_kin_relation">enter kin relation\\</string>
+    <string name="enter_kin_contact">enter kin contact</string>
+    <string name="enter_kin_address">enter kin address</string>
+    <string name="enter_district">enter district</string>
+    <string name="enter_sub_county">enter sub county</string>
+    <string name="enter_village">enter village</string>
+    <string name="enter_farm_size">enter farm size</string>
+    <string name="enter_second_livestock">enter second livestock</string>
+    <string name="select_main_crop">select main crop</string>
+    <string name="select_second_crop">selct second crop</string>
+    <string name="select_third_crop">select third crop</string>
+    <string name="select_main_livestock">select main livestock</string>
     <array name="gender_array">
         <item>Female</item>
         <item>Male</item>
