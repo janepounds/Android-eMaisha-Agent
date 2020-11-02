@@ -49,6 +49,9 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
 
+    private EditText etxtBusinessName,etxtOwner,etxtPhone,etxtEmail,etxtFullAddress;
+    private Spinner spinBusinessType;
+    private AutoCompleteTextView spinDistrict,spinSubcounty,spinVillage;
 
     String[] descriptionData = {"Contact\nDetails", "Business\nDetails"};
 
@@ -91,15 +94,15 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Spinner spinBusinessType = view.findViewById(R.id.business_type_spinner);
-        final EditText etxtBusinessName = view.findViewById(R.id.business_name_et);
-        final EditText etxtOwner = view.findViewById(R.id.proprietor_name_et);
-        final EditText etxtPhone = view.findViewById(R.id.phone_number_et);
-        final EditText etxtEmail = view.findViewById(R.id.email_address_et);
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
-        AutoCompleteTextView spinSubcounty = view.findViewById(R.id.sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
-        final EditText etxtFullAddress = view.findViewById(R.id.full_address_et);
+        spinBusinessType = view.findViewById(R.id.business_type_spinner);
+        etxtBusinessName = view.findViewById(R.id.business_name_et);
+        etxtOwner = view.findViewById(R.id.proprietor_name_et);
+        etxtPhone = view.findViewById(R.id.phone_number_et);
+        etxtEmail = view.findViewById(R.id.email_address_et);
+        spinDistrict = view.findViewById(R.id.district_spinner);
+        spinSubcounty = view.findViewById(R.id.sub_county_spinner);
+        spinVillage = view.findViewById(R.id.village_spinner);
+        etxtFullAddress = view.findViewById(R.id.full_address_et);
         Button btnSubmit = view.findViewById(R.id.next_button);
 
         //load district, subcounty and village data
@@ -266,31 +269,81 @@ public class ProfilingBulkBuyersFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String business_name = etxtBusinessName.getText().toString().trim();
-                String phone = etxtPhone.getText().toString().trim();
-                String email = etxtEmail.getText().toString().trim();
-                String full_address = etxtFullAddress.getText().toString().trim();
-                String owner = etxtOwner.getText().toString().trim();
+                if (validateEntries()) {
+                    String business_name = etxtBusinessName.getText().toString().trim();
+                    String phone = etxtPhone.getText().toString().trim();
+                    String email = etxtEmail.getText().toString().trim();
+                    String full_address = etxtFullAddress.getText().toString().trim();
+                    String owner = etxtOwner.getText().toString().trim();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("business_name",business_name);
-                bundle.putString("phone",phone);
-                bundle.putString("owner",owner);
-                bundle.putString("full_address",full_address);
-                bundle.putString("email",email);
-                bundle.putString("district",spinDistrict.getText().toString());
-                bundle.putString("sub_country",spinSubcounty.getText().toString());
-                bundle.putString("village",spinVillage.getText().toString());
-                bundle.putString("business_type",business_type);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("business_name", business_name);
+                    bundle.putString("phone", phone);
+                    bundle.putString("owner", owner);
+                    bundle.putString("full_address", full_address);
+                    bundle.putString("email", email);
+                    bundle.putString("district", spinDistrict.getText().toString());
+                    bundle.putString("sub_country", spinSubcounty.getText().toString());
+                    bundle.putString("village", spinVillage.getText().toString());
+                    bundle.putString("business_type", business_type);
 
 
-                navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment,bundle);
+                    navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment, bundle);
 
+                }
 
 
             }
         });
 
 
+    }
+
+    public boolean validateEntries() {
+        String message = null;
+        if (etxtBusinessName.getText().toString().isEmpty()) {
+            etxtBusinessName.setError(getString(R.string.enter_business_name));
+            return false;
+        } else if (etxtPhone.getText().toString().isEmpty()) {
+            etxtPhone.setError(getString(R.string.enter_phone_number));
+            return false;
+        } else if (etxtOwner.getText().toString().isEmpty()) {
+            etxtOwner.setError(getString(R.string.enter_owner));
+            return false;
+        } else if (etxtFullAddress.getText().toString().isEmpty()) {
+            etxtFullAddress.setError(getString(R.string.enter_full_address));
+            return false;
+        } else if (etxtEmail.getText().toString().isEmpty()) {
+            etxtEmail.setError(getString(R.string.enter_email));
+            return false;
+
+        } else if (spinBusinessType.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_business_type);
+            spinBusinessType.requestFocus();
+            return false;
+        } else if (spinDistrict.getText().toString().isEmpty()) {
+            spinDistrict.setError(getString(R.string.enter_district));
+            return false;
+        } else if (spinSubcounty.getText().toString().isEmpty()) {
+            spinSubcounty.setError(getString(R.string.enter_sub_county));
+            return false;
+        } else if (spinVillage.getText().toString().isEmpty()) {
+            message = getString(R.string.select_gender);
+            spinVillage.setError(getString(R.string.enter_village));
+            return false;
+        }
+        else if(message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            etxtBusinessName.setError(null);
+            etxtPhone.setError(null);
+            etxtOwner.setError(null);
+            etxtFullAddress.setError(null);
+            etxtEmail.setError(null);
+
+            return true;
+
+        }
     }
 }

@@ -43,6 +43,8 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     CheckBox chkCropInsurance, chkMarketIntelligence, chkAgroInputsOnCredit, chkAgroEquipment, chkTrainingOnBusinessDevt, chkTrainingOnInstitutionalDevt, chkCashLoansAgriculturalPurposes, chkNonCashLoansAgriculturalPurposes, chkTrainingOrTechnicalAssistance, chkSubsidizedInput;
     String respondent_position, name, year_of_registration, full_address, telephone, email, chairperson, chairperson_contact, secretary, secretary_contact, respondent, respondent_contact;
 
+    private  EditText etxtMalesNumber,etxtFemalesNumber;
+    private  Spinner spinLivestockValueChain,spinCropValueChain;
     public ProfilingAssociationStep3Fragment() {
         // Required empty public constructor
     }
@@ -101,10 +103,10 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
 
-        EditText etxtMalesNumber = view.findViewById(R.id.etxt_number_of_males);
-        EditText etxtFemalesNumber = view.findViewById(R.id.etxt_number_of_females);
-        Spinner spinLivestockValueChain = view.findViewById(R.id.livestock_value_chain_spinner);
-        Spinner spinCropValueChain = view.findViewById(R.id.crop_value_chains_spinner);
+        etxtMalesNumber = view.findViewById(R.id.etxt_number_of_males);
+        etxtFemalesNumber = view.findViewById(R.id.etxt_number_of_females);
+        spinLivestockValueChain = view.findViewById(R.id.livestock_value_chain_spinner);
+        spinCropValueChain = view.findViewById(R.id.crop_value_chains_spinner);
         chkAgriculturalMarketing = view.findViewById(R.id.main_activities_agricultural_marketing_cb);
         chkBulking = view.findViewById(R.id.main_activities_bulking_cb);
         chkProcessing = view.findViewById(R.id.main_activities_processing_cb);
@@ -178,151 +180,152 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String number_of_males = etxtMalesNumber.getText().toString().trim();
-                String number_of_females = etxtFemalesNumber.getText().toString().trim();
-                String main_activities = "";
-                String asset_ownership = "";
-                String market = "";
-                String marketing_channels = "";
-                String funding_source = "";
-                String additional_services = "";
-                if (chkAgriculturalMarketing.isChecked()) {
-                    main_activities += "\nAgricultural Marketing";
-                }
-                if (chkBulking.isChecked()) {
-                    main_activities += "\nBulking";
-                }
-                if (chkStorage.isChecked()) {
-                    main_activities += "\nStorage";
-                }
-                if (chkProduction.isChecked()) {
-                    main_activities += "\nProduction";
-                }
-                if (chkProcessing.isChecked()) {
-                    main_activities += "\nProcessing";
-                }
-                if (chkSprayPump.isChecked()) {
-                    asset_ownership += "\nSpray Pump";
-                }
-                if (chkTractor.isChecked()) {
-                    asset_ownership += "\nTractor";
-                }
-                if (chkShelter.isChecked()) {
-                    asset_ownership += "\nShelter";
-                }
-                if (chkWeeder.isChecked()) {
-                    asset_ownership += "\nWeeder";
-                }
-                if (chkCombinedHarvester.isChecked()) {
-                    asset_ownership += "\nCombined Harvester";
-                }
-                if (chkNone.isChecked()) {
-                    asset_ownership += "\nNone";
-                }
-                if (chkDryer.isChecked()) {
-                    asset_ownership += "\nDryer";
-                }
-                if (chkMillingMachine.isChecked()) {
-                    asset_ownership += "\nMilling Machine";
-                }
-                if (chkOxPlough.isChecked()) {
-                    asset_ownership += "\nOx Plough";
-                }
-                if (ChkPlanter.isChecked()) {
-                    asset_ownership += "\nPlanter";
-                }
-                if (chkWetProcessingMachine.isChecked()) {
-                    asset_ownership += "\nWet Processing Machine";
-                }
-                if (chkTraders.isChecked()) {
-                    market += "\nTraders";
-                }
-                if (chkProcessors.isChecked()) {
-                    market += "\nProcessors";
-                }
-                if (chkFinalConsumer.isChecked()) {
-                    market += "\nFinal Consumers";
-                }
-                if (chkBuyer.isChecked()) {
-                    marketing_channels += "\nBuyer";
-                }
-                if (chkNgo.isChecked()) {
-                    marketing_channels += "\nNGO";
-                }
-                if (chkCallCenter.isChecked()) {
-                    marketing_channels += "\nCall Center";
-                }
-                if (chkGovernmentExtension.isChecked()) {
-                    marketing_channels += "\nGovernment Extension Workers";
-                }
-                if (chkFarmerOrganisation.isChecked()) {
-                    marketing_channels += "\nFarmer Organisation Marketeers";
-                }
-                if (chkRadioTv.isChecked()) {
-                    marketing_channels += "\nRadio/Tv";
-                }
-                if (chkMedia.isChecked()) {
-                    marketing_channels += "\nMedia/Online";
-                }
-                if (chkPrivate.isChecked()) {
-                    marketing_channels += "\nPrivate Extension Workers";
-                }
-                if (chkMemberFees.isChecked()) {
-                    funding_source += "\nMember Fees";
-                }
-                if (chkSales.isChecked()) {
-                    funding_source += "\nSales";
-                }
-                if (chkProcessingFees.isChecked()) {
-                    funding_source += "\nProcessing Fees";
-                }
-                if (chkGrants.isChecked()) {
-                    funding_source += "\nGrants";
-                }
-                if (chkCredit.isChecked()) {
-                    funding_source += "\nCredit";
-                }
-                if (chkCropInsurance.isChecked()) {
-                    additional_services += "\nCrop Insurance";
-                }
-                if (chkMarketIntelligence.isChecked()) {
-                    additional_services += "\nMarket Intelligence";
-                }
-                if (chkAgroInputsOnCredit.isChecked()) {
-                    additional_services += "\nAgricultural Inputs on credit";
-                }
-                if (chkAgroEquipment.isChecked()) {
-                    additional_services += "\nAccess to Agricultural Equipment";
-                }
-                if (chkTrainingOnBusinessDevt.isChecked()) {
-                    additional_services += "\nTraining on business development";
-                }
-                if (chkTrainingOnInstitutionalDevt.isChecked()) {
-                    additional_services += "\nTraining on institutional development";
-                }
-                if (chkCashLoansAgriculturalPurposes.isChecked()) {
-                    additional_services += "\nCash loans for agricultural Purposes";
-                }
-                if (chkNonCashLoansAgriculturalPurposes.isChecked()) {
-                    additional_services += "\nCash loans for non agricultural Purposes";
-                }
-                if (chkTrainingOrTechnicalAssistance.isChecked()) {
-                    additional_services += "\nTraining or technical assistance in agricultural practices of technology";
-                }
+                if (validateEntries()) {
+                    String number_of_males = etxtMalesNumber.getText().toString().trim();
+                    String number_of_females = etxtFemalesNumber.getText().toString().trim();
+                    String main_activities = "";
+                    String asset_ownership = "";
+                    String market = "";
+                    String marketing_channels = "";
+                    String funding_source = "";
+                    String additional_services = "";
+                    if (chkAgriculturalMarketing.isChecked()) {
+                        main_activities += "\nAgricultural Marketing";
+                    }
+                    if (chkBulking.isChecked()) {
+                        main_activities += "\nBulking";
+                    }
+                    if (chkStorage.isChecked()) {
+                        main_activities += "\nStorage";
+                    }
+                    if (chkProduction.isChecked()) {
+                        main_activities += "\nProduction";
+                    }
+                    if (chkProcessing.isChecked()) {
+                        main_activities += "\nProcessing";
+                    }
+                    if (chkSprayPump.isChecked()) {
+                        asset_ownership += "\nSpray Pump";
+                    }
+                    if (chkTractor.isChecked()) {
+                        asset_ownership += "\nTractor";
+                    }
+                    if (chkShelter.isChecked()) {
+                        asset_ownership += "\nShelter";
+                    }
+                    if (chkWeeder.isChecked()) {
+                        asset_ownership += "\nWeeder";
+                    }
+                    if (chkCombinedHarvester.isChecked()) {
+                        asset_ownership += "\nCombined Harvester";
+                    }
+                    if (chkNone.isChecked()) {
+                        asset_ownership += "\nNone";
+                    }
+                    if (chkDryer.isChecked()) {
+                        asset_ownership += "\nDryer";
+                    }
+                    if (chkMillingMachine.isChecked()) {
+                        asset_ownership += "\nMilling Machine";
+                    }
+                    if (chkOxPlough.isChecked()) {
+                        asset_ownership += "\nOx Plough";
+                    }
+                    if (ChkPlanter.isChecked()) {
+                        asset_ownership += "\nPlanter";
+                    }
+                    if (chkWetProcessingMachine.isChecked()) {
+                        asset_ownership += "\nWet Processing Machine";
+                    }
+                    if (chkTraders.isChecked()) {
+                        market += "\nTraders";
+                    }
+                    if (chkProcessors.isChecked()) {
+                        market += "\nProcessors";
+                    }
+                    if (chkFinalConsumer.isChecked()) {
+                        market += "\nFinal Consumers";
+                    }
+                    if (chkBuyer.isChecked()) {
+                        marketing_channels += "\nBuyer";
+                    }
+                    if (chkNgo.isChecked()) {
+                        marketing_channels += "\nNGO";
+                    }
+                    if (chkCallCenter.isChecked()) {
+                        marketing_channels += "\nCall Center";
+                    }
+                    if (chkGovernmentExtension.isChecked()) {
+                        marketing_channels += "\nGovernment Extension Workers";
+                    }
+                    if (chkFarmerOrganisation.isChecked()) {
+                        marketing_channels += "\nFarmer Organisation Marketeers";
+                    }
+                    if (chkRadioTv.isChecked()) {
+                        marketing_channels += "\nRadio/Tv";
+                    }
+                    if (chkMedia.isChecked()) {
+                        marketing_channels += "\nMedia/Online";
+                    }
+                    if (chkPrivate.isChecked()) {
+                        marketing_channels += "\nPrivate Extension Workers";
+                    }
+                    if (chkMemberFees.isChecked()) {
+                        funding_source += "\nMember Fees";
+                    }
+                    if (chkSales.isChecked()) {
+                        funding_source += "\nSales";
+                    }
+                    if (chkProcessingFees.isChecked()) {
+                        funding_source += "\nProcessing Fees";
+                    }
+                    if (chkGrants.isChecked()) {
+                        funding_source += "\nGrants";
+                    }
+                    if (chkCredit.isChecked()) {
+                        funding_source += "\nCredit";
+                    }
+                    if (chkCropInsurance.isChecked()) {
+                        additional_services += "\nCrop Insurance";
+                    }
+                    if (chkMarketIntelligence.isChecked()) {
+                        additional_services += "\nMarket Intelligence";
+                    }
+                    if (chkAgroInputsOnCredit.isChecked()) {
+                        additional_services += "\nAgricultural Inputs on credit";
+                    }
+                    if (chkAgroEquipment.isChecked()) {
+                        additional_services += "\nAccess to Agricultural Equipment";
+                    }
+                    if (chkTrainingOnBusinessDevt.isChecked()) {
+                        additional_services += "\nTraining on business development";
+                    }
+                    if (chkTrainingOnInstitutionalDevt.isChecked()) {
+                        additional_services += "\nTraining on institutional development";
+                    }
+                    if (chkCashLoansAgriculturalPurposes.isChecked()) {
+                        additional_services += "\nCash loans for agricultural Purposes";
+                    }
+                    if (chkNonCashLoansAgriculturalPurposes.isChecked()) {
+                        additional_services += "\nCash loans for non agricultural Purposes";
+                    }
+                    if (chkTrainingOrTechnicalAssistance.isChecked()) {
+                        additional_services += "\nTraining or technical assistance in agricultural practices of technology";
+                    }
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                boolean check = databaseAccess.addAssociation(name, year_of_registration, district, sub_county, village, full_address, telephone, email, crop_value_chain, livestock_value_chain, chairperson, chairperson_contact, secretary, secretary_contact, number_of_males, number_of_females, registration_level, respondent, respondent_contact, asset_ownership, organisation_type, main_activities, market, marketing_channels, funding_source, additional_services);
-                if (check) {
-                    Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    boolean check = databaseAccess.addAssociation(name, year_of_registration, district, sub_county, village, full_address, telephone, email, crop_value_chain, livestock_value_chain, chairperson, chairperson_contact, secretary, secretary_contact, number_of_males, number_of_females, registration_level, respondent, respondent_contact, asset_ownership, organisation_type, main_activities, market, marketing_channels, funding_source, additional_services);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
-
 
             }
         });
@@ -335,5 +338,40 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         });
 
 
+    }
+
+    public boolean validateEntries() {
+
+        String message = null;
+        if (etxtMalesNumber.getText().toString().isEmpty()) {
+            etxtMalesNumber.setError(getString(R.string.enter_number_males));
+            etxtMalesNumber.requestFocus();
+            return false;
+
+        } else if (etxtFemalesNumber.getText().toString().isEmpty()) {
+            etxtFemalesNumber.setError(getString(R.string.enter_number_females));
+            etxtFemalesNumber.requestFocus();
+            return false;
+
+    } else if(spinCropValueChain.getSelectedItemPosition() == 0) {
+        message = getString(R.string.select_crop_value_chain);
+        spinCropValueChain.requestFocus();
+        return false;
+
+        } else if(spinLivestockValueChain.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_livestock_value_chain);
+            spinLivestockValueChain.requestFocus();
+            return false;
+
+    }else if(message != null) {
+        Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+        return false;
+    } else {
+            etxtMalesNumber.setError(null);
+            etxtFemalesNumber.setError(null);
+
+
+            return true;
+        }
     }
 }

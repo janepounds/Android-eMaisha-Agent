@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,9 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
     private Context context;
     private NavController navController;
     private FragmentProfilingAssociationStep2Binding binding;
+
+    private EditText etxtChairperson,etxtChairpersonContact,etxtSecretary,etxtSecretaryContact,etxtRespondent,etxtRespondentContact;
+    private Spinner spinRespondentPosition;
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
     String respondent_position, name, year_of_registration, full_address, telephone, email,district,sub_county,village,registration_level,organisation_type;
@@ -84,13 +88,13 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
         navController = Navigation.findNavController(view);
 
 
-        final EditText etxtChairperson = view.findViewById(R.id.chairperson_et);
-        final EditText etxtChairpersonContact = view.findViewById(R.id.chairperson_contact_et);
-        final EditText etxtSecretary = view.findViewById(R.id.secretary_et);
-        EditText etxtSecretaryContact = view.findViewById(R.id.vice_chairperson_contact_et);
-        final EditText etxtRespondent = view.findViewById(R.id.respondent_et);
-        EditText etxtRespondentContact = view.findViewById(R.id.respondent_contact_et);
-        Spinner spinRespondentPosition = view.findViewById(R.id.respondent_position_held_spinner);
+        etxtChairperson = view.findViewById(R.id.chairperson_et);
+        etxtChairpersonContact = view.findViewById(R.id.chairperson_contact_et);
+        etxtSecretary = view.findViewById(R.id.secretary_et);
+        etxtSecretaryContact = view.findViewById(R.id.vice_chairperson_contact_et);
+        etxtRespondent = view.findViewById(R.id.respondent_et);
+        etxtRespondentContact = view.findViewById(R.id.respondent_contact_et);
+        spinRespondentPosition = view.findViewById(R.id.respondent_position_held_spinner);
 
 
         spinRespondentPosition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -110,35 +114,36 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String chairperson = etxtChairperson.getText().toString().trim();
-                String chairperson_contact = etxtChairpersonContact.getText().toString().trim();
-                String secretary = etxtSecretary.getText().toString().trim();
-                String secretary_contact = etxtSecretaryContact.getText().toString().trim();
-                String respondent = etxtRespondent.getText().toString().trim();
-                String respondent_contact = etxtRespondentContact.getText().toString().trim();
+                if (validateEntries()) {
+                    String chairperson = etxtChairperson.getText().toString().trim();
+                    String chairperson_contact = etxtChairpersonContact.getText().toString().trim();
+                    String secretary = etxtSecretary.getText().toString().trim();
+                    String secretary_contact = etxtSecretaryContact.getText().toString().trim();
+                    String respondent = etxtRespondent.getText().toString().trim();
+                    String respondent_contact = etxtRespondentContact.getText().toString().trim();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("name", name);
-                bundle.putString("year_of_registration", year_of_registration);
-                bundle.putString("full_address", full_address);
-                bundle.putString("telephone", telephone);
-                bundle.putString("email", email);
-                bundle.putString("chairperson", chairperson);
-                bundle.putString("chairperson_contact", chairperson_contact);
-                bundle.putString("secretary", secretary);
-                bundle.putString("secretary_contact", secretary_contact);
-                bundle.putString("respondent", respondent);
-                bundle.putString("respondent_contact", respondent_contact);
-                bundle.putString("respondent_position", respondent_position);
-                bundle.putString("district",district);
-                bundle.putString("sub_county",sub_county);
-                bundle.putString("village",village);
-                bundle.putString("registration_level",registration_level);
-                bundle.putString("organisation_type",organisation_type);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", name);
+                    bundle.putString("year_of_registration", year_of_registration);
+                    bundle.putString("full_address", full_address);
+                    bundle.putString("telephone", telephone);
+                    bundle.putString("email", email);
+                    bundle.putString("chairperson", chairperson);
+                    bundle.putString("chairperson_contact", chairperson_contact);
+                    bundle.putString("secretary", secretary);
+                    bundle.putString("secretary_contact", secretary_contact);
+                    bundle.putString("respondent", respondent);
+                    bundle.putString("respondent_contact", respondent_contact);
+                    bundle.putString("respondent_position", respondent_position);
+                    bundle.putString("district", district);
+                    bundle.putString("sub_county", sub_county);
+                    bundle.putString("village", village);
+                    bundle.putString("registration_level", registration_level);
+                    bundle.putString("organisation_type", organisation_type);
 
-                //navigation to step 3
-                navController.navigate(R.id.action_profilingAssociationStep2Fragment_to_profilingAssociationStep3Fragment,bundle);
-
+                    //navigation to step 3
+                    navController.navigate(R.id.action_profilingAssociationStep2Fragment_to_profilingAssociationStep3Fragment, bundle);
+                }
             }
         });
         binding.previousButton.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +154,57 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
             }
         });
 
+
+    }
+
+    public boolean validateEntries() {
+
+        String message = null;
+        if (etxtChairperson.getText().toString().isEmpty()) {
+            etxtChairperson.setError(getString(R.string.enter_chairperson_name));
+            etxtChairperson.requestFocus();
+            return false;
+
+        }else if (etxtChairpersonContact.getText().toString().isEmpty()) {
+            etxtChairpersonContact.setError(getString(R.string.enter_chairperson_contact));
+            etxtChairpersonContact.requestFocus();
+            return false;
+        } else if (etxtSecretary.getText().toString().isEmpty()) {
+            etxtSecretary.setError(getString(R.string.enter_secretary_name));
+            etxtSecretary.requestFocus();
+            return false;
+        } else if (etxtSecretaryContact.getText().toString().isEmpty()) {
+            etxtSecretaryContact.setError(getString(R.string.enter_secretary_contact));
+            etxtSecretaryContact.requestFocus();
+            return false;
+        } else if (etxtRespondent.getText().toString().isEmpty()) {
+            etxtRespondent.setError(getString(R.string.enter_respondent_name));
+            etxtRespondent.requestFocus();
+            return false;
+        } else if (etxtRespondentContact.getText().toString().isEmpty()) {
+            etxtRespondentContact.setError(getString(R.string.enter_respondent_contact));
+            etxtRespondentContact.requestFocus();
+            return false;
+        } else if (spinRespondentPosition.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_respondent_position);
+            spinRespondentPosition.requestFocus();
+            return false;
+
+        }else if(message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            etxtChairperson.setError(null);
+            etxtChairpersonContact.setError(null);
+            etxtSecretary.setError(null);
+            etxtSecretaryContact.setError(null);
+            etxtRespondent.setError(null);
+            etxtRespondentContact.setError(null);
+
+
+            return true;
+
+        }
 
     }
 }
