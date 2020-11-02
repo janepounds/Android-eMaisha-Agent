@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ProfilingActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,7 @@ public class ProfilingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.label_profiling);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+       
       //  BottomNavigationView navView = findViewById(R.id.nav_view);
        // navView.setItemIconTintList(null);
        // navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
@@ -53,33 +55,45 @@ public class ProfilingActivity extends AppCompatActivity {
         }
     };*/
 
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                //do something here like
+//
+//                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+//                    getSupportFragmentManager().popBackStack();
+//                }
+//
+//                return true;
+//        }
+//        return false;
+//    }
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        onBackPressed();
+//        return true;
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+//            getSupportFragmentManager().popBackStack();
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //do something here like
 
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getSupportFragmentManager().popBackStack();
-                }
-
-                return true;
-        }
-        return false;
-    }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        return true;
+        return super.onSupportNavigateUp();
     }
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        } else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 }
