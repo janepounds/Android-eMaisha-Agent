@@ -1,5 +1,8 @@
 package com.cabraltech.emaishaagentsapp.network;
 
+import com.cabraltech.emaishaagentsapp.models.Regions;
+import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -172,4 +175,8 @@ public interface Api {
             @Field("infestation_level") String infestation_level,
             @Field("recommendation") String recommendation
     );
+
+    @FormUrlEncoded
+    @POST("getregions")
+    Call<Regions> getAllRegions(@Field("latest_id") int latest_id);
 }

@@ -3,6 +3,7 @@ package com.cabraltech.emaishaagentsapp.fragments.profiling;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAgroInputDea
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
-
+    private static final String TAG = "ProfilingAgroInputDeale";
     private Context context;
     private NavController navController;
     private FragmentProfilingAgroInputDealerStep3Binding binding;
@@ -72,6 +73,7 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
         certification_type = getArguments().getString("certification_type");
         registration_status = getArguments().getString("registration_status");
         association_membership = getArguments().getString("association_membership");
+        association_name = getArguments().getString("association_name");
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_agro_input_dealer_step3, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -245,6 +247,7 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
 
                 DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                 databaseAccess.open();
+                Log.d(TAG, "onClick: "+ association_name + certification);
 
                 boolean check = databaseAccess.addDealer(business_name, district, sub_county, village, full_address, certification, certification_type, certification_number, registration_body, registration_year, registration_status, association_membership, association_name, business_type, number_of_outlets, type_of_sales, item_sold, marketing_channels, funding_source, additional_services);
                 if (check) {

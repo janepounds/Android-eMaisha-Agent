@@ -296,6 +296,18 @@
     <string name="secretary">Secretary</string>
     <string name="max">&#xb0;C Max</string>
     <string name="min">&#xb0;C Min</string>
+    <string name="permission_rejected"> Permission not Granted! </string>
+    <string name="permission_camera_storage"> Need Camera and Storage Permissions! </string>
+    <string name="permission_camera_storage_needed"> This app needs camera and storage permissions to take pictures from the gallery or with the camera. </string>
+
+    <string name="rate_now"> Rate It! </string>
+    <string name="not_now"> Not Now </string>
+    <string name="rate_app_msg"> If you enjoy using this app, it would be great to take a moment to rate it. </string>
+
+    <string name="title"> Title </string>
+    <string name="cancel">Cancel</string>
+    <string name="description">Description</string>
+    <string name="ok">Ok</string>
     <array name="gender_array">
         <item>Female</item>
         <item>Male</item>

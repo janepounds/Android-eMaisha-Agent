@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="8dp">
-                    <Spinner
+                    <AutoCompleteTextView
                         android:id="@+id/commodities_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

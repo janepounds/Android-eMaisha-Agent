@@ -13,11 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -27,15 +32,18 @@ import android.widget.Toast;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
+import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionAddMarketBinding;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionAddMarketPriceBinding;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class DataCollectionAddMarketPriceFragment extends Fragment {
+    private static final String TAG = "DataCollectionAddMarket";
     private FragmentDataCollectionAddMarketPriceBinding fragmentDataCollectionAddMarketPriceBinding;
     private Context context;
     private NavController navController;
@@ -76,7 +84,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         final TextView txtDate = view.findViewById(R.id.date_tv);
 
         Spinner spinMarket_name = view.findViewById(R.id.market_spinner);
-        Spinner spinCommodities = view.findViewById(R.id.commodities_spinner);
+        AutoCompleteTextView spinCommodities = view.findViewById(R.id.commodities_spinner);
         Spinner spinVarieties = view.findViewById(R.id.variety_spinner);
         Spinner spinUnits = view.findViewById(R.id.measurement_units_spinner);
 
@@ -100,17 +108,6 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             }
         });
 
-        spinCommodities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                commodities = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         spinVarieties.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -123,6 +120,27 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
             }
         });
+        ArrayList<String> commodities = new ArrayList<>();
+
+        ArrayAdapter<String> commodityListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line, commodities);
+        spinCommodities.setThreshold(1);
+        spinCommodities.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        spinCommodities.setAdapter(commodityListAdapter);
 
         spinUnits.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -147,7 +165,9 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
                 DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                 databaseAccess.open();
 
-                boolean check = databaseAccess.addMarketPrice(date,commodities,varieties,market_name,units,wholesale_price,retail_sale);
+                Log.d(TAG, "onClick: "+date +spinCommodities.getText().toString()+varieties+market_name+units+wholesale_price+retail_sale);
+
+                boolean check = databaseAccess.addMarketPrice(date,spinCommodities.getText().toString(),varieties,market_name,units,wholesale_price,retail_sale);
                 if (check) {
                     Toast.makeText(getActivity(), "Market Price Added Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), DashboardActivity.class);

@@ -7,13 +7,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -30,25 +35,35 @@ import androidx.navigation.NavController;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
+import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionReportPestBinding;
+import com.cabraltech.emaishaagentsapp.models.RegionDetails;
 
+
+import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
 
 public class DataCollectionReportPestFragment extends Fragment {
+    private static final String TAG = "DataCollectionReportPes";
 
     private FragmentDataCollectionReportPestBinding binding;
     private Context context;
     private NavController navController;
-    String district, sub_county, village,damage;
+    String damage;
     String mediaPath, encodedImageID = "N/A";
     EditText etxtPhoto;
+    private int pickedDistrictId;
+    private int pickedSubcountyId;
+    private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
+    private ArrayList<String> villageList = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -86,9 +101,9 @@ public class DataCollectionReportPestFragment extends Fragment {
 
         final EditText etxtDate = view.findViewById(R.id.reporting_date_et);
         final EditText etxtFarmName = view.findViewById(R.id.farm_name_et);
-        Spinner spinDistrict = view.findViewById(R.id.district_spinner);
-        Spinner spinSubCounty = view.findViewById(R.id.sub_county_spinner);
-        Spinner spinVillage = view.findViewById(R.id.village_spinner);
+        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
+        AutoCompleteTextView spinSubCounty = view.findViewById(R.id.sub_county_spinner);
+        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
         Spinner spinDamage = view.findViewById(R.id.damage_assessment_spinner);
 
         final EditText etxtPhone = view.findViewById(R.id.farmer_phone_number_et);
@@ -102,14 +117,145 @@ public class DataCollectionReportPestFragment extends Fragment {
         Button btnSubmit =view.findViewById(R.id.submit_button);
 
 
-        spinVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        //load district, subcounty and village data
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+        databaseAccess.open();
+        ArrayList<SpinnerItem> districtList = new ArrayList<>();
+
+        try {
+            for (RegionDetails x : databaseAccess.getRegionDetails("district")) {
+                districtList.add(new SpinnerItem() {
+                    @Override
+                    public String getId() {
+                        return String.valueOf(x.getId());
+                    }
+
+
+
+                    @NonNull
+                    @Override
+                    public String toString() {
+                        return x.getRegion();
+                    }
+                });
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "onCreate: "+ districtList + districtList.size());
+        ArrayAdapter<SpinnerItem> districtListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, districtList);
+        spinDistrict.setThreshold(1);
+        spinDistrict.setAdapter(districtListAdapter);
+        spinDistrict.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                village = adapterView.getItemAtPosition(i).toString();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                spinDistrict.showDropDown();
+                for (int i = 0; i < districtList.size(); i++) {
+
+                    if (districtList.get(i).toString().equals(spinDistrict.getText().toString())) {
+                        pickedDistrictId =Integer.parseInt(districtList.get(i).getId());
+
+                        Log.d(TAG, "onCreate: "+ pickedDistrictId);
+
+                        subcountyList.clear();
+                        try {
+                            for (RegionDetails x : databaseAccess.getSubcountyDetails(String.valueOf(pickedDistrictId),"subcounty")) {
+                                subcountyList.add(new SpinnerItem() {
+                                    @Override
+                                    public String getId() {
+                                        return String.valueOf(x.getId());
+                                    }
+
+
+
+                                    @NonNull
+                                    @Override
+                                    public String toString() {
+                                        return x.getRegion();
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d(TAG, "onCreate: "+ subcountyList);
+                        ArrayAdapter<SpinnerItem> subcountryListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, subcountyList);
+                        spinSubCounty.setThreshold(1);
+                        spinSubCounty.setAdapter(subcountryListAdapter);
+                    }
+
+
+                }
+            }
+        });
+
+
+        spinSubCounty.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                spinSubCounty.showDropDown();
+
+                for (int i = 0; i < subcountyList.size(); i++) {
+
+                    if (subcountyList.get(i).toString().equals(spinSubCounty.getText().toString())) {
+                        pickedSubcountyId =Integer.parseInt(subcountyList.get(i).getId());
+
+                        Log.d(TAG, "onCreate: "+ pickedSubcountyId);
+
+                        villageList.clear();
+                        try {
+                            for (RegionDetails x : databaseAccess.getVillageDetails(String.valueOf(pickedSubcountyId),"village")) {
+                                villageList.add(x.getRegion());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d(TAG, "onCreate: "+ villageList);
+                        ArrayAdapter<String> villageListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line, villageList);
+                        spinVillage.setThreshold(1);
+                        spinVillage.setAdapter(villageListAdapter);
+                    }
+
+
+                }
+            }
+        });
+
+        spinVillage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -125,28 +271,8 @@ public class DataCollectionReportPestFragment extends Fragment {
 
             }
         });
-        spinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                district = adapterView.getItemAtPosition(i).toString();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-        spinSubCounty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                sub_county = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         etxtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,7 +304,7 @@ public class DataCollectionReportPestFragment extends Fragment {
                 DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                 databaseAccess.open();
 
-                boolean check = databaseAccess.addPestReport(date,farm_name,district,sub_county,village,phone,signs_and_symptoms,pest_or_disease,damage,recommendation,encodedImageID);
+                boolean check = databaseAccess.addPestReport(date,farm_name,spinDistrict.getText().toString(),spinSubCounty.getText().toString(),spinVillage.getText().toString(),phone,signs_and_symptoms,pest_or_disease,damage,recommendation,encodedImageID);
                 if (check) {
                     Toast.makeText(getActivity(), "Pest Report Added Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), DashboardActivity.class);

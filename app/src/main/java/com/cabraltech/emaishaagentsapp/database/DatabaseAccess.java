@@ -5,9 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.cabraltech.emaishaagentsapp.models.RegionDetails;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class DatabaseAccess {
     private SQLiteOpenHelper openHelper;
@@ -96,6 +102,7 @@ public class DatabaseAccess {
         values.put("third_crop", third_crop);
         values.put("main_livestock", main_livestock);
         values.put("second_livestock", second_livestock);
+        values.put("sync_status",0);
 
         long check = database.insert("farmers", null, values);
         database.close();
@@ -106,6 +113,118 @@ public class DatabaseAccess {
         } else {
             return true;
         }
+    }
+
+    //////////**************GET LAST ENTERED REGION ID**************///////////////////
+    public int getMaxRegionId() {
+        this.database = openHelper.getWritableDatabase();
+
+        Cursor cur = database.rawQuery("SELECT MAX(id) FROM  regions", null);
+        cur.moveToFirst();
+
+        int regionId = cur.getInt(0);
+
+        // close cursor and DB
+        cur.close();
+        database.close();
+
+        return regionId;
+
+    }
+
+    ///**********************insert regions**************************//////////////////
+    public void insertRegionDetails(List<RegionDetails> regionDetails) {
+        this.database = openHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        for(RegionDetails regionDetail : regionDetails) {
+            contentValues.put("id", regionDetail.getId());
+            contentValues.put("regionType", regionDetail.getRegionType());
+            contentValues.put("region", regionDetail.getRegion());
+            contentValues.put("belongs_to", regionDetail.getBelongs_to());
+            database.insert("regions", null, contentValues);
+        }
+        database.close();
+    }
+
+    //******GET DISTRICTS*****//
+
+    public ArrayList<RegionDetails> getRegionDetails( String district) throws JSONException {
+        this.database = openHelper.getWritableDatabase();
+        ArrayList<RegionDetails> array_list = new ArrayList();
+
+        Cursor res = database.rawQuery("select * from regions where  regionType = '" + district + "'", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            RegionDetails regionDetails = new RegionDetails();
+            regionDetails.setTableId(Integer.parseInt(res.getString(res.getColumnIndex("table_id"))));
+            regionDetails.setId(Integer.parseInt(res.getString(res.getColumnIndex("id"))));
+            regionDetails.setRegionType(res.getString(res.getColumnIndex("regionType")));
+            regionDetails.setRegion(res.getString(res.getColumnIndex("region")));
+            regionDetails.setBelongs_to(res.getString(res.getColumnIndex("belongs_to")));
+            array_list.add(regionDetails);
+            res.moveToNext();
+        }
+
+        res.close();
+        database.close();
+        Log.d("RegionDetails ", array_list.size() + "");
+
+        return array_list;
+    }
+
+    //******GET SUB COUNTY*****//
+
+    public ArrayList<RegionDetails> getSubcountyDetails( String belongs_to, String subcounty) throws JSONException {
+        this.database = openHelper.getWritableDatabase();
+        ArrayList<RegionDetails> array_list = new ArrayList();
+
+        Cursor res = database.rawQuery("select * from regions where  belongs_to   = '" + belongs_to + "'" + " AND  regionType  = '" + subcounty + "'", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            RegionDetails regionDetails = new RegionDetails();
+            regionDetails.setTableId(Integer.parseInt(res.getString(res.getColumnIndex("table_id"))));
+            regionDetails.setId(Integer.parseInt(res.getString(res.getColumnIndex("id"))));
+            regionDetails.setRegionType(res.getString(res.getColumnIndex("regionType")));
+            regionDetails.setRegion(res.getString(res.getColumnIndex("region")));
+            regionDetails.setBelongs_to(res.getString(res.getColumnIndex("belongs_to")));
+            array_list.add(regionDetails);
+            res.moveToNext();
+        }
+
+        res.close();
+        database.close();
+        Log.d("RegionDetails ", array_list.size() + "");
+
+        return array_list;
+    }
+
+    //******GET VILLAGES*****//
+
+    public ArrayList<RegionDetails> getVillageDetails( String belongs_to, String subcounty) throws JSONException {
+        this.database = openHelper.getWritableDatabase();
+        ArrayList<RegionDetails> array_list = new ArrayList();
+
+        Cursor res = database.rawQuery("select * from regions where  belongs_to   = '" + belongs_to + "'" + " AND  regionType  = '" + subcounty + "'", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast()) {
+            RegionDetails regionDetails = new RegionDetails();
+            regionDetails.setTableId(Integer.parseInt(res.getString(res.getColumnIndex("table_id"))));
+            regionDetails.setId(Integer.parseInt(res.getString(res.getColumnIndex("id"))));
+            regionDetails.setRegionType(res.getString(res.getColumnIndex("regionType")));
+            regionDetails.setRegion(res.getString(res.getColumnIndex("region")));
+            regionDetails.setBelongs_to(res.getString(res.getColumnIndex("belongs_to")));
+            array_list.add(regionDetails);
+            res.moveToNext();
+        }
+
+        res.close();
+        database.close();
+        Log.d("RegionDetails ", array_list.size() + "");
+
+        return array_list;
     }
 
 
@@ -135,6 +254,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("first_name", cursor.getString(1));
                 map.put("last_name", cursor.getString(2));
                 map.put("dob", cursor.getString(3));
@@ -203,6 +323,7 @@ public class DatabaseAccess {
         values.put("marketing_channels", market_channels);
         values.put("funding_source", funding_source);
         values.put("additional_services", additional_services);
+        values.put("sync_status", 0);
 
 
         long check = database.insert("associations", null, values);
@@ -225,6 +346,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("name", cursor.getString(1));
                 map.put("year_of_registration", cursor.getString(2));
                 map.put("district", cursor.getString(3));
@@ -248,8 +370,9 @@ public class DatabaseAccess {
                 map.put("main_activities", cursor.getString(22));
                 map.put("asset_ownership", cursor.getString(23));
                 map.put("market", cursor.getString(24));
-                map.put("funding_source", cursor.getString(25));
-                map.put("additional_services", cursor.getString(26));
+                map.put("marketing_channels", cursor.getString(25));
+                map.put("funding_source", cursor.getString(26));
+                map.put("additional_services", cursor.getString(27));
 
 
                 associations.add(map);
@@ -304,6 +427,7 @@ public class DatabaseAccess {
         values.put("marketing_channels", marketing_channels);
         values.put("funding_source", funding_source);
         values.put("additional_services", additional_services);
+        values.put("sync_status", 0);
         long check = database.insert("agro_input_dealers", null, values);
         database.close();
 
@@ -324,6 +448,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("business_name", cursor.getString(1));
                 map.put("district", cursor.getString(2));
                 map.put("sub_county", cursor.getString(2));
@@ -391,6 +516,7 @@ public class DatabaseAccess {
         values.put("funding_source", funding_source);
         values.put("marketing_channels", marketing_channels);
         values.put("full_address", actual_address);
+        values.put("sync_status", 0);
         long check = database.insert("agro_traders", null, values);
         database.close();
 
@@ -463,6 +589,7 @@ public class DatabaseAccess {
         values.put("sub_county", sub_county);
         values.put("town", village);
         values.put("contact_person", contact_person);
+        values.put("sync_status", 0);
         long check = database.insert("markets", null, values);
         database.close();
 
@@ -482,12 +609,14 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("name", cursor.getString(1));
                 map.put("street_address", cursor.getString(2));
                 map.put("district", cursor.getString(3));
                 map.put("sub_county", cursor.getString(4));
-                map.put("contact_person", cursor.getString(5));
-                map.put("phone_number", cursor.getString(6));
+                map.put("town", cursor.getString(5));
+                map.put("contact_person", cursor.getString(6));
+                map.put("phone_number", cursor.getString(7));
                 markets.add(map);
             } while (cursor.moveToNext());
         }
@@ -521,12 +650,13 @@ public class DatabaseAccess {
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
         values.put("date", date);
-        values.put("commodities", commodities);
         values.put("variety", variety);
         values.put("market", market);
         values.put("measurement_units", measurement_units);
         values.put("wholesale_price", wholesale_price);
         values.put("retail_price", retail_price);
+        values.put("sync_status", 0);
+        values.put("commodity", commodities);
         long check = database.insert("market_prices", null, values);
         database.close();
 
@@ -547,12 +677,14 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("variety", cursor.getString(2));
                 map.put("market", cursor.getString(3));
                 map.put("measurement_units", cursor.getString(4));
                 map.put("wholesale_price", cursor.getString(5));
                 map.put("retail_price", cursor.getString(6));
+//                map.put("commodity", cursor.getString(8));
                 market_prices.add(map);
             } while (cursor.moveToNext());
         }
@@ -595,6 +727,7 @@ public class DatabaseAccess {
         values.put("damage_assesment", damage_assesment);
         values.put("recommendation", recommendation);
         values.put("photo_of_damage", photo_of_damage);
+        values.put("sync_status",0);
         long check = database.insert("pest_reports", null, values);
         database.close();
 
@@ -614,16 +747,18 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("district", cursor.getString(2));
                 map.put("sub_county", cursor.getString(3));
                 map.put("village", cursor.getString(4));
                 map.put("farmer_phone", cursor.getString(5));
-                map.put("sign_and_symptoms", cursor.getString(6));
+                map.put("signs_and_symptoms", cursor.getString(6));
                 map.put("suspected_pest", cursor.getString(7));
                 map.put("damage_assesment", cursor.getString(8));
                 map.put("recommendation", cursor.getString(9));
                 map.put("photo_of_damage", cursor.getString(10));
+                map.put("farmer_name",cursor.getString(11));
                 pest_reports.add(map);
             } while (cursor.moveToNext());
         }
@@ -666,6 +801,7 @@ public class DatabaseAccess {
         values.put("infestation", infestation);
         values.put("infestation_level", infestation_level);
         values.put("recommendation", recommendation);
+        values.put("sync_status", 0);
         long check = database.insert("scouting_reports", null, values);
         database.close();
 
@@ -685,6 +821,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id",cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("farmer_name", cursor.getString(2));
                 map.put("district", cursor.getString(3));

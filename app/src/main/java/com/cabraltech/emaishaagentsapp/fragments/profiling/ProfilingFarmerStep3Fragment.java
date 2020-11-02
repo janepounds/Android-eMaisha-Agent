@@ -28,6 +28,7 @@ import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingFarmerStep3Binding;
+import com.cabraltech.emaishaagentsapp.network.NetworkStateChecker;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 
@@ -69,7 +70,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         next_of_kin_contact = getArguments().getString("next_of_kin_contact");
         next_of_kin_relation = getArguments().getString("next_of_kin_relation");
         district = getArguments().getString("district");
-        sub_county = getArguments().getString("district");
+        sub_county = getArguments().getString("subcounty");
         village = getArguments().getString("village");
 
         // Inflate the layout for this fragment
@@ -159,7 +160,9 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
 
                 boolean check = databaseAccess.addFarmer(first_name, last_name, dob, age, gender, nationality, religion, education_level, marital_status, household_size, language_used, source_of_income, household_head, district, sub_county, village, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address, farming_size, main_crop, second_crop, third_crop, main_livestock, second_livestock);
                 if (check) {
+
                     Toast.makeText(getActivity(), "Farmer Profiled Successfully", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(getActivity(), DashboardActivity.class);
                     startActivity(intent);
                 } else {
