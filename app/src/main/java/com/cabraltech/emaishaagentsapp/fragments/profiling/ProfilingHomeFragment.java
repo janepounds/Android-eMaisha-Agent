@@ -12,8 +12,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingHomeBinding;
@@ -40,8 +42,11 @@ public class ProfilingHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_home,container,false);
+        this.setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         return  binding.getRoot();
     }
     @Override
@@ -77,5 +82,22 @@ public class ProfilingHomeFragment extends Fragment {
             }
         });
 
+
     }
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+
+            navController.popBackStack();
+            //getActivity().getSupportFragmentManager().popBackStack();
+
+
+          //  getFragmentManager().popBackStack();
+          getActivity().onBackPressed();
+            Toast.makeText(getContext(), "Back", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
