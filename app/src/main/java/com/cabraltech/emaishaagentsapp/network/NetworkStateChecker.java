@@ -35,179 +35,181 @@ public class NetworkStateChecker extends BroadcastReceiver {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
         databaseAccess.open();
         farmersList = databaseAccess.getUnSyncedFarmers();
-        Log.d(TAG, "onCreate: MyApp onCreate" +farmersList);
+        Log.d(TAG, "onCreate: MyApp onCreate" + farmersList);
 
         if (activeNetwork != null && activeNetwork.isConnected()) {
-            for (int i = 0; i < farmersList.size(); i++) {
-                saveFarmersList(
-                        farmersList.get(i).get("id"),
-                        farmersList.get(i).get("first_name"),
-                        farmersList.get(i).get("last_name"),
-                        farmersList.get(i).get("dob"),
-                        farmersList.get(i).get("age"),
-                        farmersList.get(i).get("gender"),
-                        farmersList.get(i).get("nationality"),
-                        farmersList.get(i).get("religion"),
-                        farmersList.get(i).get("level_of_education"),
-                        farmersList.get(i).get("marital_status"),
-                        farmersList.get(i).get("household_size"),
-                        farmersList.get(i).get("language_used"),
-                        farmersList.get(i).get("source_of_income"),
-                        farmersList.get(i).get("household_head"),
-                        farmersList.get(i).get("district"),
-                        farmersList.get(i).get("sub_county"),
-                        farmersList.get(i).get("village"),
-                        farmersList.get(i).get("phone_number"),
-                        farmersList.get(i).get("next_of_kin"),
-                        farmersList.get(i).get("next_of_kin_relation"),
-                        farmersList.get(i).get("next_of_kin_contact"),
-                        farmersList.get(i).get("next_of_kin_address"),
-                        farmersList.get(i).get("farming_land_size"),
-                        farmersList.get(i).get("main_crop"),
-                        farmersList.get(i).get("second_crop"),
-                        farmersList.get(i).get("third_crop"),
-                        farmersList.get(i).get("main_livestock"),
-                        farmersList.get(i).get("second_livestock")
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                for (int i = 0; i < farmersList.size(); i++) {
+                    saveFarmersList(
+                            farmersList.get(i).get("id"),
+                            farmersList.get(i).get("first_name"),
+                            farmersList.get(i).get("last_name"),
+                            farmersList.get(i).get("dob"),
+                            farmersList.get(i).get("age"),
+                            farmersList.get(i).get("gender"),
+                            farmersList.get(i).get("nationality"),
+                            farmersList.get(i).get("religion"),
+                            farmersList.get(i).get("level_of_education"),
+                            farmersList.get(i).get("marital_status"),
+                            farmersList.get(i).get("household_size"),
+                            farmersList.get(i).get("language_used"),
+                            farmersList.get(i).get("source_of_income"),
+                            farmersList.get(i).get("household_head"),
+                            farmersList.get(i).get("district"),
+                            farmersList.get(i).get("sub_county"),
+                            farmersList.get(i).get("village"),
+                            farmersList.get(i).get("phone_number"),
+                            farmersList.get(i).get("next_of_kin"),
+                            farmersList.get(i).get("next_of_kin_relation"),
+                            farmersList.get(i).get("next_of_kin_contact"),
+                            farmersList.get(i).get("next_of_kin_address"),
+                            farmersList.get(i).get("farming_land_size"),
+                            farmersList.get(i).get("main_crop"),
+                            farmersList.get(i).get("second_crop"),
+                            farmersList.get(i).get("third_crop"),
+                            farmersList.get(i).get("main_livestock"),
+                            farmersList.get(i).get("second_livestock")
 
 
+                    );
+                }
+                pestReport = databaseAccess.getUnSyncedPestReports();
+                Log.d(TAG, "onCreate: MyApp onCreate" + pestReport);
+                for (int i = 0; i < pestReport.size(); i++) {
+                    savePestReports(
+                            pestReport.get(i).get("id"),
+                            pestReport.get(i).get("date"),
+                            pestReport.get(i).get("district"),
+                            pestReport.get(i).get("sub_county"),
+                            pestReport.get(i).get("village"),
+                            pestReport.get(i).get("farmer_phone"),
+                            pestReport.get(i).get("signs_and_symptoms"),
+                            pestReport.get(i).get("suspected_pest"),
+                            pestReport.get(i).get("damage_assesment"),
+                            pestReport.get(i).get("recommendation"),
+                            pestReport.get(i).get("photo_of_damage"),
+                            pestReport.get(i).get("farmer_name")
 
 
-                );
-            }
-            pestReport = databaseAccess.getUnSyncedPestReports();
-            Log.d(TAG, "onCreate: MyApp onCreate" +pestReport);
-            for (int i = 0; i < pestReport.size(); i++) {
-                savePestReports(
-                        pestReport.get(i).get("id"),
-                        pestReport.get(i).get("date"),
-                        pestReport.get(i).get("district"),
-                        pestReport.get(i).get("sub_county"),
-                        pestReport.get(i).get("village"),
-                        pestReport.get(i).get("farmer_phone"),
-                        pestReport.get(i).get("signs_and_symptoms"),
-                        pestReport.get(i).get("suspected_pest"),
-                        pestReport.get(i).get("damage_assesment"),
-                        pestReport.get(i).get("recommendation"),
-                        pestReport.get(i).get("photo_of_damage"),
-                        pestReport.get(i).get("farmer_name")
+                    );
+
+                }
+                scoutingReport = databaseAccess.getUnSyncedScoutingReports();
+                for (int i = 0; i < scoutingReport.size(); i++) {
+                    saveScoutingReport(
+                            scoutingReport.get(i).get("id"),
+                            scoutingReport.get(i).get("date"),
+                            scoutingReport.get(i).get("farmer_name"),
+                            scoutingReport.get(i).get("district"),
+                            scoutingReport.get(i).get("sub_county"),
+                            scoutingReport.get(i).get("village"),
+                            scoutingReport.get(i).get("phone_number"),
+                            scoutingReport.get(i).get("infested"),
+                            scoutingReport.get(i).get("infestation_type"),
+                            scoutingReport.get(i).get("infestation"),
+                            scoutingReport.get(i).get("infestation_level"),
+                            scoutingReport.get(i).get("recommendation")
+
+                    );
 
 
-                );
-
-            }
-            scoutingReport = databaseAccess.getUnSyncedScoutingReports();
-            for (int i = 0; i < scoutingReport.size(); i++) {
-                saveScoutingReport(
-                        scoutingReport.get(i).get("id"),
-                        scoutingReport.get(i).get("date"),
-                        scoutingReport.get(i).get("farmer_name"),
-                        scoutingReport.get(i).get("district"),
-                        scoutingReport.get(i).get("sub_county"),
-                        scoutingReport.get(i).get("village"),
-                        scoutingReport.get(i).get("phone_number"),
-                        scoutingReport.get(i).get("infested"),
-                        scoutingReport.get(i).get("infestation_type"),
-                        scoutingReport.get(i).get("infestation"),
-                        scoutingReport.get(i).get("infestation_level"),
-                        scoutingReport.get(i).get("recommendation")
-
-                );
+                }
+                marketPrices = databaseAccess.getUnSyncedMarketprices();
+                for (int i = 0; i < marketPrices.size(); i++) {
+                    saveMarketPrices(
+                            marketPrices.get(i).get("id"),
+                            marketPrices.get(i).get("date"),
+                            marketPrices.get(i).get("variety"),
+                            marketPrices.get(i).get("market"),
+                            marketPrices.get(i).get("measurement_units"),
+                            marketPrices.get(i).get("wholesale_price"),
+                            marketPrices.get(i).get("retail_price"),
+                            marketPrices.get(i).get("commodity")
+                    );
 
 
-            }
-            marketPrices = databaseAccess.getUnSyncedMarketprices();
-            for (int i = 0; i < marketPrices.size(); i++) {
-                saveMarketPrices(
-                        marketPrices.get(i).get("id"),
-                        marketPrices.get(i).get("date"),
-                        marketPrices.get(i).get("variety"),
-                        marketPrices.get(i).get("market"),
-                        marketPrices.get(i).get("measurement_units"),
-                        marketPrices.get(i).get("wholesale_price"),
-                        marketPrices.get(i).get("retail_price"),
-                        marketPrices.get(i).get("commodity")
-                );
+                }
+
+                marketDetails = databaseAccess.getUnSyncedMarkets();
+                for (int i = 0; i < marketDetails.size(); i++) {
+                    saveMarket(
+                            marketDetails.get(i).get("id"),
+                            marketDetails.get(i).get("name"),
+                            marketDetails.get(i).get("street_address"),
+                            marketDetails.get(i).get("district"),
+                            marketDetails.get(i).get("sub_county"),
+                            marketDetails.get(i).get("town"),
+                            marketDetails.get(i).get("contact_person"),
+                            marketDetails.get(i).get("phone_number")
+                    );
 
 
-            }
-
-            marketDetails = databaseAccess.getUnSyncedMarkets();
-            for (int i = 0; i < marketDetails.size(); i++) {
-                saveMarket(
-                        marketDetails.get(i).get("id"),
-                        marketDetails.get(i).get("name"),
-                        marketDetails.get(i).get("street_address"),
-                        marketDetails.get(i).get("district"),
-                        marketDetails.get(i).get("sub_county"),
-                        marketDetails.get(i).get("town"),
-                        marketDetails.get(i).get("contact_person"),
-                        marketDetails.get(i).get("phone_number")
-                );
-
-
-            }
-            association = databaseAccess.getUnSyncedAssociations();
-            for (int i = 0; i < association.size(); i++) {
-                saveAssociation(
-                        association.get(i).get("id"),
-                        association.get(i).get("name"),
-                        association.get(i).get("year_of_registration"),
-                        association.get(i).get("district"),
-                        association.get(i).get("sub_county"),
-                        association.get(i).get("village"),
-                        association.get(i).get("full_address"),
-                        association.get(i).get("association_telephone"),
-                        association.get(i).get("association_email"),
-                        association.get(i).get("number_of_male_members"),
-                        association.get(i).get("crop_value_chain"),
-                        association.get(i).get("livestock_value_chain"),
-                        association.get(i).get("chairperson"),
-                        association.get(i).get("chairperson_contact"),
-                        association.get(i).get("secretary"),
-                        association.get(i).get("secretary_contact"),
-                        association.get(i).get("number_of_female_members"),
-                        association.get(i).get("organisation_type"),
-                        association.get(i).get("registration_level"),
-                        association.get(i).get("respondent"),
-                        association.get(i).get("respondent_contact"),
-                        association.get(i).get("main_activities"),
-                        association.get(i).get("asset_ownership"),
-                        association.get(i).get("market"),
-                        association.get(i).get("marketing_channels"),
-                        association.get(i).get("funding_source"),
-                        association.get(i).get("additional_services")
+                }
+                association = databaseAccess.getUnSyncedAssociations();
+                for (int i = 0; i < association.size(); i++) {
+                    saveAssociation(
+                            association.get(i).get("id"),
+                            association.get(i).get("name"),
+                            association.get(i).get("year_of_registration"),
+                            association.get(i).get("district"),
+                            association.get(i).get("sub_county"),
+                            association.get(i).get("village"),
+                            association.get(i).get("full_address"),
+                            association.get(i).get("association_telephone"),
+                            association.get(i).get("association_email"),
+                            association.get(i).get("number_of_male_members"),
+                            association.get(i).get("crop_value_chain"),
+                            association.get(i).get("livestock_value_chain"),
+                            association.get(i).get("chairperson"),
+                            association.get(i).get("chairperson_contact"),
+                            association.get(i).get("secretary"),
+                            association.get(i).get("secretary_contact"),
+                            association.get(i).get("number_of_female_members"),
+                            association.get(i).get("organisation_type"),
+                            association.get(i).get("registration_level"),
+                            association.get(i).get("respondent"),
+                            association.get(i).get("respondent_contact"),
+                            association.get(i).get("main_activities"),
+                            association.get(i).get("asset_ownership"),
+                            association.get(i).get("market"),
+                            association.get(i).get("marketing_channels"),
+                            association.get(i).get("funding_source"),
+                            association.get(i).get("additional_services")
 
 
-                );
+                    );
 
 
-            }
-            agroInputDealers = databaseAccess.getUnSyncedDealers();
-            for (int i = 0; i < agroInputDealers.size(); i++) {
-                saveAgroInputDealer(
-                        agroInputDealers.get(i).get("id"),
-                        agroInputDealers.get(i).get("business_name"),
-                        agroInputDealers.get(i).get("district"),
-                        agroInputDealers.get(i).get("sub_county"),
-                        agroInputDealers.get(i).get("village"),
-                        agroInputDealers.get(i).get("full_address"),
-                        agroInputDealers.get(i).get("certification"),
-                        agroInputDealers.get(i).get("certification_type"),
-                        agroInputDealers.get(i).get("certification_number"),
-                        agroInputDealers.get(i).get("registration_body"),
-                        agroInputDealers.get(i).get("registration_year"),
-                        agroInputDealers.get(i).get("registration_status"),
-                        agroInputDealers.get(i).get("association_membership"),
-                        agroInputDealers.get(i).get("association_name"),
-                        agroInputDealers.get(i).get("business_type"),
-                        agroInputDealers.get(i).get("number_of_outlets"),
-                        agroInputDealers.get(i).get("types_of_sales"),
-                        agroInputDealers.get(i).get("items_sold"),
-                        agroInputDealers.get(i).get("marketing_channels"),
-                        agroInputDealers.get(i).get("funding_source"),
-                        agroInputDealers.get(i).get("additional_services")
+                }
+                agroInputDealers = databaseAccess.getUnSyncedDealers();
+                for (int i = 0; i < agroInputDealers.size(); i++) {
+                    saveAgroInputDealer(
+                            agroInputDealers.get(i).get("id"),
+                            agroInputDealers.get(i).get("business_name"),
+                            agroInputDealers.get(i).get("district"),
+                            agroInputDealers.get(i).get("sub_county"),
+                            agroInputDealers.get(i).get("village"),
+                            agroInputDealers.get(i).get("full_address"),
+                            agroInputDealers.get(i).get("certification"),
+                            agroInputDealers.get(i).get("certification_type"),
+                            agroInputDealers.get(i).get("certification_number"),
+                            agroInputDealers.get(i).get("registration_body"),
+                            agroInputDealers.get(i).get("registration_year"),
+                            agroInputDealers.get(i).get("registration_status"),
+                            agroInputDealers.get(i).get("association_membership"),
+                            agroInputDealers.get(i).get("association_name"),
+                            agroInputDealers.get(i).get("business_type"),
+                            agroInputDealers.get(i).get("number_of_outlets"),
+                            agroInputDealers.get(i).get("types_of_sales"),
+                            agroInputDealers.get(i).get("items_sold"),
+                            agroInputDealers.get(i).get("marketing_channels"),
+                            agroInputDealers.get(i).get("funding_source"),
+                            agroInputDealers.get(i).get("additional_services")
 
-                );
+                    );
+
+
+                }
 
 
             }
@@ -215,10 +217,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
 
         }
-
-
     }
-
 
     private void saveFarmersList(
             String id,
