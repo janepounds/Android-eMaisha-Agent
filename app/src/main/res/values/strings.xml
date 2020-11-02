@@ -307,7 +307,6 @@
     <string name="title"> Title </string>
     <string name="cancel">Cancel</string>
     <string name="description">Description</string>
-    <string name="ok">Ok</string>
     <string name="enter_first_name">please enter first name</string>
     <string name="enter_last_name">please enter last name</string>
     <string name="enter_dob">please enter date of birth</string>
