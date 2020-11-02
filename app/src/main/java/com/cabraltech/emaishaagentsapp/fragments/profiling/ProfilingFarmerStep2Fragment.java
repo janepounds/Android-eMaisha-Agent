@@ -337,15 +337,21 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
             message = getString(R.string.select_gender);
             spinVillage.setError(getString(R.string.enter_village));
             return false;
-        }
-
-        if (message != null) {
+        } else if (message != null) {
             Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
             return false;
+        } else {
+            etxtPhone.setError(null);
+            etxt_next_of_kin.setError(null);
+            etxt_next_of_kin_relation.setError(null);
+            etxt_next_of_kin_contact.setError(null);
+            etxt_next_of_kin_address.setError(null);
+            spinDistrict.setError(null);
+            spinSubCounty.setError(null);
+            spinVillage.setError(null);
+            return true;
+
         }
-
-        return true;
-
     }
 
 }

@@ -221,7 +221,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
 
     }
 
-    public boolean validateEntries(){
+    public boolean validateEntries() {
         String message = null;
         if (etxtFarmingSize.getText().toString().isEmpty()) {
             etxtFarmingSize.setError(getString(R.string.enter_farm_size));
@@ -229,28 +229,30 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         } else if (etxtSecondLivestock.getText().toString().isEmpty()) {
             etxtSecondLivestock.setError(getString(R.string.enter_second_livestock));
             return false;
-        } else if (spinMainCrop.getSelectedItemPosition()==0) {
-            message =getString(R.string.select_main_crop);
+        } else if (spinMainCrop.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_main_crop);
             spinMainCrop.requestFocus();
             return false;
-        } else if (spinSecondCrop.getSelectedItemPosition()==0) {
+        } else if (spinSecondCrop.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_second_crop);
             spinSecondCrop.requestFocus();
             return false;
-        } else if (spinThirdCrop.getSelectedItemPosition()==0) {
+        } else if (spinThirdCrop.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_third_crop);
             spinThirdCrop.requestFocus();
             return false;
-        } else if (spinMainLivestock.getSelectedItemPosition()==0) {
+        } else if (spinMainLivestock.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_main_livestock);
             spinMainLivestock.requestFocus();
             return false;
-        }
-
-        if (message != null) {
+        } else if (message != null) {
             Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
             return false;
+        } else {
+            etxtFarmingSize.setError(null);
+            etxtSecondLivestock.setError(null);
+
+            return true;
         }
-        return true;
     }
 }

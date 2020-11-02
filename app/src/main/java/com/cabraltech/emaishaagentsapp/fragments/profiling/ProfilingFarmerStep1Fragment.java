@@ -249,61 +249,64 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         if (etxtFirstName.getText().toString().isEmpty()) {
             etxtFirstName.setError(getString(R.string.enter_first_name));
             return false;
-        }else if (etxtLastName.getText().toString().isEmpty()) {
+        } else if (etxtLastName.getText().toString().isEmpty()) {
             etxtLastName.setError(getString(R.string.enter_last_name));
             return false;
-        }else  if (txtDob.getText().toString().isEmpty()) {
+        } else if (txtDob.getText().toString().isEmpty()) {
             txtDob.setError(getString(R.string.enter_dob));
             return false;
-        }else  if (etxtAge.getText().toString().isEmpty()) {
+        } else if (etxtAge.getText().toString().isEmpty()) {
             etxtAge.setError(getString(R.string.enter_age));
             return false;
-        }else if(etxtHouseholdSize.getText().toString().isEmpty()) {
+        } else if (etxtHouseholdSize.getText().toString().isEmpty()) {
             etxtHouseholdSize.setError(getString(R.string.enter_house_hold_size));
             return false;
-        }
-        else if(etxtHouseholdHead.getText().toString().isEmpty()) {
+        } else if (etxtHouseholdHead.getText().toString().isEmpty()) {
             etxtHouseholdHead.setError(getString(R.string.enter_house_hold_head));
             return false;
-        } else if(etxtSourceOfIncome.getText().toString().isEmpty()) {
+        } else if (etxtSourceOfIncome.getText().toString().isEmpty()) {
             etxtSourceOfIncome.setError(getString(R.string.enter_source_of_icome));
             return false;
-        }else if(spinGender.getSelectedItemPosition() == 0) {
+        } else if (spinGender.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_gender);
             spinGender.requestFocus();
             return false;
-        }else if(spinEducation.getSelectedItemPosition() == 0) {
+        } else if (spinEducation.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_education_level);
             spinEducation.requestFocus();
             return false;
-        }else if(spinLanguage.getSelectedItemPosition() == 0) {
+        } else if (spinLanguage.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_language);
             spinLanguage.requestFocus();
             return false;
-        }
-        else if(spinMarital.getSelectedItemPosition() == 0) {
+        } else if (spinMarital.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_marital_status);
             spinMarital.requestFocus();
             return false;
-        }
-        else if(spinNationality.getSelectedItemPosition() == 0) {
+        } else if (spinNationality.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_nationality);
             spinNationality.requestFocus();
             return false;
-        }
-        else if(spinReligion.getSelectedItemPosition() == 0) {
+        } else if (spinReligion.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_religion);
             spinReligion.requestFocus();
             return false;
         }
 
-        if(message != null){
-            Toast.makeText(context, getString(R.string.missing_fields_message)+message, Toast.LENGTH_LONG).show();
+        else if(message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
             return false;
-        }
+        } else {
+            etxtFirstName.setError(null);
+            etxtLastName.setError(null);
+            txtDob.setError(null);
+            etxtAge.setError(null);
+            etxtHouseholdSize.setError(null);
+            etxtHouseholdHead.setError(null);
+            etxtSourceOfIncome.setError(null);
 
             return true;
 
+        }
     }
-
 }
