@@ -28,6 +28,27 @@ import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
 
+    public static final String PREFERENCES_FILE_NAME = "UserInfo";
+    public static final String FARM_NAME_PREFERENCES_ID = "farmname";
+    public static final String STREET_PREFERENCES_ID = "addressStreet";
+    public static final String CITY_PREFERENCES_ID = "addressCityOrTown";
+    public static final String USER_DEFAULT_ADDRESS_PREFERENCES_ID = "userDefaultAddressID";
+    public static final String COUNTRY_PREFERENCES_ID = "addressCountry";
+    public static final String PREFERENCES_FIRST_NAME = "firstname";
+    public static final String PREFERENCES_LAST_NAME = "lastname";
+    public static String RETRIEVED_USER_ID = "";
+    public static String PREFERENCES_USER_ID = "userId";
+    public static final String PREFERENCES_USER_EMAIL = "email";
+    public static final String PREFERENCES_PHONE_NUMBER = "phoneNumber";
+
+    public static final String PREFERENCES_FIREBASE_TOKEN_SUBMITTED = "tokenSubmitted";
+    public static final String PREFERENCES_USER_BACKED_UP = "userBackedUp";
+    public static final String PREFERENCES_USER_PASSWORD = "password";
+
+    public static final String TASK_BACKUP_DATA_TAG = "SYNC_SERVICE";
+    public static final String TASK_SEND_NOTIFICATIONS_TAG = "SEND_NOTIFICATIONS";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

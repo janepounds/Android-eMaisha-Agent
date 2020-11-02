@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.cabraltech.emaishaagentsapp.database.DB_Handler;
+import com.cabraltech.emaishaagentsapp.database.DB_Manager;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
@@ -21,7 +23,8 @@ import retrofit2.Response;
 
 public class MyApp extends MultiDexApplication {
     private static final String TAG = "MyApp";
-    private Context context;
+    private static Context context;
+    private static DB_Handler db_handler;
     private List<HashMap<String, String>> farmersList, pestReport, scoutingReport, marketPrices, marketDetails, association, agroInputDealers,bulkBuyers;
     private String sync_status;
     @Override
@@ -37,6 +40,9 @@ public class MyApp extends MultiDexApplication {
         databaseAccess.open();
         farmersList = databaseAccess.getUnSyncedFarmers();
         Log.d(TAG, "onCreate: MyApp onCreate" +farmersList);
+        // initialize DB_Handler and DB_Manager
+        db_handler = new DB_Handler();
+        DB_Manager.initializeInstance(db_handler);
 
         if (activeNetwork != null && activeNetwork.isConnected()) {
             for (int i = 0; i < farmersList.size(); i++) {
@@ -499,4 +505,8 @@ public class MyApp extends MultiDexApplication {
 
     }
 
+
+    public static Context getContext() {
+        return context;
+    }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -11,7 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.cabraltech.emaishaagentsapp.R;
+import com.cabraltech.emaishaagentsapp.database.User_Info_DB;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
+import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponseData;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
 
@@ -28,6 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     Button nextBtn;
 
     private ProgressDialog progressDialog;
+    User_Info_DB userInfoDB;
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +62,18 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
             v.getContext().startActivity(intent);
         });
+        userInfoDB = new User_Info_DB();
+        sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
 
         nextBtn.setOnClickListener(v -> {
-            progressDialog.show();
-            processLogin();
+            if (emailOrPhone.getText().toString().trim().isEmpty()) {
+                emailOrPhone.setError("Required");
+            } else if (password.getText().toString().trim().isEmpty()) {
+                password.setError("Required");
+            }else{
+                progressDialog.show();
+                processLogin();
+            }
         });
     }
 
@@ -73,8 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse: " + response.body().getSuccess());
                     Log.d(TAG, "onResponse: " + response.body().getData().getEmail());
-                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                    startActivity(intent);
+                    loginUser(response.body().getData());
                 } else {
                     Log.d(TAG, "onResponse: " + response.code());
                 }
@@ -87,4 +100,44 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void loginUser(LoginResponseData userDetails) {
+        // Save User Data to Local Databases
+        if (userInfoDB.getUserData(userDetails.getId()) != null) {
+            // User already exists
+            userInfoDB.updateUserData(userDetails);
+        } else {
+            // Insert Details of New User
+            userInfoDB.insertUserData(userDetails);
+        }
+        Log.e("USERID", userDetails.getId());
+        // Save necessary details in SharedPrefs
+        editor = sharedPreferences.edit();
+        editor.putString(DashboardActivity.PREFERENCES_USER_ID, userDetails.getId());
+        editor.putString(DashboardActivity.PREFERENCES_USER_EMAIL, userDetails.getEmail());
+        editor.putString(DashboardActivity.PREFERENCES_FIRST_NAME, userDetails.getFirstName());
+        editor.putString(DashboardActivity.PREFERENCES_LAST_NAME, userDetails.getLastName());
+        editor.putString(DashboardActivity.PREFERENCES_PHONE_NUMBER, userDetails.getPhone_number());
+
+        editor.putString("addressStreet", userDetails.getVillage());
+        editor.putString("addressCityOrTown", userDetails.getSubCounty());
+        editor.putString("address_district", userDetails.getDistrict());
+
+        editor.putBoolean("isLogged_in", true);
+        editor.apply();
+
+        // Set UserLoggedIn in MyAppPrefsManager
+//        MyAppPrefsManager myAppPrefsManager = new MyAppPrefsManager(LoginActivity.this);
+//        myAppPrefsManager.logInUser();
+
+        // Set isLogged_in of ConstantValues
+        //ConstantValues.IS_USER_LOGGED_IN = myAppPrefsManager.isUserLoggedIn();
+        //StartAppRequests.RegisterDeviceForFCM(LoginActivity.this);
+        // Navigate back to MainActivity
+        Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(i);
+        finish();
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_out_right);
+    }
+
 }
