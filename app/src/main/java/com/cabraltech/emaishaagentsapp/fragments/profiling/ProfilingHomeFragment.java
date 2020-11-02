@@ -47,6 +47,7 @@ public class ProfilingHomeFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
         return  binding.getRoot();
     }
     @Override
@@ -82,6 +83,12 @@ public class ProfilingHomeFragment extends Fragment {
             }
         });
 
+
+    }
+
+    public  void onNavigationItemSelected (int itemPosition,
+                                                      long itemId){
+        navController.popBackStack();
 
     }
     public boolean onOptionsItemSelected(MenuItem item) {
