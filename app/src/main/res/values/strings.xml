@@ -365,6 +365,23 @@
     <string name="enter_number_females">please enter number of females</string>
     <string name="select_crop_value_chain">please select crop value chain</string>
     <string name="select_livestock_value_chain">please select livestock value chain</string>
+    <string name="enter_street_address">please enter street address</string>
+    <string name="enter_contact_person">please enter contact person</string>
+    <string name="select_market">please select market</string>
+    <string name="enter_retail_price">please enter retail price</string>
+    <string name="enter_wholesale_price">please enter wholesale price</string>
+    <string name="enter_date">please select date</string>
+    <string name="select_varieties">please select variety</string>
+    <string name="enter_farmer_name">please enter farmer\'s name</string>
+    <string name="enter_signs_symptoms">please enter signs and symptoms</string>
+    <string name="enter_pest_disease">please enter suspected pest/disease</string>
+    <string name="select_damage_assessment">please select damage assessment</string>
+    <string name="enter_recommendation">please enter recommendation</string>
+    <string name="select_photo">please select photo</string>
+    <string name="select_infested">please select infested option</string>
+    <string name="select_infestation_type">please select infestation type</string>
+    <string name="select_infestation">please select infestation</string>
+    <string name="select_infestation_level">please select infestation level</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>

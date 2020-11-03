@@ -59,7 +59,10 @@ public class DataCollectionReportPestFragment extends Fragment {
     private NavController navController;
     String damage;
     String mediaPath, encodedImageID = "N/A";
-    EditText etxtPhoto;
+    private TextView etxtPhoto, txtBrowse;
+    private EditText etxtDate,etxtFarmName,etxtPhone,etxtSigns,etxtPest,etxtRecommendation;
+    private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
+    private Spinner spinDamage;
     private int pickedDistrictId;
     private int pickedSubcountyId;
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
@@ -99,20 +102,20 @@ public class DataCollectionReportPestFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final EditText etxtDate = view.findViewById(R.id.reporting_date_et);
-        final EditText etxtFarmName = view.findViewById(R.id.farm_name_et);
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
-        AutoCompleteTextView spinSubCounty = view.findViewById(R.id.sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
-        Spinner spinDamage = view.findViewById(R.id.damage_assessment_spinner);
+        etxtDate = view.findViewById(R.id.reporting_date_et);
+        etxtFarmName = view.findViewById(R.id.farm_name_et);
+        spinDistrict = view.findViewById(R.id.district_spinner);
+        spinSubCounty = view.findViewById(R.id.sub_county_spinner);
+        spinVillage = view.findViewById(R.id.village_spinner);
+        spinDamage = view.findViewById(R.id.damage_assessment_spinner);
 
-        final EditText etxtPhone = view.findViewById(R.id.farmer_phone_number_et);
-        final EditText etxtSigns = view.findViewById(R.id.signs_and_symptoms_et);
-        final EditText etxtPest = view.findViewById(R.id.suspected_pest_disease_et);
-        final EditText etxtRecommendation = view.findViewById(R.id.recommendation_et);
-         etxtPhoto = view.findViewById(R.id.photo_of_the_damage_et);
+        etxtPhone = view.findViewById(R.id.farmer_phone_number_et);
+        etxtSigns = view.findViewById(R.id.signs_and_symptoms_et);
+        etxtPest = view.findViewById(R.id.suspected_pest_disease_et);
+        etxtRecommendation = view.findViewById(R.id.recommendation_et);
+        etxtPhoto = view.findViewById(R.id.photo_of_the_damage_et);
 
-        TextView txtBrowse = view.findViewById(R.id.photo_browse_tv);
+        txtBrowse = view.findViewById(R.id.photo_browse_tv);
 
         Button btnSubmit =view.findViewById(R.id.submit_button);
 
@@ -294,24 +297,26 @@ public class DataCollectionReportPestFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 String date = etxtDate.getText().toString().trim();
-                 String farm_name = etxtFarmName.getText().toString().trim();
-                 String phone = etxtPhone.getText().toString().trim();
-                 String signs_and_symptoms = etxtSigns.getText().toString().trim();
-                 String pest_or_disease = etxtPest.getText().toString().trim();
-                 String recommendation = etxtRecommendation.getText().toString().trim();
+                if (validateEntries()) {
+                    String date = etxtDate.getText().toString().trim();
+                    String farm_name = etxtFarmName.getText().toString().trim();
+                    String phone = etxtPhone.getText().toString().trim();
+                    String signs_and_symptoms = etxtSigns.getText().toString().trim();
+                    String pest_or_disease = etxtPest.getText().toString().trim();
+                    String recommendation = etxtRecommendation.getText().toString().trim();
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                boolean check = databaseAccess.addPestReport(date,farm_name,spinDistrict.getText().toString(),spinSubCounty.getText().toString(),spinVillage.getText().toString(),phone,signs_and_symptoms,pest_or_disease,damage,recommendation,encodedImageID);
-                if (check) {
-                    Toast.makeText(getActivity(), "Pest Report Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    boolean check = databaseAccess.addPestReport(date, farm_name, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), phone, signs_and_symptoms, pest_or_disease, damage, recommendation, encodedImageID);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Pest Report Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
             }
         });
@@ -380,4 +385,71 @@ public class DataCollectionReportPestFragment extends Fragment {
         return encImage;
     }
 
+    public boolean validateEntries(){
+        String message = null;
+        if (etxtDate.getText().toString().isEmpty()) {
+            etxtDate.setError(getString(R.string.enter_date));
+            etxtDate.requestFocus();
+            return false;
+
+        }else if (etxtFarmName.getText().toString().isEmpty()) {
+            etxtFarmName.setError(getString(R.string.enter_farmer_name));
+            etxtFarmName.requestFocus();
+            return false;
+        } else if (etxtPhone.getText().toString().isEmpty()) {
+            etxtPhone.setError(getString(R.string.enter_phone_number));
+            etxtPhone.requestFocus();
+            return false;
+        } else if (etxtSigns.getText().toString().isEmpty()) {
+            etxtSigns.setError(getString(R.string.enter_signs_symptoms));
+            etxtSigns.requestFocus();
+            return false;
+        } else if (etxtPest.getText().toString().isEmpty()) {
+            etxtPest.setError(getString(R.string.enter_pest_disease));
+            etxtPest.requestFocus();
+            return false;
+        } else if (etxtRecommendation.getText().toString().isEmpty()) {
+            etxtRecommendation.setError(getString(R.string.enter_recommendation));
+            etxtRecommendation.requestFocus();
+            return false;
+        } else if (etxtPhoto.getText().toString().isEmpty()) {
+            etxtPhoto.setError(getString(R.string.select_photo));
+            etxtPhoto.requestFocus();
+            return false;
+        } else if (spinDamage.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_damage_assessment);
+            spinDamage.requestFocus();
+            return false;
+
+        }else if (spinDistrict.getText().toString().isEmpty()) {
+            spinDistrict.setError(getString(R.string.enter_district));
+            spinDistrict.requestFocus();
+            return false;
+        } else if (spinSubCounty.getText().toString().isEmpty()) {
+            spinSubCounty.setError(getString(R.string.enter_sub_county));
+            spinSubCounty.requestFocus();
+            return false;
+        } else if (spinVillage.getText().toString().isEmpty()) {
+            spinVillage.setError(getString(R.string.enter_village));
+            spinVillage.requestFocus();
+            return false;
+        } else if(message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            etxtDate.setError(null);
+            etxtFarmName.setError(null);
+            etxtPhone.setError(null);
+            etxtPest.setError(null);
+            etxtSigns.setError(null);
+            etxtRecommendation.setError(null);
+            etxtPhoto.setError(null);
+            spinDistrict.setError(null);
+            spinSubCounty.setError(null);
+            spinVillage.setError(null);
+
+            return true;
+
+        }
+    }
 }

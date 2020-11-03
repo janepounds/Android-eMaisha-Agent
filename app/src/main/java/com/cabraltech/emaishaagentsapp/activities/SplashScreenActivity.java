@@ -3,7 +3,9 @@ package com.cabraltech.emaishaagentsapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 import com.cabraltech.emaishaagentsapp.R;
@@ -24,27 +26,35 @@ import retrofit2.Response;
 
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreenActivity";
+
+    private SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences;
+
     Thread t;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
 
-        t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                RequestAllRegions();
-                Intent service = new Intent(getBaseContext(), BroadcastService.class);
+        sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+
+        t = new Thread(() -> {
+            RequestAllRegions();
+            Intent service = new Intent(getBaseContext(), BroadcastService.class);
                 startService(service);
-                try {
-                    t.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                    finish();
+            try {
+                t.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                if (sharedPreferences.getBoolean("isLogged_in", false)) {
+                    startActivity(new Intent(this, DashboardActivity.class));
+                } else {
+                    startActivity(new Intent(this, LoginActivity.class));
                 }
+                finish();
             }
         });
         t.start();
@@ -55,7 +65,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
         int regionId = databaseAccess.getMaxRegionId();
-        Log.d(TAG, "RequestAllRegions: "+ regionId);
+        Log.d(TAG, "RequestAllRegions: " + regionId);
 
         Call<Regions> call = APIClient.getInstance()
                 .getAllRegions(regionId);
@@ -75,8 +85,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 //                if (!TextUtils.isEmpty(regionsData.getSuccess()))
 //                    cropManagerApp.setAppSettingsDetails(regionsData.getData());
                 Log.d(TAG, "RequestAllRegions: " + regionsData);
-            }
-            else {
+            } else {
                 Log.e(TAG, "RequestAllRegions: Response is not successful");
 
             }

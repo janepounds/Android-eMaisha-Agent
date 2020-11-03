@@ -48,6 +48,10 @@ public class DataCollectionAddMarketFragment extends Fragment {
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
 
+    private Spinner spinMarket_name;
+    private EditText etxtStreet_address, etxtContatc, etxtPhone;
+    private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -83,13 +87,13 @@ public class DataCollectionAddMarketFragment extends Fragment {
 
 //        navController = Navigation.findNavController(view);
 
-        Spinner spinMarket_name = view.findViewById(R.id.market_name_spinner);
-        final EditText etxtStreet_address = view.findViewById(R.id.street_address_et);
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
-        AutoCompleteTextView spinSubCounty = view.findViewById(R.id.sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
-        final EditText etxtContatc = view.findViewById(R.id.contact_person_et);
-        final EditText etxtPhone = view.findViewById(R.id.phone_number_et);
+        spinMarket_name = view.findViewById(R.id.market_name_spinner);
+        etxtStreet_address = view.findViewById(R.id.street_address_et);
+        spinDistrict = view.findViewById(R.id.district_spinner);
+        spinSubCounty = view.findViewById(R.id.sub_county_spinner);
+        spinVillage = view.findViewById(R.id.village_spinner);
+        etxtContatc = view.findViewById(R.id.contact_person_et);
+        etxtPhone = view.findViewById(R.id.phone_number_et);
         Button btnSubmit = view.findViewById(R.id.submit_button);
 
 
@@ -254,23 +258,24 @@ public class DataCollectionAddMarketFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String street_address = etxtStreet_address.getText().toString();
-                String contact = etxtContatc.getText().toString().trim();
-                String phone = etxtPhone.getText().toString().trim();
+                if(validateEntries()) {
+                    String street_address = etxtStreet_address.getText().toString();
+                    String contact = etxtContatc.getText().toString().trim();
+                    String phone = etxtPhone.getText().toString().trim();
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                boolean check = databaseAccess.addMarket(market_name,street_address,phone,spinDistrict.getText().toString(),spinSubCounty.getText().toString(),spinVillage.getText().toString(),contact);
-                if (check) {
-                    Toast.makeText(getActivity(), "Market Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    boolean check = databaseAccess.addMarket(market_name, street_address, phone, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), contact);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Market Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
-
             }
         });
 
@@ -282,6 +287,56 @@ public class DataCollectionAddMarketFragment extends Fragment {
 //
 //            }
 //        });
+
+    }
+
+    public boolean validateEntries(){
+        String message = null;
+        if (etxtStreet_address.getText().toString().isEmpty()) {
+            etxtStreet_address.setError(getString(R.string.enter_street_address));
+            etxtStreet_address.requestFocus();
+            return false;
+
+        }else if (etxtContatc.getText().toString().isEmpty()) {
+            etxtContatc.setError(getString(R.string.enter_contact_person));
+            etxtContatc.requestFocus();
+            return false;
+        } else if (etxtPhone.getText().toString().isEmpty()) {
+            etxtPhone.setError(getString(R.string.enter_phone_number));
+            etxtPhone.requestFocus();
+            return false;
+        } else if (spinMarket_name.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_market);
+            spinMarket_name.requestFocus();
+            return false;
+
+        }else if (spinDistrict.getText().toString().isEmpty()) {
+            spinDistrict.setError(getString(R.string.enter_district));
+            spinDistrict.requestFocus();
+            return false;
+        } else if (spinSubCounty.getText().toString().isEmpty()) {
+            spinSubCounty.setError(getString(R.string.enter_sub_county));
+            spinSubCounty.requestFocus();
+            return false;
+        } else if (spinVillage.getText().toString().isEmpty()) {
+            spinVillage.setError(getString(R.string.enter_village));
+            spinVillage.requestFocus();
+            return false;
+        }else if(message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            etxtStreet_address.setError(null);
+            etxtContatc.setError(null);
+            etxtPhone.setError(null);
+            spinDistrict.setError(null);
+            spinSubCounty.setError(null);
+            spinVillage.setError(null);
+
+            return true;
+
+        }
+
 
     }
 }
