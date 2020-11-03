@@ -230,9 +230,13 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
                 int mMonth = mcurrentDate.get(Calendar.MONTH);
                 int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
+
+
                 final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+
                         int month = selectedmonth + 1;
+                        int year = selectedyear ;
                         NumberFormat formatter = new DecimalFormat("00");
                         ed_.setText(selectedyear + "-" + formatter.format(month) + "-" + formatter.format(selectedday));
                     }

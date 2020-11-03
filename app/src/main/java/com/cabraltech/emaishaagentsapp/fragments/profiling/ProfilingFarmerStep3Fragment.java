@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,8 +42,9 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     private ConstraintLayout constraintLayout;
     String[] descriptionData = {"Personal\nDetails", "Contact\nDetails", "Farming\nDetails"};
     String farming_size, second_livestock, main_crop, second_crop, third_crop, main_livestock, district, sub_county, village, gender, marital_status, religion, education_level, language_used, nationality, first_name, last_name, dob, age, household_size, household_head, source_of_income, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address;
-    private EditText etxtFarmingSize,etxtSecondLivestock;
-    private Spinner spinMainCrop,spinSecondCrop,spinThirdCrop,spinMainLivestock;
+    private EditText etxtFarmingSize;
+    private Spinner spinMainCrop,spinSecondCrop,spinThirdCrop,spinMainLivestock,etxtSecondLivestock;
+    private LinearLayout moreCropsLayout, moreLivestockLayout;
     public ProfilingFarmerStep3Fragment() {
         // Required empty public constructor
     }
@@ -100,12 +102,21 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
          spinSecondCrop = view.findViewById(R.id.second_crop_spinner);
          spinThirdCrop = view.findViewById(R.id.third_crop_spinner);
          spinMainLivestock = view.findViewById(R.id.main_livestock_spinner);
+         moreCropsLayout = view.findViewById(R.id.second_third_crop_layout);
+         moreLivestockLayout = view.findViewById(R.id.second_livestock_layout);
 
 
         spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 main_crop = adapterView.getItemAtPosition(i).toString();
+                if (main_crop.toLowerCase().equals("none")) {
+                    moreCropsLayout.setVisibility(View.GONE);
+
+                } else {
+                    moreCropsLayout.setVisibility(View.VISIBLE);
+                }
+
             }
 
             @Override
@@ -118,6 +129,24 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 main_livestock = adapterView.getItemAtPosition(i).toString();
+
+                if (main_livestock.toLowerCase().equals("none")) {
+                    moreLivestockLayout.setVisibility(View.GONE);
+
+                } else {
+                    moreLivestockLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        etxtSecondLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                second_crop = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -141,7 +170,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         spinSecondCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                second_crop = adapterView.getItemAtPosition(i).toString();
+                second_livestock = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -156,7 +185,6 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             public void onClick(View v) {
                 if(validateEntries()) {
                     farming_size = etxtFarmingSize.getText().toString().trim();
-                    second_livestock = etxtSecondLivestock.getText().toString().trim();
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();
 
@@ -226,20 +254,9 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         if (etxtFarmingSize.getText().toString().isEmpty()) {
             etxtFarmingSize.setError(getString(R.string.enter_farm_size));
             return false;
-        } else if (etxtSecondLivestock.getText().toString().isEmpty()) {
-            etxtSecondLivestock.setError(getString(R.string.enter_second_livestock));
-            return false;
         } else if (spinMainCrop.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_main_crop);
             spinMainCrop.requestFocus();
-            return false;
-        } else if (spinSecondCrop.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_second_crop);
-            spinSecondCrop.requestFocus();
-            return false;
-        } else if (spinThirdCrop.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_third_crop);
-            spinThirdCrop.requestFocus();
             return false;
         } else if (spinMainLivestock.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_main_livestock);
@@ -250,7 +267,6 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             return false;
         } else {
             etxtFarmingSize.setError(null);
-            etxtSecondLivestock.setError(null);
 
             return true;
         }

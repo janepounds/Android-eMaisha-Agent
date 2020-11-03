@@ -1,9 +1,12 @@
 package com.cabraltech.emaishaagentsapp.fragments.profiling;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +16,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,7 +41,10 @@ import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import org.json.JSONException;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ProfilingAssociationFragment extends Fragment {
     private static final String TAG = "ProfilingAssociationFra";
@@ -312,6 +321,34 @@ public class ProfilingAssociationFragment extends Fragment {
 
 
     }
+    public static void addDatePicker(final TextView ed_, final Context context) {
+        ed_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar mcurrentDate = Calendar.getInstance();
+                int mYear = mcurrentDate.get(Calendar.YEAR);
+                int mMonth = mcurrentDate.get(Calendar.MONTH);
+                int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+
+                final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        int month = selectedmonth + 1;
+
+                        NumberFormat formatter = new DecimalFormat("00");
+                        ed_.setText(selectedyear);
+                    }
+                }, mYear, mMonth, mDay);
+                mDatePicker.findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+                mDatePicker.findViewById(Resources.getSystem().getIdentifier("month", "id", "android")).setVisibility(View.GONE);
+
+                mDatePicker.show();
+
+            }
+        });
+        ed_.setInputType(InputType.TYPE_NULL);
+    }
+
 
     public boolean validateEntries() {
 
