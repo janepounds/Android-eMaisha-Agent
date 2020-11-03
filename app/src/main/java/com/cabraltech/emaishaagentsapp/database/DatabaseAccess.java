@@ -434,7 +434,7 @@ public class DatabaseAccess {
 
 
     //insert dealer
-    public boolean addDealer(String name, String district, String sub_county, String village, String full_address, String certification, String certification_type, String certification_number, String registration_body, String registration_year, String registration_status, String association_membership, String association_name, String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services) {
+    public boolean addDealer(String name, String district, String sub_county, String village, String full_address,  String certification_type, String certification_number, String registration_body, String registration_year, String registration_status, String association_membership, String association_name, String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services,String owner,String owner_contact) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
@@ -443,7 +443,6 @@ public class DatabaseAccess {
         values.put("sub_county", sub_county);
         values.put("village", village);
         values.put("full_address", full_address);
-        values.put("certification", certification);
         values.put("certification_type", certification_type);
         values.put("certification_number", certification_number);
         values.put("registration_body", registration_body);
@@ -458,6 +457,8 @@ public class DatabaseAccess {
         values.put("marketing_channels", marketing_channels);
         values.put("funding_source", funding_source);
         values.put("additional_services", additional_services);
+        values.put("owner", owner);
+        values.put("owner_contact", owner_contact);
         values.put("sync_status", 0);
         long check = database.insert("agro_input_dealers", null, values);
         database.close();
@@ -482,10 +483,9 @@ public class DatabaseAccess {
                 map.put("id",cursor.getString(0));
                 map.put("business_name", cursor.getString(1));
                 map.put("district", cursor.getString(2));
-                map.put("sub_county", cursor.getString(2));
+                map.put("sub_county", cursor.getString(3));
                 map.put("village", cursor.getString(4));
                 map.put("full_address", cursor.getString(5));
-                map.put("certification", cursor.getString(6));
                 map.put("certification_type", cursor.getString(7));
                 map.put("certification_number", cursor.getString(8));
                 map.put("registration_body", cursor.getString(10));
@@ -500,6 +500,8 @@ public class DatabaseAccess {
                 map.put("marketing_channels", cursor.getString(19));
                 map.put("funding_source", cursor.getString(20));
                 map.put("additional_services", cursor.getString(21));
+                map.put("owner", cursor.getString(22));
+                map.put("owner_contact", cursor.getString(23));
                 agro_dealers.add(map);
             } while (cursor.moveToNext());
         }

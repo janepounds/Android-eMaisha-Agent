@@ -48,6 +48,9 @@ public class ProfilingAssociationFragment extends Fragment {
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
 
+    private EditText etxtName,etxtYear_of_registration,etxtFull_address,etxtTelephone,etxtEmail;
+    private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
+    private Spinner spinOrganisationType,spinRegistrationLevel;
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
 
@@ -92,16 +95,16 @@ public class ProfilingAssociationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        final EditText etxtName = view.findViewById(R.id.association_name_et);
-        final EditText etxtYear_of_registration = view.findViewById(R.id.year_of_registration_et);
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
-        AutoCompleteTextView spinSubCounty = view.findViewById(R.id.sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
-        final EditText etxtFull_address = view.findViewById(R.id.full_address_et);
-        final EditText etxtTelephone = view.findViewById(R.id.association_telephone_et);
-        final EditText etxtEmail = view.findViewById(R.id.association_email_et);
-        Spinner spinOrganisationType = view.findViewById(R.id.organisation_type_spinner);
-        Spinner spinRegistrationLevel = view.findViewById(R.id.registration_level_spinner);
+        etxtName = view.findViewById(R.id.association_name_et);
+        etxtYear_of_registration = view.findViewById(R.id.year_of_registration_et);
+        spinDistrict = view.findViewById(R.id.district_spinner);
+        spinSubCounty = view.findViewById(R.id.sub_county_spinner);
+        spinVillage = view.findViewById(R.id.village_spinner);
+        etxtFull_address = view.findViewById(R.id.full_address_et);
+        etxtTelephone = view.findViewById(R.id.association_telephone_et);
+        etxtEmail = view.findViewById(R.id.association_email_et);
+        spinOrganisationType = view.findViewById(R.id.organisation_type_spinner);
+        spinRegistrationLevel = view.findViewById(R.id.registration_level_spinner);
 
 
         Button next_button = view.findViewById(R.id.next_button);
@@ -281,24 +284,25 @@ public class ProfilingAssociationFragment extends Fragment {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = etxtName.getText().toString().trim();
-                String year_of_registration = etxtYear_of_registration.toString().trim();
-                String full_address = etxtFull_address.getText().toString().trim();
-                String telephone = etxtTelephone.getText().toString().trim();
-                String email = etxtEmail.getText().toString().trim();
-                Bundle bundle = new Bundle();
-                bundle.putString("name",name);
-                bundle.putString("year_of_registration",year_of_registration);
-                bundle.putString("full_address",full_address);
-                bundle.putString("telephone",telephone);
-                bundle.putString("email",email);
-                bundle.putString("district",spinDistrict.getText().toString());
-                bundle.putString("sub_county",spinSubCounty.getText().toString());
-                bundle.putString("village",spinVillage.getText().toString());
-                bundle.putString("registration_level",registration_level);
-                bundle.putString("organisation_type",organisation_type);
-                navController.navigate(R.id.action_profilingAssociationFragment_to_profilingAssociationStep2Fragment,bundle);
-
+                if (validateEntries()) {
+                    String name = etxtName.getText().toString().trim();
+                    String year_of_registration = etxtYear_of_registration.toString().trim();
+                    String full_address = etxtFull_address.getText().toString().trim();
+                    String telephone = etxtTelephone.getText().toString().trim();
+                    String email = etxtEmail.getText().toString().trim();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", name);
+                    bundle.putString("year_of_registration", year_of_registration);
+                    bundle.putString("full_address", full_address);
+                    bundle.putString("telephone", telephone);
+                    bundle.putString("email", email);
+                    bundle.putString("district", spinDistrict.getText().toString());
+                    bundle.putString("sub_county", spinSubCounty.getText().toString());
+                    bundle.putString("village", spinVillage.getText().toString());
+                    bundle.putString("registration_level", registration_level);
+                    bundle.putString("organisation_type", organisation_type);
+                    navController.navigate(R.id.action_profilingAssociationFragment_to_profilingAssociationStep2Fragment, bundle);
+                }
             }
         });
 
@@ -307,5 +311,68 @@ public class ProfilingAssociationFragment extends Fragment {
 
 
 
+    }
+
+    public boolean validateEntries() {
+
+        String message = null;
+        if (etxtName.getText().toString().isEmpty()) {
+            etxtName.setError(getString(R.string.enter_association_name));
+            etxtName.requestFocus();
+            return false;
+
+        }else if (etxtYear_of_registration.getText().toString().isEmpty()) {
+            etxtYear_of_registration.setError(getString(R.string.enter_registration_year));
+            etxtYear_of_registration.requestFocus();
+            return false;
+        } else if (etxtFull_address.getText().toString().isEmpty()) {
+            etxtFull_address.setError(getString(R.string.enter_full_address));
+            etxtFull_address.requestFocus();
+            return false;
+        } else if (etxtTelephone.getText().toString().isEmpty()) {
+            etxtTelephone.setError(getString(R.string.enter_association_telephone));
+            etxtTelephone.requestFocus();
+            return false;
+        } else if (etxtEmail.getText().toString().isEmpty()) {
+            etxtEmail.setError(getString(R.string.enter_email));
+            etxtEmail.requestFocus();
+            return false;
+        } else if (spinOrganisationType.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_organisation_type);
+            spinOrganisationType.requestFocus();
+            return false;
+
+        } else if (spinRegistrationLevel.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_registration_level);
+            spinRegistrationLevel.requestFocus();
+            return false;
+        }else if (spinDistrict.getText().toString().isEmpty()) {
+            spinDistrict.setError(getString(R.string.enter_district));
+            spinDistrict.requestFocus();
+            return false;
+        } else if (spinSubCounty.getText().toString().isEmpty()) {
+            spinSubCounty.setError(getString(R.string.enter_sub_county));
+            spinSubCounty.requestFocus();
+            return false;
+        } else if (spinVillage.getText().toString().isEmpty()) {
+            spinVillage.setError(getString(R.string.enter_village));
+            spinVillage.requestFocus();
+            return false;
+        }else if(message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            etxtName.setError(null);
+            etxtYear_of_registration.setError(null);
+            etxtFull_address.setError(null);
+            etxtTelephone.setError(null);
+            etxtEmail.setError(null);
+            spinDistrict.setError(null);
+            spinSubCounty.setError(null);
+            spinVillage.setError(null);
+
+            return true;
+
+        }
     }
 }

@@ -336,6 +336,35 @@
     <string name="select_third_crop">select third crop</string>
     <string name="select_main_livestock">select main livestock</string>
     <string name="ok">OK</string>
+    <string name="enter_business_name">please enter business name</string>
+    <string name="enter_owner">please enter onwer\'s name</string>
+    <string name="enter_full_address">please enter full address</string>
+    <string name="enter_email">please enter email</string>
+    <string name="select_business_type">please select business type</string>
+    <string name="enter_commodities">please enter commodity</string>
+    <string name="enter_owner_contact">please enter owner contact</string>
+    <string name="enter_registration_year">please enter registration year</string>
+    <string name="select_registration_status">please select registration status</string>
+    <string name="select_certificate_type">please select certificate type</string>
+    <string name="enter_certificate_number">please enter certificate number</string>
+    <string name="select_association_membership">please select association membership</string>
+    <string name="enter_association_name">please enter association name</string>
+    <string name="enter_number_outlets">please enter number of outlets</string>
+    <string name="select_sales_type">please select type of sales</string>
+    <string name="enter_association_telephone">please enter association telephone</string>
+    <string name="select_organisation_type">please select organisation type</string>
+    <string name="select_registration_level">please select registration level</string>
+    <string name="enter_chairperson_name">please enter chairperson\'s name</string>
+    <string name="enter_chairperson_contact">please enter chairperson\'s contact</string>
+    <string name="enter_secretary_name">please enter secretary\'s name</string>
+    <string name="enter_secretary_contact">please enter secretary\'s contact</string>
+    <string name="enter_respondent_name">please enter respondent\'s name</string>
+    <string name="enter_respondent_contact">please enter respondent\'s contact</string>
+    <string name="select_respondent_position">please select respondent\'s position held</string>
+    <string name="enter_number_males">please enter number of males</string>
+    <string name="enter_number_females">please enter number of females</string>
+    <string name="select_crop_value_chain">please select crop value chain</string>
+    <string name="select_livestock_value_chain">please select livestock value chain</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>
