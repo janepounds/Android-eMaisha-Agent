@@ -48,6 +48,10 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
     private Context context;
     private NavController navController;
     String  market_name,commodities,varieties,units;
+    private Spinner spinMarket_name,spinVarieties,spinUnits;
+    private AutoCompleteTextView spinCommodities;
+    private EditText etxtWholeSale,etxtRetailSale;
+    private TextView txtDate;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -81,16 +85,16 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        final TextView txtDate = view.findViewById(R.id.date_tv);
+        txtDate = view.findViewById(R.id.date_tv);
 
-        Spinner spinMarket_name = view.findViewById(R.id.market_spinner);
-        AutoCompleteTextView spinCommodities = view.findViewById(R.id.commodities_spinner);
-        Spinner spinVarieties = view.findViewById(R.id.variety_spinner);
-        Spinner spinUnits = view.findViewById(R.id.measurement_units_spinner);
+        spinMarket_name = view.findViewById(R.id.market_spinner);
+        spinCommodities = view.findViewById(R.id.commodities_spinner);
+        spinVarieties = view.findViewById(R.id.variety_spinner);
+        spinUnits = view.findViewById(R.id.measurement_units_spinner);
 
 
-        final EditText etxtWholeSale = view.findViewById(R.id.wholesale_price_et);
-        final EditText etxtRetailSale  = view.findViewById(R.id.retail_price_et);
+        etxtWholeSale = view.findViewById(R.id.wholesale_price_et);
+        etxtRetailSale  = view.findViewById(R.id.retail_price_et);
 
         Button btnSubmit = view.findViewById(R.id.submit_button);
 
@@ -158,25 +162,26 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String date = txtDate.getText().toString().trim();
-                String wholesale_price = etxtWholeSale.getText().toString().trim();
-                String retail_sale = etxtRetailSale.getText().toString().trim();
+                if (validateEntries()) {
+                    String date = txtDate.getText().toString().trim();
+                    String wholesale_price = etxtWholeSale.getText().toString().trim();
+                    String retail_sale = etxtRetailSale.getText().toString().trim();
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                Log.d(TAG, "onClick: "+date +spinCommodities.getText().toString()+varieties+market_name+units+wholesale_price+retail_sale);
+                    Log.d(TAG, "onClick: " + date + spinCommodities.getText().toString() + varieties + market_name + units + wholesale_price + retail_sale);
 
-                boolean check = databaseAccess.addMarketPrice(date,spinCommodities.getText().toString(),varieties,market_name,units,wholesale_price,retail_sale);
-                if (check) {
-                    Toast.makeText(getActivity(), "Market Price Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    boolean check = databaseAccess.addMarketPrice(date, spinCommodities.getText().toString(), varieties, market_name, units, wholesale_price, retail_sale);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Market Price Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
-
 
             }
         });
@@ -226,6 +231,59 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             }
         });
         ed_.setInputType(InputType.TYPE_NULL);
+    }
+
+    public boolean validateEntries(){
+        String message = null;
+        if (spinCommodities.getText().toString().isEmpty()) {
+            spinCommodities.setError(getString(R.string.enter_commodities));
+            spinCommodities.requestFocus();
+            return false;
+
+        }else if (etxtRetailSale.getText().toString().isEmpty()) {
+            etxtRetailSale.setError(getString(R.string.enter_retail_price));
+            etxtRetailSale.requestFocus();
+            return false;
+
+        } else if (spinVarieties.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_varieties);
+            spinVarieties.requestFocus();
+            return false;
+
+        } else if (spinMarket_name.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_market);
+            spinMarket_name.requestFocus();
+            return false;
+
+        } else if (etxtWholeSale.getText().toString().isEmpty()) {
+            etxtWholeSale.setError(getString(R.string.enter_wholesale_price));
+            etxtWholeSale.requestFocus();
+            return false;
+
+        } else if (spinUnits.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_association_membership);
+            spinUnits.requestFocus();
+            return false;
+
+        } else if (txtDate.getText().toString().isEmpty()) {
+            txtDate.setError(getString(R.string.enter_date));
+            txtDate.requestFocus();
+            return false;
+
+
+        } else if(message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            spinCommodities.setError(null);
+            txtDate.setError(null);
+            etxtWholeSale.setError(null);
+            etxtRetailSale.setError(null);
+
+            return true;
+
+        }
+
     }
 
 }

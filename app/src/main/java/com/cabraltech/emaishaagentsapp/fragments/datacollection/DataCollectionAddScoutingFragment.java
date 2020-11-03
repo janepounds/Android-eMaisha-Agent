@@ -54,6 +54,9 @@ public class DataCollectionAddScoutingFragment extends Fragment {
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
 
+    private EditText etxtDate,etxtFarmerName,etxtFarmerPhone,etxtRecommendations;
+    private Spinner spinInfested,spinInfestationLevel,spinInfestationType,spinInfestation;
+    private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -88,19 +91,19 @@ public class DataCollectionAddScoutingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final EditText etxtDate = view.findViewById(R.id.scouting_date_et);
-        final EditText etxtFarmerName = view.findViewById(R.id.scouting_farm_name_et);
-        final EditText etxtFarmerPhone = view.findViewById(R.id.scouting_farmer_phone_number_et);
-        final EditText etxtRecommendations = view.findViewById(R.id.scouting_recommendation_et);
+        etxtDate = view.findViewById(R.id.scouting_date_et);
+        etxtFarmerName = view.findViewById(R.id.scouting_farm_name_et);
+        etxtFarmerPhone = view.findViewById(R.id.scouting_farmer_phone_number_et);
+        etxtRecommendations = view.findViewById(R.id.scouting_recommendation_et);
 
 
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.scouting_district_spinner);
-        AutoCompleteTextView spinSubCounty = view.findViewById(R.id.scouting_sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.scouting_village_spinner);
-        Spinner spinInfested = view.findViewById(R.id.scouting_infested_spinner);
-        Spinner spinInfestationLevel = view.findViewById(R.id.scouting_infestation_level_spinner);
-        Spinner spinInfestationType = view.findViewById(R.id.scouting_infestation_type_spinner);
-        Spinner spinInfestation = view.findViewById(R.id.scouting_infestation_spinner);
+        spinDistrict = view.findViewById(R.id.scouting_district_spinner);
+        spinSubCounty = view.findViewById(R.id.scouting_sub_county_spinner);
+        spinVillage = view.findViewById(R.id.scouting_village_spinner);
+        spinInfested = view.findViewById(R.id.scouting_infested_spinner);
+        spinInfestationLevel = view.findViewById(R.id.scouting_infestation_level_spinner);
+        spinInfestationType = view.findViewById(R.id.scouting_infestation_type_spinner);
+        spinInfestation = view.findViewById(R.id.scouting_infestation_spinner);
 
         Button btnSubmit = view.findViewById(R.id.submit_button);
 
@@ -311,22 +314,24 @@ public class DataCollectionAddScoutingFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String date = etxtDate.getText().toString().trim();
-                String farmer_name = etxtFarmerName.getText().toString().trim();
-                String farmer_phone = etxtFarmerPhone.getText().toString().trim();
-                String recommendation = etxtRecommendations.getText().toString().trim();
+                if (validateEntries()) {
+                    String date = etxtDate.getText().toString().trim();
+                    String farmer_name = etxtFarmerName.getText().toString().trim();
+                    String farmer_phone = etxtFarmerPhone.getText().toString().trim();
+                    String recommendation = etxtRecommendations.getText().toString().trim();
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                boolean check = databaseAccess.addScoutingReport(date, farmer_name, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), farmer_phone, infested, infestation_type, infestation, infestation_level, recommendation);
-                if (check) {
-                    Toast.makeText(getActivity(), "Scouting Report Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    boolean check = databaseAccess.addScoutingReport(date, farmer_name, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), farmer_phone, infested, infestation_type, infestation, infestation_level, recommendation);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Scouting Report Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
             }
         });
@@ -371,5 +376,73 @@ public class DataCollectionAddScoutingFragment extends Fragment {
         ed_.setInputType(InputType.TYPE_NULL);
     }
 
+    public boolean validateEntries(){
+        String message = null;
+        if (etxtDate.getText().toString().isEmpty()) {
+            etxtDate.setError(getString(R.string.enter_date));
+            etxtDate.requestFocus();
+            return false;
+
+        }else if (etxtFarmerName.getText().toString().isEmpty()) {
+            etxtFarmerName.setError(getString(R.string.enter_farmer_name));
+            etxtFarmerName.requestFocus();
+            return false;
+        } else if (etxtFarmerPhone.getText().toString().isEmpty()) {
+            etxtFarmerPhone.setError(getString(R.string.enter_phone_number));
+            etxtFarmerPhone.requestFocus();
+            return false;
+        } else if (etxtRecommendations.getText().toString().isEmpty()) {
+            etxtRecommendations.setError(getString(R.string.enter_recommendation));
+            etxtRecommendations.requestFocus();
+            return false;
+
+        } else if (spinInfested.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_infested);
+            spinInfested.requestFocus();
+            return false;
+
+        } else if (spinInfestationType.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_infestation_type);
+            spinInfestationType.requestFocus();
+            return false;
+
+        } else if (spinInfestation.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_infestation);
+            spinInfestation.requestFocus();
+            return false;
+
+        } else if (spinInfestationLevel.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_infestation_level);
+            spinInfestationLevel.requestFocus();
+            return false;
+
+        }else if (spinDistrict.getText().toString().isEmpty()) {
+            spinDistrict.setError(getString(R.string.enter_district));
+            spinDistrict.requestFocus();
+            return false;
+        } else if (spinSubCounty.getText().toString().isEmpty()) {
+            spinSubCounty.setError(getString(R.string.enter_sub_county));
+            spinSubCounty.requestFocus();
+            return false;
+        } else if (spinVillage.getText().toString().isEmpty()) {
+            spinVillage.setError(getString(R.string.enter_village));
+            spinVillage.requestFocus();
+            return false;
+        } else if(message != null) {
+            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            etxtDate.setError(null);
+            etxtFarmerName.setError(null);
+            etxtFarmerPhone.setError(null);
+            etxtRecommendations.setError(null);
+            spinDistrict.setError(null);
+            spinSubCounty.setError(null);
+            spinVillage.setError(null);
+
+            return true;
+
+        }
+    }
 
 }
