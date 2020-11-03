@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">eMaisha-Agent</string>
+    <string name="app_name">eMaisha Agent</string>
     <string name="don_t_have_an_account_swipe_right_to">Don’t have an account? Swipe right to</string>
     <string name="create_a_new_account">Create a New Account.</string>
     <string name="welcome_please_login_to_your_account">Welcome, Please Login to your Account</string>

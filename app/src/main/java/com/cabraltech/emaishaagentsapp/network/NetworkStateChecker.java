@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
@@ -30,6 +31,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
+        checkConnectivity(context);
+
+    }
+    public void checkConnectivity(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
@@ -39,6 +44,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
         if (activeNetwork != null && activeNetwork.isConnected()) {
             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                Toast.makeText(context, "Internet is on", Toast.LENGTH_LONG).show();
                 for (int i = 0; i < farmersList.size(); i++) {
                     saveFarmersList(
                             farmersList.get(i).get("id"),
@@ -115,6 +121,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                 }
                 marketPrices = databaseAccess.getUnSyncedMarketprices();
+                Log.d(TAG, "checkConnectivity: "+marketPrices);
                 for (int i = 0; i < marketPrices.size(); i++) {
                     saveMarketPrices(
                             marketPrices.get(i).get("id"),
@@ -397,7 +404,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Market prices Synced");
 
-                    //update status locally
                     //update status locally
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
                     databaseAccess.open();

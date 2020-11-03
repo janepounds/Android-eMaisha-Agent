@@ -747,7 +747,7 @@ public class DatabaseAccess {
                 map.put("measurement_units", cursor.getString(4));
                 map.put("wholesale_price", cursor.getString(5));
                 map.put("retail_price", cursor.getString(6));
-//                map.put("commodity", cursor.getString(8));
+                map.put("commodity", cursor.getString(8));
                 market_prices.add(map);
             } while (cursor.moveToNext());
         }
