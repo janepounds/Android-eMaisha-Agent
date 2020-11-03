@@ -136,6 +136,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.putBoolean("isLogged_in", true);
         editor.apply();
 
+        Log.d(TAG, "loginUser: Login Status = " + sharedPreferences.getBoolean("isLogged_in", false));
+
         // Set UserLoggedIn in MyAppPrefsManager
 //        MyAppPrefsManager myAppPrefsManager = new MyAppPrefsManager(LoginActivity.this);
 //        myAppPrefsManager.logInUser();
@@ -150,4 +152,9 @@ public class LoginActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.enter_from_right, R.anim.exit_out_right);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

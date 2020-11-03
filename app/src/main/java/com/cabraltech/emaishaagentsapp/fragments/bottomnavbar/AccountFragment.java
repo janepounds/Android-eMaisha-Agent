@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.service.autofill.UserData;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,19 +19,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
+import com.cabraltech.emaishaagentsapp.activities.LoginActivity;
+import com.cabraltech.emaishaagentsapp.database.User_Info_DB;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentAccountBinding;
 import com.cabraltech.emaishaagentsapp.models.AccountViewModel;
 import com.cabraltech.emaishaagentsapp.utils.*;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,22 +36,30 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 public class AccountFragment extends Fragment {
+    private static final String TAG = "AccountFragment";
 
     private FragmentAccountBinding binding;
 
     private AccountViewModel accountViewModel;
 
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_account, container, false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("My Account");
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("My Account");
+
+        sharedPreferences = requireActivity().getSharedPreferences("UserInfo", MODE_PRIVATE);
 
         // Edit UserID in SharedPreferences
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserInfo", MODE_PRIVATE);
+
+        Log.d(TAG, "onCreateView: Login Status = " + sharedPreferences.getBoolean("isLogged_in", true));
 
         String name = sharedPreferences.getString(DashboardActivity.PREFERENCES_FIRST_NAME, "") + " " + sharedPreferences.getString(DashboardActivity.PREFERENCES_LAST_NAME, "");
         binding.userNameTv.setText(name);
@@ -64,6 +67,13 @@ public class AccountFragment extends Fragment {
 
         String address = sharedPreferences.getString("addressStreet", "") + ", " + sharedPreferences.getString("addressCityOrTown", "") + ", " + sharedPreferences.getString("address_district", "") + ", ";
         binding.defaultUserLocation1Tv.setText(address);
+
+        binding.layoutLogout.setOnClickListener(view -> {
+            editor = sharedPreferences.edit();
+            editor.putBoolean("isLogged_in", false);
+            editor.apply();
+            requireContext().startActivity(new Intent(requireActivity(), LoginActivity.class));
+        });
 
         return binding.getRoot();
     }
@@ -86,7 +96,7 @@ public class AccountFragment extends Fragment {
         Utilities.rateMyApp(getContext());
     }
 
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.edit, menu);
         return true;
@@ -103,7 +113,4 @@ public class AccountFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-
 }
