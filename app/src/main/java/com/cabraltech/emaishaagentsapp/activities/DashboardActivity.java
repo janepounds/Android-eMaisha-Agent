@@ -72,14 +72,9 @@ public class DashboardActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 23) //Android MarshMellow Version or above
         {
             requestPermission();
-
         }
-
-
-
-
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -131,5 +126,4 @@ public class DashboardActivity extends AppCompatActivity {
                 .onSameThread()
                 .check();
     }
-
 }
