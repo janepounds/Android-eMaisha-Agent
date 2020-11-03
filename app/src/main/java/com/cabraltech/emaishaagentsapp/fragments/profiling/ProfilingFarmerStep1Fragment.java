@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +57,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     private EditText etxtFirstName,etxtLastName,etxtAge,etxtHouseholdSize,etxtSourceOfIncome;
     private Spinner spinGender,spinNationality,spinReligion,spinEducation,spinLanguage,spinMarital,etxtHouseholdHead;
     private TextView txtDob;
+    private LinearLayout genderLayout,nationalityLayout,religionLayout,educationLayout,languageLayout,maritalLayout,househeadLayout;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -109,6 +112,13 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
          etxtHouseholdSize = view.findViewById(R.id.household_size_et);
          etxtSourceOfIncome = view.findViewById(R.id.source_of_income_et);
          etxtHouseholdHead = view.findViewById(R.id.household_head_et);
+         genderLayout = view.findViewById(R.id.gender_layout);
+         nationalityLayout = view.findViewById(R.id.nationality_layout);
+         religionLayout = view.findViewById(R.id.religion_layout);
+         educationLayout = view.findViewById(R.id.education_layout);
+         languageLayout = view.findViewById(R.id.language_layout);
+         maritalLayout = view.findViewById(R.id.marital_layout);
+         househeadLayout = view.findViewById(R.id.head_layout);
 
 
         txtDob.setOnClickListener(new View.OnClickListener() {
@@ -267,11 +277,6 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     }
 
     public boolean validateEntries() {
-        ShapeDrawable shape = new ShapeDrawable(new RectShape());
-        shape.getPaint().setColor(Color.RED);
-        shape.getPaint().setStyle(Paint.Style.STROKE);
-        shape.getPaint().setStrokeWidth(3);
-
 
         String message = null;
         if (etxtFirstName.getText().toString().isEmpty()) {
@@ -291,7 +296,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             return false;
         } else if (etxtHouseholdHead.getSelectedItemPosition()==0) {
             message = getString(R.string.enter_house_hold_head);
-            etxtHouseholdHead.requestFocus();
+            househeadLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
 
             return false;
         } else if (etxtSourceOfIncome.getText().toString().isEmpty()) {
@@ -299,28 +304,28 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             return false;
         } else if (spinGender.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_gender);
-            spinGender.setBackground(shape);
+            genderLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
             return false;
         } else if (spinEducation.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_education_level);
             // Assign the created border to EditText widget
-            spinEducation.setBackground(shape);
+            educationLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
             return false;
         } else if (spinLanguage.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_language);
-            spinLanguage.setBackground(shape);
+            languageLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
             return false;
         } else if (spinMarital.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_marital_status);
-            spinMarital.setBackground(shape);
+            maritalLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
             return false;
         } else if (spinNationality.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_nationality);
-            spinNationality.setBackground(shape);
+            nationalityLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
             return false;
         } else if (spinReligion.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_religion);
-            spinReligion.setBackground(shape);
+            religionLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
             return false;
         }
 

@@ -189,8 +189,9 @@
                         android:text="@string/gender"
                         android:layout_marginBottom="4dp" />
                     <LinearLayout
+                        android:id="@+id/gender_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
                         <Spinner
@@ -216,8 +217,9 @@
                         android:layout_marginBottom="4dp"
                         />
                     <LinearLayout
+                        android:id="@+id/nationality_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
                         <Spinner
@@ -253,8 +255,9 @@
                         android:text="@string/religion"
                         android:layout_marginBottom="4dp" />
                     <LinearLayout
+                        android:id="@+id/religion_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
 
@@ -281,8 +284,9 @@
                         android:layout_marginBottom="4dp"
                         />
                     <LinearLayout
+                        android:id="@+id/education_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
                         <Spinner
@@ -318,6 +322,7 @@
                         android:layout_marginBottom="4dp"
                         />
                     <LinearLayout
+                        android:id="@+id/marital_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_spinner"
@@ -380,6 +385,7 @@
                         android:layout_marginBottom="4dp"
                         />
                     <LinearLayout
+                        android:id="@+id/language_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_spinner"
@@ -432,6 +438,7 @@
                     android:text="@string/household_head"
                     android:layout_marginBottom="4dp"/>
                 <LinearLayout
+                    android:id="@+id/head_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_spinner"
