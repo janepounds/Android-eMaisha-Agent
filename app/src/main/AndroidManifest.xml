@@ -42,8 +42,11 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".network.BroadcastService"/>
+        <receiver android:name=".network.NetworkStateChecker"
+         android:exported="false"
+            android:enabled="true">
 
-        <receiver android:name=".network.NetworkStateChecker">
             <intent-filter>
                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>
             </intent-filter>

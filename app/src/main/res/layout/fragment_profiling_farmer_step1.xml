@@ -431,13 +431,19 @@
                     android:layout_height="wrap_content"
                     android:text="@string/household_head"
                     android:layout_marginBottom="4dp"/>
-                <EditText
-                    android:id="@+id/household_head_et"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_spinner"
+                    android:padding="8dp">
+                <Spinner
+                    android:id="@+id/household_head_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:inputType="text"
                     android:textSize="14sp"
-                    android:background="@drawable/rounded_rectangle_edit_text" />
+                    android:entries="@array/gender_array" />
+                </LinearLayout>
 
             </LinearLayout>
 
