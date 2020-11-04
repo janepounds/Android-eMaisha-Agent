@@ -2,6 +2,7 @@ package com.cabraltech.emaishaagentsapp.fragments.profiling;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.GradientDrawable;
@@ -26,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -282,67 +284,202 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
 
         String message = null;
         if (etxtFirstName.getText().toString().isEmpty()) {
-            etxtFirstName.setError(getString(R.string.enter_first_name));
-            return false;
-        } else if (etxtLastName.getText().toString().isEmpty()) {
-            etxtLastName.setError(getString(R.string.enter_last_name));
-            return false;
-        } else if (txtDob.getText().toString().isEmpty()) {
-            txtDob.setError(getString(R.string.enter_dob));
-            return false;
-        } else if (etxtAge.getText().toString().isEmpty()) {
-            etxtAge.setError(getString(R.string.enter_age));
-            return false;
-        } else if (etxtHouseholdSize.getText().toString().isEmpty()) {
-            etxtHouseholdSize.setError(getString(R.string.enter_house_hold_size));
-            return false;
-        } else if (etxtHouseholdHead.getSelectedItemPosition() == 0) {
-            message = getString(R.string.enter_house_hold_head);
-            househeadLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
+            message = getString(R.string.enter_first_name);
+            int bottom = etxtFirstName.getPaddingBottom();
+            int top = etxtFirstName.getPaddingTop();
+            int right = etxtFirstName.getPaddingRight();
+            int left = etxtFirstName.getPaddingLeft();
+            etxtFirstName.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxtFirstName.setPadding(bottom,top,right,left);
+            etxtFirstName.setFocusable(true);
+            etxtFirstName.requestFocus();
 
-            return false;
-        } else if (etxtSourceOfIncome.getText().toString().isEmpty()) {
-            etxtSourceOfIncome.setError(getString(R.string.enter_source_of_icome));
-            return false;
+
+
+
+        } else if (etxtLastName.getText().toString().isEmpty()) {
+            message = getString(R.string.enter_last_name);
+            int bottom = etxtLastName.getPaddingBottom();
+            int top = etxtLastName.getPaddingTop();
+            int right = etxtLastName.getPaddingRight();
+            int left = etxtLastName.getPaddingLeft();
+            etxtLastName.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxtLastName.setPadding(bottom,top,right,left);
+            etxtLastName.setFocusable(true);
+            etxtLastName.requestFocus();
+
+        } else if (txtDob.getText().toString().isEmpty()) {
+            message = getString(R.string.enter_dob);
+            int bottom = txtDob.getPaddingBottom();
+            int top = txtDob.getPaddingTop();
+            int right = txtDob.getPaddingRight();
+            int left = txtDob.getPaddingLeft();
+            txtDob.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            txtDob.setPadding(bottom,top,right,left);
+            txtDob.setFocusable(true);
+            txtDob.requestFocus();
+
+        } else if (etxtAge.getText().toString().isEmpty()) {
+            message = getString(R.string.enter_age);
+            int bottom = etxtAge.getPaddingBottom();
+            int top = etxtAge.getPaddingTop();
+            int right = etxtAge.getPaddingRight();
+            int left = etxtAge.getPaddingLeft();
+            etxtAge.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxtAge.setPadding(bottom,top,right,left);
+            etxtAge.setFocusable(true);
+            etxtAge.requestFocus();
+
         } else if (spinGender.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_gender);
-            genderLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
-            return false;
+            int bottom = genderLayout.getPaddingBottom();
+            int top = genderLayout.getPaddingTop();
+            int right = genderLayout.getPaddingRight();
+            int left = genderLayout.getPaddingLeft();
+            genderLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            genderLayout.setPadding(bottom,top,right,left);
+            genderLayout.setFocusable(true);
+            genderLayout.requestFocus();
+
+        } else if (spinNationality.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_nationality);
+            int bottom = nationalityLayout.getPaddingBottom();
+            int top = nationalityLayout.getPaddingTop();
+            int right = nationalityLayout.getPaddingRight();
+            int left = nationalityLayout.getPaddingLeft();
+            nationalityLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            nationalityLayout.setPadding(bottom,top,right,left);
+            nationalityLayout.setFocusable(true);
+            nationalityLayout.requestFocus();
+
+        } else if (spinReligion.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_religion);
+            int bottom = religionLayout.getPaddingBottom();
+            int top = religionLayout.getPaddingTop();
+            int right = religionLayout.getPaddingRight();
+            int left = religionLayout.getPaddingLeft();
+            religionLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            religionLayout.setPadding(bottom,top,right,left);
+            religionLayout.setFocusable(true);
+            religionLayout.requestFocus();
+
         } else if (spinEducation.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_education_level);
             // Assign the created border to EditText widget
-            educationLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
-            return false;
-        } else if (spinLanguage.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_language);
-            languageLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
-            return false;
+            int bottom = educationLayout.getPaddingBottom();
+            int top = educationLayout.getPaddingTop();
+            int right = educationLayout.getPaddingRight();
+            int left = educationLayout.getPaddingLeft();
+            educationLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            educationLayout.setPadding(bottom,top,right,left);
+            educationLayout.setFocusable(true);
+            educationLayout.requestFocus();
+
         } else if (spinMarital.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_marital_status);
-            maritalLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
-            return false;
-        } else if (spinNationality.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_nationality);
-            nationalityLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
-            return false;
-        } else if (spinReligion.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_religion);
-            religionLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
-            return false;
-        } else if (message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            etxtFirstName.setError(null);
-            etxtLastName.setError(null);
-            txtDob.setError(null);
-            etxtAge.setError(null);
-            etxtHouseholdSize.setError(null);
-            etxtSourceOfIncome.setError(null);
+            int bottom = maritalLayout.getPaddingBottom();
+            int top = maritalLayout.getPaddingTop();
+            int right = maritalLayout.getPaddingRight();
+            int left = maritalLayout.getPaddingLeft();
+            maritalLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            maritalLayout.setPadding(bottom,top,right,left);
+            maritalLayout.setFocusable(true);
+            maritalLayout.requestFocus();
 
-            return true;
+        } else if (etxtHouseholdSize.getText().toString().isEmpty()) {
+            message = getString(R.string.enter_house_hold_size);
+            int bottom = etxtHouseholdSize.getPaddingBottom();
+            int top = etxtHouseholdSize.getPaddingTop();
+            int right = etxtHouseholdSize.getPaddingRight();
+            int left = etxtHouseholdSize.getPaddingLeft();
+            etxtHouseholdSize.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxtHouseholdSize.setPadding(bottom,top,right,left);
+            etxtHouseholdSize.setFocusable(true);
+            etxtHouseholdSize.requestFocus();
+
+        } else if (spinLanguage.getSelectedItemPosition() == 0) {
+            message = getString(R.string.select_language);
+            int bottom = languageLayout.getPaddingBottom();
+            int top = languageLayout.getPaddingTop();
+            int right = languageLayout.getPaddingRight();
+            int left = languageLayout.getPaddingLeft();
+            languageLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            languageLayout.setPadding(bottom,top,right,left);
+            languageLayout.setFocusable(true);
+            languageLayout.requestFocus();
+
+        } else if (etxtSourceOfIncome.getText().toString().isEmpty()) {
+            message = getString(R.string.enter_source_of_icome);
+            int bottom = etxtSourceOfIncome.getPaddingBottom();
+            int top = etxtSourceOfIncome.getPaddingTop();
+            int right = etxtSourceOfIncome.getPaddingRight();
+            int left = etxtSourceOfIncome.getPaddingLeft();
+            etxtSourceOfIncome.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxtSourceOfIncome.setPadding(bottom,top,right,left);
+            etxtSourceOfIncome.setFocusable(true);
+            etxtSourceOfIncome.requestFocus();
+
+        } else if (etxtHouseholdHead.getSelectedItemPosition() == 0) {
+            message = getString(R.string.enter_house_hold_head);
+            int bottom = househeadLayout.getPaddingBottom();
+            int top = househeadLayout.getPaddingTop();
+            int right = househeadLayout.getPaddingRight();
+            int left = househeadLayout.getPaddingLeft();
+            househeadLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            househeadLayout.setPadding(bottom,top,right,left);
+            househeadLayout.setFocusable(true);
+            househeadLayout.requestFocus();
 
         }
+       if (message != null) {
+           Toast.makeText(context, getString(R.string.missing_fields_message) +" "+ message, Toast.LENGTH_LONG).show();
+           return  false;
+        }
+
+        else{
+
+            Toast.makeText(context, "ELSE REACHED", Toast.LENGTH_LONG).show();
+//            etxtFirstName.setError(null);
+//            etxtLastName.setError(null);
+//            txtDob.setError(null);
+//            etxtAge.setError(null);
+//            etxtHouseholdSize.setError(null);
+//            etxtSourceOfIncome.setError(null);
+            int bottom = getView().getPaddingBottom();
+            int top = getView().getPaddingTop();
+            int right = getView().getPaddingRight();
+            int left = getView().getPaddingLeft();
+            etxtFirstName.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+            etxtFirstName.setPadding(bottom,top,right,left);
+            etxtLastName.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+            etxtLastName.setPadding(bottom,top,right,left);
+
+            religionLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
+            religionLayout.setPadding(8,8,8,8);
+            nationalityLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
+            nationalityLayout.setPadding(8,8,8,8);
+            maritalLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
+            maritalLayout.setPadding(8,8,8,8);
+            languageLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
+            languageLayout.setPadding(8,8,8,8);
+            educationLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
+            educationLayout.setPadding(8,8,8,8);
+            genderLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
+            genderLayout.setPadding(8,8,8,8);
+            househeadLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
+            househeadLayout.setPadding(8,8,8,8);
+            txtDob.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_edit_text));
+            txtDob.setPadding(10,10,10,10);
+
+            return true;
+        }
+
+
+
+
+
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
