@@ -362,6 +362,9 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
             message = getString(R.string.select_livestock_value_chain);
             spinLivestockValueChain.requestFocus();
             return false;
+        }else if(!chkTraders.isChecked() || !chkProcessors.isChecked() || !chkFinalConsumer.isChecked() ){
+            Toast.makeText(context, getString(R.string.please_check_atleast_one_option) + message, Toast.LENGTH_LONG).show();
+            return false;
 
     }else if(message != null) {
         Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
