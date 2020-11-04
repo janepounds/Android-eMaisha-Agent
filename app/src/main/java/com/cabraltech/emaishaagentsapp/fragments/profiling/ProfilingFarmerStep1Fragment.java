@@ -54,10 +54,10 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     private NavController navController;
     private FragmentProfilingFarmerStep1Binding binding;
     String gender, marital_status, religion, education_level, language_used, nationality;
-    private EditText etxtFirstName,etxtLastName,etxtAge,etxtHouseholdSize,etxtSourceOfIncome;
-    private Spinner spinGender,spinNationality,spinReligion,spinEducation,spinLanguage,spinMarital,etxtHouseholdHead;
+    private EditText etxtFirstName, etxtLastName, etxtAge, etxtHouseholdSize, etxtSourceOfIncome;
+    private Spinner spinGender, spinNationality, spinReligion, spinEducation, spinLanguage, spinMarital, etxtHouseholdHead;
     private TextView txtDob;
-    private LinearLayout genderLayout,nationalityLayout,religionLayout,educationLayout,languageLayout,maritalLayout,househeadLayout;
+    private LinearLayout genderLayout, nationalityLayout, religionLayout, educationLayout, languageLayout, maritalLayout, househeadLayout;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -99,26 +99,26 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-         etxtFirstName = view.findViewById(R.id.first_name_et);
-         etxtLastName = view.findViewById(R.id.last_name_et);
-         txtDob = view.findViewById(R.id.date_of_birth_tv);
-         etxtAge = view.findViewById(R.id.age_et);
-         spinGender = view.findViewById(R.id.gender_spinner);
-         spinNationality = view.findViewById(R.id.nationality_spinner);
-         spinReligion = view.findViewById(R.id.religion_spinner);
-         spinEducation = view.findViewById(R.id.level_of_education_spinner);
-         spinMarital = view.findViewById(R.id.marital_status_spinner);
-         spinLanguage = view.findViewById(R.id.language_used_spinner);
-         etxtHouseholdSize = view.findViewById(R.id.household_size_et);
-         etxtSourceOfIncome = view.findViewById(R.id.source_of_income_et);
-         etxtHouseholdHead = view.findViewById(R.id.household_head_et);
-         genderLayout = view.findViewById(R.id.gender_layout);
-         nationalityLayout = view.findViewById(R.id.nationality_layout);
-         religionLayout = view.findViewById(R.id.religion_layout);
-         educationLayout = view.findViewById(R.id.education_layout);
-         languageLayout = view.findViewById(R.id.language_layout);
-         maritalLayout = view.findViewById(R.id.marital_layout);
-         househeadLayout = view.findViewById(R.id.head_layout);
+        etxtFirstName = view.findViewById(R.id.first_name_et);
+        etxtLastName = view.findViewById(R.id.last_name_et);
+        txtDob = view.findViewById(R.id.date_of_birth_tv);
+        etxtAge = view.findViewById(R.id.age_et);
+        spinGender = view.findViewById(R.id.gender_spinner);
+        spinNationality = view.findViewById(R.id.nationality_spinner);
+        spinReligion = view.findViewById(R.id.religion_spinner);
+        spinEducation = view.findViewById(R.id.level_of_education_spinner);
+        spinMarital = view.findViewById(R.id.marital_status_spinner);
+        spinLanguage = view.findViewById(R.id.language_used_spinner);
+        etxtHouseholdSize = view.findViewById(R.id.household_size_et);
+        etxtSourceOfIncome = view.findViewById(R.id.source_of_income_et);
+        etxtHouseholdHead = view.findViewById(R.id.household_head_et);
+        genderLayout = view.findViewById(R.id.gender_layout);
+        nationalityLayout = view.findViewById(R.id.nationality_layout);
+        religionLayout = view.findViewById(R.id.religion_layout);
+        educationLayout = view.findViewById(R.id.education_layout);
+        languageLayout = view.findViewById(R.id.language_layout);
+        maritalLayout = view.findViewById(R.id.marital_layout);
+        househeadLayout = view.findViewById(R.id.head_layout);
 
 
         txtDob.setOnClickListener(new View.OnClickListener() {
@@ -203,7 +203,6 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         });
 
 
-
         navController = Navigation.findNavController(view);
 
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
@@ -265,11 +264,10 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
                         ed_.setText(selectedyear + "-" + formatter.format(month) + "-" + formatter.format(selectedday));
 
 
-                        try {
+                        if (validateDob()) {
                             computeAge(ed_.getText().toString());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
                         }
+
 
                     }
                 }, mYear, mMonth, mDay);
@@ -298,7 +296,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         } else if (etxtHouseholdSize.getText().toString().isEmpty()) {
             etxtHouseholdSize.setError(getString(R.string.enter_house_hold_size));
             return false;
-        } else if (etxtHouseholdHead.getSelectedItemPosition()==0) {
+        } else if (etxtHouseholdHead.getSelectedItemPosition() == 0) {
             message = getString(R.string.enter_house_hold_head);
             househeadLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
 
@@ -331,9 +329,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             message = getString(R.string.select_religion);
             religionLayout.setBackground(getResources().getDrawable(R.drawable.spinner_error_border));
             return false;
-        }
-
-        else if(message != null) {
+        } else if (message != null) {
             Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
             return false;
         } else {
@@ -348,22 +344,76 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
 
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public Period computeAge(String dob) throws ParseException {
+    public String computeAge(String dob) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDate = new Date();
+        try {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        Date d = sdf.parse(dob);
-        Calendar c = Calendar.getInstance();
-        c.setTime(d);
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH) + 1;
-        int date = c.get(Calendar.DATE);
-        LocalDate l1 = LocalDate.of(year, month, date);
-        LocalDate now1 = LocalDate.now();
-        Period diff1 = Period.between(l1, now1);
-        etxtAge.setText(diff1.getYears());
+            convertedDate = dateFormat.parse(dob);
+            Calendar today = Calendar.getInstance();       // get calendar instance
+            today.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
+            today.set(Calendar.MINUTE, 0);                 // set minute in hour
+            today.set(Calendar.SECOND, 0);                 // set second in minute
+            today.set(Calendar.MILLISECOND, 0);
 
-        return diff1;
+            long daysBetween = daysBetween(convertedDate, today.getTime());
+            int years = (int) (daysBetween / 365);
+            int months = (int) ((daysBetween - years * 365) / 30);
+            int days = (int) (daysBetween % 30);
+            Log.d("DATES", dob + " " + convertedDate.toString() + " - " + today.getTime().toString() + " days = " + daysBetween);
+            String age = "";
+            if (years > 0) {
+                age += years ;
+                etxtAge.setText(age);
+
+            }
+
+
+            return age;
+
+
+        } catch (ParseException e) {
+            Log.d("DATe", dob);
+            e.printStackTrace();
+            String age = "--";
+            return age;
+
+        }
+    }
+
+    public static long daysBetween(Date startDate, Date endDate) {
+        Calendar sDate = getDatePart(startDate);
+        Calendar eDate = getDatePart(endDate);
+
+        long daysBetween = 0;
+        while (sDate.before(eDate)) {
+            sDate.add(Calendar.DAY_OF_MONTH,1);
+            //Log.d("Day "+daysBetween,sDate.getTime().toString());
+            daysBetween++;
+        }
+        return daysBetween;
+    }
+    public static Calendar getDatePart(Date date){
+        Calendar cal = Calendar.getInstance();       // get calendar instance
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
+        cal.set(Calendar.MINUTE, 0);                 // set minute in hour
+        cal.set(Calendar.SECOND, 0);                 // set second in minute
+        cal.set(Calendar.MILLISECOND, 0);            // set millisecond in second
+
+        return cal;                                  // return the date part
+    }
+
+    public boolean validateDob(){
+        if(txtDob.getText().toString().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
 
     }
+
 }
+
