@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -201,7 +203,12 @@ public class ProfilingAssociationFragment extends Fragment {
             }
         });
 
-
+        etxtYear_of_registration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addDatePicker(etxtYear_of_registration, getActivity());
+            }
+        });
 
 
 
@@ -321,34 +328,38 @@ public class ProfilingAssociationFragment extends Fragment {
 
 
     }
-    public static void addDatePicker(final TextView ed_, final Context context) {
+    public void addDatePicker(final TextView ed_, final Context context) {
         ed_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar mcurrentDate = Calendar.getInstance();
                 int mYear = mcurrentDate.get(Calendar.YEAR);
-                int mMonth = mcurrentDate.get(Calendar.MONTH);
-                int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                int mMonth = 0;
+                int mDay = 0;
+
 
 
                 final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                        int month = selectedmonth + 1;
 
+                        int month = selectedmonth + 1;
+                        int year = selectedyear ;
                         NumberFormat formatter = new DecimalFormat("00");
                         ed_.setText(selectedyear);
-                    }
-                }, mYear, mMonth, mDay);
-                mDatePicker.findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
-                mDatePicker.findViewById(Resources.getSystem().getIdentifier("month", "id", "android")).setVisibility(View.GONE);
 
+
+
+
+
+                    }
+                }, mYear,mMonth,mDay);
                 mDatePicker.show();
 
             }
         });
         ed_.setInputType(InputType.TYPE_NULL);
     }
-
 
     public boolean validateEntries() {
 
