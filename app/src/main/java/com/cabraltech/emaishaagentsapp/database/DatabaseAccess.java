@@ -59,6 +59,10 @@ public class DatabaseAccess {
         }
     }
 
+
+
+
+
     private int getFarmerID(String id) {
         this.database = openHelper.getWritableDatabase();
         Cursor c = database.query("farmers", new String[]{"id"}, "id =? ", new String[]{id}, null, null, null, null);
