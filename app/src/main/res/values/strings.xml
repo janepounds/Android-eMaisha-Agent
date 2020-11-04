@@ -323,7 +323,7 @@
     <string name="select_gender">please select gender</string>
     <string name="enter_phone_number">enter phone number</string>
     <string name="enter_kin">enter next of kin</string>
-    <string name="enter_kin_relation">enter kin relation\\</string>
+    <string name="enter_kin_relation">enter kin relation</string>
     <string name="enter_kin_contact">enter kin contact</string>
     <string name="enter_kin_address">enter kin address</string>
     <string name="enter_district">enter district</string>

@@ -268,7 +268,8 @@
                             android:background="@android:color/transparent"
                             android:inputType="phone"
                             android:textSize="14sp"
-                            android:maxLength="9"/>
+                            android:maxLength="9"
+                            />
                         </LinearLayout>
 
                     </LinearLayout>
