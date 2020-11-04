@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PatternMatcher;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -45,6 +48,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 public class ProfilingAssociationFragment extends Fragment {
     private static final String TAG = "ProfilingAssociationFra";
@@ -201,7 +205,12 @@ public class ProfilingAssociationFragment extends Fragment {
             }
         });
 
-
+        etxtYear_of_registration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addDatePicker(etxtYear_of_registration, getActivity());
+            }
+        });
 
 
 
@@ -321,7 +330,7 @@ public class ProfilingAssociationFragment extends Fragment {
 
 
     }
-    public static void addDatePicker(final TextView ed_, final Context context) {
+    public void addDatePicker(final TextView ed_, final Context context) {
         ed_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -331,17 +340,22 @@ public class ProfilingAssociationFragment extends Fragment {
                 int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
 
+
                 final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+
                         int month = selectedmonth + 1;
-
+                        int year = selectedyear ;
                         NumberFormat formatter = new DecimalFormat("00");
-                        ed_.setText(selectedyear);
-                    }
-                }, mYear, mMonth, mDay);
-                mDatePicker.findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
-                mDatePicker.findViewById(Resources.getSystem().getIdentifier("month", "id", "android")).setVisibility(View.GONE);
+                        ed_.setText(selectedyear+ "");
 
+
+
+
+
+                    }
+                }, mYear,mMonth,mDay);
                 mDatePicker.show();
 
             }
@@ -349,10 +363,10 @@ public class ProfilingAssociationFragment extends Fragment {
         ed_.setInputType(InputType.TYPE_NULL);
     }
 
-
     public boolean validateEntries() {
 
         String message = null;
+        String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$*" ;
         if (etxtName.getText().toString().isEmpty()) {
             etxtName.setError(getString(R.string.enter_association_name));
             etxtName.requestFocus();
@@ -374,6 +388,10 @@ public class ProfilingAssociationFragment extends Fragment {
             etxtEmail.setError(getString(R.string.enter_email));
             etxtEmail.requestFocus();
             return false;
+        } else if (!etxtEmail.getText().toString().matches(regex)) {
+            etxtEmail.setError(getString(R.string.enter_valid_email));
+            etxtEmail.requestFocus();
+                return false;
         } else if (spinOrganisationType.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_organisation_type);
             spinOrganisationType.requestFocus();

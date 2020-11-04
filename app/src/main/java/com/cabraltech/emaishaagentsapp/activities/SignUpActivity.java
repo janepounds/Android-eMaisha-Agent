@@ -126,6 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         submitBtn.setOnClickListener(v -> {
+            String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$*";
             if (firstName.getText().toString().trim().isEmpty()) {
                 firstName.setError("Required");
             } else if (lastName.getText().toString().trim().isEmpty()) {
@@ -140,6 +141,8 @@ public class SignUpActivity extends AppCompatActivity {
                 phoneNumber.setError("Required");
             } else if (email.getText().toString().trim().isEmpty()) {
                 email.setError("Required");
+            }  else if (!email.getText().toString().trim().matches(regex)) {
+                email.setError(getString(R.string.enter_valid_email));
             } else if (password.getText().toString().trim().isEmpty()) {
                 password.setError("Required");
             } else if (confirmPassword.getText().toString().trim().isEmpty()) {
