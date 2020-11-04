@@ -372,7 +372,7 @@ public class ProfilingAssociationFragment extends Fragment {
             etxtName.requestFocus();
             return false;
 
-        }else if (etxtYear_of_registration.getText().toString().isEmpty()) {
+        }else if (etxtYear_of_registration.getText().toString().isEmpty() || etxtYear_of_registration.getText().toString().trim().length() <4 ) {
             etxtYear_of_registration.setError(getString(R.string.enter_registration_year));
             etxtYear_of_registration.requestFocus();
             return false;
