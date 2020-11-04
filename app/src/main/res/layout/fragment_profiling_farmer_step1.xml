@@ -82,7 +82,8 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_edit_text"
                         android:textSize="14sp"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:focusable="true"/>
 
                 </LinearLayout>
 

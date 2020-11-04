@@ -291,6 +291,10 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = etxtFirstName.getPaddingLeft();
             etxtFirstName.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             etxtFirstName.setPadding(bottom,top,right,left);
+            etxtFirstName.setFocusable(true);
+            etxtFirstName.requestFocus();
+
+
 
 
         } else if (etxtLastName.getText().toString().isEmpty()) {
@@ -301,6 +305,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = etxtLastName.getPaddingLeft();
             etxtLastName.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             etxtLastName.setPadding(bottom,top,right,left);
+            etxtLastName.setFocusable(true);
+            etxtLastName.requestFocus();
 
         } else if (txtDob.getText().toString().isEmpty()) {
             message = getString(R.string.enter_dob);
@@ -310,6 +316,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = txtDob.getPaddingLeft();
             txtDob.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             txtDob.setPadding(bottom,top,right,left);
+            txtDob.setFocusable(true);
+            txtDob.requestFocus();
 
         } else if (etxtAge.getText().toString().isEmpty()) {
             message = getString(R.string.enter_age);
@@ -319,6 +327,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = etxtAge.getPaddingLeft();
             etxtAge.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             etxtAge.setPadding(bottom,top,right,left);
+            etxtAge.setFocusable(true);
+            etxtAge.requestFocus();
 
         } else if (spinGender.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_gender);
@@ -328,6 +338,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = genderLayout.getPaddingLeft();
             genderLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             genderLayout.setPadding(bottom,top,right,left);
+            genderLayout.setFocusable(true);
+            genderLayout.requestFocus();
 
         } else if (spinNationality.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_nationality);
@@ -337,6 +349,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = nationalityLayout.getPaddingLeft();
             nationalityLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             nationalityLayout.setPadding(bottom,top,right,left);
+            nationalityLayout.setFocusable(true);
+            nationalityLayout.requestFocus();
 
         } else if (spinReligion.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_religion);
@@ -346,6 +360,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = religionLayout.getPaddingLeft();
             religionLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             religionLayout.setPadding(bottom,top,right,left);
+            religionLayout.setFocusable(true);
+            religionLayout.requestFocus();
 
         } else if (spinEducation.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_education_level);
@@ -356,6 +372,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = educationLayout.getPaddingLeft();
             educationLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             educationLayout.setPadding(bottom,top,right,left);
+            educationLayout.setFocusable(true);
+            educationLayout.requestFocus();
 
         } else if (spinMarital.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_marital_status);
@@ -365,9 +383,19 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = maritalLayout.getPaddingLeft();
             maritalLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             maritalLayout.setPadding(bottom,top,right,left);
+            maritalLayout.setFocusable(true);
+            maritalLayout.requestFocus();
 
         } else if (etxtHouseholdSize.getText().toString().isEmpty()) {
             message = getString(R.string.enter_house_hold_size);
+            int bottom = etxtHouseholdSize.getPaddingBottom();
+            int top = etxtHouseholdSize.getPaddingTop();
+            int right = etxtHouseholdSize.getPaddingRight();
+            int left = etxtHouseholdSize.getPaddingLeft();
+            etxtHouseholdSize.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxtHouseholdSize.setPadding(bottom,top,right,left);
+            etxtHouseholdSize.setFocusable(true);
+            etxtHouseholdSize.requestFocus();
 
         } else if (spinLanguage.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_language);
@@ -377,6 +405,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = languageLayout.getPaddingLeft();
             languageLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             languageLayout.setPadding(bottom,top,right,left);
+            languageLayout.setFocusable(true);
+            languageLayout.requestFocus();
 
         } else if (etxtSourceOfIncome.getText().toString().isEmpty()) {
             message = getString(R.string.enter_source_of_icome);
@@ -386,6 +416,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = etxtSourceOfIncome.getPaddingLeft();
             etxtSourceOfIncome.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             etxtSourceOfIncome.setPadding(bottom,top,right,left);
+            etxtSourceOfIncome.setFocusable(true);
+            etxtSourceOfIncome.requestFocus();
 
         } else if (etxtHouseholdHead.getSelectedItemPosition() == 0) {
             message = getString(R.string.enter_house_hold_head);
@@ -395,11 +427,17 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             int left = househeadLayout.getPaddingLeft();
             househeadLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             househeadLayout.setPadding(bottom,top,right,left);
+            househeadLayout.setFocusable(true);
+            househeadLayout.requestFocus();
 
-        } if (message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) +" "+ message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
+        }
+       if (message != null) {
+           Toast.makeText(context, getString(R.string.missing_fields_message) +" "+ message, Toast.LENGTH_LONG).show();
+           return  false;
+        }
+
+        else{
+
             Toast.makeText(context, "ELSE REACHED", Toast.LENGTH_LONG).show();
 //            etxtFirstName.setError(null);
 //            etxtLastName.setError(null);
@@ -407,6 +445,15 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
 //            etxtAge.setError(null);
 //            etxtHouseholdSize.setError(null);
 //            etxtSourceOfIncome.setError(null);
+            int bottom = getView().getPaddingBottom();
+            int top = getView().getPaddingTop();
+            int right = getView().getPaddingRight();
+            int left = getView().getPaddingLeft();
+            etxtFirstName.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+            etxtFirstName.setPadding(bottom,top,right,left);
+            etxtLastName.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+            etxtLastName.setPadding(bottom,top,right,left);
+
             religionLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
             religionLayout.setPadding(8,8,8,8);
             nationalityLayout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
@@ -423,9 +470,16 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             househeadLayout.setPadding(8,8,8,8);
             txtDob.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_edit_text));
             txtDob.setPadding(10,10,10,10);
-            return true;
 
+            return true;
         }
+
+
+
+
+
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
