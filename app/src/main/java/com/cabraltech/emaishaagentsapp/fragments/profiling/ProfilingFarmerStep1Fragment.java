@@ -250,6 +250,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Calendar mcurrentDate = Calendar.getInstance();
+                mcurrentDate.add(Calendar.YEAR,-15);
                 int mYear = mcurrentDate.get(Calendar.YEAR);
                 int mMonth = mcurrentDate.get(Calendar.MONTH);
                 int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);

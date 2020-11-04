@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PatternMatcher;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -47,6 +48,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 public class ProfilingAssociationFragment extends Fragment {
     private static final String TAG = "ProfilingAssociationFra";
@@ -334,8 +336,8 @@ public class ProfilingAssociationFragment extends Fragment {
             public void onClick(View view) {
                 Calendar mcurrentDate = Calendar.getInstance();
                 int mYear = mcurrentDate.get(Calendar.YEAR);
-                int mMonth = 0;
-                int mDay = 0;
+                int mMonth = mcurrentDate.get(Calendar.MONTH);
+                int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
 
 
@@ -346,7 +348,7 @@ public class ProfilingAssociationFragment extends Fragment {
                         int month = selectedmonth + 1;
                         int year = selectedyear ;
                         NumberFormat formatter = new DecimalFormat("00");
-                        ed_.setText(selectedyear);
+                        ed_.setText(selectedyear+ "");
 
 
 
@@ -364,6 +366,7 @@ public class ProfilingAssociationFragment extends Fragment {
     public boolean validateEntries() {
 
         String message = null;
+        String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$*" ;
         if (etxtName.getText().toString().isEmpty()) {
             etxtName.setError(getString(R.string.enter_association_name));
             etxtName.requestFocus();
@@ -385,6 +388,10 @@ public class ProfilingAssociationFragment extends Fragment {
             etxtEmail.setError(getString(R.string.enter_email));
             etxtEmail.requestFocus();
             return false;
+        } else if (!etxtEmail.getText().toString().matches(regex)) {
+            etxtEmail.setError(getString(R.string.enter_valid_email));
+            etxtEmail.requestFocus();
+                return false;
         } else if (spinOrganisationType.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_organisation_type);
             spinOrganisationType.requestFocus();

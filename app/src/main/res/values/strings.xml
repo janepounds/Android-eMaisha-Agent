@@ -384,6 +384,7 @@
     <string name="select_infestation_level">please select infestation level</string>
     <string name="select_second_livestock">please select second livestock</string>
     <string name="please_check_atleast_one_option">please check atleast one option</string>
+    <string name="enter_valid_email">enter valid email</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>
