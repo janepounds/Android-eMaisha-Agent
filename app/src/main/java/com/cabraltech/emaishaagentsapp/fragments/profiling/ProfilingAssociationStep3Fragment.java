@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -42,7 +44,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     CheckBox chkMemberFees, chkSales, chkProcessingFees, chkGrants, chkCredit;
     CheckBox chkCropInsurance, chkMarketIntelligence, chkAgroInputsOnCredit, chkAgroEquipment, chkTrainingOnBusinessDevt, chkTrainingOnInstitutionalDevt, chkCashLoansAgriculturalPurposes, chkNonCashLoansAgriculturalPurposes, chkTrainingOrTechnicalAssistance, chkSubsidizedInput;
     String respondent_position, name, year_of_registration, full_address, telephone, email, chairperson, chairperson_contact, secretary, secretary_contact, respondent, respondent_contact;
-
+    private LinearLayout cropvalueLayout,livestockLayout;
     private  EditText etxtMalesNumber,etxtFemalesNumber;
     private  Spinner spinLivestockValueChain,spinCropValueChain;
     public ProfilingAssociationStep3Fragment() {
@@ -149,6 +151,8 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         chkSubsidizedInput = view.findViewById(R.id.additional_services_subsidized_inputs_cb);
         chkAgroEquipment = view.findViewById(R.id.additional_services_agricultural_equipment_cb);
         chkTrainingOnInstitutionalDevt = view.findViewById(R.id.additional_services_training_institutional_devt_cb);
+        cropvalueLayout = view.findViewById(R.id.crop_layout);
+        livestockLayout = view.findViewById(R.id.livestock_layout);
 
 
         spinCropValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -340,41 +344,65 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
 
     }
 
-    public boolean validateEntries() {
+    public  boolean hasText(EditText editText) {
 
-        String message = null;
-        if (etxtMalesNumber.getText().toString().isEmpty()) {
-            etxtMalesNumber.setError(getString(R.string.enter_number_males));
-            etxtMalesNumber.requestFocus();
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
             return false;
-
-        } else if (etxtFemalesNumber.getText().toString().isEmpty()) {
-            etxtFemalesNumber.setError(getString(R.string.enter_number_females));
-            etxtFemalesNumber.requestFocus();
-            return false;
-
-    } else if(spinCropValueChain.getSelectedItemPosition() == 0) {
-        message = getString(R.string.select_crop_value_chain);
-        spinCropValueChain.requestFocus();
-        return false;
-
-        } else if(spinLivestockValueChain.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_livestock_value_chain);
-            spinLivestockValueChain.requestFocus();
-            return false;
-        }else if(!chkTraders.isChecked() || !chkProcessors.isChecked() || !chkFinalConsumer.isChecked() ){
-            Toast.makeText(context, getString(R.string.please_check_atleast_one_option) + message, Toast.LENGTH_LONG).show();
-            return false;
-
-    }else if(message != null) {
-        Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-        return false;
-    } else {
-            etxtMalesNumber.setError(null);
-            etxtFemalesNumber.setError(null);
-
-
-            return true;
         }
+
+
+        return true;
     }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public boolean validateEntries() {
+        boolean check = true;
+        if (!hasText(etxtMalesNumber)) check = false;
+        if (!hasText(etxtFemalesNumber)) check = false;
+        if(!selectedText(spinCropValueChain,cropvalueLayout)) check = false;
+        if(!selectedText(spinLivestockValueChain,livestockLayout)) check = false;
+
+
+
+        return check;
+
+
+    }
+
+
 }
