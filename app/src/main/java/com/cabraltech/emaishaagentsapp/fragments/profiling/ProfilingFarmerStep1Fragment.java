@@ -295,7 +295,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             etxtFirstName.setFocusable(true);
             etxtFirstName.requestFocus();
 
-
+            return false;
 
 
         } else if (etxtLastName.getText().toString().isEmpty()) {
@@ -308,7 +308,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             etxtLastName.setPadding(bottom,top,right,left);
             etxtLastName.setFocusable(true);
             etxtLastName.requestFocus();
-
+            return false;
         } else if (txtDob.getText().toString().isEmpty()) {
             message = getString(R.string.enter_dob);
             int bottom = txtDob.getPaddingBottom();
@@ -319,7 +319,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             txtDob.setPadding(bottom,top,right,left);
             txtDob.setFocusable(true);
             txtDob.requestFocus();
-
+            return false;
         } else if (etxtAge.getText().toString().isEmpty()) {
             message = getString(R.string.enter_age);
             int bottom = etxtAge.getPaddingBottom();
@@ -330,7 +330,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             etxtAge.setPadding(bottom,top,right,left);
             etxtAge.setFocusable(true);
             etxtAge.requestFocus();
-
+            return false;
         } else if (spinGender.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_gender);
             int bottom = genderLayout.getPaddingBottom();
@@ -341,7 +341,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             genderLayout.setPadding(bottom,top,right,left);
             genderLayout.setFocusable(true);
             genderLayout.requestFocus();
-
+            return false;
         } else if (spinNationality.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_nationality);
             int bottom = nationalityLayout.getPaddingBottom();
@@ -352,7 +352,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             nationalityLayout.setPadding(bottom,top,right,left);
             nationalityLayout.setFocusable(true);
             nationalityLayout.requestFocus();
-
+            return false;
         } else if (spinReligion.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_religion);
             int bottom = religionLayout.getPaddingBottom();
@@ -363,7 +363,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             religionLayout.setPadding(bottom,top,right,left);
             religionLayout.setFocusable(true);
             religionLayout.requestFocus();
-
+            return false;
         } else if (spinEducation.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_education_level);
             // Assign the created border to EditText widget
@@ -375,7 +375,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             educationLayout.setPadding(bottom,top,right,left);
             educationLayout.setFocusable(true);
             educationLayout.requestFocus();
-
+            return false;
         } else if (spinMarital.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_marital_status);
             int bottom = maritalLayout.getPaddingBottom();
@@ -386,7 +386,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             maritalLayout.setPadding(bottom,top,right,left);
             maritalLayout.setFocusable(true);
             maritalLayout.requestFocus();
-
+            return false;
         } else if (etxtHouseholdSize.getText().toString().isEmpty()) {
             message = getString(R.string.enter_house_hold_size);
             int bottom = etxtHouseholdSize.getPaddingBottom();
@@ -397,7 +397,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             etxtHouseholdSize.setPadding(bottom,top,right,left);
             etxtHouseholdSize.setFocusable(true);
             etxtHouseholdSize.requestFocus();
-
+            return false;
         } else if (spinLanguage.getSelectedItemPosition() == 0) {
             message = getString(R.string.select_language);
             int bottom = languageLayout.getPaddingBottom();
@@ -408,7 +408,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             languageLayout.setPadding(bottom,top,right,left);
             languageLayout.setFocusable(true);
             languageLayout.requestFocus();
-
+            return false;
         } else if (etxtSourceOfIncome.getText().toString().isEmpty()) {
             message = getString(R.string.enter_source_of_icome);
             int bottom = etxtSourceOfIncome.getPaddingBottom();
@@ -419,7 +419,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             etxtSourceOfIncome.setPadding(bottom,top,right,left);
             etxtSourceOfIncome.setFocusable(true);
             etxtSourceOfIncome.requestFocus();
-
+            return false;
         } else if (etxtHouseholdHead.getSelectedItemPosition() == 0) {
             message = getString(R.string.enter_house_hold_head);
             int bottom = househeadLayout.getPaddingBottom();
@@ -430,12 +430,12 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             househeadLayout.setPadding(bottom,top,right,left);
             househeadLayout.setFocusable(true);
             househeadLayout.requestFocus();
-
+            return false;
         }
        if (message != null) {
            Toast.makeText(context, getString(R.string.missing_fields_message) +" "+ message, Toast.LENGTH_LONG).show();
            return  false;
-        }
+     }
 
         else{
 

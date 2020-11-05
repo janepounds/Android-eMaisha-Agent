@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -312,35 +313,98 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
 
     public boolean validateEntries() {
         String message = null;
-        if (etxtPhone.getText().toString().isEmpty()) {
-            etxtPhone.setError(getString(R.string.enter_phone_number));
+        if (spinDistrict.getText().toString().isEmpty()) {
+            Toast.makeText(context, getString(R.string.enter_kin), Toast.LENGTH_LONG).show();
+            int bottom = spinDistrict.getPaddingBottom();
+            int top = spinDistrict.getPaddingTop();
+            int right = spinDistrict.getPaddingRight();
+            int left = spinDistrict.getPaddingLeft();
+            spinDistrict.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            spinDistrict.setPadding(bottom, top, right, left);
+            spinDistrict.setFocusable(true);
+            spinDistrict.requestFocus();
             return false;
-        } else if (etxt_next_of_kin.getText().toString().isEmpty()) {
-            etxt_next_of_kin.setError(getString(R.string.enter_kin));
+        }else if (spinSubCounty.getText().toString().isEmpty()) {
+                Toast.makeText(context, getString(R.string.enter_sub_county), Toast.LENGTH_LONG).show();
+                int bottom = spinSubCounty.getPaddingBottom();
+                int top = spinSubCounty.getPaddingTop();
+                int right = spinSubCounty.getPaddingRight();
+                int left = spinSubCounty.getPaddingLeft();
+                spinSubCounty.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+                spinSubCounty.setPadding(bottom,top,right,left);
+                spinSubCounty.setFocusable(true);
+                spinSubCounty.requestFocus();
+                return false;
+            } else if (spinVillage.getText().toString().isEmpty()) {
+            Toast.makeText(context, getString(R.string.enter_village), Toast.LENGTH_LONG).show();
+            int bottom = spinVillage.getPaddingBottom();
+            int top = spinVillage.getPaddingTop();
+            int right = spinVillage.getPaddingRight();
+            int left = spinVillage.getPaddingLeft();
+            spinVillage.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            spinVillage.setPadding(bottom, top, right, left);
+            spinVillage.setFocusable(true);
+            spinVillage.requestFocus();
+            return false;
+
+            }else if (etxtPhone.getText().toString().isEmpty() || etxtPhone.getText().toString().trim().length() < 9) {
+                Toast.makeText(context, getString(R.string.enter_phone_number), Toast.LENGTH_LONG).show();
+                int bottom = etxtPhone.getPaddingBottom();
+                int top = etxtPhone.getPaddingTop();
+                int right = etxtPhone.getPaddingRight();
+                int left = etxtPhone.getPaddingLeft();
+                etxtPhone.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+                etxtPhone.setPadding(bottom,top,right,left);
+                etxtPhone.setFocusable(true);
+                etxtPhone.requestFocus();
+                return false;
+            } else if (etxt_next_of_kin.getText().toString().isEmpty()) {
+            Toast.makeText(context, getString(R.string.enter_kin), Toast.LENGTH_LONG).show();
+            int bottom = etxt_next_of_kin.getPaddingBottom();
+            int top = etxt_next_of_kin.getPaddingTop();
+            int right = etxt_next_of_kin.getPaddingRight();
+            int left = etxt_next_of_kin.getPaddingLeft();
+            etxt_next_of_kin.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxt_next_of_kin.setPadding(bottom,top,right,left);
+            etxt_next_of_kin.setFocusable(true);
+            etxt_next_of_kin.requestFocus();
             return false;
         } else if (etxt_next_of_kin_relation.getText().toString().isEmpty()) {
-            etxt_next_of_kin_relation.setError(getString(R.string.enter_kin_relation));
+            Toast.makeText(context, getString(R.string.enter_kin_relation), Toast.LENGTH_LONG).show();
+            int bottom = etxt_next_of_kin_relation.getPaddingBottom();
+            int top = etxt_next_of_kin_relation.getPaddingTop();
+            int right = etxt_next_of_kin_relation.getPaddingRight();
+            int left = etxt_next_of_kin_relation.getPaddingLeft();
+            etxt_next_of_kin_relation.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxt_next_of_kin_relation.setPadding(bottom,top,right,left);
+            etxt_next_of_kin_relation.setFocusable(true);
+            etxt_next_of_kin_relation.requestFocus();
             return false;
-        } else if (etxt_next_of_kin_contact.getText().toString().isEmpty()) {
-            etxt_next_of_kin_contact.setError(getString(R.string.enter_kin_contact));
+        } else if (etxt_next_of_kin_contact.getText().toString().isEmpty() || etxt_next_of_kin_contact.getText().toString().trim().length() < 9) {
+            Toast.makeText(context, getString(R.string.enter_kin_contact), Toast.LENGTH_LONG).show();
+            int bottom = etxt_next_of_kin_contact.getPaddingBottom();
+            int top = etxt_next_of_kin_contact.getPaddingTop();
+            int right = etxt_next_of_kin_contact.getPaddingRight();
+            int left = etxt_next_of_kin_contact.getPaddingLeft();
+            etxt_next_of_kin_contact.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxt_next_of_kin_contact.setPadding(bottom,top,right,left);
+            etxt_next_of_kin_contact.setFocusable(true);
+            etxt_next_of_kin_contact.requestFocus();
             return false;
         } else if (etxt_next_of_kin_address.getText().toString().isEmpty()) {
-            etxt_next_of_kin_address.setError(getString(R.string.enter_kin_address));
+            Toast.makeText(context, getString(R.string.enter_kin_address), Toast.LENGTH_LONG).show();
+            int bottom = etxt_next_of_kin_address.getPaddingBottom();
+            int top = etxt_next_of_kin_address.getPaddingTop();
+            int right = etxt_next_of_kin_address.getPaddingRight();
+            int left = etxt_next_of_kin_address.getPaddingLeft();
+            etxt_next_of_kin_address.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            etxt_next_of_kin_address.setPadding(bottom,top,right,left);
+            etxt_next_of_kin_address.setFocusable(true);
+            etxt_next_of_kin_address.requestFocus();
             return false;
-        } else if (spinDistrict.getText().toString().isEmpty()) {
-            spinDistrict.setError(getString(R.string.enter_district));
-            return false;
-        } else if (spinSubCounty.getText().toString().isEmpty()) {
-            spinSubCounty.setError(getString(R.string.enter_sub_county));
-            return false;
-        } else if (spinVillage.getText().toString().isEmpty()) {
-            message = getString(R.string.select_gender);
-            spinVillage.setError(getString(R.string.enter_village));
-            return false;
-        } else if (message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
+        }  else {
+            Toast.makeText(context, "ELSE REACHED", Toast.LENGTH_LONG).show();
+
             etxtPhone.setError(null);
             etxt_next_of_kin.setError(null);
             etxt_next_of_kin_relation.setError(null);
