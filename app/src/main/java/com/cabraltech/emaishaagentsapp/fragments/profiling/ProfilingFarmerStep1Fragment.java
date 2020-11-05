@@ -10,7 +10,9 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -284,7 +286,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     public  boolean hasText(EditText editText) {
 
         String text = editText.getText().toString().trim();
-        editText.setError(null);
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_spinner,null));
 
         // length 0 means there is no text
         if (text.isEmpty()) {
@@ -299,24 +301,18 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             return false;
         }
 
+
         return true;
     }
     public  boolean selectedText(Spinner spinner,LinearLayout layout) {
 
         int position = spinner.getSelectedItemPosition();
-        int bottom = getView().getPaddingBottom();
-        int top = getView().getPaddingTop();
-        int right = getView().getPaddingRight();
-        int left = getView().getPaddingLeft();
         layout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
-        layout.setPadding(left,top,right,bottom);
+        layout.setPadding(8,8,8,8);
 
         // length 0 means there is no text
         if (position == 0) {
-            int bottom1 = layout.getPaddingBottom();
-            int top1 = layout.getPaddingTop();
-            int right1 = layout.getPaddingRight();
-            int left1 = layout.getPaddingLeft();
+
             layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             layout.setPadding(8,8,8,8);
             layout.setFocusable(true);
@@ -329,14 +325,14 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
 
     public boolean hasTextView(TextView textView){
         String text = textView.getText().toString().trim();
-        textView.setError(null);
-
+        int bottom = textView.getPaddingBottom();
+        int top = textView.getPaddingTop();
+        int right = textView.getPaddingRight();
+        int left = textView.getPaddingLeft();
+        textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_spinner,null));
         // length 0 means there is no text
         if (text.isEmpty()) {
-            int bottom = textView.getPaddingBottom();
-            int top = textView.getPaddingTop();
-            int right = textView.getPaddingRight();
-            int left = textView.getPaddingLeft();
+
             textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
             textView.setPadding(bottom,top,right,left);
             textView.setFocusable(true);
