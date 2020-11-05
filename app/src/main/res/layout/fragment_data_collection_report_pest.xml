@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textSize="14sp"
-                android:inputType="date"
+                android:inputType="none"
                 android:focusable="false"
                 android:background="@drawable/rounded_rectangle_edit_text"
                 android:drawableEnd="@drawable/calendar"/>
@@ -89,6 +89,7 @@
                     android:text="@string/district"
                     android:layout_marginBottom="4dp"/>
                 <LinearLayout
+                    android:id="@+id/district_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -116,6 +117,7 @@
                     android:text="@string/sub_county"
                     android:layout_marginBottom="4dp"/>
                 <LinearLayout
+                    android:id="@+id/subcounty_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -155,6 +157,7 @@
                     android:text="@string/village"
                     android:layout_marginBottom="4dp"/>
                 <LinearLayout
+                    android:id="@+id/village_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -258,6 +261,7 @@
                     android:text="@string/damage_assessment"
                     android:layout_marginBottom="4dp" />
                 <LinearLayout
+                    android:id="@+id/damage_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -307,6 +311,7 @@
             android:text="@string/photo_of_the_damage"
             android:layout_marginBottom="4dp"/>
         <LinearLayout
+            android:id="@+id/photo_damage_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"

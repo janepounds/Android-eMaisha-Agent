@@ -57,6 +57,7 @@
                     android:layout_marginBottom="4dp"
                     />
                 <LinearLayout
+                    android:id="@+id/commodoties_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -95,10 +96,11 @@
                     android:text="@string/variety"
                     android:layout_marginBottom="4dp" />
                 <LinearLayout
+                    android:id="@+id/variety_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_spinner"
-                    android:padding="6dp">
+                    android:padding="8dp">
                     <Spinner
                         android:id="@+id/variety_spinner"
                         android:layout_width="match_parent"
@@ -121,10 +123,11 @@
                     android:layout_marginBottom="4dp"
                     />
                 <LinearLayout
+                    android:id="@+id/market_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_spinner"
-                    android:padding="6dp">
+                    android:padding="8dp">
                     <Spinner
                         android:id="@+id/market_spinner"
                         android:layout_width="match_parent"
@@ -151,6 +154,7 @@
                 android:text="@string/measurement_units"
                 android:layout_marginBottom="4dp" />
             <LinearLayout
+                android:id="@+id/units_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_rectangle_spinner"

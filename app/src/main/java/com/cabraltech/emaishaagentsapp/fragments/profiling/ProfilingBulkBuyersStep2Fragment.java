@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -230,19 +233,32 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
 
 
     }
+    public  boolean autoText(AutoCompleteTextView editText) {
 
-    public boolean validateEntries() {
-        String message = null;
-        if (actCommodities.getText().toString().isEmpty()) {
-            actCommodities.setError(getString(R.string.enter_commodities));
-            return false;
-        } else if (message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            actCommodities.setError(null);
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
 
-            return true;
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
         }
+
+
+        return true;
+    }
+    public boolean validateEntries() {
+        boolean check = true;
+       if(!autoText(actCommodities)) check = false;
+
+        return check;
     }
 }
