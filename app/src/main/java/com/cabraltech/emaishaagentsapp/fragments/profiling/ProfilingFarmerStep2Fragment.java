@@ -364,7 +364,7 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
     public boolean validateEntries() {
 
         boolean check = true;
-        if (!hasText(etxtPhone)) check = false;
+        if (!hasText(etxtPhone)|| etxtPhone.getText().toString().trim().length() < 9) check = false;
         if (!hasText(etxt_next_of_kin)) check = false;
         if (!hasText(etxt_next_of_kin_contact) || etxt_next_of_kin_contact.getText().toString().trim().length() < 9) check = false;
         if (!hasText(etxt_next_of_kin_address)) check = false;

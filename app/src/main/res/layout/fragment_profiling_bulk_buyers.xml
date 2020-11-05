@@ -91,14 +91,16 @@
                     android:layout_marginBottom="4dp"
                     />
                 <LinearLayout
+                    android:id="@+id/business_type_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="8dp">
+
                     <Spinner
                         android:id="@+id/business_type_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:entries="@array/type_of_business_array" />
                 </LinearLayout>
@@ -228,6 +230,7 @@
                     android:text="@string/district"
                     android:layout_marginBottom="4dp" />
                 <LinearLayout
+                    android:id="@+id/district_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -256,6 +259,7 @@
                     android:layout_marginBottom="4dp"
                     />
                 <LinearLayout
+                    android:id="@+id/subcounty_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -296,6 +300,7 @@
                     android:layout_marginBottom="4dp"
                     />
                 <LinearLayout
+                    android:id="@+id/village_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"

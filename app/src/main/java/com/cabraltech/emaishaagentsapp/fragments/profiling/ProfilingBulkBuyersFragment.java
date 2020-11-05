@@ -14,12 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -52,6 +55,7 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     private EditText etxtBusinessName,etxtOwner,etxtPhone,etxtEmail,etxtFullAddress;
     private Spinner spinBusinessType;
     private AutoCompleteTextView spinDistrict,spinSubcounty,spinVillage;
+    private LinearLayout businessLayout,districtLayout,subcountyLayout,villageLayout;
 
     String[] descriptionData = {"Contact\nDetails", "Business\nDetails"};
 
@@ -298,52 +302,84 @@ public class ProfilingBulkBuyersFragment extends Fragment {
 
 
     }
+    public  boolean hasText(EditText editText) {
 
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner,LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            layout.setPadding(left, top, right, bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
     public boolean validateEntries() {
-        String message = null;
-        if (etxtBusinessName.getText().toString().isEmpty()) {
-            etxtBusinessName.setError(getString(R.string.enter_business_name));
-            return false;
-        } else if (etxtPhone.getText().toString().isEmpty()) {
-            etxtPhone.setError(getString(R.string.enter_phone_number));
-            return false;
-        } else if (etxtOwner.getText().toString().isEmpty()) {
-            etxtOwner.setError(getString(R.string.enter_owner));
-            return false;
-        } else if (etxtFullAddress.getText().toString().isEmpty()) {
-            etxtFullAddress.setError(getString(R.string.enter_full_address));
-            return false;
-        } else if (etxtEmail.getText().toString().isEmpty()) {
-            etxtEmail.setError(getString(R.string.enter_email));
-            return false;
+        boolean check = true;
+        if (!hasText(etxtBusinessName)) check = false;
+        if (!hasText(etxtOwner)) check = false;
+        if (!hasText(etxtPhone) || etxtPhone.getText().toString().trim().length() < 9) check = false;
+        if (!hasText(etxtEmail)) check = false;
+        if (!hasText(etxtFullAddress)) check = false;
+        if(!selectedText(spinBusinessType,businessLayout)) check = false;
+        if(!autoText(spinDistrict,districtLayout)) check = false;
+        if(!autoText(spinSubcounty,subcountyLayout)) check = false;
+        if(!autoText(spinVillage,villageLayout)) check = false;
 
-        } else if (spinBusinessType.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_business_type);
-            spinBusinessType.requestFocus();
-            return false;
-        } else if (spinDistrict.getText().toString().isEmpty()) {
-            spinDistrict.setError(getString(R.string.enter_district));
-            return false;
-        } else if (spinSubcounty.getText().toString().isEmpty()) {
-            spinSubcounty.setError(getString(R.string.enter_sub_county));
-            return false;
-        } else if (spinVillage.getText().toString().isEmpty()) {
-            message = getString(R.string.select_gender);
-            spinVillage.setError(getString(R.string.enter_village));
-            return false;
-        }
-        else if(message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            etxtBusinessName.setError(null);
-            etxtPhone.setError(null);
-            etxtOwner.setError(null);
-            etxtFullAddress.setError(null);
-            etxtEmail.setError(null);
-
-            return true;
-
-        }
+        return check;
     }
 }
