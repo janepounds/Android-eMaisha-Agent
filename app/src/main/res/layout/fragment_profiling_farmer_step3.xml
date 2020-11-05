@@ -122,7 +122,7 @@
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
                         <AutoCompleteTextView
@@ -130,6 +130,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:background="@android:color/transparent"
                             android:entries="@array/crop_array" />
                     </LinearLayout>
                 </LinearLayout>
@@ -161,7 +162,7 @@
                         android:layout_marginBottom="4dp" />
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
                         <AutoCompleteTextView
@@ -169,6 +170,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:background="@android:color/transparent"
                             android:entries="@array/crop_array" />
                     </LinearLayout>
                 </LinearLayout>
@@ -188,13 +190,14 @@
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
                         <AutoCompleteTextView
                             android:id="@+id/third_crop_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
                             android:layout_gravity="center"
                             android:entries="@array/crop_array" />
                     </LinearLayout>
@@ -224,7 +227,7 @@
                         android:text="@string/main_livestock" />
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="40dp"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
                         <AutoCompleteTextView
@@ -232,6 +235,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:background="@android:color/transparent"
                             android:entries="@array/main_livestock_array" />
                     </LinearLayout>
                 </LinearLayout>
@@ -254,13 +258,14 @@
                         android:layout_marginBottom="4dp"/>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
                         <AutoCompleteTextView
                             android:id="@+id/second_livestock_et"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
                             android:layout_gravity="center"
                             android:entries="@array/main_livestock_array" />
                     </LinearLayout>
