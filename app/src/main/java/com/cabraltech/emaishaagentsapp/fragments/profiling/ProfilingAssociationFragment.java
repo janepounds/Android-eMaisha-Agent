@@ -20,6 +20,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -64,6 +66,7 @@ public class ProfilingAssociationFragment extends Fragment {
     private EditText etxtName,etxtYear_of_registration,etxtFull_address,etxtTelephone,etxtEmail;
     private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
     private Spinner spinOrganisationType,spinRegistrationLevel;
+    private LinearLayout organTypeLayout,regLevelLayout;
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
 
@@ -118,6 +121,8 @@ public class ProfilingAssociationFragment extends Fragment {
         etxtEmail = view.findViewById(R.id.association_email_et);
         spinOrganisationType = view.findViewById(R.id.organisation_type_spinner);
         spinRegistrationLevel = view.findViewById(R.id.registration_level_spinner);
+        regLevelLayout = view.findViewById(R.id.reg_level_layout);
+        organTypeLayout = view.findViewById(R.id.organ_type_layout);
 
 
         Button next_button = view.findViewById(R.id.next_button);
@@ -363,71 +368,90 @@ public class ProfilingAssociationFragment extends Fragment {
         ed_.setInputType(InputType.TYPE_NULL);
     }
 
-    public boolean validateEntries() {
+    public  boolean hasText(EditText editText) {
 
-        String message = null;
-        String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$*" ;
-        if (etxtName.getText().toString().isEmpty()) {
-            etxtName.setError(getString(R.string.enter_association_name));
-            etxtName.requestFocus();
-            return false;
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
 
-        }else if (etxtYear_of_registration.getText().toString().isEmpty() || etxtYear_of_registration.getText().toString().trim().length() <4 ) {
-            etxtYear_of_registration.setError(getString(R.string.enter_registration_year));
-            etxtYear_of_registration.requestFocus();
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
             return false;
-        } else if (etxtFull_address.getText().toString().isEmpty()) {
-            etxtFull_address.setError(getString(R.string.enter_full_address));
-            etxtFull_address.requestFocus();
-            return false;
-        } else if (etxtTelephone.getText().toString().isEmpty()) {
-            etxtTelephone.setError(getString(R.string.enter_association_telephone));
-            etxtTelephone.requestFocus();
-            return false;
-        } else if (etxtEmail.getText().toString().isEmpty()) {
-            etxtEmail.setError(getString(R.string.enter_email));
-            etxtEmail.requestFocus();
-            return false;
-        } else if (!etxtEmail.getText().toString().matches(regex)) {
-            etxtEmail.setError(getString(R.string.enter_valid_email));
-            etxtEmail.requestFocus();
-                return false;
-        } else if (spinOrganisationType.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_organisation_type);
-            spinOrganisationType.requestFocus();
-            return false;
-
-        } else if (spinRegistrationLevel.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_registration_level);
-            spinRegistrationLevel.requestFocus();
-            return false;
-        }else if (spinDistrict.getText().toString().isEmpty()) {
-            spinDistrict.setError(getString(R.string.enter_district));
-            spinDistrict.requestFocus();
-            return false;
-        } else if (spinSubCounty.getText().toString().isEmpty()) {
-            spinSubCounty.setError(getString(R.string.enter_sub_county));
-            spinSubCounty.requestFocus();
-            return false;
-        } else if (spinVillage.getText().toString().isEmpty()) {
-            spinVillage.setError(getString(R.string.enter_village));
-            spinVillage.requestFocus();
-            return false;
-        }else if(message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            etxtName.setError(null);
-            etxtYear_of_registration.setError(null);
-            etxtFull_address.setError(null);
-            etxtTelephone.setError(null);
-            etxtEmail.setError(null);
-            spinDistrict.setError(null);
-            spinSubCounty.setError(null);
-            spinVillage.setError(null);
-
-            return true;
-
         }
+
+
+        return true;
     }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean hasValidEmail(EditText editText, String message){
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$*")) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            Toast.makeText(context,  message, Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+    public boolean validateEntries() {
+        boolean check = true;
+        if (!hasText(etxtName)) check = false;
+        if (!hasText(etxtYear_of_registration)) check = false;
+        if (!hasValidEmail(etxtEmail,getString(R.string.enter_valid_email))) check = false;
+        if (!hasText(etxtFull_address)) check = false;
+        if (!hasText(etxtTelephone)) check = false;
+        if (!hasText(etxtEmail)) check = false;
+        if (!hasText(spinDistrict)) check = false;
+        if (!hasText(spinSubCounty)) check = false;
+        if (!hasText(spinVillage)) check = false;
+        if(!selectedText(spinOrganisationType,organTypeLayout)) check = false;
+        if(!selectedText(spinRegistrationLevel,regLevelLayout)) check = false;
+
+
+        return check;
+
+
+    }
+
+
 }

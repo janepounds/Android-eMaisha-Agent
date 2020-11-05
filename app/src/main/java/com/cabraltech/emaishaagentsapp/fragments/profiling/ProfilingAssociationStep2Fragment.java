@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -31,6 +33,7 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
 
     private EditText etxtChairperson,etxtChairpersonContact,etxtSecretary,etxtSecretaryContact,etxtRespondent,etxtRespondentContact;
     private Spinner spinRespondentPosition;
+    private LinearLayout respondentPositionLayout;
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
     String respondent_position, name, year_of_registration, full_address, telephone, email,district,sub_county,village,registration_level,organisation_type;
@@ -95,6 +98,7 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
         etxtRespondent = view.findViewById(R.id.respondent_et);
         etxtRespondentContact = view.findViewById(R.id.respondent_contact_et);
         spinRespondentPosition = view.findViewById(R.id.respondent_position_held_spinner);
+        respondentPositionLayout = view.findViewById(R.id.resp_position_layout);
 
 
         spinRespondentPosition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -157,54 +161,67 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
 
     }
 
-    public boolean validateEntries() {
+    public  boolean hasText(EditText editText) {
 
-        String message = null;
-        if (etxtChairperson.getText().toString().isEmpty()) {
-            etxtChairperson.setError(getString(R.string.enter_chairperson_name));
-            etxtChairperson.requestFocus();
-            return false;
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
 
-        }else if (etxtChairpersonContact.getText().toString().isEmpty()) {
-            etxtChairpersonContact.setError(getString(R.string.enter_chairperson_contact));
-            etxtChairpersonContact.requestFocus();
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
             return false;
-        } else if (etxtSecretary.getText().toString().isEmpty()) {
-            etxtSecretary.setError(getString(R.string.enter_secretary_name));
-            etxtSecretary.requestFocus();
-            return false;
-        } else if (etxtSecretaryContact.getText().toString().isEmpty()) {
-            etxtSecretaryContact.setError(getString(R.string.enter_secretary_contact));
-            etxtSecretaryContact.requestFocus();
-            return false;
-        } else if (etxtRespondent.getText().toString().isEmpty()) {
-            etxtRespondent.setError(getString(R.string.enter_respondent_name));
-            etxtRespondent.requestFocus();
-            return false;
-        } else if (etxtRespondentContact.getText().toString().isEmpty()) {
-            etxtRespondentContact.setError(getString(R.string.enter_respondent_contact));
-            etxtRespondentContact.requestFocus();
-            return false;
-        } else if (spinRespondentPosition.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_respondent_position);
-            spinRespondentPosition.requestFocus();
-            return false;
-
-        }else if(message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            etxtChairperson.setError(null);
-            etxtChairpersonContact.setError(null);
-            etxtSecretary.setError(null);
-            etxtSecretaryContact.setError(null);
-            etxtRespondent.setError(null);
-            etxtRespondentContact.setError(null);
-
-
-            return true;
-
         }
 
+
+        return true;
     }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public boolean validateEntries() {
+        boolean check = true;
+        if (!hasText(etxtChairperson)) check = false;
+        if (!hasText(etxtChairpersonContact)) check = false;
+        if (!hasText(etxtSecretary)) check = false;
+        if (!hasText(etxtSecretaryContact)) check = false;
+        if (!hasText(etxtRespondent)) check = false;
+        if (!hasText(etxtRespondentContact)) check = false;
+        if(!selectedText(spinRespondentPosition,respondentPositionLayout)) check = false;
+
+
+
+        return check;
+
+
+    }
+
 }
