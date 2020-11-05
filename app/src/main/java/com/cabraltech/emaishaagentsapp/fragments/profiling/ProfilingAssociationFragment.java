@@ -66,7 +66,7 @@ public class ProfilingAssociationFragment extends Fragment {
     private EditText etxtName,etxtYear_of_registration,etxtFull_address,etxtTelephone,etxtEmail;
     private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
     private Spinner spinOrganisationType,spinRegistrationLevel;
-    private LinearLayout organTypeLayout,regLevelLayout;
+    private LinearLayout organTypeLayout,regLevelLayout,districtLayout,subcountyLayout,villageLayout;
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
 
@@ -123,6 +123,9 @@ public class ProfilingAssociationFragment extends Fragment {
         spinRegistrationLevel = view.findViewById(R.id.registration_level_spinner);
         regLevelLayout = view.findViewById(R.id.reg_level_layout);
         organTypeLayout = view.findViewById(R.id.organ_type_layout);
+        districtLayout = view.findViewById(R.id.district_layout);
+        subcountyLayout = view.findViewById(R.id.subcounty_layout);
+        villageLayout = view.findViewById(R.id.village_layout);
 
 
         Button next_button = view.findViewById(R.id.next_button);
@@ -390,6 +393,29 @@ public class ProfilingAssociationFragment extends Fragment {
 
         return true;
     }
+
+    public  boolean hasAutoText(AutoCompleteTextView autoCompleteTextView,LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
     public  boolean selectedText(Spinner spinner, LinearLayout layout) {
 
         int position = spinner.getSelectedItemPosition();
@@ -437,13 +463,13 @@ public class ProfilingAssociationFragment extends Fragment {
         boolean check = true;
         if (!hasText(etxtName)) check = false;
         if (!hasText(etxtYear_of_registration)) check = false;
-        if (!hasValidEmail(etxtEmail,getString(R.string.enter_valid_email))) check = false;
+//        if (!hasValidEmail(etxtEmail,getString(R.string.enter_valid_email))) check = false;
         if (!hasText(etxtFull_address)) check = false;
         if (!hasText(etxtTelephone)) check = false;
         if (!hasText(etxtEmail)) check = false;
-        if (!hasText(spinDistrict)) check = false;
-        if (!hasText(spinSubCounty)) check = false;
-        if (!hasText(spinVillage)) check = false;
+        if (!hasAutoText(spinDistrict,districtLayout)) check = false;
+        if (!hasAutoText(spinSubCounty,subcountyLayout)) check = false;
+        if (!hasAutoText(spinVillage,villageLayout)) check = false;
         if(!selectedText(spinOrganisationType,organTypeLayout)) check = false;
         if(!selectedText(spinRegistrationLevel,regLevelLayout)) check = false;
 

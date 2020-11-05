@@ -171,7 +171,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/crop_layout"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -186,6 +186,7 @@
                     android:layout_marginBottom="4dp"
                     />
                 <LinearLayout
+                    android:id="@+id/crop_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -217,6 +218,7 @@
                 android:text="@string/main_activities"
                 android:layout_marginBottom="4dp"/>
             <LinearLayout
+                android:id="@+id/main_activities_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -295,6 +297,7 @@
                 android:text="@string/asset_ownership"
                 android:layout_marginBottom="4dp"/>
             <LinearLayout
+                android:id="@+id/asset_ownership_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -433,6 +436,7 @@
                 android:text="@string/label_market"
                 android:layout_marginBottom="4dp"/>
             <LinearLayout
+                android:id="@+id/market_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -490,6 +494,7 @@
                 android:text="@string/marketing_channels"
                 android:layout_marginBottom="4dp"/>
             <LinearLayout
+                android:id="@+id/marketing_channels_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -607,6 +612,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/check_box_bg">
                 <LinearLayout
+                    android:id="@+id/funding_source_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -681,6 +687,7 @@
                 android:text="@string/additional_services"
                 android:layout_marginBottom="4dp"/>
             <LinearLayout
+                android:id="@+id/additional_services_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

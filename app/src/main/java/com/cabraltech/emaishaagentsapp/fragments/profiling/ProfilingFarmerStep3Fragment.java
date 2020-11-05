@@ -53,6 +53,11 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -131,24 +136,41 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             }
         });
         spinMainCrop.setAdapter(commodityListAdapter);
-//        spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                main_crop = adapterView.getItemAtPosition(i).toString();
-//                if (main_crop.toLowerCase().equals("none")) {
-//                    moreCropsLayout.setVisibility(View.GONE);
-//
-//                } else {
-//                    moreCropsLayout.setVisibility(View.VISIBLE);
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
+        spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                main_crop = spinMainCrop.getText().toString();
+                if (main_crop.toLowerCase().equals("none")) {
+                    moreCropsLayout.setVisibility(View.GONE);
+
+                } else {
+                    moreCropsLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinMainLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                main_livestock = spinMainLivestock.getText().toString();
+
+                if (main_livestock.toLowerCase().equals("none")) {
+                    moreLivestockLayout.setVisibility(View.GONE);
+
+                } else {
+                    moreLivestockLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         ArrayAdapter<String> secondcropListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
@@ -236,59 +258,6 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         });
         etxtSecondLivestock.setAdapter(secondlivestockAdapter);
 
-//        spinMainLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                main_livestock = adapterView.getItemAtPosition(i).toString();
-//
-//                if (main_livestock.toLowerCase().equals("none")) {
-//                    moreLivestockLayout.setVisibility(View.GONE);
-//
-//                } else {
-//                    moreLivestockLayout.setVisibility(View.VISIBLE);
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//        etxtSecondLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                second_crop = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//
-//        spinThirdCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                third_crop = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//
-//        spinSecondCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                second_livestock = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
 
 
         binding.submitButton.setOnClickListener(new View.OnClickListener() {

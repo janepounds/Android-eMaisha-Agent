@@ -47,6 +47,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     private LinearLayout cropvalueLayout,livestockLayout;
     private  EditText etxtMalesNumber,etxtFemalesNumber;
     private  Spinner spinLivestockValueChain,spinCropValueChain;
+    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
     public ProfilingAssociationStep3Fragment() {
         // Required empty public constructor
     }
@@ -153,6 +154,12 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         chkTrainingOnInstitutionalDevt = view.findViewById(R.id.additional_services_training_institutional_devt_cb);
         cropvalueLayout = view.findViewById(R.id.crop_layout);
         livestockLayout = view.findViewById(R.id.livestock_layout);
+        mainActivitiesLayout = view.findViewById(R.id.main_activities_layout);
+        assetOwnerShipLayout = view.findViewById(R.id.asset_ownership_layout);
+        marketLayout = view.findViewById(R.id.market_layout);
+        marketingchannelsLayout = view.findViewById(R.id.marketing_channels_layout);
+        fundingsourceLayout = view.findViewById(R.id.funding_source_layout);
+        additionalserviceLayout = view.findViewById(R.id.additional_services_layout);
 
 
         spinCropValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -344,6 +351,30 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
 
     }
 
+    public boolean TestCheckBox(LinearLayout linearLayout,String message) {
+        View v = null;
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        int count = linearLayout.getChildCount();
+        for (int n = 0; n < count; ++n)
+            v = linearLayout.getChildAt(n);
+        if (v instanceof CheckBox && ((CheckBox) v).isChecked()) {
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            return true;
+        }
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            Toast.makeText(context,  message, Toast.LENGTH_LONG).show();
+            return false;
+
+
+    }
+
     public  boolean hasText(EditText editText) {
 
         String text = editText.getText().toString().trim();
@@ -396,6 +427,12 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         if (!hasText(etxtFemalesNumber)) check = false;
         if(!selectedText(spinCropValueChain,cropvalueLayout)) check = false;
         if(!selectedText(spinLivestockValueChain,livestockLayout)) check = false;
+        if(TestCheckBox(mainActivitiesLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+        if(TestCheckBox(assetOwnerShipLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+        if(TestCheckBox(marketLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+        if(TestCheckBox(marketingchannelsLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+        if(TestCheckBox(fundingsourceLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+        if(TestCheckBox(additionalserviceLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
 
 
 

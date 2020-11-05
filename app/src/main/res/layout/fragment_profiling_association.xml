@@ -106,7 +106,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
             <LinearLayout
-                android:id="@+id/reg_level_layout"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,6 +120,7 @@
                     android:text="@string/registration_level"
                     android:layout_marginBottom="4dp" />
                 <LinearLayout
+                    android:id="@+id/reg_level_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -181,6 +182,7 @@
                     android:text="@string/district"
                     android:layout_marginBottom="4dp" />
                 <LinearLayout
+                    android:id="@+id/district_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -195,6 +197,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -209,6 +212,7 @@
                     android:layout_marginBottom="4dp"
                     />
                 <LinearLayout
+                    android:id="@+id/subcounty_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -249,6 +253,7 @@
                     android:layout_marginBottom="4dp"
                     />
                 <LinearLayout
+                    android:id="@+id/village_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
