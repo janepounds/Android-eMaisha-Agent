@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -34,6 +37,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
     CheckBox chkMaaif, chkUnada, chkNda;
     private Spinner spinCertificationType,spinRegistrationStatus,spinAssociationMember;
     private EditText etxtRegistrationYear,etxtCertificationNumber,etxtAssociationName;
+    private LinearLayout assMembershipLayout,certTypeLayout,regBodyLayout,regStatusLayout;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -65,6 +69,8 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         owner = getArguments().getString("owner");
         owner_contact = getArguments().getString("owner_contact");
 
+
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_agro_input_dealer_step2, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -93,6 +99,11 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         chkMaaif = view.findViewById(R.id.registration_body_maaif_cb);
         chkUnada = view.findViewById(R.id.registration_body_unada_cb);
         chkNda = view.findViewById(R.id.registration_body_nda_cb);
+
+        assMembershipLayout = view.findViewById(R.id.ass_membership_layout);
+        certTypeLayout = view.findViewById(R.id.certificate_type_layout);
+        regBodyLayout = view.findViewById(R.id.registration_body_layout);
+        regStatusLayout = view.findViewById(R.id.registration_status_layout);
 
 
         spinCertificationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -186,50 +197,63 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
 
     }
 
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+
+
     public boolean validateEntries() {
+        boolean check = true;
+        if (!selectedText(spinRegistrationStatus,regStatusLayout)) check = false;
+        if (!hasText(etxtRegistrationYear)|| etxtRegistrationYear.getText().toString().trim().length() < 4) check = false;
+        if(!selectedText(spinCertificationType,certTypeLayout)) check = false;
+        if (!hasText(etxtCertificationNumber)) check = false;
+        if (!hasText(etxtAssociationName)) check = false;
+        if(!selectedText(spinAssociationMember,assMembershipLayout)) check = false;
 
-        String message = null;
-        if (etxtRegistrationYear.getText().toString().isEmpty()) {
-            etxtRegistrationYear.setError(getString(R.string.enter_registration_year));
-            etxtRegistrationYear.requestFocus();
-            return false;
+        return check;
 
-        } else if (spinRegistrationStatus.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_registration_status);
-            spinRegistrationStatus.requestFocus();
-            return false;
-
-        } else if (spinCertificationType.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_certificate_type);
-            spinCertificationType.requestFocus();
-            return false;
-
-        } else if (etxtCertificationNumber.getText().toString().isEmpty()) {
-            etxtCertificationNumber.setError(getString(R.string.enter_certificate_number));
-            etxtCertificationNumber.requestFocus();
-            return false;
-
-        } else if (spinAssociationMember.getSelectedItemPosition() == 0) {
-                message = getString(R.string.select_association_membership);
-                spinAssociationMember.requestFocus();
-                return false;
-
-        } else if (etxtAssociationName.getText().toString().isEmpty()) {
-            etxtAssociationName.setError(getString(R.string.enter_association_name));
-            etxtAssociationName.requestFocus();
-            return false;
-
-
-        } else if(message != null) {
-                Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-                return false;
-            } else {
-                etxtRegistrationYear.setError(null);
-                etxtCertificationNumber.setError(null);
-                etxtAssociationName.setError(null);
-
-                return true;
-
-            }
     }
 }

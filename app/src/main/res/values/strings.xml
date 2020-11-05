@@ -314,7 +314,7 @@
     <string name="enter_house_hold_size">please enter house hold size</string>
     <string name="enter_house_hold_head">please enter house hold head</string>
     <string name="enter_source_of_icome">please enter source of income</string>
-    <string name="missing_fields_message">missing field : </string>
+    <string name="missing_fields_message">Please enter/select valid input </string>
     <string name="select_religion">please select religion</string>
     <string name="select_nationality">please select nationality</string>
     <string name="select_marital_status">please select marital status</string>

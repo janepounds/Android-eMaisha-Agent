@@ -16,10 +16,10 @@
     <item>
         <shape android:shape="rectangle" >
             <padding
-                android:bottom="8dp"
-                android:left="8dp"
-                android:right="8dp"
-                android:top="8dp" />
+                android:bottom="16dp"
+                android:left="16dp"
+                android:right="16dp"
+                android:top="16dp" />
             <solid android:color="#ffffff" />
 
             <corners android:radius="4dp" />

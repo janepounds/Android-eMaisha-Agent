@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -40,6 +42,7 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
     CheckBox chkTraining, chkAdvisory, chkCredit, chkTechnology, chkMarketInformation, chkPrintedMaterial;
     private EditText etxtNumberOfOutlets;
     private Spinner spinBusinessType,spinTypeOfSales;
+    private LinearLayout businessTypeLayout, salesTypeLayout;
 
 
     @Override
@@ -123,6 +126,8 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
         chkTechnology = view.findViewById(R.id.additional_services_tech_cb);
         chkMarketInformation = view.findViewById(R.id.additional_services_market_info_cb);
         chkPrintedMaterial = view.findViewById(R.id.additional_services_printed_material_cb);
+        businessTypeLayout = view.findViewById(R.id.business_type_layout);
+        salesTypeLayout = view.findViewById(R.id.type_of_sales_layout);
 
 
         spinBusinessType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -269,35 +274,58 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
 
 
     }
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
 
     public boolean validateEntries() {
-        String message = null;
+        boolean check = true;
+        if (!selectedText(spinBusinessType,businessTypeLayout)) check = false;
+        if (!hasText(etxtNumberOfOutlets))check = false;
+        if(!selectedText(spinTypeOfSales,salesTypeLayout)) check = false;
 
-        if (etxtNumberOfOutlets.getText().toString().isEmpty()) {
-            etxtNumberOfOutlets.setError(getString(R.string.enter_number_outlets));
-            etxtNumberOfOutlets.requestFocus();
-            return false;
-
-        } else if (spinBusinessType.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_business_type);
-            spinBusinessType.requestFocus();
-            return false;
-
-        } else if (spinTypeOfSales.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_sales_type);
-            spinTypeOfSales.requestFocus();
-            return false;
-
-        } else if(message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-
-        } else {
-            etxtNumberOfOutlets.setError(null);
-
-            return true;
-
-        }
+        return check;
 
     }
 }

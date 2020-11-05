@@ -286,16 +286,17 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     public  boolean hasText(EditText editText) {
 
         String text = editText.getText().toString().trim();
-        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_spinner,null));
-
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
-            int bottom = editText.getPaddingBottom();
-            int top = editText.getPaddingTop();
-            int right = editText.getPaddingRight();
-            int left = editText.getPaddingLeft();
-            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
-            editText.setPadding(bottom,top,right,left);
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
             return false;
@@ -307,14 +308,18 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     public  boolean selectedText(Spinner spinner,LinearLayout layout) {
 
         int position = spinner.getSelectedItemPosition();
-        layout.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_spinner));
-        layout.setPadding(8,8,8,8);
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
 
         // length 0 means there is no text
         if (position == 0) {
 
             layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
-            layout.setPadding(8,8,8,8);
+            layout.setPadding(left,top,right,bottom);
             layout.setFocusable(true);
             layout.requestFocus();
             return false;
@@ -329,12 +334,13 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         int top = textView.getPaddingTop();
         int right = textView.getPaddingRight();
         int left = textView.getPaddingLeft();
-        textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_spinner,null));
+        textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        textView.setPadding(left,top,right,bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
-            textView.setPadding(bottom,top,right,left);
+            textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            textView.setPadding(left,top,right,bottom);
             textView.setFocusable(true);
             textView.requestFocus();
             return false;

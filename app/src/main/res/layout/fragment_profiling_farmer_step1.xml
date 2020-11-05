@@ -193,7 +193,8 @@
                         android:id="@+id/gender_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/rounded_rectangle_spinner">
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        android:padding="8dp">
                         <Spinner
                             android:id="@+id/gender_spinner"
                             android:layout_width="match_parent"
@@ -220,7 +221,7 @@
                         android:id="@+id/nationality_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/rounded_rectangle_spinner"
+                        android:background="@drawable/rounded_rectangle_edit_text"
                         android:padding="8dp">
                         <Spinner
                             android:id="@+id/nationality_spinner"
@@ -258,7 +259,8 @@
                         android:id="@+id/religion_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/rounded_rectangle_spinner">
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        android:padding="8dp">
 
                         <Spinner
                             android:id="@+id/religion_spinner"
@@ -286,7 +288,7 @@
                         android:id="@+id/education_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/rounded_rectangle_spinner"
+                        android:background="@drawable/rounded_rectangle_edit_text"
                         android:padding="8dp">
                         <Spinner
                             android:id="@+id/level_of_education_spinner"
@@ -324,7 +326,8 @@
                         android:id="@+id/marital_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/rounded_rectangle_spinner">
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        android:padding="8dp">
                         <Spinner
                             android:id="@+id/marital_status_spinner"
                             android:layout_width="match_parent"
@@ -386,7 +389,8 @@
                         android:id="@+id/language_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/rounded_rectangle_spinner">
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        android:padding="8dp">
                         <Spinner
                             android:id="@+id/language_used_spinner"
                             android:layout_width="match_parent"
@@ -438,7 +442,8 @@
                     android:id="@+id/head_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_spinner">
+                    android:background="@drawable/rounded_rectangle_edit_text"
+                    android:padding="8dp">
                 <Spinner
                     android:id="@+id/household_head_et"
                     android:layout_width="match_parent"

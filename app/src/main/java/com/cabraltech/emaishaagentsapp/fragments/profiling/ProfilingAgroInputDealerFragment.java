@@ -13,14 +13,17 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -50,6 +53,7 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
 
     private EditText etxtBusinessName,etxtFull_address,etxtOwner,etxtOwnerContact;
     private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
+    private LinearLayout districtLayout,subCountyLayout, villageLayout,ownerContactLayout;
 
     String  certification_type, certification_status;
      String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
@@ -102,6 +106,11 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         etxtFull_address = view.findViewById(R.id.full_address_et);
         etxtOwner = view.findViewById(R.id.owner_et);
         etxtOwnerContact = view.findViewById(R.id.owner_contact_et);
+        districtLayout = view.findViewById(R.id.district_layout);
+        subCountyLayout = view.findViewById(R.id.subcounty_layout);
+        villageLayout = view.findViewById(R.id.village_layout);
+        ownerContactLayout = view.findViewById(R.id.owner_contact_layout);
+
 
        // final EditText etxtProprietorContact = view.findViewById(R.id.proprietor_contact_et);
         Spinner spinCertificationType = view.findViewById(R.id.certificate_type_spinner);
@@ -289,48 +298,65 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         });
 
     }
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+
 
     public boolean validateEntries() {
 
-        String message = null;
-        if (etxtBusinessName.getText().toString().isEmpty()) {
-            etxtBusinessName.setError(getString(R.string.enter_business_name));
-            etxtBusinessName.requestFocus();
-            return false;
+      boolean check = true;
+      if (!hasText(etxtBusinessName)) check = false;
+       if (!hasText(etxtOwner)) check = false;
+        if (!hasText(etxtOwnerContact) || etxtOwnerContact.getText().toString().trim().length() < 9) check = false;
+        if (!hasText(etxtFull_address)) check = false;
+          if (!autoText(spinDistrict,districtLayout)) check = false;
+         if (!autoText(spinSubCounty,subCountyLayout)) check = false;
+          if (!autoText(spinVillage,villageLayout)) check = false;
+       // Toast.makeText(context, getString(R.string.missing_fields_message), Toast.LENGTH_LONG).show();
+           return check;
 
-        }else if (etxtOwner.getText().toString().isEmpty()) {
-            etxtOwner.setError(getString(R.string.enter_owner));
-            etxtOwner.requestFocus();
-            return false;
-        } else if (etxtOwnerContact.getText().toString().isEmpty()) {
-            etxtOwnerContact.setError(getString(R.string.enter_owner_contact));
-            etxtOwnerContact.requestFocus();
-            return false;
-        }else if (spinDistrict.getText().toString().isEmpty()) {
-            spinDistrict.setError(getString(R.string.enter_district));
-            spinDistrict.requestFocus();
-            return false;
-        } else if (spinSubCounty.getText().toString().isEmpty()) {
-            spinSubCounty.setError(getString(R.string.enter_sub_county));
-            spinSubCounty.requestFocus();
-            return false;
-        } else if (spinVillage.getText().toString().isEmpty()) {
-            spinVillage.setError(getString(R.string.enter_village));
-            spinVillage.requestFocus();
-            return false;
-        }else if(message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            etxtBusinessName.setError(null);
-            etxtOwnerContact.setError(null);
-            etxtOwner.setError(null);
-            spinDistrict.setError(null);
-            spinSubCounty.setError(null);
-            spinVillage.setError(null);
 
-            return true;
-
-        }
     }
 }
