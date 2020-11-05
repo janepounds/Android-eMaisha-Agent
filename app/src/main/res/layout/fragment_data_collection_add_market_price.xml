@@ -67,7 +67,8 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:inputType="text"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:entries="@array/crop_array"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

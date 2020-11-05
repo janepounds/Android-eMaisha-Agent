@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,7 +47,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     String[] descriptionData = {"Personal\nDetails", "Contact\nDetails", "Farming\nDetails"};
     String farming_size, second_livestock, main_crop, second_crop, third_crop, main_livestock, district, sub_county, village, gender, marital_status, religion, education_level, language_used, nationality, first_name, last_name, dob, age, household_size, household_head, source_of_income, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address;
     private EditText etxtFarmingSize;
-    private Spinner spinMainCrop,spinSecondCrop,spinThirdCrop,spinMainLivestock,etxtSecondLivestock;
+    private AutoCompleteTextView spinMainCrop,spinSecondCrop,spinThirdCrop,spinMainLivestock,etxtSecondLivestock;
     private LinearLayout moreCropsLayout, moreLivestockLayout;
     public ProfilingFarmerStep3Fragment() {
         // Required empty public constructor
@@ -106,78 +110,185 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
          moreLivestockLayout = view.findViewById(R.id.second_livestock_layout);
 
 
-        spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                main_crop = adapterView.getItemAtPosition(i).toString();
-                if (main_crop.toLowerCase().equals("none")) {
-                    moreCropsLayout.setVisibility(View.GONE);
 
-                } else {
-                    moreCropsLayout.setVisibility(View.VISIBLE);
-                }
+        ArrayAdapter<String> commodityListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
+        spinMainCrop.setThreshold(1);
+        spinMainCrop.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-        });
-
-        spinMainLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                main_livestock = adapterView.getItemAtPosition(i).toString();
-
-                if (main_livestock.toLowerCase().equals("none")) {
-                    moreLivestockLayout.setVisibility(View.GONE);
-
-                } else {
-                    moreLivestockLayout.setVisibility(View.VISIBLE);
-                }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void afterTextChanged(Editable editable) {
+                spinMainCrop.showDropDown();
 
             }
         });
-        etxtSecondLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinMainCrop.setAdapter(commodityListAdapter);
+//        spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                main_crop = adapterView.getItemAtPosition(i).toString();
+//                if (main_crop.toLowerCase().equals("none")) {
+//                    moreCropsLayout.setVisibility(View.GONE);
+//
+//                } else {
+//                    moreCropsLayout.setVisibility(View.VISIBLE);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+
+
+        ArrayAdapter<String> secondcropListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
+        spinSecondCrop.setThreshold(1);
+        spinSecondCrop.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                second_crop = adapterView.getItemAtPosition(i).toString();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                spinSecondCrop.showDropDown();
 
             }
         });
+        spinSecondCrop.setAdapter(secondcropListAdapter);
 
-        spinThirdCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ArrayAdapter<String> thirdcropListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
+        spinThirdCrop.setThreshold(1);
+        spinThirdCrop.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                third_crop = adapterView.getItemAtPosition(i).toString();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-        });
-
-        spinSecondCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                second_livestock = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void afterTextChanged(Editable editable) {
+                spinThirdCrop.showDropDown();
 
             }
         });
+        spinThirdCrop.setAdapter(thirdcropListAdapter);
+
+        ArrayAdapter<String> mainlivestockAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.main_livestock_array));
+        spinMainLivestock.setThreshold(1);
+        spinMainLivestock.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                spinMainLivestock.showDropDown();
+
+            }
+        });
+        spinMainLivestock.setAdapter(mainlivestockAdapter);
+
+
+        ArrayAdapter<String>secondlivestockAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.main_livestock_array));
+        etxtSecondLivestock.setThreshold(1);
+        etxtSecondLivestock.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                etxtSecondLivestock.showDropDown();
+
+            }
+        });
+        etxtSecondLivestock.setAdapter(secondlivestockAdapter);
+
+//        spinMainLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                main_livestock = adapterView.getItemAtPosition(i).toString();
+//
+//                if (main_livestock.toLowerCase().equals("none")) {
+//                    moreLivestockLayout.setVisibility(View.GONE);
+//
+//                } else {
+//                    moreLivestockLayout.setVisibility(View.VISIBLE);
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+//        etxtSecondLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                second_crop = adapterView.getItemAtPosition(i).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+//
+//        spinThirdCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                third_crop = adapterView.getItemAtPosition(i).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+//
+//        spinSecondCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                second_livestock = adapterView.getItemAtPosition(i).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
 
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
@@ -254,11 +365,11 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         if (etxtFarmingSize.getText().toString().isEmpty()) {
             etxtFarmingSize.setError(getString(R.string.enter_farm_size));
             return false;
-        } else if (spinMainCrop.getSelectedItemPosition() == 0) {
+        } else if (spinMainCrop.getText().toString().isEmpty()) {
             message = getString(R.string.select_main_crop);
             spinMainCrop.requestFocus();
             return false;
-        } else if (spinMainLivestock.getSelectedItemPosition() == 0) {
+        } else if (spinMainLivestock.getText().toString().isEmpty()) {
             message = getString(R.string.select_main_livestock);
             spinMainLivestock.requestFocus();
             return false;

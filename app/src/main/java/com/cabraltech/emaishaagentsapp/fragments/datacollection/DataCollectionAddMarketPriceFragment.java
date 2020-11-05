@@ -124,9 +124,9 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
             }
         });
-        ArrayList<String> commodities = new ArrayList<>();
 
-        ArrayAdapter<String> commodityListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line, commodities);
+
+        ArrayAdapter<String> commodityListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
         spinCommodities.setThreshold(1);
         spinCommodities.addTextChangedListener(new TextWatcher() {
             @Override
@@ -141,6 +141,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                spinCommodities.showDropDown();
 
             }
         });

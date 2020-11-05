@@ -125,12 +125,12 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
-                        <Spinner
+                        <AutoCompleteTextView
                             android:id="@+id/main_crop_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/main_crop_array" />
+                            android:entries="@array/crop_array" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -164,12 +164,12 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
-                        <Spinner
+                        <AutoCompleteTextView
                             android:id="@+id/second_crop_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/second_crop_array" />
+                            android:entries="@array/crop_array" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -191,12 +191,12 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
-                        <Spinner
+                        <AutoCompleteTextView
                             android:id="@+id/third_crop_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/third_crop_array" />
+                            android:entries="@array/crop_array" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -220,15 +220,14 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/main_livestock"
                         android:layout_marginBottom="4dp"
-                        />
+                        android:text="@string/main_livestock" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
-                        <Spinner
+                        <AutoCompleteTextView
                             android:id="@+id/main_livestock_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -258,12 +257,12 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="8dp">
-                        <Spinner
+                        <AutoCompleteTextView
                             android:id="@+id/second_livestock_et"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/second_livestock_array" />
+                            android:entries="@array/main_livestock_array" />
                     </LinearLayout>
 
 
