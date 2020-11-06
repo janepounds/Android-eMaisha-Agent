@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -48,7 +49,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     String farming_size, second_livestock, main_crop, second_crop, third_crop, main_livestock, district, sub_county, village, gender, marital_status, religion, education_level, language_used, nationality, first_name, last_name, dob, age, household_size, household_head, source_of_income, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address;
     private EditText etxtFarmingSize;
     private AutoCompleteTextView spinMainCrop,spinSecondCrop,spinThirdCrop,spinMainLivestock,etxtSecondLivestock;
-    private LinearLayout moreCropsLayout, moreLivestockLayout;
+    private LinearLayout moreCropsLayout, moreLivestockLayout, mainCropLayout,mainLivestockLayout;
     public ProfilingFarmerStep3Fragment() {
         // Required empty public constructor
     }
@@ -113,6 +114,8 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
          spinMainLivestock = view.findViewById(R.id.main_livestock_spinner);
          moreCropsLayout = view.findViewById(R.id.second_third_crop_layout);
          moreLivestockLayout = view.findViewById(R.id.second_livestock_layout);
+        mainCropLayout = view.findViewById(R.id.main_crop_layout);
+        mainLivestockLayout = view.findViewById(R.id.main_livestock_layout);
 
 
 
@@ -328,28 +331,61 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         //        location[0], location[1] + anchorView.getHeight());
 
     }
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+
 
     public boolean validateEntries() {
-        String message = null;
-        if (etxtFarmingSize.getText().toString().isEmpty()) {
-            etxtFarmingSize.setError(getString(R.string.enter_farm_size));
-            return false;
-        } else if (spinMainCrop.getText().toString().isEmpty()) {
-            message = getString(R.string.select_main_crop);
-            spinMainCrop.requestFocus();
-            return false;
-        } else if (spinMainLivestock.getText().toString().isEmpty()) {
-            message = getString(R.string.select_main_livestock);
-            spinMainLivestock.requestFocus();
-            return false;
-        } else if (message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            etxtFarmingSize.setError(null);
+        boolean check = true;
 
-            return true;
-        }
+        if (!hasText(etxtFarmingSize)) check = false;
+        if (!autoText(spinMainCrop,mainCropLayout)) check = false;
+        if (!autoText(spinMainLivestock,mainLivestockLayout)) check = false;
+        // Toast.makeText(context, getString(R.string.missing_fields_message), Toast.LENGTH_LONG).show();
+        return check;
+
     }
 
 

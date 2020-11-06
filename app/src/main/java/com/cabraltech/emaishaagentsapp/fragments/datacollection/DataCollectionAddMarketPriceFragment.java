@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -26,6 +27,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +54,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
     private AutoCompleteTextView spinCommodities;
     private EditText etxtWholeSale,etxtRetailSale;
     private TextView txtDate;
+    private  LinearLayout commoditiesLayout,varietyLayout,marketLayout,unitsLayout;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -95,6 +98,10 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
         etxtWholeSale = view.findViewById(R.id.wholesale_price_et);
         etxtRetailSale  = view.findViewById(R.id.retail_price_et);
+        commoditiesLayout  = view.findViewById(R.id.commodoties_layout);
+        varietyLayout  = view.findViewById(R.id.variety_layout);
+        marketLayout  = view.findViewById(R.id.market_layout);
+        unitsLayout  = view.findViewById(R.id.units_layout);
 
         Button btnSubmit = view.findViewById(R.id.submit_button);
 
@@ -234,56 +241,103 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         ed_.setInputType(InputType.TYPE_NULL);
     }
 
-    public boolean validateEntries(){
-        String message = null;
-        if (spinCommodities.getText().toString().isEmpty()) {
-            spinCommodities.setError(getString(R.string.enter_commodities));
-            spinCommodities.requestFocus();
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
             return false;
-
-        }else if (etxtRetailSale.getText().toString().isEmpty()) {
-            etxtRetailSale.setError(getString(R.string.enter_retail_price));
-            etxtRetailSale.requestFocus();
-            return false;
-
-        } else if (spinVarieties.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_varieties);
-            spinVarieties.requestFocus();
-            return false;
-
-        } else if (spinMarket_name.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_market);
-            spinMarket_name.requestFocus();
-            return false;
-
-        } else if (etxtWholeSale.getText().toString().isEmpty()) {
-            etxtWholeSale.setError(getString(R.string.enter_wholesale_price));
-            etxtWholeSale.requestFocus();
-            return false;
-
-        } else if (spinUnits.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_association_membership);
-            spinUnits.requestFocus();
-            return false;
-
-        } else if (txtDate.getText().toString().isEmpty()) {
-            txtDate.setError(getString(R.string.enter_date));
-            txtDate.requestFocus();
-            return false;
-
-
-        } else if(message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            spinCommodities.setError(null);
-            txtDate.setError(null);
-            etxtWholeSale.setError(null);
-            etxtRetailSale.setError(null);
-
-            return true;
-
         }
+
+
+        return true;
+    }
+    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner,LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            layout.setPadding(left, top, right, bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+    public boolean hasTextView(TextView textView){
+        String text = textView.getText().toString().trim();
+        int bottom = textView.getPaddingBottom();
+        int top = textView.getPaddingTop();
+        int right = textView.getPaddingRight();
+        int left = textView.getPaddingLeft();
+        textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        textView.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            textView.setPadding(left,top,right,bottom);
+            textView.setFocusable(true);
+            textView.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    public boolean validateEntries(){
+        boolean check = true;
+        if (!hasTextView(txtDate)) check = false;
+        if (!autoText(spinCommodities,commoditiesLayout)) check = false;
+        if(!selectedText(spinVarieties,varietyLayout)) check = false;
+        if(!selectedText(spinMarket_name,marketLayout)) check = false;
+        if(!selectedText(spinUnits,unitsLayout)) check = false;
+        if(!hasText(etxtWholeSale)) check = false;
+        if(!hasText(etxtRetailSale)) check = false;
+
+        return check;
+
 
     }
 

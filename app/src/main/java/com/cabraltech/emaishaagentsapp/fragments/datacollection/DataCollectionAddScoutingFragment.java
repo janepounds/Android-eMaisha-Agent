@@ -18,12 +18,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -57,6 +60,7 @@ public class DataCollectionAddScoutingFragment extends Fragment {
     private EditText etxtDate,etxtFarmerName,etxtFarmerPhone,etxtRecommendations;
     private Spinner spinInfested,spinInfestationLevel,spinInfestationType,spinInfestation;
     private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
+    private LinearLayout districtLayout,subcountyLayout,villageLayout,infestedLayout,infestationTypeLayout,infestationLayout,infestationLevelLayout;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -104,6 +108,14 @@ public class DataCollectionAddScoutingFragment extends Fragment {
         spinInfestationLevel = view.findViewById(R.id.scouting_infestation_level_spinner);
         spinInfestationType = view.findViewById(R.id.scouting_infestation_type_spinner);
         spinInfestation = view.findViewById(R.id.scouting_infestation_spinner);
+
+        districtLayout = view.findViewById(R.id.district_layout);
+        subcountyLayout = view.findViewById(R.id.subcounty_layout);
+        villageLayout = view.findViewById(R.id.village_layout);
+        infestedLayout = view.findViewById(R.id.infested_layout);
+        infestationTypeLayout = view.findViewById(R.id.infestation_type_layout);
+        infestationLayout = view.findViewById(R.id.infestation_layout);
+        infestationLevelLayout = view.findViewById(R.id.infestation_level_layout);
 
         Button btnSubmit = view.findViewById(R.id.submit_button);
 
@@ -376,73 +388,108 @@ public class DataCollectionAddScoutingFragment extends Fragment {
         ed_.setInputType(InputType.TYPE_NULL);
     }
 
-    public boolean validateEntries(){
-        String message = null;
-        if (etxtDate.getText().toString().isEmpty()) {
-            etxtDate.setError(getString(R.string.enter_date));
-            etxtDate.requestFocus();
-            return false;
+    public  boolean hasText(EditText editText) {
 
-        }else if (etxtFarmerName.getText().toString().isEmpty()) {
-            etxtFarmerName.setError(getString(R.string.enter_farmer_name));
-            etxtFarmerName.requestFocus();
-            return false;
-        } else if (etxtFarmerPhone.getText().toString().isEmpty()) {
-            etxtFarmerPhone.setError(getString(R.string.enter_phone_number));
-            etxtFarmerPhone.requestFocus();
-            return false;
-        } else if (etxtRecommendations.getText().toString().isEmpty()) {
-            etxtRecommendations.setError(getString(R.string.enter_recommendation));
-            etxtRecommendations.requestFocus();
-            return false;
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
 
-        } else if (spinInfested.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_infested);
-            spinInfested.requestFocus();
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
             return false;
-
-        } else if (spinInfestationType.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_infestation_type);
-            spinInfestationType.requestFocus();
-            return false;
-
-        } else if (spinInfestation.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_infestation);
-            spinInfestation.requestFocus();
-            return false;
-
-        } else if (spinInfestationLevel.getSelectedItemPosition() == 0) {
-            message = getString(R.string.select_infestation_level);
-            spinInfestationLevel.requestFocus();
-            return false;
-
-        }else if (spinDistrict.getText().toString().isEmpty()) {
-            spinDistrict.setError(getString(R.string.enter_district));
-            spinDistrict.requestFocus();
-            return false;
-        } else if (spinSubCounty.getText().toString().isEmpty()) {
-            spinSubCounty.setError(getString(R.string.enter_sub_county));
-            spinSubCounty.requestFocus();
-            return false;
-        } else if (spinVillage.getText().toString().isEmpty()) {
-            spinVillage.setError(getString(R.string.enter_village));
-            spinVillage.requestFocus();
-            return false;
-        } else if(message != null) {
-            Toast.makeText(context, getString(R.string.missing_fields_message) + message, Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            etxtDate.setError(null);
-            etxtFarmerName.setError(null);
-            etxtFarmerPhone.setError(null);
-            etxtRecommendations.setError(null);
-            spinDistrict.setError(null);
-            spinSubCounty.setError(null);
-            spinVillage.setError(null);
-
-            return true;
-
         }
+
+
+        return true;
+    }
+    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner,LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            layout.setPadding(left, top, right, bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+    public boolean hasTextView(TextView textView){
+        String text = textView.getText().toString().trim();
+        int bottom = textView.getPaddingBottom();
+        int top = textView.getPaddingTop();
+        int right = textView.getPaddingRight();
+        int left = textView.getPaddingLeft();
+        textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        textView.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            textView.setPadding(left,top,right,bottom);
+            textView.setFocusable(true);
+            textView.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    public boolean validateEntries(){
+        boolean check = true;
+        if (!hasText(etxtDate)) check = false;
+        if (!hasText(etxtFarmerName)) check = false;
+        if(!autoText(spinDistrict,districtLayout)) check = false;
+        if(!autoText(spinSubCounty,subcountyLayout)) check = false;
+        if(!autoText(spinVillage,villageLayout)) check = false;
+        if (!hasText(etxtFarmerPhone)) check = false;
+        if(!selectedText(spinInfested,infestedLayout)) check = false;
+        if(!selectedText(spinInfestationType,infestationTypeLayout)) check = false;
+        if(!selectedText(spinInfestation,infestationLayout)) check = false;
+        if(!selectedText(spinInfestationLevel,infestationLevelLayout)) check = false;
+        if (!hasText(etxtRecommendations)) check = false;
+
+
+        return check;
+
     }
 
 }
