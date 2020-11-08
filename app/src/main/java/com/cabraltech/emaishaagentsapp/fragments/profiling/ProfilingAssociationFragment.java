@@ -1,9 +1,14 @@
 package com.cabraltech.emaishaagentsapp.fragments.profiling;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PatternMatcher;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,13 +18,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -35,7 +46,11 @@ import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import org.json.JSONException;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.regex.Pattern;
 
 public class ProfilingAssociationFragment extends Fragment {
     private static final String TAG = "ProfilingAssociationFra";
@@ -48,6 +63,10 @@ public class ProfilingAssociationFragment extends Fragment {
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
 
+    private EditText etxtName,etxtYear_of_registration,etxtFull_address,etxtTelephone,etxtEmail;
+    private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
+    private Spinner spinOrganisationType,spinRegistrationLevel;
+    private LinearLayout organTypeLayout,regLevelLayout,districtLayout,subcountyLayout,villageLayout;
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
 
@@ -92,16 +111,21 @@ public class ProfilingAssociationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        final EditText etxtName = view.findViewById(R.id.association_name_et);
-        final EditText etxtYear_of_registration = view.findViewById(R.id.year_of_registration_et);
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
-        AutoCompleteTextView spinSubCounty = view.findViewById(R.id.sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
-        final EditText etxtFull_address = view.findViewById(R.id.full_address_et);
-        final EditText etxtTelephone = view.findViewById(R.id.association_telephone_et);
-        final EditText etxtEmail = view.findViewById(R.id.association_email_et);
-        Spinner spinOrganisationType = view.findViewById(R.id.organisation_type_spinner);
-        Spinner spinRegistrationLevel = view.findViewById(R.id.registration_level_spinner);
+        etxtName = view.findViewById(R.id.association_name_et);
+        etxtYear_of_registration = view.findViewById(R.id.year_of_registration_et);
+        spinDistrict = view.findViewById(R.id.district_spinner);
+        spinSubCounty = view.findViewById(R.id.sub_county_spinner);
+        spinVillage = view.findViewById(R.id.village_spinner);
+        etxtFull_address = view.findViewById(R.id.full_address_et);
+        etxtTelephone = view.findViewById(R.id.association_telephone_et);
+        etxtEmail = view.findViewById(R.id.association_email_et);
+        spinOrganisationType = view.findViewById(R.id.organisation_type_spinner);
+        spinRegistrationLevel = view.findViewById(R.id.registration_level_spinner);
+        regLevelLayout = view.findViewById(R.id.reg_level_layout);
+        organTypeLayout = view.findViewById(R.id.organ_type_layout);
+        districtLayout = view.findViewById(R.id.district_layout);
+        subcountyLayout = view.findViewById(R.id.subcounty_layout);
+        villageLayout = view.findViewById(R.id.village_layout);
 
 
         Button next_button = view.findViewById(R.id.next_button);
@@ -189,7 +213,12 @@ public class ProfilingAssociationFragment extends Fragment {
             }
         });
 
-
+        etxtYear_of_registration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addDatePicker(etxtYear_of_registration, getActivity());
+            }
+        });
 
 
 
@@ -281,24 +310,25 @@ public class ProfilingAssociationFragment extends Fragment {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = etxtName.getText().toString().trim();
-                String year_of_registration = etxtYear_of_registration.toString().trim();
-                String full_address = etxtFull_address.getText().toString().trim();
-                String telephone = etxtTelephone.getText().toString().trim();
-                String email = etxtEmail.getText().toString().trim();
-                Bundle bundle = new Bundle();
-                bundle.putString("name",name);
-                bundle.putString("year_of_registration",year_of_registration);
-                bundle.putString("full_address",full_address);
-                bundle.putString("telephone",telephone);
-                bundle.putString("email",email);
-                bundle.putString("district",spinDistrict.getText().toString());
-                bundle.putString("sub_county",spinSubCounty.getText().toString());
-                bundle.putString("village",spinVillage.getText().toString());
-                bundle.putString("registration_level",registration_level);
-                bundle.putString("organisation_type",organisation_type);
-                navController.navigate(R.id.action_profilingAssociationFragment_to_profilingAssociationStep2Fragment,bundle);
-
+                if (validateEntries()) {
+                    String name = etxtName.getText().toString().trim();
+                    String year_of_registration = etxtYear_of_registration.toString().trim();
+                    String full_address = etxtFull_address.getText().toString().trim();
+                    String telephone = etxtTelephone.getText().toString().trim();
+                    String email = etxtEmail.getText().toString().trim();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", name);
+                    bundle.putString("year_of_registration", year_of_registration);
+                    bundle.putString("full_address", full_address);
+                    bundle.putString("telephone", telephone);
+                    bundle.putString("email", email);
+                    bundle.putString("district", spinDistrict.getText().toString());
+                    bundle.putString("sub_county", spinSubCounty.getText().toString());
+                    bundle.putString("village", spinVillage.getText().toString());
+                    bundle.putString("registration_level", registration_level);
+                    bundle.putString("organisation_type", organisation_type);
+                    navController.navigate(R.id.action_profilingAssociationFragment_to_profilingAssociationStep2Fragment, bundle);
+                }
             }
         });
 
@@ -308,4 +338,146 @@ public class ProfilingAssociationFragment extends Fragment {
 
 
     }
+    public void addDatePicker(final TextView ed_, final Context context) {
+        ed_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar mcurrentDate = Calendar.getInstance();
+                int mYear = mcurrentDate.get(Calendar.YEAR);
+                int mMonth = mcurrentDate.get(Calendar.MONTH);
+                int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+
+
+                final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+
+                        int month = selectedmonth + 1;
+                        int year = selectedyear ;
+                        NumberFormat formatter = new DecimalFormat("00");
+                        ed_.setText(selectedyear+ "");
+
+
+
+
+
+                    }
+                }, mYear,mMonth,mDay);
+                mDatePicker.show();
+
+            }
+        });
+        ed_.setInputType(InputType.TYPE_NULL);
+    }
+
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public  boolean hasAutoText(AutoCompleteTextView autoCompleteTextView,LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean hasValidEmail(EditText editText, String message){
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$*")) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            Toast.makeText(context,  message, Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+    public boolean validateEntries() {
+        boolean check = true;
+        if (!hasText(etxtName)) check = false;
+        if (!hasText(etxtYear_of_registration)) check = false;
+//        if (!hasValidEmail(etxtEmail,getString(R.string.enter_valid_email))) check = false;
+        if (!hasText(etxtFull_address)) check = false;
+        if (!hasText(etxtTelephone)) check = false;
+        if (!hasText(etxtEmail)) check = false;
+        if (!hasAutoText(spinDistrict,districtLayout)) check = false;
+        if (!hasAutoText(spinSubCounty,subcountyLayout)) check = false;
+        if (!hasAutoText(spinVillage,villageLayout)) check = false;
+        if(!selectedText(spinOrganisationType,organTypeLayout)) check = false;
+        if(!selectedText(spinRegistrationLevel,regLevelLayout)) check = false;
+
+
+        return check;
+
+
+    }
+
+
 }

@@ -14,12 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -47,6 +49,11 @@ public class DataCollectionAddMarketFragment extends Fragment {
     private int pickedSubcountyId;
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
+
+    private Spinner spinMarket_name;
+    private EditText etxtStreet_address, etxtContatc, etxtPhone;
+    private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
+    private LinearLayout marketLayout,districtLayout,subcountyLayout,villageLayout;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -83,13 +90,18 @@ public class DataCollectionAddMarketFragment extends Fragment {
 
 //        navController = Navigation.findNavController(view);
 
-        Spinner spinMarket_name = view.findViewById(R.id.market_name_spinner);
-        final EditText etxtStreet_address = view.findViewById(R.id.street_address_et);
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
-        AutoCompleteTextView spinSubCounty = view.findViewById(R.id.sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
-        final EditText etxtContatc = view.findViewById(R.id.contact_person_et);
-        final EditText etxtPhone = view.findViewById(R.id.phone_number_et);
+        spinMarket_name = view.findViewById(R.id.market_name_spinner);
+        etxtStreet_address = view.findViewById(R.id.street_address_et);
+        spinDistrict = view.findViewById(R.id.district_spinner);
+        spinSubCounty = view.findViewById(R.id.sub_county_spinner);
+        spinVillage = view.findViewById(R.id.village_spinner);
+        etxtContatc = view.findViewById(R.id.contact_person_et);
+        etxtPhone = view.findViewById(R.id.phone_number_et);
+        marketLayout = view.findViewById(R.id.market_name_layout);
+        districtLayout = view.findViewById(R.id.district_layout);
+        subcountyLayout = view.findViewById(R.id.subcounty_layout);
+        villageLayout = view.findViewById(R.id.village_layout);
+
         Button btnSubmit = view.findViewById(R.id.submit_button);
 
 
@@ -254,23 +266,24 @@ public class DataCollectionAddMarketFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String street_address = etxtStreet_address.getText().toString();
-                String contact = etxtContatc.getText().toString().trim();
-                String phone = etxtPhone.getText().toString().trim();
+                if(validateEntries()) {
+                    String street_address = etxtStreet_address.getText().toString();
+                    String contact = etxtContatc.getText().toString().trim();
+                    String phone = etxtPhone.getText().toString().trim();
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                boolean check = databaseAccess.addMarket(market_name,street_address,phone,spinDistrict.getText().toString(),spinSubCounty.getText().toString(),spinVillage.getText().toString(),contact);
-                if (check) {
-                    Toast.makeText(getActivity(), "Market Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    boolean check = databaseAccess.addMarket(market_name, street_address, phone, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), contact);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Market Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
-
             }
         });
 
@@ -282,6 +295,87 @@ public class DataCollectionAddMarketFragment extends Fragment {
 //
 //            }
 //        });
+
+    }
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner,LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            layout.setPadding(left, top, right, bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean validateEntries(){
+        boolean check = true;
+        if (!hasText(etxtStreet_address)) check = false;
+        if (!hasText(etxtContatc)) check = false;
+        if (!hasText(etxtPhone) || etxtPhone.getText().toString().trim().length() < 9) check = false;
+        if(!selectedText(spinMarket_name,marketLayout)) check = false;
+        if(!autoText(spinDistrict,districtLayout)) check = false;
+        if(!autoText(spinSubCounty,subcountyLayout)) check = false;
+        if(!autoText(spinVillage,villageLayout)) check = false;
+
+        return check;
+
 
     }
 }

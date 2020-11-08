@@ -14,12 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -49,6 +52,10 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
 
+    private EditText etxtBusinessName,etxtOwner,etxtPhone,etxtEmail,etxtFullAddress;
+    private Spinner spinBusinessType;
+    private AutoCompleteTextView spinDistrict,spinSubcounty,spinVillage;
+    private LinearLayout businessLayout,districtLayout,subcountyLayout,villageLayout;
 
     String[] descriptionData = {"Contact\nDetails", "Business\nDetails"};
 
@@ -91,15 +98,15 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Spinner spinBusinessType = view.findViewById(R.id.business_type_spinner);
-        final EditText etxtBusinessName = view.findViewById(R.id.business_name_et);
-        final EditText etxtOwner = view.findViewById(R.id.proprietor_name_et);
-        final EditText etxtPhone = view.findViewById(R.id.phone_number_et);
-        final EditText etxtEmail = view.findViewById(R.id.email_address_et);
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
-        AutoCompleteTextView spinSubcounty = view.findViewById(R.id.sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
-        final EditText etxtFullAddress = view.findViewById(R.id.full_address_et);
+        spinBusinessType = view.findViewById(R.id.business_type_spinner);
+        etxtBusinessName = view.findViewById(R.id.business_name_et);
+        etxtOwner = view.findViewById(R.id.proprietor_name_et);
+        etxtPhone = view.findViewById(R.id.phone_number_et);
+        etxtEmail = view.findViewById(R.id.email_address_et);
+        spinDistrict = view.findViewById(R.id.district_spinner);
+        spinSubcounty = view.findViewById(R.id.sub_county_spinner);
+        spinVillage = view.findViewById(R.id.village_spinner);
+        etxtFullAddress = view.findViewById(R.id.full_address_et);
         Button btnSubmit = view.findViewById(R.id.next_button);
 
         //load district, subcounty and village data
@@ -266,31 +273,113 @@ public class ProfilingBulkBuyersFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String business_name = etxtBusinessName.getText().toString().trim();
-                String phone = etxtPhone.getText().toString().trim();
-                String email = etxtEmail.getText().toString().trim();
-                String full_address = etxtFullAddress.getText().toString().trim();
-                String owner = etxtOwner.getText().toString().trim();
+                if (validateEntries()) {
+                    String business_name = etxtBusinessName.getText().toString().trim();
+                    String phone = etxtPhone.getText().toString().trim();
+                    String email = etxtEmail.getText().toString().trim();
+                    String full_address = etxtFullAddress.getText().toString().trim();
+                    String owner = etxtOwner.getText().toString().trim();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("business_name",business_name);
-                bundle.putString("phone",phone);
-                bundle.putString("owner",owner);
-                bundle.putString("full_address",full_address);
-                bundle.putString("email",email);
-                bundle.putString("district",spinDistrict.getText().toString());
-                bundle.putString("sub_country",spinSubcounty.getText().toString());
-                bundle.putString("village",spinVillage.getText().toString());
-                bundle.putString("business_type",business_type);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("business_name", business_name);
+                    bundle.putString("phone", phone);
+                    bundle.putString("owner", owner);
+                    bundle.putString("full_address", full_address);
+                    bundle.putString("email", email);
+                    bundle.putString("district", spinDistrict.getText().toString());
+                    bundle.putString("sub_country", spinSubcounty.getText().toString());
+                    bundle.putString("village", spinVillage.getText().toString());
+                    bundle.putString("business_type", business_type);
 
 
-                navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment,bundle);
+                    navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment, bundle);
 
+                }
 
 
             }
         });
 
 
+    }
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner,LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            layout.setPadding(left, top, right, bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+    public boolean validateEntries() {
+        boolean check = true;
+        if (!hasText(etxtBusinessName)) check = false;
+        if (!hasText(etxtOwner)) check = false;
+        if (!hasText(etxtPhone) || etxtPhone.getText().toString().trim().length() < 9) check = false;
+        if (!hasText(etxtEmail)) check = false;
+        if (!hasText(etxtFullAddress)) check = false;
+        if(!selectedText(spinBusinessType,businessLayout)) check = false;
+        if(!autoText(spinDistrict,districtLayout)) check = false;
+        if(!autoText(spinSubcounty,subcountyLayout)) check = false;
+        if(!autoText(spinVillage,villageLayout)) check = false;
+
+        return check;
     }
 }

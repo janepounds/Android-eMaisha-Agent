@@ -22,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -59,7 +61,11 @@ public class DataCollectionReportPestFragment extends Fragment {
     private NavController navController;
     String damage;
     String mediaPath, encodedImageID = "N/A";
-    EditText etxtPhoto;
+    private TextView etxtPhoto, txtBrowse;
+    private EditText etxtDate,etxtFarmName,etxtPhone,etxtSigns,etxtPest,etxtRecommendation;
+    private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
+    private LinearLayout districtLayout,subcountyLayout,villageLayout,damageLayout;
+    private Spinner spinDamage;
     private int pickedDistrictId;
     private int pickedSubcountyId;
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
@@ -99,20 +105,24 @@ public class DataCollectionReportPestFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final EditText etxtDate = view.findViewById(R.id.reporting_date_et);
-        final EditText etxtFarmName = view.findViewById(R.id.farm_name_et);
-        AutoCompleteTextView spinDistrict = view.findViewById(R.id.district_spinner);
-        AutoCompleteTextView spinSubCounty = view.findViewById(R.id.sub_county_spinner);
-        AutoCompleteTextView spinVillage = view.findViewById(R.id.village_spinner);
-        Spinner spinDamage = view.findViewById(R.id.damage_assessment_spinner);
+        etxtDate = view.findViewById(R.id.reporting_date_et);
+        etxtFarmName = view.findViewById(R.id.farm_name_et);
+        spinDistrict = view.findViewById(R.id.district_spinner);
+        spinSubCounty = view.findViewById(R.id.sub_county_spinner);
+        spinVillage = view.findViewById(R.id.village_spinner);
+        spinDamage = view.findViewById(R.id.damage_assessment_spinner);
 
-        final EditText etxtPhone = view.findViewById(R.id.farmer_phone_number_et);
-        final EditText etxtSigns = view.findViewById(R.id.signs_and_symptoms_et);
-        final EditText etxtPest = view.findViewById(R.id.suspected_pest_disease_et);
-        final EditText etxtRecommendation = view.findViewById(R.id.recommendation_et);
-         etxtPhoto = view.findViewById(R.id.photo_of_the_damage_et);
+        etxtPhone = view.findViewById(R.id.farmer_phone_number_et);
+        etxtSigns = view.findViewById(R.id.signs_and_symptoms_et);
+        etxtPest = view.findViewById(R.id.suspected_pest_disease_et);
+        etxtRecommendation = view.findViewById(R.id.recommendation_et);
+        etxtPhoto = view.findViewById(R.id.photo_of_the_damage_et);
 
-        TextView txtBrowse = view.findViewById(R.id.photo_browse_tv);
+        txtBrowse = view.findViewById(R.id.photo_browse_tv);
+
+        districtLayout = view.findViewById(R.id.district_layout);
+        subcountyLayout = view.findViewById(R.id.subcounty_layout);
+        villageLayout = view.findViewById(R.id.village_layout);
 
         Button btnSubmit =view.findViewById(R.id.submit_button);
 
@@ -294,24 +304,26 @@ public class DataCollectionReportPestFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 String date = etxtDate.getText().toString().trim();
-                 String farm_name = etxtFarmName.getText().toString().trim();
-                 String phone = etxtPhone.getText().toString().trim();
-                 String signs_and_symptoms = etxtSigns.getText().toString().trim();
-                 String pest_or_disease = etxtPest.getText().toString().trim();
-                 String recommendation = etxtRecommendation.getText().toString().trim();
+                if (validateEntries()) {
+                    String date = etxtDate.getText().toString().trim();
+                    String farm_name = etxtFarmName.getText().toString().trim();
+                    String phone = etxtPhone.getText().toString().trim();
+                    String signs_and_symptoms = etxtSigns.getText().toString().trim();
+                    String pest_or_disease = etxtPest.getText().toString().trim();
+                    String recommendation = etxtRecommendation.getText().toString().trim();
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                boolean check = databaseAccess.addPestReport(date,farm_name,spinDistrict.getText().toString(),spinSubCounty.getText().toString(),spinVillage.getText().toString(),phone,signs_and_symptoms,pest_or_disease,damage,recommendation,encodedImageID);
-                if (check) {
-                    Toast.makeText(getActivity(), "Pest Report Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    boolean check = databaseAccess.addPestReport(date, farm_name, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), phone, signs_and_symptoms, pest_or_disease, damage, recommendation, encodedImageID);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Pest Report Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
             }
         });
@@ -380,4 +392,107 @@ public class DataCollectionReportPestFragment extends Fragment {
         return encImage;
     }
 
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+        String text = autoCompleteTextView.getText().toString().trim();
+        int bottom = linearLayout.getPaddingBottom();
+        int top = linearLayout.getPaddingTop();
+        int right = linearLayout.getPaddingRight();
+        int left = linearLayout.getPaddingLeft();
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        linearLayout.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setFocusable(true);
+            linearLayout.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner,LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            layout.setPadding(left, top, right, bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+    public boolean hasTextView(TextView textView){
+        String text = textView.getText().toString().trim();
+        int bottom = textView.getPaddingBottom();
+        int top = textView.getPaddingTop();
+        int right = textView.getPaddingRight();
+        int left = textView.getPaddingLeft();
+        textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        textView.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            textView.setPadding(left,top,right,bottom);
+            textView.setFocusable(true);
+            textView.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    public boolean validateEntries(){
+        boolean check = true;
+        if (!hasText(etxtDate)) check = false;
+        if (!hasText(etxtFarmName)) check = false;
+        if(!autoText(spinDistrict,districtLayout)) check = false;
+        if(!autoText(spinSubCounty,subcountyLayout)) check = false;
+        if(!autoText(spinVillage,villageLayout)) check = false;
+        if (!hasText(etxtPhone)) check = false;
+        if (!hasText(etxtSigns)) check = false;
+        if (!hasText(etxtPest)) check = false;
+        if(!selectedText(spinDamage,damageLayout)) check = false;
+        if (!hasText(etxtRecommendation)) check = false;
+        if (!hasTextView(etxtPhoto)) check = false;
+
+
+        return check;
+
+    }
 }

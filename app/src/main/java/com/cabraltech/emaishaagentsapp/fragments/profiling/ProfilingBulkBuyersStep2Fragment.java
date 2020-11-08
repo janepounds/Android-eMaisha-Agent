@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -38,6 +41,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
     CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkVillageSavings, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution;
     CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency;
 
+    AutoCompleteTextView actCommodities;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -85,7 +89,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        AutoCompleteTextView actCommodities = view.findViewById(R.id.commodities_spinner);
+      actCommodities = view.findViewById(R.id.commodities_spinner);
 
 
         chkIndividualFarmer = view.findViewById(R.id.supply_source_individual_farmer_cb);
@@ -129,94 +133,94 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //submit
+                if (validateEntries()) {
+                    String supply_source = "";
+                    String supplier_location = "";
+                    String funding_source = "";
+                    String marketing_channels = "";
 
-                String supply_source = "";
-                String supplier_location = "";
-                String funding_source = "";
-                String marketing_channels = "";
-
-                if (chkFarmerOrganisation.isChecked()) {
-                    supply_source += "\nFarmer Organisations";
-                }
-                if (chkIndividualFarmer.isChecked()) {
-                    supply_source += "\nIndividual Farmer";
-                }
-                if (chkFarmerOrganisation.isChecked()) {
-                    supply_source += "\nRural Traders";
-                }
-                if (chkWithInDistrict.isChecked()) {
-                    supplier_location += "\nWitIn The District";
-                }
-                if (chkOutsideDistrict.isChecked()) {
-                    supplier_location += "\nOutside The District";
-                }
-                if (chkOutsideCountry.isChecked()) {
-                    supplier_location += "\nOutside The Country";
-                }
-                if (chkPrivateMoneyLender.isChecked()) {
-                    funding_source += "\nPrivate Money Lender";
-                }
-                if (chkFriendsOrRelatives.isChecked()) {
-                    funding_source += "\nFriends or Relatives";
-                }
-                if (chkSaccos.isChecked()) {
-                    funding_source += "\nSaccos";
-                }
-                if (chkVillageSavings.isChecked()) {
-                    funding_source += "\nVillage Savings and Lending Associations";
-                }
-                if (chkPrivateEquity.isChecked()) {
-                    funding_source += "\nPrivate Equity";
-                }
-                if (chkCommercialBank.isChecked()) {
-                    funding_source += "\nCommercial Bank";
-                }
-                if (chMicroFinanceInstitution.isChecked()) {
-                    funding_source += "\nMicro-Finance Institutions";
-                }
-                if (chkInternet.isChecked()) {
-                    marketing_channels += "\nInternet";
-                }
-                if (chkTelevision.isChecked()) {
-                    marketing_channels += "\nTelevision";
-                }
-                if (chkCallCenter.isChecked()) {
-                    marketing_channels += "\nCall Center";
-                }
-                if (chkNgo.isChecked()) {
-                    marketing_channels += "\nNGO";
-                }
-                if (chkBuyers.isChecked()) {
-                    marketing_channels += "\nBuyers from bigger markets";
-                }
-                if (chkRadio.isChecked()) {
-                    marketing_channels += "\nRadio";
-                }
-                if (chkExtensionWorkers.isChecked()) {
-                    marketing_channels += "\nExtension Workers";
-                }
-                if (chkFellowTraders.isChecked()) {
-                    marketing_channels += "\nFellow Traders";
-                }
-                if (chkGovernmentAgency.isChecked()) {
-                    marketing_channels += "\nGovernment Agency";
-                }
+                    if (chkFarmerOrganisation.isChecked()) {
+                        supply_source += "\nFarmer Organisations";
+                    }
+                    if (chkIndividualFarmer.isChecked()) {
+                        supply_source += "\nIndividual Farmer";
+                    }
+                    if (chkFarmerOrganisation.isChecked()) {
+                        supply_source += "\nRural Traders";
+                    }
+                    if (chkWithInDistrict.isChecked()) {
+                        supplier_location += "\nWitIn The District";
+                    }
+                    if (chkOutsideDistrict.isChecked()) {
+                        supplier_location += "\nOutside The District";
+                    }
+                    if (chkOutsideCountry.isChecked()) {
+                        supplier_location += "\nOutside The Country";
+                    }
+                    if (chkPrivateMoneyLender.isChecked()) {
+                        funding_source += "\nPrivate Money Lender";
+                    }
+                    if (chkFriendsOrRelatives.isChecked()) {
+                        funding_source += "\nFriends or Relatives";
+                    }
+                    if (chkSaccos.isChecked()) {
+                        funding_source += "\nSaccos";
+                    }
+                    if (chkVillageSavings.isChecked()) {
+                        funding_source += "\nVillage Savings and Lending Associations";
+                    }
+                    if (chkPrivateEquity.isChecked()) {
+                        funding_source += "\nPrivate Equity";
+                    }
+                    if (chkCommercialBank.isChecked()) {
+                        funding_source += "\nCommercial Bank";
+                    }
+                    if (chMicroFinanceInstitution.isChecked()) {
+                        funding_source += "\nMicro-Finance Institutions";
+                    }
+                    if (chkInternet.isChecked()) {
+                        marketing_channels += "\nInternet";
+                    }
+                    if (chkTelevision.isChecked()) {
+                        marketing_channels += "\nTelevision";
+                    }
+                    if (chkCallCenter.isChecked()) {
+                        marketing_channels += "\nCall Center";
+                    }
+                    if (chkNgo.isChecked()) {
+                        marketing_channels += "\nNGO";
+                    }
+                    if (chkBuyers.isChecked()) {
+                        marketing_channels += "\nBuyers from bigger markets";
+                    }
+                    if (chkRadio.isChecked()) {
+                        marketing_channels += "\nRadio";
+                    }
+                    if (chkExtensionWorkers.isChecked()) {
+                        marketing_channels += "\nExtension Workers";
+                    }
+                    if (chkFellowTraders.isChecked()) {
+                        marketing_channels += "\nFellow Traders";
+                    }
+                    if (chkGovernmentAgency.isChecked()) {
+                        marketing_channels += "\nGovernment Agency";
+                    }
 
 
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
+                    boolean check = databaseAccess.addTrader(business_type, business_name, owner, commodities, phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
-                boolean check = databaseAccess.addTrader(business_type,business_name,owner,commodities,phone,email,district,sub_county,village,full_address,supplier_location,supply_source,funding_source,marketing_channels);
-                if (check) {
-                    Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
-
             }
         });
         binding.previousButton.setOnClickListener(new View.OnClickListener() {
@@ -228,5 +232,33 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         });
 
 
+    }
+    public  boolean autoText(AutoCompleteTextView editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public boolean validateEntries() {
+        boolean check = true;
+       if(!autoText(actCommodities)) check = false;
+
+        return check;
     }
 }

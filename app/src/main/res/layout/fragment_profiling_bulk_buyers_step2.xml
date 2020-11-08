@@ -70,11 +70,11 @@
                     android:id="@+id/commodities_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingStart="8dp"
+                    android:padding="8dp"
                     android:inputType="text"
+                    android:textSize="14sp"
                     android:background="@drawable/rounded_rectangle_edit_text"
-                    android:entries="@array/commodities_array"
-                    android:paddingLeft="8dp" />
+                    android:entries="@array/commodities_array" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -452,7 +452,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal">
             <Button
                 android:layout_weight="1"
@@ -460,7 +461,8 @@
                 style="@style/button_style_previous"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:text="@string/previous" />
 
             <Button
@@ -469,7 +471,8 @@
                 style="@style/button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/submit" />
         </LinearLayout>
     </LinearLayout>

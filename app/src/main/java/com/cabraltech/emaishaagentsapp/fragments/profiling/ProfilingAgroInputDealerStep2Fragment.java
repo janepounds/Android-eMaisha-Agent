@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -29,8 +33,11 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
     private NavController navController;
     private FragmentProfilingAgroInputDealerStep2Binding binding;
     String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
-    String certification_type, registration_status, association_membership,district, sub_county, village, certification,business_name,full_address;
+    String certification_type, registration_status, association_membership,district, sub_county, village, certification,business_name,full_address,owner,owner_contact;
     CheckBox chkMaaif, chkUnada, chkNda;
+    private Spinner spinCertificationType,spinRegistrationStatus,spinAssociationMember;
+    private EditText etxtRegistrationYear,etxtCertificationNumber,etxtAssociationName;
+    private LinearLayout assMembershipLayout,certTypeLayout,regBodyLayout,regStatusLayout;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -57,9 +64,12 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         district = getArguments().getString("district");
         sub_county = getArguments().getString("sub_county");
         village = getArguments().getString("village");
-        certification = getArguments().getString("certification");
         business_name = getArguments().getString("business_name");
         full_address = getArguments().getString("full_address");
+        owner = getArguments().getString("owner");
+        owner_contact = getArguments().getString("owner_contact");
+
+
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_agro_input_dealer_step2, container, false);
@@ -78,17 +88,22 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        Spinner spinCertificationType = view.findViewById(R.id.certificate_type_spinner);
-        Spinner spinRegistrationStatus = view.findViewById(R.id.registration_status_spinner);
-        Spinner spinAssociationMember = view.findViewById(R.id.association_membership_spinner);
+         spinCertificationType = view.findViewById(R.id.certificate_type_spinner);
+         spinRegistrationStatus = view.findViewById(R.id.registration_status_spinner);
+         spinAssociationMember = view.findViewById(R.id.association_membership_spinner);
 
-        EditText etxtRegistrationYear = view.findViewById(R.id.registration_year_et);
-        EditText etxtCertificationNumber = view.findViewById(R.id.certificate_number_et);
-        EditText etxtAssociationName = view.findViewById(R.id.association_name_et);
+         etxtRegistrationYear = view.findViewById(R.id.registration_year_et);
+         etxtCertificationNumber = view.findViewById(R.id.certificate_number_et);
+         etxtAssociationName = view.findViewById(R.id.association_name_et);
 
         chkMaaif = view.findViewById(R.id.registration_body_maaif_cb);
         chkUnada = view.findViewById(R.id.registration_body_unada_cb);
         chkNda = view.findViewById(R.id.registration_body_nda_cb);
+
+        assMembershipLayout = view.findViewById(R.id.ass_membership_layout);
+        certTypeLayout = view.findViewById(R.id.certificate_type_layout);
+        regBodyLayout = view.findViewById(R.id.registration_body_layout);
+        regStatusLayout = view.findViewById(R.id.registration_status_layout);
 
 
         spinCertificationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -140,42 +155,105 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String registration_year = etxtRegistrationYear.getText().toString().trim();
-                String association_name = etxtAssociationName.getText().toString().trim();
-                String certification_number = etxtCertificationNumber.getText().toString().trim();
-                String registration_body = "";
+                if (validateEntries()) {
+                    String registration_year = etxtRegistrationYear.getText().toString().trim();
+                    String association_name = etxtAssociationName.getText().toString().trim();
+                    String certification_number = etxtCertificationNumber.getText().toString().trim();
+                    String registration_body = "";
 
-                if (chkMaaif.isChecked()) {
-                    registration_body += "\nMAAIF";
+                    if (chkMaaif.isChecked()) {
+                        registration_body += "\nMAAIF";
+                    }
+                    if (chkUnada.isChecked()) {
+                        registration_body += "\nUNADA";
+                    }
+                    if (chkNda.isChecked()) {
+                        registration_body += "\nNDA";
+                    }
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("business_name", business_name);
+                    bundle.putString("full_address", full_address);
+                    bundle.putString("owner", owner);
+                    bundle.putString("owner_contact", owner_contact);
+                    bundle.putString("district", district);
+                    bundle.putString("sub_country", sub_county);
+                    bundle.putString("village", village);
+                    bundle.putString("registration_year", registration_year);
+                    bundle.putString("association_name", association_name);
+                    bundle.putString("certification_number", certification_number);
+                    bundle.putString("registration_body", registration_body);
+                    bundle.putString("association_membership", association_membership);
+                    bundle.putString("registration_status", registration_status);
+                    bundle.putString("certification_type", certification_type);
+
+                    //navigation to step 2
+                    navController.navigate(R.id.action_profilingAgroInputDealerStep2Fragment_to_profilingAgroInputDealerStep3Fragment, bundle);
+
                 }
-                if (chkUnada.isChecked()) {
-                    registration_body += "\nUNADA";
-                }
-                if (chkNda.isChecked()) {
-                    registration_body += "\nNDA";
-                }
-
-                Bundle bundle = new Bundle();
-                bundle.putString("business_name", business_name);
-                bundle.putString("full_address", full_address);
-                bundle.putString("certification", certification);
-                bundle.putString("district", district);
-                bundle.putString("sub_country", sub_county);
-                bundle.putString("village", village);
-                bundle.putString("registration_year", registration_year);
-                bundle.putString("association_name", association_name);
-                bundle.putString("certification_number", certification_number);
-                bundle.putString("registration_body", registration_body);
-                bundle.putString("association_membership", association_membership);
-                bundle.putString("registration_status", registration_status);
-                bundle.putString("certification_type", certification_type);
-
-                //navigation to step 2
-                navController.navigate(R.id.action_profilingAgroInputDealerStep2Fragment_to_profilingAgroInputDealerStep3Fragment,bundle);
-
             }
         });
 
+
+    }
+
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+    public boolean validateEntries() {
+        boolean check = true;
+        if (!selectedText(spinRegistrationStatus,regStatusLayout)) check = false;
+        if (!hasText(etxtRegistrationYear)|| etxtRegistrationYear.getText().toString().trim().length() < 4) check = false;
+        if(!selectedText(spinCertificationType,certTypeLayout)) check = false;
+        if (!hasText(etxtCertificationNumber)) check = false;
+        if (!hasText(etxtAssociationName)) check = false;
+        if(!selectedText(spinAssociationMember,assMembershipLayout)) check = false;
+
+        return check;
 
     }
 }

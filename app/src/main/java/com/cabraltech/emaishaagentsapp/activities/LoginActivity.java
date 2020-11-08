@@ -17,6 +17,7 @@ import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponseData;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -70,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                 emailOrPhone.setError("Required");
             } else if (password.getText().toString().trim().isEmpty()) {
                 password.setError("Required");
-            }else{
+            } else {
                 progressDialog.show();
                 processLogin();
             }
@@ -90,6 +91,11 @@ public class LoginActivity extends AppCompatActivity {
                     loginUser(response.body().getData());
                 } else {
                     Log.d(TAG, "onResponse: " + response.code());
+                    Log.d(TAG, "onResponse: " + response.message());
+
+                    if (response.code() == 400) {
+                        Snackbar.make(findViewById(android.R.id.content), "Invalid email or password", Snackbar.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -102,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(LoginResponseData userDetails) {
+        Log.d(TAG, "loginUser: Profile Picture = " + userDetails.getPicture());
         // Save User Data to Local Databases
         if (userInfoDB.getUserData(userDetails.getId()) != null) {
             // User already exists
@@ -123,8 +130,13 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("addressCityOrTown", userDetails.getSubCounty());
         editor.putString("address_district", userDetails.getDistrict());
 
+        editor.putString(DashboardActivity.PREFERENCES_USER_PHOTO, userDetails.getPicture());
+        editor.putString(DashboardActivity.PREFERENCES_USER_NATIONAL_ID, userDetails.getNationalIdPicture());
+
         editor.putBoolean("isLogged_in", true);
         editor.apply();
+
+        Log.d(TAG, "loginUser: Login Status = " + sharedPreferences.getBoolean("isLogged_in", false));
 
         // Set UserLoggedIn in MyAppPrefsManager
 //        MyAppPrefsManager myAppPrefsManager = new MyAppPrefsManager(LoginActivity.this);
@@ -140,4 +152,9 @@ public class LoginActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.enter_from_right, R.anim.exit_out_right);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

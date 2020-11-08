@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -33,11 +35,14 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
     private NavController navController;
     private FragmentProfilingAgroInputDealerStep3Binding binding;
     String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
-    String business_type, type_of_sales, registration_year, association_name, certification_number, registration_body, certification_type, registration_status, association_membership, district, sub_county, village, certification, business_name, full_address;
+    String business_type, type_of_sales, registration_year, association_name, certification_number, registration_body, certification_type, registration_status, association_membership, district, sub_county, village, certification, business_name, full_address,owner,owner_contact;
     CheckBox chkSeed, chkPesticide, chkFoodStuff, chkGeneralMerchandise, chkFertilizer, chkFarmEquipment, chkHardware, chkVetDrugs;
     CheckBox chkInternet, chkTelevision, chkCallCenter, chkBuyers, chkRadio, chkFellowTraders, chkExtensionWorkers;
     CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution;
     CheckBox chkTraining, chkAdvisory, chkCredit, chkTechnology, chkMarketInformation, chkPrintedMaterial;
+    private EditText etxtNumberOfOutlets;
+    private Spinner spinBusinessType,spinTypeOfSales;
+    private LinearLayout businessTypeLayout, salesTypeLayout;
 
 
     @Override
@@ -64,7 +69,8 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
         district = getArguments().getString("district");
         sub_county = getArguments().getString("sub_county");
         village = getArguments().getString("village");
-        certification = getArguments().getString("certification");
+        owner = getArguments().getString("owner");
+        owner_contact = getArguments().getString("owner_contact");
         business_name = getArguments().getString("business_name");
         full_address = getArguments().getString("full_address");
         registration_year = getArguments().getString("registration_year");
@@ -90,9 +96,9 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        EditText etxtNumberOfOutlets = view.findViewById(R.id.number_of_outlets_et);
-        Spinner spinBusinessType = view.findViewById(R.id.type_of_business_spinner);
-        Spinner spinTypeOfSales = view.findViewById(R.id.type_of_sales_spinner);
+       etxtNumberOfOutlets = view.findViewById(R.id.number_of_outlets_et);
+       spinBusinessType = view.findViewById(R.id.type_of_business_spinner);
+        spinTypeOfSales = view.findViewById(R.id.type_of_sales_spinner);
         chkSeed = view.findViewById(R.id.items_sold_seed_cb);
         chkPesticide = view.findViewById(R.id.items_sold_pesticide_cb);
         chkFoodStuff = view.findViewById(R.id.items_sold_food_stuff_cb);
@@ -120,6 +126,8 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
         chkTechnology = view.findViewById(R.id.additional_services_tech_cb);
         chkMarketInformation = view.findViewById(R.id.additional_services_market_info_cb);
         chkPrintedMaterial = view.findViewById(R.id.additional_services_printed_material_cb);
+        businessTypeLayout = view.findViewById(R.id.business_type_layout);
+        salesTypeLayout = view.findViewById(R.id.type_of_sales_layout);
 
 
         spinBusinessType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -159,110 +167,165 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String number_of_outlets = etxtNumberOfOutlets.getText().toString().trim();
-                String item_sold = "";
-                String marketing_channels = "";
-                String funding_source = "";
-                String additional_services = "";
-                if (chkSeed.isChecked()) {
-                    item_sold += "\nSeed";
-                }
-                if (chkPesticide.isChecked()) {
-                    item_sold += "\nPesticide";
-                }
-                if (chkFoodStuff.isChecked()) {
-                    item_sold += "\nFood Stuff";
-                }
-                if (chkGeneralMerchandise.isChecked()) {
-                    item_sold += "\nGeneral Merchandise";
-                }
-                if (chkFertilizer.isChecked()) {
-                    item_sold += "\nFertilizer";
-                }
-                if (chkFarmEquipment.isChecked()) {
-                    item_sold += "\nFarm Equipment";
-                }
-                if (chkHardware.isChecked()) {
-                    item_sold += "\nHardware";
-                }
-                if (chkVetDrugs.isChecked()) {
-                    item_sold += "\nVet Drugs";
-                }
-                if (chkInternet.isChecked()) {
-                    marketing_channels += "\nInternet";
-                }
-                if (chkTelevision.isChecked()) {
-                    marketing_channels += "\nTelevision";
-                }
-                if (chkCallCenter.isChecked()) {
-                    marketing_channels += "\nCall Center";
-                }
-                if (chkBuyers.isChecked()) {
-                    marketing_channels += "\nBuyers from bigger Markets";
-                }
-                if (chkRadio.isChecked()) {
-                    marketing_channels += "\nRadio";
-                }
-                if (chkExtensionWorkers.isChecked()) {
-                    marketing_channels += "\nExtension Workers";
-                }
-                if (chkFellowTraders.isChecked()) {
-                    marketing_channels += "\nFellow Traders";
-                }
-                if (chkFriendsOrRelatives.isChecked()) {
-                    funding_source += "\nFriends or Relatives";
-                }
-                if (chkSaccos.isChecked()) {
-                    funding_source += "\nSaccos";
-                }
-                if (chkPrivateEquity.isChecked()) {
-                    funding_source += "\nPrivate Equity";
-                }
-                if (chkCommercialBank.isChecked()) {
-                    funding_source += "\nCommercial Bank";
-                }
-                if (chMicroFinanceInstitution.isChecked()) {
-                    funding_source += "\nMicro-Finance Institutions";
-                }
-                if (chkTraining.isChecked()) {
-                    additional_services += "\nTraning";
-                }
-                if (chkAdvisory.isChecked()) {
-                    additional_services += "\nAdvisory";
-                }
-                if (chkCredit.isChecked()) {
-                    additional_services += "\nCredit(Input)";
-                }
-                if (chkTechnology.isChecked()) {
-                    additional_services += "\nTechnology Demonstration";
-                }
-                if (chkMarketInformation.isChecked()) {
-                    additional_services += "\nProvision of market Information";
-                }
-                if (chkPrintedMaterial.isChecked()) {
-                    additional_services += "\nDissemination of Printed Material";
-                }
+                if (validateEntries()) {
+                    String number_of_outlets = etxtNumberOfOutlets.getText().toString().trim();
+                    String item_sold = "";
+                    String marketing_channels = "";
+                    String funding_source = "";
+                    String additional_services = "";
+                    if (chkSeed.isChecked()) {
+                        item_sold += "\nSeed";
+                    }
+                    if (chkPesticide.isChecked()) {
+                        item_sold += "\nPesticide";
+                    }
+                    if (chkFoodStuff.isChecked()) {
+                        item_sold += "\nFood Stuff";
+                    }
+                    if (chkGeneralMerchandise.isChecked()) {
+                        item_sold += "\nGeneral Merchandise";
+                    }
+                    if (chkFertilizer.isChecked()) {
+                        item_sold += "\nFertilizer";
+                    }
+                    if (chkFarmEquipment.isChecked()) {
+                        item_sold += "\nFarm Equipment";
+                    }
+                    if (chkHardware.isChecked()) {
+                        item_sold += "\nHardware";
+                    }
+                    if (chkVetDrugs.isChecked()) {
+                        item_sold += "\nVet Drugs";
+                    }
+                    if (chkInternet.isChecked()) {
+                        marketing_channels += "\nInternet";
+                    }
+                    if (chkTelevision.isChecked()) {
+                        marketing_channels += "\nTelevision";
+                    }
+                    if (chkCallCenter.isChecked()) {
+                        marketing_channels += "\nCall Center";
+                    }
+                    if (chkBuyers.isChecked()) {
+                        marketing_channels += "\nBuyers from bigger Markets";
+                    }
+                    if (chkRadio.isChecked()) {
+                        marketing_channels += "\nRadio";
+                    }
+                    if (chkExtensionWorkers.isChecked()) {
+                        marketing_channels += "\nExtension Workers";
+                    }
+                    if (chkFellowTraders.isChecked()) {
+                        marketing_channels += "\nFellow Traders";
+                    }
+                    if (chkFriendsOrRelatives.isChecked()) {
+                        funding_source += "\nFriends or Relatives";
+                    }
+                    if (chkSaccos.isChecked()) {
+                        funding_source += "\nSaccos";
+                    }
+                    if (chkPrivateEquity.isChecked()) {
+                        funding_source += "\nPrivate Equity";
+                    }
+                    if (chkCommercialBank.isChecked()) {
+                        funding_source += "\nCommercial Bank";
+                    }
+                    if (chMicroFinanceInstitution.isChecked()) {
+                        funding_source += "\nMicro-Finance Institutions";
+                    }
+                    if (chkTraining.isChecked()) {
+                        additional_services += "\nTraning";
+                    }
+                    if (chkAdvisory.isChecked()) {
+                        additional_services += "\nAdvisory";
+                    }
+                    if (chkCredit.isChecked()) {
+                        additional_services += "\nCredit(Input)";
+                    }
+                    if (chkTechnology.isChecked()) {
+                        additional_services += "\nTechnology Demonstration";
+                    }
+                    if (chkMarketInformation.isChecked()) {
+                        additional_services += "\nProvision of market Information";
+                    }
+                    if (chkPrintedMaterial.isChecked()) {
+                        additional_services += "\nDissemination of Printed Material";
+                    }
 
 
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                    databaseAccess.open();
+                    Log.d(TAG, "onClick: " + association_name + certification);
 
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                databaseAccess.open();
-                Log.d(TAG, "onClick: "+ association_name + certification);
+                    boolean check = databaseAccess.addDealer(business_name, district, sub_county, village, full_address, owner, owner_contact , certification_type, certification_number, registration_body, registration_year, registration_status, association_membership, association_name, business_type, number_of_outlets, type_of_sales, item_sold, marketing_channels, funding_source, additional_services);
+                    if (check) {
+                        Toast.makeText(getActivity(), "Agro Input Dealer Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
-                boolean check = databaseAccess.addDealer(business_name, district, sub_county, village, full_address, certification, certification_type, certification_number, registration_body, registration_year, registration_status, association_membership, association_name, business_type, number_of_outlets, type_of_sales, item_sold, marketing_channels, funding_source, additional_services);
-                if (check) {
-                    Toast.makeText(getActivity(), "Agro Input Dealer Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
-
 
             }
         });
 
+
+    }
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean validateEntries() {
+        boolean check = true;
+        if (!selectedText(spinBusinessType,businessTypeLayout)) check = false;
+        if (!hasText(etxtNumberOfOutlets))check = false;
+        if(!selectedText(spinTypeOfSales,salesTypeLayout)) check = false;
+
+        return check;
 
     }
 }

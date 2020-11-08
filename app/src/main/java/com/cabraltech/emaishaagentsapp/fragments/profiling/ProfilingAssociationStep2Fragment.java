@@ -7,11 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -27,6 +30,10 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
     private Context context;
     private NavController navController;
     private FragmentProfilingAssociationStep2Binding binding;
+
+    private EditText etxtChairperson,etxtChairpersonContact,etxtSecretary,etxtSecretaryContact,etxtRespondent,etxtRespondentContact;
+    private Spinner spinRespondentPosition;
+    private LinearLayout respondentPositionLayout;
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
     String respondent_position, name, year_of_registration, full_address, telephone, email,district,sub_county,village,registration_level,organisation_type;
@@ -84,13 +91,14 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
         navController = Navigation.findNavController(view);
 
 
-        final EditText etxtChairperson = view.findViewById(R.id.chairperson_et);
-        final EditText etxtChairpersonContact = view.findViewById(R.id.chairperson_contact_et);
-        final EditText etxtSecretary = view.findViewById(R.id.secretary_et);
-        EditText etxtSecretaryContact = view.findViewById(R.id.vice_chairperson_contact_et);
-        final EditText etxtRespondent = view.findViewById(R.id.respondent_et);
-        EditText etxtRespondentContact = view.findViewById(R.id.respondent_contact_et);
-        Spinner spinRespondentPosition = view.findViewById(R.id.respondent_position_held_spinner);
+        etxtChairperson = view.findViewById(R.id.chairperson_et);
+        etxtChairpersonContact = view.findViewById(R.id.chairperson_contact_et);
+        etxtSecretary = view.findViewById(R.id.secretary_et);
+        etxtSecretaryContact = view.findViewById(R.id.vice_chairperson_contact_et);
+        etxtRespondent = view.findViewById(R.id.respondent_et);
+        etxtRespondentContact = view.findViewById(R.id.respondent_contact_et);
+        spinRespondentPosition = view.findViewById(R.id.respondent_position_held_spinner);
+        respondentPositionLayout = view.findViewById(R.id.resp_position_layout);
 
 
         spinRespondentPosition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -110,35 +118,36 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String chairperson = etxtChairperson.getText().toString().trim();
-                String chairperson_contact = etxtChairpersonContact.getText().toString().trim();
-                String secretary = etxtSecretary.getText().toString().trim();
-                String secretary_contact = etxtSecretaryContact.getText().toString().trim();
-                String respondent = etxtRespondent.getText().toString().trim();
-                String respondent_contact = etxtRespondentContact.getText().toString().trim();
+                if (validateEntries()) {
+                    String chairperson = etxtChairperson.getText().toString().trim();
+                    String chairperson_contact = etxtChairpersonContact.getText().toString().trim();
+                    String secretary = etxtSecretary.getText().toString().trim();
+                    String secretary_contact = etxtSecretaryContact.getText().toString().trim();
+                    String respondent = etxtRespondent.getText().toString().trim();
+                    String respondent_contact = etxtRespondentContact.getText().toString().trim();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("name", name);
-                bundle.putString("year_of_registration", year_of_registration);
-                bundle.putString("full_address", full_address);
-                bundle.putString("telephone", telephone);
-                bundle.putString("email", email);
-                bundle.putString("chairperson", chairperson);
-                bundle.putString("chairperson_contact", chairperson_contact);
-                bundle.putString("secretary", secretary);
-                bundle.putString("secretary_contact", secretary_contact);
-                bundle.putString("respondent", respondent);
-                bundle.putString("respondent_contact", respondent_contact);
-                bundle.putString("respondent_position", respondent_position);
-                bundle.putString("district",district);
-                bundle.putString("sub_county",sub_county);
-                bundle.putString("village",village);
-                bundle.putString("registration_level",registration_level);
-                bundle.putString("organisation_type",organisation_type);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", name);
+                    bundle.putString("year_of_registration", year_of_registration);
+                    bundle.putString("full_address", full_address);
+                    bundle.putString("telephone", telephone);
+                    bundle.putString("email", email);
+                    bundle.putString("chairperson", chairperson);
+                    bundle.putString("chairperson_contact", chairperson_contact);
+                    bundle.putString("secretary", secretary);
+                    bundle.putString("secretary_contact", secretary_contact);
+                    bundle.putString("respondent", respondent);
+                    bundle.putString("respondent_contact", respondent_contact);
+                    bundle.putString("respondent_position", respondent_position);
+                    bundle.putString("district", district);
+                    bundle.putString("sub_county", sub_county);
+                    bundle.putString("village", village);
+                    bundle.putString("registration_level", registration_level);
+                    bundle.putString("organisation_type", organisation_type);
 
-                //navigation to step 3
-                navController.navigate(R.id.action_profilingAssociationStep2Fragment_to_profilingAssociationStep3Fragment,bundle);
-
+                    //navigation to step 3
+                    navController.navigate(R.id.action_profilingAssociationStep2Fragment_to_profilingAssociationStep3Fragment, bundle);
+                }
             }
         });
         binding.previousButton.setOnClickListener(new View.OnClickListener() {
@@ -151,4 +160,68 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
 
 
     }
+
+    public  boolean hasText(EditText editText) {
+
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        editText.setPadding(left,top,right,bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
+            editText.setPadding(left,top,right,bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+    public  boolean selectedText(Spinner spinner, LinearLayout layout) {
+
+        int position = spinner.getSelectedItemPosition();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
+        layout.setPadding(left,top,right,bottom);
+
+        // length 0 means there is no text
+        if (position == 0) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
+            layout.setPadding(left,top,right,bottom);
+            layout.setFocusable(true);
+            layout.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public boolean validateEntries() {
+        boolean check = true;
+        if (!hasText(etxtChairperson)) check = false;
+        if (!hasText(etxtChairpersonContact)) check = false;
+        if (!hasText(etxtSecretary)) check = false;
+        if (!hasText(etxtSecretaryContact)) check = false;
+        if (!hasText(etxtRespondent)) check = false;
+        if (!hasText(etxtRespondentContact)) check = false;
+        if(!selectedText(spinRespondentPosition,respondentPositionLayout)) check = false;
+
+
+
+        return check;
+
+
+    }
+
 }

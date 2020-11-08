@@ -32,17 +32,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/date"
-                        android:textSize="16sp"
                         android:layout_marginBottom="4dp"/>
                     <EditText
                         android:id="@+id/scouting_date_et"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:textSize="14sp"
                         android:inputType="date"
                         android:focusable="false"
                         android:background="@drawable/rounded_rectangle_edit_text"
-                        />
+                        android:drawableEnd="@drawable/calendar"/>
 
                 </LinearLayout>
 
@@ -58,16 +57,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/farmer_name"
-                        android:textSize="16sp"
                         android:layout_marginBottom="4dp"/>
                     <EditText
                         android:id="@+id/scouting_farm_name_et"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:textSize="14sp"
                         android:inputType="text"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        />
+                        android:background="@drawable/rounded_rectangle_edit_text" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -90,19 +87,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/district"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="16sp"/>
+                        android:layout_marginBottom="4dp"/>
                     <LinearLayout
+                        android:id="@+id/district_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="6dp">
                         <AutoCompleteTextView
                             android:id="@+id/scouting_district_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            />
+                            android:inputType="text"
+                            android:textSize="14sp"
+                            android:background="@android:color/transparent"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -117,19 +115,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/sub_county"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="16sp"/>
+                        android:layout_marginBottom="4dp"/>
                     <LinearLayout
+                        android:id="@+id/subcounty_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="6dp">
                         <AutoCompleteTextView
                             android:id="@+id/scouting_sub_county_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                           />
+                            android:inputType="text"
+                            android:textSize="14sp"
+                            android:background="@android:color/transparent"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -156,19 +155,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/village"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="16sp"/>
+                        android:layout_marginBottom="4dp"/>
                     <LinearLayout
+                        android:id="@+id/village_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="40dp"
                         android:background="@drawable/rounded_rectangle_spinner"
                         android:padding="6dp">
                         <AutoCompleteTextView
                             android:id="@+id/scouting_village_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                           />
+                            android:inputType="text"
+                            android:textSize="14sp"
+                            android:background="@android:color/transparent"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -183,16 +183,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/farmer_phone_number"
-                        android:textSize="16sp"
                         android:layout_marginBottom="4dp"/>
-                    <EditText
-                        android:id="@+id/scouting_farmer_phone_number_et"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:inputType="phone"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        />
+                        android:layout_height="40dp"
+                        android:background="@drawable/edittext_corner"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/text_country_code"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:background="@drawable/edittext_left_corners_green"
+                            android:gravity="center"
+                            android:text="+256"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/scouting_farmer_phone_number_et"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:padding="6dp"
+                            android:background="@android:color/transparent"
+                            android:inputType="phone"
+                            android:textSize="14sp"
+                            android:maxLength="9"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -216,9 +235,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/infested"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="16sp"/>
+                        android:layout_marginBottom="4dp"/>
                     <LinearLayout
+                        android:id="@+id/infested_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
@@ -243,9 +262,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/infestation_type"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="16sp"/>
+                        android:layout_marginBottom="4dp"/>
                     <LinearLayout
+                        android:id="@+id/infestation_type_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
@@ -279,9 +298,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/infestation"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="16sp"/>
+                        android:layout_marginBottom="4dp"/>
                     <LinearLayout
+                        android:id="@+id/infestation_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
@@ -306,9 +325,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/infestation_level"
-                        android:layout_marginBottom="4dp"
-                        android:textSize="16sp"/>
+                        android:layout_marginBottom="4dp"/>
                     <LinearLayout
+                        android:id="@+id/infestation_level_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_rectangle_spinner"
@@ -336,16 +355,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/recommendation"
-                    android:textSize="16sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
                     android:id="@+id/scouting_recommendation_et"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
+                    android:layout_gravity="top"
+                    android:gravity="top"
                     android:textSize="14sp"
                     android:inputType="textMultiLine"
                     android:background="@drawable/rounded_rectangle_edit_text"
-                    />
+                    android:isScrollContainer="true"/>
 
             </LinearLayout>
 

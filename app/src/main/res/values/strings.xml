@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">eMaisha-Agent</string>
+    <string name="app_name">eMaisha Agent</string>
     <string name="don_t_have_an_account_swipe_right_to">Don’t have an account? Swipe right to</string>
     <string name="create_a_new_account">Create a New Account.</string>
     <string name="welcome_please_login_to_your_account">Welcome, Please Login to your Account</string>
@@ -307,17 +307,98 @@
     <string name="title"> Title </string>
     <string name="cancel">Cancel</string>
     <string name="description">Description</string>
-    <string name="ok">Ok</string>
+    <string name="enter_first_name">please enter first name</string>
+    <string name="enter_last_name">please enter last name</string>
+    <string name="enter_dob">please enter date of birth</string>
+    <string name="enter_age">please enter age</string>
+    <string name="enter_house_hold_size">please enter house hold size</string>
+    <string name="enter_house_hold_head">please enter house hold head</string>
+    <string name="enter_source_of_icome">please enter source of income</string>
+    <string name="missing_fields_message">Please enter/select valid input </string>
+    <string name="select_religion">please select religion</string>
+    <string name="select_nationality">please select nationality</string>
+    <string name="select_marital_status">please select marital status</string>
+    <string name="select_language">please select language</string>
+    <string name="select_education_level">please select education level</string>
+    <string name="select_gender">please select gender</string>
+    <string name="enter_phone_number">enter phone number</string>
+    <string name="enter_kin">enter next of kin</string>
+    <string name="enter_kin_relation">enter kin relation</string>
+    <string name="enter_kin_contact">enter kin contact</string>
+    <string name="enter_kin_address">enter kin address</string>
+    <string name="enter_district">enter district</string>
+    <string name="enter_sub_county">enter sub county</string>
+    <string name="enter_village">enter village</string>
+    <string name="enter_farm_size">enter farm size</string>
+    <string name="enter_second_livestock">enter second livestock</string>
+    <string name="select_main_crop">select main crop</string>
+    <string name="select_second_crop">selct second crop</string>
+    <string name="select_third_crop">select third crop</string>
+    <string name="select_main_livestock">select main livestock</string>
+    <string name="ok">OK</string>
+    <string name="enter_business_name">please enter business name</string>
+    <string name="enter_owner">please enter onwer\'s name</string>
+    <string name="enter_full_address">please enter full address</string>
+    <string name="enter_email">please enter email</string>
+    <string name="select_business_type">please select business type</string>
+    <string name="enter_commodities">please enter commodity</string>
+    <string name="enter_owner_contact">please enter owner contact</string>
+    <string name="enter_registration_year">please enter registration year</string>
+    <string name="select_registration_status">please select registration status</string>
+    <string name="select_certificate_type">please select certificate type</string>
+    <string name="enter_certificate_number">please enter certificate number</string>
+    <string name="select_association_membership">please select association membership</string>
+    <string name="enter_association_name">please enter association name</string>
+    <string name="enter_number_outlets">please enter number of outlets</string>
+    <string name="select_sales_type">please select type of sales</string>
+    <string name="enter_association_telephone">please enter association telephone</string>
+    <string name="select_organisation_type">please select organisation type</string>
+    <string name="select_registration_level">please select registration level</string>
+    <string name="enter_chairperson_name">please enter chairperson\'s name</string>
+    <string name="enter_chairperson_contact">please enter chairperson\'s contact</string>
+    <string name="enter_secretary_name">please enter secretary\'s name</string>
+    <string name="enter_secretary_contact">please enter secretary\'s contact</string>
+    <string name="enter_respondent_name">please enter respondent\'s name</string>
+    <string name="enter_respondent_contact">please enter respondent\'s contact</string>
+    <string name="select_respondent_position">please select respondent\'s position held</string>
+    <string name="enter_number_males">please enter number of males</string>
+    <string name="enter_number_females">please enter number of females</string>
+    <string name="select_crop_value_chain">please select crop value chain</string>
+    <string name="select_livestock_value_chain">please select livestock value chain</string>
+    <string name="enter_street_address">please enter street address</string>
+    <string name="enter_contact_person">please enter contact person</string>
+    <string name="select_market">please select market</string>
+    <string name="enter_retail_price">please enter retail price</string>
+    <string name="enter_wholesale_price">please enter wholesale price</string>
+    <string name="enter_date">please select date</string>
+    <string name="select_varieties">please select variety</string>
+    <string name="enter_farmer_name">please enter farmer\'s name</string>
+    <string name="enter_signs_symptoms">please enter signs and symptoms</string>
+    <string name="enter_pest_disease">please enter suspected pest/disease</string>
+    <string name="select_damage_assessment">please select damage assessment</string>
+    <string name="enter_recommendation">please enter recommendation</string>
+    <string name="select_photo">please select photo</string>
+    <string name="select_infested">please select infested option</string>
+    <string name="select_infestation_type">please select infestation type</string>
+    <string name="select_infestation">please select infestation</string>
+    <string name="select_infestation_level">please select infestation level</string>
+    <string name="select_second_livestock">please select second livestock</string>
+    <string name="please_check_atleast_one_option">please check atleast one option</string>
+    <string name="enter_valid_email">enter valid email</string>
+    <string name="select_atleast_one_checkbox">select atleast one checkbox</string>
     <array name="gender_array">
+        <item>Select</item>
         <item>Female</item>
         <item>Male</item>
     </array>
     <array name="nationality_array">
+        <item>Select</item>
         <item>National</item>
         <item>Refugee</item>
 
     </array>
     <array name="religion_array">
+        <item>Select</item>
         <item>Anglican</item>
         <item>Catholic</item>
         <item>Muslim</item>
@@ -327,6 +408,7 @@
         <item>Bahai</item>
     </array>
     <array name="level_of_education_array">
+        <item>Select</item>
         <item>None</item>
         <item>PLE</item>
         <item>UCE</item>
@@ -334,108 +416,184 @@
         <item>Degree</item>
     </array>
     <array name="marital_status_array">
+        <item>Select</item>
         <item>Single</item>
         <item>Married</item>
         <item>Divorced</item>
         <item>Widowed</item>
     </array>
     <array name="language_used_array">
+        <item>Select</item>
         <item>English</item>
         <item>Luganda</item>
     </array>
-    <array name="main_crop_array">
-        <item>Cassava</item>
-        <item>Beans</item>
+    <array name="crop_array">
+        <item>Select</item>
+        <item>None</item>
+        <item> Maize(and flour)</item>
+        <item> Beans</item>
+        <item>Cassava fresh and dry chips and flour</item>
+        <item> Rice</item>
+        <item> Millet</item>
+        <item> Sorghum</item>
+        <item>Irish potatoes</item>
+        <item> Sweet potatoes</item>
+        <item> Cow peas</item>
+        <item> Pigeon peas</item>
+        <item> Garden peas</item>
+        <item> Simsim</item>
+        <item> Yams</item>
+        <item> Cabbages</item>
+        <item> Tomatoes</item>
+        <item> Chilies</item>
+        <item> Cauliflower</item>
+        <item> Egg plants</item>
+        <item> Onions</item>
+        <item> Carrots</item>
+        <item> Cheers</item>
+        <item> Cotton</item>
+        <item> Coffee</item>
+        <item> Tea</item>
+        <item> Cocoa</item>
+        <item> Vanilla</item>
+        <item> Green peppers</item>
+        <item> Oranges</item>
+        <item> Lemon</item>
+        <item> Mandarin</item>
+        <item> Nakati</item>
+        <item> Sukumawiki</item>
+        <item> Soy beans</item>
+        <item> Sunflower</item>
+        <item> Gallic</item>
+        <item> Ginger</item>
+        <item> Cucumber</item>
+        <item> Coco yams</item>
+        <item> Watermelon</item>
+        <item> Pineapple</item>
+        <item> Mangoes</item>
+        <item> Amaranths</item>
+        <item> Banana plantain(matooke)</item>
+        <item> Banana desert(yellow)</item>
+        <item> Straw berries</item>
+        <item> Apple</item>
+        <item> Oil palm</item>
+        <item> Sugar cane</item>
+        <item> Pumpkins</item>
     </array>
-    <array name="second_crop_array">
-        <item>Cassava</item>
-        <item>Beans</item>
-    </array>
-    <array name="third_crop_array">
-        <item>Cassava</item>
-        <item>Beans</item>
-    </array>
+
     <array name="main_livestock_array">
-        <item>Cattle</item>
-        <item>Sheep</item>
+        <item>Select</item>
+        <item>None</item>
+        <item>Off-layers</item>
+        <item> Broilers</item>
+        <item> kuroilers</item>
+        <item> Eggs</item>
+        <item> Beef</item>
+        <item> Meat</item>
+        <item> Mutton</item>
+        <item> Pork</item>
+        <item> Chicken</item>
+        <item> Rabbit</item>
+        <item> Fish</item>
+        <item> Guinea fowl</item>
+        <item> Ducks</item>
+        <item> Turkeys</item>
     </array>
+
     <array name="crop_value_chain_array">
-        <item>Crop Value Chain</item>
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="livestock_value_chain_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="main_source_of_funding_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="certificate_type_array">
+        <item>Select</item>
         <item>Crop Inputs</item>
         <item>Vet Drugs</item>
         <item>Both</item>
     </array>
     <array name="category_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="commodities_array">
+        <item>Select</item>
         <item>Cattle</item>
         <item>Sheep</item>
     </array>
     <array name="market_name_array">
+        <item>Select</item>
         <item>Kabusu Market</item>
         <item>Nakulabye Market</item>
     </array>
     <array name="town_array">
+        <item>Select</item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="variety_array">
+        <item>Select</item>
         <item>Kampala</item>
         <item>Kabale</item>
     </array>
     <array name="measurement_units_array">
+        <item>Select</item>
         <item>Kgs</item>
         <item>Tonnes</item>
     </array>
     <array name="infested_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="registration_status_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="type_of_business_array">
+        <item>Select</item>
         <item>Sole Proprietorship</item>
         <item>Partnership</item>
         <item>Limited Liability Company</item>
         <item>Cooperative</item>
     </array>
     <array name="association_membership_array">
+        <item>Select</item>
         <item>Yes</item>
         <item>No</item>
     </array>
     <array name="type_of_sales_array">
+        <item>Select</item>
         <item>Wholesale</item>
         <item>Retail</item>
         <item>Both</item>
     </array>
     <array name="registration_level_array">
+        <item>Select</item>
         <item>Local Govt</item>
         <item>District</item>
         <item>National</item>
         <item>NGO</item>
     </array>
     <array name="organisation_type_array">
+        <item>Select</item>
         <item>Farmer Group</item>
         <item>Rural Producer Organisation</item>
         <item>Cooperative</item>
     </array>
     <array name="respondent_position_array">
+        <item>Select</item>
         <item>Chairman</item>
         <item>Secretary</item>
         <item>Treasurer</item>

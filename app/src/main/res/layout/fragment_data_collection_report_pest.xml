@@ -31,17 +31,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/date"
-                android:textSize="16sp"
                 android:layout_marginBottom="4dp"/>
             <EditText
                 android:id="@+id/reporting_date_et"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:textSize="14sp"
-                android:inputType="date"
+                android:inputType="none"
                 android:focusable="false"
                 android:background="@drawable/rounded_rectangle_edit_text"
-                />
+                android:drawableEnd="@drawable/calendar"/>
 
         </LinearLayout>
 
@@ -57,7 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/farmer_name"
-                android:textSize="16sp"
                 android:layout_marginBottom="4dp"/>
             <EditText
                 android:id="@+id/farm_name_et"
@@ -89,19 +87,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/district"
-                    android:layout_marginBottom="4dp"
-                    android:textSize="16sp"/>
+                    android:layout_marginBottom="4dp"/>
                 <LinearLayout
+                    android:id="@+id/district_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="6dp">
                     <AutoCompleteTextView
                         android:id="@+id/district_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        />
+                        android:textSize="14sp"
+                        android:inputType="text"
+                        android:background="@android:color/transparent"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -116,19 +115,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sub_county"
-                    android:layout_marginBottom="4dp"
-                    android:textSize="16sp"/>
+                    android:layout_marginBottom="4dp"/>
                 <LinearLayout
+                    android:id="@+id/subcounty_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="6dp">
                     <AutoCompleteTextView
                         android:id="@+id/sub_county_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        />
+                        android:textSize="14sp"
+                        android:inputType="text"
+                        android:background="@android:color/transparent"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -155,19 +155,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/village"
-                    android:layout_marginBottom="4dp"
-                    android:textSize="16sp"/>
+                    android:layout_marginBottom="4dp"/>
                 <LinearLayout
+                    android:id="@+id/village_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="6dp">
                     <AutoCompleteTextView
                         android:id="@+id/village_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                       />
+                        android:textSize="14sp"
+                        android:inputType="text"
+                        android:background="@android:color/transparent"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -182,7 +183,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/farmer_phone_number"
-                    android:textSize="16sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
                     android:id="@+id/farmer_phone_number_et"
@@ -210,7 +210,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/signs_and_symptoms"
-                    android:textSize="16sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
                     android:id="@+id/signs_and_symptoms_et"
@@ -219,7 +218,7 @@
                     android:textSize="14sp"
                     android:inputType="textMultiLine"
                     android:background="@drawable/rounded_rectangle_edit_text"
-                    />
+                    android:isScrollContainer="true"/>
 
             </LinearLayout>
 
@@ -236,7 +235,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/suspected_pest_disease"
-                    android:textSize="16sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
                     android:id="@+id/suspected_pest_disease_et"
@@ -244,8 +242,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/rounded_rectangle_edit_text"
-                    />
+                    android:background="@drawable/rounded_rectangle_edit_text" />
 
             </LinearLayout>
 
@@ -262,9 +259,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/damage_assessment"
-                    android:textSize="16sp"
                     android:layout_marginBottom="4dp" />
                 <LinearLayout
+                    android:id="@+id/damage_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_spinner"
@@ -290,7 +287,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/recommendation"
-                android:textSize="16sp"
                 android:layout_marginBottom="4dp"/>
             <EditText
                 android:id="@+id/recommendation_et"
@@ -299,7 +295,7 @@
                 android:textSize="14sp"
                 android:inputType="textMultiLine"
                 android:background="@drawable/rounded_rectangle_edit_text"
-                />
+                android:isScrollContainer="true"/>
 
         </LinearLayout>
 
@@ -313,16 +309,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/photo_of_the_damage"
-            android:textSize="16sp"
             android:layout_marginBottom="4dp"/>
         <LinearLayout
+            android:id="@+id/photo_damage_layout"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@drawable/edittext_corner"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:id="@+id/photo_of_the_damage_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -330,7 +326,7 @@
                 android:paddingLeft="@dimen/dimen_10dp"
                 android:focusable="false"
                 android:background="@android:color/transparent"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/photo_browse_tv"
