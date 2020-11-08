@@ -3,6 +3,7 @@ package com.cabraltech.emaishaagentsapp.fragments.profiling;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ import com.kofigyan.stateprogressbar.StateProgressBar;
 
 public class ProfilingAssociationStep3Fragment extends Fragment {
 
-
+    private static final String TAG = "ProfilingAssociationSte";
     private Context context;
     private NavController navController;
     private FragmentProfilingAssociationStep3Binding binding;
@@ -351,29 +352,56 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
 
     }
 
-    public boolean TestCheckBox(LinearLayout linearLayout,String message) {
-        View v = null;
-        int bottom = linearLayout.getPaddingBottom();
-        int top = linearLayout.getPaddingTop();
-        int right = linearLayout.getPaddingRight();
-        int left = linearLayout.getPaddingLeft();
-        int count = linearLayout.getChildCount();
-        for (int n = 0; n < count; ++n)
-            v = linearLayout.getChildAt(n);
-        if (v instanceof CheckBox && ((CheckBox) v).isChecked()) {
-            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-            linearLayout.setPadding(left,top,right,bottom);
-            return true;
-        }
-            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            linearLayout.setPadding(left,top,right,bottom);
-            linearLayout.setFocusable(true);
-            linearLayout.requestFocus();
-            Toast.makeText(context,  message, Toast.LENGTH_LONG).show();
-            return false;
+//    public boolean TestCheckBox(LinearLayout linearLayout,String message) {
+//        boolean result = false;
+//        int checked = 0;
+//        View v = null;
+//        int bottom = linearLayout.getPaddingBottom();
+//        int top = linearLayout.getPaddingTop();
+//        int right = linearLayout.getPaddingRight();
+//        int left = linearLayout.getPaddingLeft();
+//        int count = linearLayout.getChildCount();
+//
+//        for (int n = 0; n < count; ++n) {
+//            v = linearLayout.getChildAt(n);
+//            Log.d(TAG, "TestCheckBox: " + v + count);
+//
+//            if (v instanceof LinearLayout) {
+//                int count1 = ((LinearLayout) v).getChildCount();
+//                for (int i = 0; i < count1; i++) {
+//                    v = ((LinearLayout) v).getChildAt(i);
+//                    Log.d(TAG, "TestCheckBoxx: " + v + count);
+//
+//                    if (v instanceof CheckBox) {
+//                        String checkboxName = ((CheckBox) v).getText().toString();
+//                        ++checked;
+//                        Log.d(TAG, "TestCheckBox: checked" + checked + checkboxName);
+//
+//                        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+//                        linearLayout.setPadding(left, top, right, bottom);
+//                        result = true;
+//                    }
+//
+////                 else {
+////                    Log.d(TAG, "TestCheckBox: not checked");
+////                    linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+////                    linearLayout.setPadding(left, top, right, bottom);
+////                    linearLayout.setFocusable(true);
+////                    linearLayout.requestFocus();
+////                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+////                    result = false;
+////                }
+//                }
+//            }
+//        }
+//
+//        return result;
+//        }
 
 
-    }
+
+
+
 
     public  boolean hasText(EditText editText) {
 
@@ -427,12 +455,12 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         if (!hasText(etxtFemalesNumber)) check = false;
         if(!selectedText(spinCropValueChain,cropvalueLayout)) check = false;
         if(!selectedText(spinLivestockValueChain,livestockLayout)) check = false;
-        if(TestCheckBox(mainActivitiesLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-        if(TestCheckBox(assetOwnerShipLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-        if(TestCheckBox(marketLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-        if(TestCheckBox(marketingchannelsLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-        if(TestCheckBox(fundingsourceLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-        if(TestCheckBox(additionalserviceLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+//        if(!TestCheckBox(mainActivitiesLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+//        if(!TestCheckBox(assetOwnerShipLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+//        if(!TestCheckBox(marketLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+//        if(!TestCheckBox(marketingchannelsLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+//        if(!TestCheckBox(fundingsourceLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
+//        if(!TestCheckBox(additionalserviceLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
 
 
 

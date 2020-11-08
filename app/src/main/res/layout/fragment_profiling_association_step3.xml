@@ -223,10 +223,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/check_box_bg">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:id="@+id/main_activities_production_cb"
                         android:layout_width="match_parent"
@@ -234,6 +236,7 @@
                         android:text="@string/production"
                         android:checked="false"
                         android:layout_weight="1"/>
+
                     <CheckBox
                         android:id="@+id/main_activities_bulking_cb"
                         android:layout_width="match_parent"
@@ -242,8 +245,8 @@
                         android:checked="false"
                         android:layout_weight="1"/>
 
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -263,6 +266,7 @@
                         android:checked="false"
                         android:layout_weight="1"/>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -327,13 +331,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <CheckBox
-                        android:id="@+id/asset_ownership_sheller_cb"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/sheller"
-                        android:checked="false"
-                        android:layout_weight="1"/>
+
                     <CheckBox
                         android:id="@+id/asset_ownership_milling_machine_cb"
                         android:layout_width="match_parent"
@@ -342,6 +340,15 @@
                         android:checked="false"
                         android:layout_weight="1"/>
                 </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/asset_ownership_sheller_cb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/sheller" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -607,12 +614,13 @@
                 android:text="@string/funding_source"
                 android:layout_marginBottom="4dp"/>
             <LinearLayout
+                android:id="@+id/funding_source_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/check_box_bg">
                 <LinearLayout
-                    android:id="@+id/funding_source_layout"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
