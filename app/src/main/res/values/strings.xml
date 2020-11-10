@@ -387,6 +387,8 @@
     <string name="enter_valid_email">enter valid email</string>
     <string name="select_atleast_one_checkbox">select atleast one checkbox</string>
     <string name="NIN">NIN</string>
+    <string name="ugandan_code" translatable="false">+256 </string>
+    <string name="veryfynumbertxt"> Please enter verification code sent in your text message. </string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>
@@ -431,74 +433,74 @@
     <array name="crop_array">
         <item>Select</item>
         <item>None</item>
-        <item> Maize(and flour)</item>
-        <item> Beans</item>
+        <item>Maize(and flour)</item>
+        <item>Beans</item>
         <item>Cassava fresh and dry chips and flour</item>
-        <item> Rice</item>
-        <item> Millet</item>
-        <item> Sorghum</item>
+        <item>Rice</item>
+        <item>Millet</item>
+        <item>Sorghum</item>
         <item>Irish potatoes</item>
-        <item> Sweet potatoes</item>
-        <item> Cow peas</item>
-        <item> Pigeon peas</item>
-        <item> Garden peas</item>
-        <item> Simsim</item>
-        <item> Yams</item>
-        <item> Cabbages</item>
-        <item> Tomatoes</item>
-        <item> Chilies</item>
-        <item> Cauliflower</item>
-        <item> Egg plants</item>
-        <item> Onions</item>
-        <item> Carrots</item>
-        <item> Cheers</item>
-        <item> Cotton</item>
-        <item> Coffee</item>
-        <item> Tea</item>
-        <item> Cocoa</item>
-        <item> Vanilla</item>
-        <item> Green peppers</item>
-        <item> Oranges</item>
-        <item> Lemon</item>
-        <item> Mandarin</item>
-        <item> Nakati</item>
-        <item> Sukumawiki</item>
-        <item> Soy beans</item>
-        <item> Sunflower</item>
-        <item> Gallic</item>
-        <item> Ginger</item>
-        <item> Cucumber</item>
-        <item> Coco yams</item>
-        <item> Watermelon</item>
-        <item> Pineapple</item>
-        <item> Mangoes</item>
-        <item> Amaranths</item>
-        <item> Banana plantain(matooke)</item>
-        <item> Banana desert(yellow)</item>
-        <item> Straw berries</item>
-        <item> Apple</item>
-        <item> Oil palm</item>
-        <item> Sugar cane</item>
-        <item> Pumpkins</item>
+        <item>Sweet potatoes</item>
+        <item>Cow peas</item>
+        <item>Pigeon peas</item>
+        <item>Garden peas</item>
+        <item>Simsim</item>
+        <item>Yams</item>
+        <item>Cabbages</item>
+        <item>Tomatoes</item>
+        <item>Chilies</item>
+        <item>Cauliflower</item>
+        <item>Egg plants</item>
+        <item>Onions</item>
+        <item>Carrots</item>
+        <item>Cheers</item>
+        <item>Cotton</item>
+        <item>Coffee</item>
+        <item>Tea</item>
+        <item>Cocoa</item>
+        <item>Vanilla</item>
+        <item>Green peppers</item>
+        <item>Oranges</item>
+        <item>Lemon</item>
+        <item>Mandarin</item>
+        <item>Nakati</item>
+        <item>Sukumawiki</item>
+        <item>Soy beans</item>
+        <item>Sunflower</item>
+        <item>Gallic</item>
+        <item>Ginger</item>
+        <item>Cucumber</item>
+        <item>Coco yams</item>
+        <item>Watermelon</item>
+        <item>Pineapple</item>
+        <item>Mangoes</item>
+        <item>Amaranths</item>
+        <item>Banana plantain(matooke)</item>
+        <item>Banana desert(yellow)</item>
+        <item>Straw berries</item>
+        <item>Apple</item>
+        <item>Oil palm</item>
+        <item>Sugar cane</item>
+        <item>Pumpkins</item>
     </array>
 
     <array name="main_livestock_array">
         <item>Select</item>
         <item>None</item>
         <item>Off-layers</item>
-        <item> Broilers</item>
-        <item> kuroilers</item>
-        <item> Eggs</item>
-        <item> Beef</item>
-        <item> Meat</item>
-        <item> Mutton</item>
-        <item> Pork</item>
-        <item> Chicken</item>
-        <item> Rabbit</item>
-        <item> Fish</item>
-        <item> Guinea fowl</item>
-        <item> Ducks</item>
-        <item> Turkeys</item>
+        <item>Broilers</item>
+        <item>kuroilers</item>
+        <item>Eggs</item>
+        <item>Beef</item>
+        <item>Meat</item>
+        <item>Mutton</item>
+        <item>Pork</item>
+        <item>Chicken</item>
+        <item>Rabbit</item>
+        <item>Fish</item>
+        <item>Guinea fowl</item>
+        <item>Ducks</item>
+        <item>Turkeys</item>
     </array>
 
     <array name="crop_value_chain_array">

@@ -2,11 +2,16 @@ package com.cabraltech.emaishaagentsapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -16,6 +21,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,12 +34,25 @@ import com.bumptech.glide.Glide;
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
+import com.cabraltech.emaishaagentsapp.utils.CheckPermissions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,11 +77,23 @@ public class SignUpActivity extends AppCompatActivity {
     private ImageButton userIdPhotoView;
     private ImageButton selectedPhotoView;
 
+    // Verification id that will be sent to the user
+    private String mVerificationId;
+
+    // Firebase auth object
+    private FirebaseAuth mAuth;
+
+    //Custom Dialog Vies
+    private Dialog dialogOTP;
+    private EditText ed_otp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         getSupportActionBar().hide();
+
+        mAuth = FirebaseAuth.getInstance();
 
         firstName = findViewById(R.id.first_name_et);
         lastName = findViewById(R.id.last_name_et);
@@ -84,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
         // Initialize ProgressDialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(getString(R.string.processing));
-        progressDialog.setMessage("Signing you up...");
+        progressDialog.setMessage("Signing you up ...");
         progressDialog.setCancelable(false);
 
         userPhotoView.setOnClickListener(v -> {
@@ -141,7 +173,7 @@ public class SignUpActivity extends AppCompatActivity {
                 phoneNumber.setError("Required");
             } else if (email.getText().toString().trim().isEmpty()) {
                 email.setError("Required");
-            }  else if (!email.getText().toString().trim().matches(regex)) {
+            } else if (!email.getText().toString().trim().matches(regex)) {
                 email.setError(getString(R.string.enter_valid_email));
             } else if (password.getText().toString().trim().isEmpty()) {
                 password.setError("Required");
@@ -163,8 +195,7 @@ public class SignUpActivity extends AppCompatActivity {
             } else if (nationalIdPhoto == null) {
                 Snackbar.make(findViewById(android.R.id.content), "National ID picture is empty", Snackbar.LENGTH_SHORT).show();
             } else {
-                progressDialog.show();
-                processRegistration();
+                sendVerificationCode(getResources().getString(R.string.ugandan_code) + phoneNumber.getText().toString().trim());
             }
         });
     }
@@ -223,6 +254,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void processRegistration() {
+        progressDialog.show();
         Call<RegistrationResponse> call = APIClient.getInstance().register(firstName.getText().toString(), lastName.getText().toString(),
                 district.getText().toString(), subCounty.getText().toString(), village.getText().toString(),
                 phoneNumber.getText().toString(), email.getText().toString(), password.getText().toString(), nextOfKin.getText().toString(),
@@ -235,7 +267,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse: " + response.body().getStatus());
                     Log.d(TAG, "onResponse: " + response.body().getData().getEmail());
-                    Intent intent = new Intent(SignUpActivity.this, OTPVerificationActivity.class);
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     Log.d(TAG, "onResponse: " + response.code());
@@ -248,5 +280,120 @@ public class SignUpActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
+    }
+
+    /// Custom dialog for OTP
+    public void showOTPDialog(Activity activity, String msg) {
+        dialogOTP = new Dialog(activity);
+        dialogOTP.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogOTP.setCancelable(false);
+        dialogOTP.setContentView(R.layout.dialog_otp);
+
+        ed_otp = dialogOTP.findViewById(R.id.ed_otp);
+        AppCompatButton btn_resend, btn_submit;
+        btn_resend = dialogOTP.findViewById(R.id.btn_resend);
+        btn_submit = dialogOTP.findViewById(R.id.btn_submit);
+
+        btn_resend.setOnClickListener(view -> sendVerificationCode(phoneNumber.getText().toString().trim()));
+
+        btn_submit.setOnClickListener(view -> {
+            if (!ed_otp.getText().toString().trim().isEmpty()) {
+                verifyVerificationCode(ed_otp.getText().toString().trim());
+            }
+        });
+
+        dialogOTP.show();
+    }
+
+    //the method is sending verification code
+    //the country id is concatenated
+    //you can take the country id as user input as well
+    private void sendVerificationCode(String mobile) {
+
+        showOTPDialog(SignUpActivity.this, "");
+
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(mobile)                        // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS)      // Timeout and unit
+                        .setActivity(this)                             // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)                      // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+
+//        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+//                mobile,
+//                60,
+//                TimeUnit.SECONDS,
+//                this,
+//                mCallbacks);
+    }
+
+    //the callback to detect the verification status
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        @Override
+        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+
+            //Getting the code sent by SMS
+            String code = phoneAuthCredential.getSmsCode();
+
+            //sometime the code is not detected automatically
+            //in this case the code will be null
+            //so user has to manually enter the code
+            if (code != null) {
+
+                ed_otp.setText(code);
+                //verifying the code
+                verifyVerificationCode(code);
+                processRegistration();
+            }
+        }
+
+        @Override
+        public void onVerificationFailed(FirebaseException e) {
+            Toast.makeText(SignUpActivity.this, e.getLocalizedMessage() /*e.getMessage()*/, Toast.LENGTH_LONG).show();
+
+            dialogOTP.dismiss();
+        }
+
+        @Override
+        public void onCodeSent(@NotNull String s, @NotNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+
+            //storing the verification id that is sent to the user
+            mVerificationId = s;
+        }
+    };
+
+    private void verifyVerificationCode(String code) {
+        //creating the credential
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+
+        //signing the user
+        signInWithPhoneAuthCredential(credential);
+    }
+
+    //*********** This method is invoked for every call on requestPermissions(Activity, String[], int) ********//
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(SignUpActivity.this, (OnCompleteListener<AuthResult>) task -> {
+                    if (task.isSuccessful()) {
+                        //verification successful we will start the profile activity
+                        dialogOTP.dismiss();
+
+                        //Final Registration Call to API
+                        processRegistration();
+                    } else {
+                        //verification unsuccessful.. display an error message
+                        String message = "Somthing is wrong, we will fix it soon...";
+                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            message = "Invalid code entered...";
+                        }
+                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+                        snackbar.setAction("Dismiss", v -> snackbar.dismiss());
+                        snackbar.show();
+                    }
+                });
     }
 }
