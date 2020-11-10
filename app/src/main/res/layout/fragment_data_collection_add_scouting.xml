@@ -274,7 +274,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/sub_county_array" />
+                            android:entries="@array/sp_crop_scouting_infestation_type" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -310,7 +310,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/district_array" />
+                           />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -337,7 +337,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/sub_county_array" />
+                            android:entries="@array/sp_crop_scouting_infestation_level" />
                     </LinearLayout>
                 </LinearLayout>
 

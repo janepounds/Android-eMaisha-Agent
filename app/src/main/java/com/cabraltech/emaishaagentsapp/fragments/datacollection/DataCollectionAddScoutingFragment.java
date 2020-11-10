@@ -279,17 +279,7 @@ public class DataCollectionAddScoutingFragment extends Fragment {
             }
         });
 
-        spinInfestation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                infestation = adapterView.getItemAtPosition(i).toString();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         spinInfestationLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -307,6 +297,39 @@ public class DataCollectionAddScoutingFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 infestation_type = adapterView.getItemAtPosition(i).toString();
+                if(infestation_type.equalsIgnoreCase("Disease")){
+                    ArrayAdapter<String> diseases = new ArrayAdapter<String>(context,  android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sp_crop_scouting_infestation_disease));
+                    spinInfestation.setAdapter(diseases);
+
+                }else if(infestation_type.equalsIgnoreCase("Nematode")){
+                    ArrayAdapter<String> nematodes = new ArrayAdapter<String>(context,  android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sp_crop_scouting_infestation_nematode));
+                    spinInfestation.setAdapter(nematodes);
+
+                }else if(infestation_type.equalsIgnoreCase("Pest")){
+                    ArrayAdapter<String> pests = new ArrayAdapter<String>(context,  android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sp_crop_scouting_infestation_pest));
+                    spinInfestation.setAdapter(pests);
+
+                }else if(infestation_type.equalsIgnoreCase("Rodent")){
+                    ArrayAdapter<String> rodents = new ArrayAdapter<String>(context,  android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sp_crop_scouting_infestation_rodent));
+                    spinInfestation.setAdapter(rodents);
+
+                }else if(infestation_type.equalsIgnoreCase("Weed")){
+                    ArrayAdapter<String> weeds = new ArrayAdapter<String>(context,  android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sp_crop_scouting_infestation_weed));
+                    spinInfestation.setAdapter(weeds);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinInfestation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                infestation = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
