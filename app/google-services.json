@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "829618917591",
+    "firebase_url": "https://emaishaagentapp.firebaseio.com",
+    "project_id": "emaishaagentapp",
+    "storage_bucket": "emaishaagentapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829618917591:android:32ac7914becfadc2b16092",
+        "android_client_info": {
+          "package_name": "com.cabraltech.emaishaagentsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829618917591-ei4q1937kluoujoijo5noihfglhd7h06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cabraltech.emaishaagentsapp",
+            "certificate_hash": "554f18c61331ff4dc6bd8518281d435eb8423306"
+          }
+        },
+        {
+          "client_id": "829618917591-53jsn74ch8g3sa5oh4efejsflniqr1e5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiGDlrzCVz7iG4MmqLRaozEfQb6mWFOUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829618917591-53jsn74ch8g3sa5oh4efejsflniqr1e5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
