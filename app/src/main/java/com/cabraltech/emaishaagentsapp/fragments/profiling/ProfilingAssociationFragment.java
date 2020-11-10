@@ -213,12 +213,6 @@ public class ProfilingAssociationFragment extends Fragment {
             }
         });
 
-        etxtYear_of_registration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addDatePicker(etxtYear_of_registration, getActivity());
-            }
-        });
 
 
 

@@ -75,7 +75,7 @@ public class DatabaseAccess {
 
 
     //insert farmer
-    public boolean addFarmer(String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String level_of_education, String marital_status, String household_size, String language_used, String source_of_income, String household_head, String district, String sub_county, String village, String phone_number, String next_of_kin, String next_of_kin_relation, String next_of_kin_contact, String next_of_kin_address, String farming_land_size, String main_crop, String second_crop, String third_crop, String main_livestock, String second_livestock) {
+    public boolean addFarmer(String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String education_level, String marital_status, String household_size, String language_used, String source_of_income, String household_head, String district, String sub_county, String village, String phone_number, String next_of_kin, String next_of_kin_relation, String next_of_kin_contact, String next_of_kin_address, String farming_land_size, String main_crop, String second_crop, String third_crop, String main_livestock, String second_livestock,String nin) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
@@ -86,7 +86,7 @@ public class DatabaseAccess {
         values.put("gender", gender);
         values.put("nationality", nationality);
         values.put("religion", religion);
-        values.put("level_of_education", level_of_education);
+        values.put("level_of_education", education_level);
         values.put("marital_status", marital_status);
         values.put("household_size", household_size);
         values.put("language_used", language_used);
@@ -107,6 +107,7 @@ public class DatabaseAccess {
         values.put("main_livestock", main_livestock);
         values.put("second_livestock", second_livestock);
         values.put("sync_status",0);
+        values.put("nin",nin);
 
         long check = database.insert("farmers", null, values);
         database.close();

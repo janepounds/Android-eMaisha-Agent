@@ -271,7 +271,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:entries="@array/district_array" />
+                        android:entries="@array/sp_crop_scouting_infestation_level" />
                 </LinearLayout>
             </LinearLayout>
 

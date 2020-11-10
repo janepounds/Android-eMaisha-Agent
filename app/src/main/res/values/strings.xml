@@ -386,6 +386,7 @@
     <string name="please_check_atleast_one_option">please check atleast one option</string>
     <string name="enter_valid_email">enter valid email</string>
     <string name="select_atleast_one_checkbox">select atleast one checkbox</string>
+    <string name="NIN">NIN</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>

@@ -123,6 +123,7 @@ public class DataCollectionReportPestFragment extends Fragment {
         districtLayout = view.findViewById(R.id.district_layout);
         subcountyLayout = view.findViewById(R.id.subcounty_layout);
         villageLayout = view.findViewById(R.id.village_layout);
+        damageLayout = view.findViewById(R.id.damage_layout);
 
         Button btnSubmit =view.findViewById(R.id.submit_button);
 

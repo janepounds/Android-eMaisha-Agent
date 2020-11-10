@@ -285,7 +285,7 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
                     bundle.putString("owner", owner);
                     bundle.putString("owner_contact", owner_contact);
                     bundle.putString("district", spinDistrict.getText().toString());
-                    bundle.putString("sub_country", spinSubCounty.getText().toString());
+                    bundle.putString("sub_county", spinSubCounty.getText().toString());
                     bundle.putString("village", spinVillage.getText().toString());
 
 

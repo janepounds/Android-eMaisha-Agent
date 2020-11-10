@@ -45,7 +45,7 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
     private FragmentProfilingFarmerStep2Binding binding;
     private NavController navController;
     String[] descriptionData = {"Personal\nDetails", "Contact\nDetails", "Farming\nDetails"};
-    String district,sub_county,village,gender, marital_status, religion, education_level, language_used, nationality,first_name,last_name,dob,age,household_size,household_head,source_of_income;
+    String district,sub_county,nin,gender, marital_status, religion, education_level, language_used, nationality,first_name,last_name,dob,age,household_size,household_head,source_of_income;
     private int pickedDistrictId;
     private int pickedSubcountyId;
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
@@ -73,13 +73,14 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
         age = getArguments().getString("age");
         marital_status = getArguments().getString("marital_status");
         religion = getArguments().getString("religion");
-        education_level = getArguments().getString("education_level");
+        education_level = getArguments().getString("level_of_education");
         language_used = getArguments().getString("language_used");
         nationality = getArguments().getString("nationality");
         dob = getArguments().getString("dob");
         household_size = getArguments().getString("household_size");
         household_head = getArguments().getString("household_head");
         source_of_income = getArguments().getString("source_of_income");
+        nin = getArguments().getString("nin");
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profiling_farmer_step2,container,false);
@@ -297,6 +298,7 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
                     bundle.putString("district", district);
                     bundle.putString("subcounty", subcounty);
                     bundle.putString("village", village);
+                    bundle.putString("nin", nin);
                     //navigate to step 3
                     navController.navigate(R.id.action_profilingFarmerStep2Fragment_to_profilingFarmerStep3Fragment, bundle);
 

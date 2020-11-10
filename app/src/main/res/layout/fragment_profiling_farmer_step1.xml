@@ -424,34 +424,67 @@
 
 
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
                 android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/household_head"
-                    android:layout_marginBottom="4dp"/>
                 <LinearLayout
-                    android:id="@+id/head_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_edit_text"
-                    android:padding="8dp">
-                <Spinner
-                    android:id="@+id/household_head_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:textSize="14sp"
-                    android:entries="@array/gender_array" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/household_head"
+                        android:layout_marginBottom="4dp"
+                        />
+                    <LinearLayout
+                        android:id="@+id/head_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        android:padding="8dp">
+                        <Spinner
+                            android:id="@+id/household_head_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:entries="@array/gender_array" />
+                    </LinearLayout>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginLeft="@dimen/dimen_10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/NIN"
+                        android:layout_marginBottom="4dp"/>
+                    <EditText
+                        android:id="@+id/nin_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        android:inputType="text"/>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

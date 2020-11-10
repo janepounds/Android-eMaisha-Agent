@@ -58,7 +58,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     private NavController navController;
     private FragmentProfilingFarmerStep1Binding binding;
     String gender, marital_status, religion, education_level, language_used, nationality;
-    private EditText etxtFirstName, etxtLastName, etxtAge, etxtHouseholdSize, etxtSourceOfIncome;
+    private EditText etxtFirstName, etxtLastName, etxtAge, etxtHouseholdSize, etxtSourceOfIncome,ninExt;
     private Spinner spinGender, spinNationality, spinReligion, spinEducation, spinLanguage, spinMarital, etxtHouseholdHead;
     private TextView txtDob;
     private LinearLayout genderLayout, nationalityLayout, religionLayout, educationLayout, languageLayout, maritalLayout, househeadLayout;
@@ -123,6 +123,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         languageLayout = view.findViewById(R.id.language_layout);
         maritalLayout = view.findViewById(R.id.marital_layout);
         househeadLayout = view.findViewById(R.id.head_layout);
+        ninExt = view.findViewById(R.id.nin_et);
 
 
         txtDob.setOnClickListener(new View.OnClickListener() {
@@ -136,8 +137,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         spinGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                gender = adapterView.getItemAtPosition(i).toString();
-                Log.d("Gender", gender);
+
             }
 
             @Override
@@ -149,7 +149,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         spinMarital.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                marital_status = adapterView.getItemAtPosition(i).toString();
+
             }
 
             @Override
@@ -161,7 +161,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         spinEducation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                education_level = adapterView.getItemAtPosition(i).toString();
+
             }
 
             @Override
@@ -173,7 +173,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         spinLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                language_used = adapterView.getItemAtPosition(i).toString();
+
             }
 
             @Override
@@ -185,7 +185,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         spinNationality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                nationality = adapterView.getItemAtPosition(i).toString();
+
             }
 
             @Override
@@ -197,7 +197,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         spinReligion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                religion = adapterView.getItemAtPosition(i).toString();
+
             }
 
             @Override
@@ -220,22 +220,30 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
                     String household_size = etxtHouseholdSize.getText().toString().trim();
                     String household_head = etxtHouseholdHead.getSelectedItem().toString().trim();
                     String source_of_income = etxtSourceOfIncome.getText().toString().trim();
+                    String nin = ninExt.getText().toString().trim();
+                    gender =  spinGender.getSelectedItem().toString();
+                    religion = spinReligion.getSelectedItem().toString();
+                    nationality = spinNationality.getSelectedItem().toString();
+                    education_level = spinEducation.getSelectedItem().toString();
+                    marital_status = spinMarital.getSelectedItem().toString();
+                    language_used = spinLanguage.getSelectedItem().toString();
+
 
                     Bundle bundle = new Bundle();
                     bundle.putString("first_name", first_name);
                     bundle.putString("last_name", last_name);
                     bundle.putString("dob", dob);
                     bundle.putString("age", age);
-                    bundle.putString("gender", gender);
+                    bundle.putString("gender",gender);
                     bundle.putString("religion", religion);
-                    bundle.putString("nationality", nationality);
                     bundle.putString("level_of_education", education_level);
-                    bundle.putString("marital_status", marital_status);
-                    bundle.putString("language_used", language_used);
-                    bundle.putString("nationality", nationality);
+                    bundle.putString("marital_status",marital_status);
+                    bundle.putString("language_used",language_used);
+                    bundle.putString("nationality",nationality );
                     bundle.putString("household_size", household_size);
                     bundle.putString("household_head", household_head);
                     bundle.putString("source_of_income", source_of_income);
+                    bundle.putString("nin", nin);
 
                     //navigation to step 2
                     navController.navigate(R.id.action_profilingFarmerFragment_to_profilingFarmerStep2Fragment, bundle);
