@@ -133,11 +133,11 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
                     bundle.putString("telephone", telephone);
                     bundle.putString("email", email);
                     bundle.putString("chairperson", chairperson);
-                    bundle.putString("chairperson_contact", chairperson_contact);
+                    bundle.putString("chairperson_contact", "0"+chairperson_contact);
                     bundle.putString("secretary", secretary);
-                    bundle.putString("secretary_contact", secretary_contact);
+                    bundle.putString("secretary_contact", "0"+secretary_contact);
                     bundle.putString("respondent", respondent);
-                    bundle.putString("respondent_contact", respondent_contact);
+                    bundle.putString("respondent_contact", "0"+respondent_contact);
                     bundle.putString("respondent_position", respondent_position);
                     bundle.putString("district", district);
                     bundle.putString("sub_county", sub_county);

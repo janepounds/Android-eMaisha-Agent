@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PatternMatcher;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -42,6 +43,7 @@ import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAssociationBinding;
 import com.cabraltech.emaishaagentsapp.models.RegionDetails;
+import com.cabraltech.emaishaagentsapp.utils.InputFilterMinMax;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import org.json.JSONException;
@@ -113,6 +115,8 @@ public class ProfilingAssociationFragment extends Fragment {
 
         etxtName = view.findViewById(R.id.association_name_et);
         etxtYear_of_registration = view.findViewById(R.id.year_of_registration_et);
+
+        etxtYear_of_registration.setFilters(new InputFilter[]{ new InputFilterMinMax("1900", ""+Calendar.getInstance().get(Calendar.YEAR))});
         spinDistrict = view.findViewById(R.id.district_spinner);
         spinSubCounty = view.findViewById(R.id.sub_county_spinner);
         spinVillage = view.findViewById(R.id.village_spinner);
@@ -460,7 +464,7 @@ public class ProfilingAssociationFragment extends Fragment {
 //        if (!hasValidEmail(etxtEmail,getString(R.string.enter_valid_email))) check = false;
         if (!hasText(etxtFull_address)) check = false;
         if (!hasText(etxtTelephone)) check = false;
-        if (!hasText(etxtEmail)) check = false;
+        if (!hasText(etxtEmail) || !hasValidEmail(etxtEmail,"Email invalid")) check = false;
         if (!hasAutoText(spinDistrict,districtLayout)) check = false;
         if (!hasAutoText(spinSubCounty,subcountyLayout)) check = false;
         if (!hasAutoText(spinVillage,villageLayout)) check = false;
