@@ -113,7 +113,9 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
             }
         });
 
-
+        focusToValidateNames(etxtChairperson);
+        focusToValidateNames(etxtSecretary);
+        focusToValidateNames(etxtRespondent);
 
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,9 +220,23 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
         if(!selectedText(spinRespondentPosition,respondentPositionLayout)) check = false;
 
 
-
         return check;
 
+
+    }
+
+    public void focusToValidateNames(EditText value){
+        value.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if (value.getText().toString().trim().length() < 7)
+                        value.setError("Failed");
+                    else
+                        value.setError(null);
+                }
+            }
+        });
 
     }
 

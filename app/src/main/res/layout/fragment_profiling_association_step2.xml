@@ -71,7 +71,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_edit_text"
                     android:textSize="14sp"
-                    android:minLength="7"
                     android:inputType="text" />
 
             </LinearLayout>
@@ -148,7 +147,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_edit_text"
                     android:textSize="14sp"
-                    android:minLength="7"
                     android:inputType="text" />
 
             </LinearLayout>
@@ -225,7 +223,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_rectangle_edit_text"
                     android:textSize="14sp"
-                    android:minLength="7"
                     android:inputType="text"
                     />
 

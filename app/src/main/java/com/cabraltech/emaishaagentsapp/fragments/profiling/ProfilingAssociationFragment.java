@@ -2,14 +2,12 @@ package com.cabraltech.emaishaagentsapp.fragments.profiling;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PatternMatcher;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +20,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,12 +35,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.cabraltech.emaishaagentsapp.R;
-import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAssociationBinding;
 import com.cabraltech.emaishaagentsapp.models.RegionDetails;
-import com.cabraltech.emaishaagentsapp.utils.InputFilterMinMax;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import org.json.JSONException;
@@ -52,7 +47,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.regex.Pattern;
 
 public class ProfilingAssociationFragment extends Fragment {
     private static final String TAG = "ProfilingAssociationFra";
@@ -116,7 +110,6 @@ public class ProfilingAssociationFragment extends Fragment {
         etxtName = view.findViewById(R.id.association_name_et);
         etxtYear_of_registration = view.findViewById(R.id.year_of_registration_et);
 
-        etxtYear_of_registration.setFilters(new InputFilter[]{ new InputFilterMinMax("1900", ""+Calendar.getInstance().get(Calendar.YEAR))});
         spinDistrict = view.findViewById(R.id.district_spinner);
         spinSubCounty = view.findViewById(R.id.sub_county_spinner);
         spinVillage = view.findViewById(R.id.village_spinner);
@@ -131,6 +124,45 @@ public class ProfilingAssociationFragment extends Fragment {
         subcountyLayout = view.findViewById(R.id.subcounty_layout);
         villageLayout = view.findViewById(R.id.village_layout);
 
+
+        etxtYear_of_registration.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                etxtYear_of_registration.setFilters(new InputFilter[]{ new InputFilterMinMax(0, Calendar.getInstance().get(Calendar.YEAR))});
+
+            }
+        });
+        etxtYear_of_registration.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && Integer.parseInt(etxtYear_of_registration.getText().toString())<1900 ) {
+                    // code to execute when EditText loses focus
+                    etxtYear_of_registration.setError("Invalid Year");
+
+                }
+            }
+        });
+        etxtEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && hasValidEmail(etxtEmail,"Invalid Email") ) {
+                    // code to execute when EditText loses focus
+                    etxtEmail.setError("Invalid Email");
+
+                }
+            }
+        });
 
         Button next_button = view.findViewById(R.id.next_button);
 
@@ -310,6 +342,7 @@ public class ProfilingAssociationFragment extends Fragment {
             public void onClick(View view) {
                 if (validateEntries()) {
                     String name = etxtName.getText().toString().trim();
+
                     String year_of_registration = etxtYear_of_registration.toString().trim();
                     String full_address = etxtFull_address.getText().toString().trim();
                     String telephone = etxtTelephone.getText().toString().trim();
@@ -477,5 +510,36 @@ public class ProfilingAssociationFragment extends Fragment {
 
     }
 
+    class InputFilterMinMax implements InputFilter {
+
+        private int min, max;
+
+        public InputFilterMinMax(int min, int max) {
+            this.min = min;
+            this.max = max;
+        }
+
+        public InputFilterMinMax(String min, String max) {
+            this.min = Integer.parseInt(min);
+            this.max = Integer.parseInt(max);
+        }
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            try {
+                int input = Integer.parseInt(dest.toString() + source.toString());
+                if (isInRange(min, max, input))
+                    return null;
+            } catch (NumberFormatException nfe) {
+                Log.e("FilterError", nfe.getMessage());
+            }
+            etxtYear_of_registration.setError("Invalid Year");
+            return "";
+        }
+
+        private boolean isInRange(int a, int b, int c) {
+            return b > a ? c >= a && c <= b : c >= b && c <= a;
+        }
+    }
 
 }
