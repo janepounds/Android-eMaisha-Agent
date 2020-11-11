@@ -26,6 +26,7 @@ import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingBulkBuyersStep2Binding;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 
@@ -213,6 +214,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     boolean check = databaseAccess.addTrader(business_type, business_name, owner, commodities, phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
                     if (check) {
                         Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().startService(new Intent(getActivity(), BroadcastService.class));
                         Intent intent = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(intent);
                     } else {
