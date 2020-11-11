@@ -351,7 +351,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, e.getLocalizedMessage() /*e.getMessage()*/, Toast.LENGTH_LONG).show();
 
             dialogOTP.dismiss();
         }
