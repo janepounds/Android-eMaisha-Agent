@@ -270,7 +270,9 @@ public class SignUpActivity extends AppCompatActivity {
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
-                    Log.d(TAG, "onResponse: " + response.code());
+                    if (response.code() == 400) {
+                        Snackbar.make(findViewById(android.R.id.content), "User already exists", Snackbar.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -299,6 +301,8 @@ public class SignUpActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(view -> {
             if (!ed_otp.getText().toString().trim().isEmpty()) {
                 verifyVerificationCode(ed_otp.getText().toString().trim());
+            } else {
+                ed_otp.setError("Required");
             }
         });
 
@@ -337,6 +341,8 @@ public class SignUpActivity extends AppCompatActivity {
             //Getting the code sent by SMS
             String code = phoneAuthCredential.getSmsCode();
 
+            Log.d(TAG, "onVerificationCompleted: Code : " + code);
+
             //sometime the code is not detected automatically
             //in this case the code will be null
             //so user has to manually enter the code
@@ -345,13 +351,12 @@ public class SignUpActivity extends AppCompatActivity {
                 ed_otp.setText(code);
                 //verifying the code
                 verifyVerificationCode(code);
-                processRegistration();
             }
         }
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(SignUpActivity.this, e.getLocalizedMessage() /*e.getMessage()*/, Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
             dialogOTP.dismiss();
         }
@@ -377,11 +382,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(SignUpActivity.this, (OnCompleteListener<AuthResult>) task -> {
+                .addOnCompleteListener(SignUpActivity.this, task -> {
                     if (task.isSuccessful()) {
                         //verification successful we will start the profile activity
                         dialogOTP.dismiss();
 
+                        Log.d(TAG, "onVerificationCompleted: Verification Completed");
                         //Final Registration Call to API
                         processRegistration();
                     } else {

@@ -33,6 +33,7 @@ import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionAddMarketBinding;
 import com.cabraltech.emaishaagentsapp.models.RegionDetails;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 
 import org.json.JSONException;
 
@@ -277,6 +278,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
                     boolean check = databaseAccess.addMarket(market_name, street_address, phone, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), contact);
                     if (check) {
                         Toast.makeText(getActivity(), "Market Added Successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().startService(new Intent(getActivity(), BroadcastService.class));
                         Intent intent = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(intent);
                     } else {

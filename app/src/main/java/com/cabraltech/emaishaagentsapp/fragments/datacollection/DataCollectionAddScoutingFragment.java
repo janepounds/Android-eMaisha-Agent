@@ -37,6 +37,7 @@ import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionAddScoutingBinding;
 import com.cabraltech.emaishaagentsapp.models.RegionDetails;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 
 import org.json.JSONException;
 
@@ -361,6 +362,7 @@ public class DataCollectionAddScoutingFragment extends Fragment {
                     boolean check = databaseAccess.addScoutingReport(date, farmer_name, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), farmer_phone, infested, infestation_type, infestation, infestation_level, recommendation);
                     if (check) {
                         Toast.makeText(getActivity(), "Scouting Report Added Successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().startService(new Intent(getActivity(), BroadcastService.class));
                         Intent intent = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(intent);
                     } else {

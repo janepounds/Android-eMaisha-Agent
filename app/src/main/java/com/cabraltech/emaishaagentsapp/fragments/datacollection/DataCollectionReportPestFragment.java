@@ -41,6 +41,7 @@ import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionReportPestBinding;
 import com.cabraltech.emaishaagentsapp.models.RegionDetails;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 
 
 import org.json.JSONException;
@@ -319,6 +320,7 @@ public class DataCollectionReportPestFragment extends Fragment {
                     boolean check = databaseAccess.addPestReport(date, farm_name, spinDistrict.getText().toString(), spinSubCounty.getText().toString(), spinVillage.getText().toString(), phone, signs_and_symptoms, pest_or_disease, damage, recommendation, encodedImageID);
                     if (check) {
                         Toast.makeText(getActivity(), "Pest Report Added Successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().startService(new Intent(getActivity(), BroadcastService.class));
                         Intent intent = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(intent);
                     } else {
