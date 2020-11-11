@@ -119,7 +119,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         actCommodities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                commodities = adapterView.getItemAtPosition(i).toString();
+
             }
 
             @Override
@@ -211,7 +211,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();
 
-                    boolean check = databaseAccess.addTrader(business_type, business_name, owner, commodities, phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
+                    boolean check = databaseAccess.addTrader(business_type, business_name, owner, actCommodities.getText().toString(), phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
                     if (check) {
                         Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
