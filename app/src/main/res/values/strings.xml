@@ -389,6 +389,7 @@
     <string name="NIN">NIN</string>
     <string name="ugandan_code" translatable="false">+256 </string>
     <string name="veryfynumbertxt"> Please enter verification code sent in your text message. </string>
+    <string name="select_crop_or_livestock">select atleast a crop or livestock</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>
@@ -426,9 +427,16 @@
         <item>Widowed</item>
     </array>
     <array name="language_used_array">
-        <item>Select</item>
-        <item>English</item>
-        <item>Luganda</item>
+        <item>Alur</item>
+        <item>Madi (okollo)</item>
+        <item>Lugbara</item>
+        <item>Kakwa</item>
+        <item>Madi(moyo and adjumani)</item>
+        <item>Kebu</item>
+        <item>Lendu</item>
+        <item>Lugbara(aringa)</item>
+
+
     </array>
     <array name="crop_array">
         <item>Select</item>
