@@ -15,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "829618917591-ei4q1937kluoujoijo5noihfglhd7h06.apps.googleusercontent.com",
+          "client_id": "829618917591-nks824e64ls00tggq7rskv2onu543rls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cabraltech.emaishaagentsapp",
+            "certificate_hash": "7a397ac7e551206048483ffe7f317f589bce6854"
+          }
+        },
+        {
+          "client_id": "829618917591-lq92bsh64p5vt4g3tsba256th7o3le4b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.cabraltech.emaishaagentsapp",
