@@ -27,6 +27,7 @@ import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAgroInputDealerStep3Binding;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
@@ -260,6 +261,7 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
                     boolean check = databaseAccess.addDealer(business_name, district, sub_county, village, full_address, owner, owner_contact , certification_type, certification_number, registration_body, registration_year, registration_status, association_membership, association_name, business_type, number_of_outlets, type_of_sales, item_sold, marketing_channels, funding_source, additional_services);
                     if (check) {
                         Toast.makeText(getActivity(), "Agro Input Dealer Added Successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().startService(new Intent(getActivity(), BroadcastService.class));
                         Intent intent = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(intent);
                     } else {

@@ -34,6 +34,7 @@ import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingFarmerStep3Binding;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.cabraltech.emaishaagentsapp.network.NetworkStateChecker;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
@@ -282,7 +283,8 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
                     if (check) {
 
                         Toast.makeText(getActivity(), "Farmer Profiled Successfully", Toast.LENGTH_SHORT).show();
-
+                        //resume broadcast service
+                        getActivity().startService(new Intent(getActivity(),BroadcastService.class));
                         Intent intent = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(intent);
                     } else {

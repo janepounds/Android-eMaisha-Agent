@@ -38,6 +38,7 @@ import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionAddMarketBinding;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionAddMarketPriceBinding;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -183,6 +184,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
                     boolean check = databaseAccess.addMarketPrice(date, spinCommodities.getText().toString(), varieties, market_name, units, wholesale_price, retail_sale);
                     if (check) {
                         Toast.makeText(getActivity(), "Market Price Added Successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().startService(new Intent(getActivity(), BroadcastService.class));
                         Intent intent = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(intent);
                     } else {

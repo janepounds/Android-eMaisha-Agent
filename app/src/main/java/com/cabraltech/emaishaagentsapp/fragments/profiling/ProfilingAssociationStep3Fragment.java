@@ -27,6 +27,7 @@ import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAssociationStep3Binding;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 public class ProfilingAssociationStep3Fragment extends Fragment {
@@ -331,6 +332,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
                     boolean check = databaseAccess.addAssociation(name, year_of_registration, district, sub_county, village, full_address, telephone, email, crop_value_chain, livestock_value_chain, chairperson, chairperson_contact, secretary, secretary_contact, number_of_males, number_of_females, registration_level, respondent, respondent_contact, asset_ownership, organisation_type, main_activities, market, marketing_channels, funding_source, additional_services);
                     if (check) {
                         Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().startService(new Intent(getActivity(), BroadcastService.class));
                         Intent intent = new Intent(getActivity(), DashboardActivity.class);
                         startActivity(intent);
                     } else {

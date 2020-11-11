@@ -42,7 +42,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".network.BroadcastService"/>
+        <service android:name=".network.BroadcastService"
+            android:stopWithTask="false"/>
         <receiver android:name=".network.NetworkStateChecker"
          android:exported="false"
             android:enabled="true">
