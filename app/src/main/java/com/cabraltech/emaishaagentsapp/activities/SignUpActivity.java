@@ -11,6 +11,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,10 +20,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +36,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cabraltech.emaishaagentsapp.R;
+import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
+import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
+import com.cabraltech.emaishaagentsapp.models.RegionDetails;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
 import com.cabraltech.emaishaagentsapp.utils.CheckPermissions;
@@ -49,9 +56,11 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
@@ -63,7 +72,11 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText firstName, lastName, phoneNumber, email, password, confirmPassword, nextOfKin, nextOfKinRelation, nextOfKinContact, nin;
     private AutoCompleteTextView district, subCounty, village;
     private Button submitBtn;
-
+    private int pickedDistrictId;
+    private int pickedSubcountyId;
+    private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
+    private ArrayList<String> villageList = new ArrayList<>();
+    private Context context;
     private ProgressDialog progressDialog;
 
     // image picker code
@@ -86,6 +99,11 @@ public class SignUpActivity extends AppCompatActivity {
     //Custom Dialog Vies
     private Dialog dialogOTP;
     private EditText ed_otp;
+
+    public SignUpActivity(Context context){
+        this.context = context;
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +136,153 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setTitle(getString(R.string.processing));
         progressDialog.setMessage("Signing you up ...");
         progressDialog.setCancelable(false);
+
+
+        //load district, subcounty and village data
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+        databaseAccess.open();
+        ArrayList<SpinnerItem> districtList = new ArrayList<>();
+
+        try {
+            for (RegionDetails x : databaseAccess.getRegionDetails("district")) {
+                districtList.add(new SpinnerItem() {
+                    @Override
+                    public String getId() {
+                        return String.valueOf(x.getId());
+                    }
+
+
+
+                    @NonNull
+                    @Override
+                    public String toString() {
+                        return x.getRegion();
+                    }
+                });
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "onCreate: "+ districtList + districtList.size());
+        ArrayAdapter<SpinnerItem> districtListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, districtList);
+        district.setThreshold(1);
+        district.setAdapter(districtListAdapter);
+        district.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                district.showDropDown();
+                for (int i = 0; i < districtList.size(); i++) {
+
+                    if (districtList.get(i).toString().equals(district.getText().toString())) {
+                        pickedDistrictId =Integer.parseInt(districtList.get(i).getId());
+
+                        Log.d(TAG, "onCreate: "+ pickedDistrictId);
+
+                        subcountyList.clear();
+                        try {
+                            for (RegionDetails x : databaseAccess.getSubcountyDetails(String.valueOf(pickedDistrictId),"subcounty")) {
+                                subcountyList.add(new SpinnerItem() {
+                                    @Override
+                                    public String getId() {
+                                        return String.valueOf(x.getId());
+                                    }
+
+
+
+                                    @NonNull
+                                    @Override
+                                    public String toString() {
+                                        return x.getRegion();
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d(TAG, "onCreate: "+ subcountyList);
+                        ArrayAdapter<SpinnerItem> subcountryListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, subcountyList);
+                        subCounty.setThreshold(1);
+                        subCounty.setAdapter(subcountryListAdapter);
+                    }
+
+
+                }
+            }
+        });
+
+
+
+
+
+
+        subCounty.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                subCounty.showDropDown();
+
+                for (int i = 0; i < subcountyList.size(); i++) {
+
+                    if (subcountyList.get(i).toString().equals(subCounty.getText().toString())) {
+                        pickedSubcountyId =Integer.parseInt(subcountyList.get(i).getId());
+
+                        Log.d(TAG, "onCreate: "+ pickedSubcountyId);
+
+                        villageList.clear();
+                        try {
+                            for (RegionDetails x : databaseAccess.getVillageDetails(String.valueOf(pickedSubcountyId),"village")) {
+                                villageList.add(x.getRegion());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d(TAG, "onCreate: "+ villageList);
+                        ArrayAdapter<String> villageListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line, villageList);
+                        village.setThreshold(1);
+                        village.setAdapter(villageListAdapter);
+                    }
+
+
+                }
+            }
+        });
+
+        village.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         userPhotoView.setOnClickListener(v -> {
             selectedPhotoView = userPhotoView;
