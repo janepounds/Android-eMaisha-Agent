@@ -386,6 +386,7 @@
     <string name="please_check_atleast_one_option">please check atleast one option</string>
     <string name="enter_valid_email">enter valid email</string>
     <string name="select_atleast_one_checkbox">select atleast one checkbox</string>
+    <string name="NIN">NIN</string>
     <string name="ugandan_code" translatable="false">+256 </string>
     <string name="veryfynumbertxt"> Please enter verification code sent in your text message. </string>
     <array name="gender_array">

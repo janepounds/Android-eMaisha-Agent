@@ -25,7 +25,7 @@ public class DatabaseOpenHelper  extends SQLiteOpenHelper {
         this.sqLiteDatabase = sqLiteDatabase;
 
         String agro_input_dealers_query = " CREATE TABLE IF NOT EXISTS " + "agro_input_dealers" + " ( " + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
-                "business_name" + " TEXT, " + "district" + " TEXT NOT NULL, " + "sub_county" + " TEXT NOT NULL, " + "village" + " TEXT, " +
+                "business_name" + " TEXT, " + "district" + " TEXT NOT NULL, " + "sub_county" + " TEXT NOT NULL, " + "village" + " TEXT, " + "full_address" + " TEXT, " +
                 "certification_type" + " TEXT NOT NULL, " +  "certification_number" + " TEXT NOT NULL, " + "sync_status" + " TEXT DEFAULT 0, " + "registration_body" + " TEXT , " +  "registration_year" + " TEXT  ," +  "registration_status" + " TEXT ,"
                 +  "association_membership" + " TEXT, " + "association_name" + " TEXT NOT NULL, " + "business_type" + " TEXT NOT NULL, " + "number_of_outlets" + " TEXT, "
                 + "types_of_sales" + " TEXT NOT NULL, " +  "items_sold" + " TEXT NOT NULL, " + "marketing_channels" + " TEXT , " + "funding_source" + " TEXT , " +  "additional_services" + " TEXT, " + "owner" + " TEXT NOT NULL, " + "owner_contact" + " TEXT NOT NULL" +
@@ -53,8 +53,8 @@ public class DatabaseOpenHelper  extends SQLiteOpenHelper {
                 "gender" + " TEXT NOT NULL, " +  "nationality" + " TEXT NOT NULL, " + "religion" + " TEXT , " + "level_of_education" + " TEXT , " +  "marital_status" + " TEXT  ," +  "household_size" + " TEXT ,"
                 +  "language_used" + " TEXT, " + "source_of_income" + " TEXT NOT NULL, " + "household_head" + " TEXT NOT NULL, " + "district" + " TEXT, "
                 + "sub_county" + " TEXT NOT NULL, " +  "village" + " TEXT , " + "phone_number" + " TEXT NOT NULL, " + "next_of_kin" + " TEXT NOT NULL, " + "next_of_kin_relation" + " TEXT, " +
-                "next_of_kin_address" + " TEXT NOT NULL, " +  "farming_land_size" + " TEXT, " + "main_crop" + " TEXT, " + "second_crop" + " TEXT, " + "third_crop" + " TEXT, " +
-                "main_livestock" + " TEXT, " +  "second_livestock" + " TEXT, " + "sync_status" + " TEXT DEFAULT 0 " +
+               "next_of_kin_contact" + " TEXT," + "next_of_kin_address" + " TEXT NOT NULL, " +  "farming_land_size" + " TEXT, " + "main_crop" + " TEXT, " + "second_crop" + " TEXT, " + "third_crop" + " TEXT, " +
+                "main_livestock" + " TEXT, " +  "second_livestock" + " TEXT, " + "sync_status" + " TEXT DEFAULT 0, " + "nin" + " TEXT " +
                 " ) ";
 
 

@@ -46,7 +46,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     PopupWindow popupWindow;
     private ConstraintLayout constraintLayout;
     String[] descriptionData = {"Personal\nDetails", "Contact\nDetails", "Farming\nDetails"};
-    String farming_size, second_livestock, main_crop, second_crop, third_crop, main_livestock, district, sub_county, village, gender, marital_status, religion, education_level, language_used, nationality, first_name, last_name, dob, age, household_size, household_head, source_of_income, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address;
+    String farming_size, second_livestock, main_crop, second_crop, third_crop, main_livestock, district, sub_county, village, gender, marital_status, religion, education_level, language_used, nationality, first_name, last_name, dob, age, household_size, household_head, source_of_income, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address,nin;
     private EditText etxtFarmingSize;
     private AutoCompleteTextView spinMainCrop,spinSecondCrop,spinThirdCrop,spinMainLivestock,etxtSecondLivestock;
     private LinearLayout moreCropsLayout, moreLivestockLayout, mainCropLayout,mainLivestockLayout;
@@ -70,7 +70,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         age = getArguments().getString("age");
         marital_status = getArguments().getString("marital_status");
         religion = getArguments().getString("religion");
-        education_level = getArguments().getString("education_level");
+        education_level = getArguments().getString("level_of_education");
         language_used = getArguments().getString("language_used");
         nationality = getArguments().getString("nationality");
         dob = getArguments().getString("dob");
@@ -85,6 +85,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         district = getArguments().getString("district");
         sub_county = getArguments().getString("subcounty");
         village = getArguments().getString("village");
+        nin = getArguments().getString("nin");
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_farmer_step3, container, false);
@@ -142,8 +143,8 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                main_crop = spinMainCrop.getText().toString();
-                if (main_crop.toLowerCase().equals("none")) {
+
+                if (spinMainCrop.getText().toString().toLowerCase().equals("none")) {
                     moreCropsLayout.setVisibility(View.GONE);
 
                 } else {
@@ -159,9 +160,9 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         spinMainLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                main_livestock = spinMainLivestock.getText().toString();
 
-                if (main_livestock.toLowerCase().equals("none")) {
+
+                if (spinMainLivestock.getText().toString().toLowerCase().equals("none")) {
                     moreLivestockLayout.setVisibility(View.GONE);
 
                 } else {
@@ -270,8 +271,14 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
                     farming_size = etxtFarmingSize.getText().toString().trim();
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();
+                    main_crop = spinMainCrop.getText().toString();
+                    main_livestock = spinMainLivestock.getText().toString();
+                    second_crop = spinSecondCrop.getText().toString();
+                    third_crop = spinThirdCrop.getText().toString();
+                    second_livestock = etxtSecondLivestock.getText().toString();
 
-                    boolean check = databaseAccess.addFarmer(first_name, last_name, dob, age, gender, nationality, religion, education_level, marital_status, household_size, language_used, source_of_income, household_head, district, sub_county, village, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address, farming_size, main_crop, second_crop, third_crop, main_livestock, second_livestock);
+
+                    boolean check = databaseAccess.addFarmer(first_name, last_name, dob, age, gender, nationality, religion, education_level, marital_status, household_size, language_used, source_of_income, household_head, district, sub_county, village, phone_number, next_of_kin, next_of_kin_relation, next_of_kin_contact, next_of_kin_address, farming_size, main_crop, second_crop, third_crop, main_livestock, second_livestock,nin);
                     if (check) {
 
                         Toast.makeText(getActivity(), "Farmer Profiled Successfully", Toast.LENGTH_SHORT).show();
