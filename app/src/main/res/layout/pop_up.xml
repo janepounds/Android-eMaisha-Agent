@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/pop_up_img"
-        android:text="Thank You"
+        android:text="Success"
         android:textSize="45sp"
         android:gravity="center"
         android:textColor="@color/colorPrimary"

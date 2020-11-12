@@ -390,6 +390,9 @@
     <string name="ugandan_code" translatable="false">+256 </string>
     <string name="veryfynumbertxt"> Please enter verification code sent in your text message. </string>
     <string name="select_crop_or_livestock">select atleast a crop or livestock</string>
+    <string name="nin_message">NIN should have atleast 14 characters</string>
+    <string name="farmer_to_farmer">Farmer to Farmer</string>
+    <string name="Savings">Savings</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>
@@ -418,6 +421,8 @@
         <item>UCE</item>
         <item>UACE</item>
         <item>Degree</item>
+        <item>Tertiary Certificate</item>
+        <item>Diploma</item>
     </array>
     <array name="marital_status_array">
         <item>Select</item>
@@ -428,16 +433,44 @@
     </array>
     <array name="language_used_array">
         <item>Select</item>
-        <item>Alur</item>
-        <item>Madi (okollo)</item>
-        <item>Lugbara</item>
-        <item>Kakwa</item>
-        <item>Madi(moyo and adjumani)</item>
-        <item>Kebu</item>
-        <item>Lendu</item>
-        <item>Lugbara(aringa)</item>
         <item>English</item>
+        <item>Swahili</item>
         <item>Luganda</item>
+        <item>Lusoga</item>
+        <item>Runyankore</item>
+        <item>Rutooro</item>
+        <item>Rukiga</item>
+        <item>Runyoro</item>
+        <item>Acholi</item>
+        <item>Alur</item>
+        <item>Lugubarati</item>
+        <item>Lango</item>
+        <item>Adhola</item>
+        <item>Kuman</item>
+        <item>Bari</item>
+        <item>Teso</item>
+        <item>Bari</item>
+        <item>Karamojong</item>
+        <item>Elgon</item>
+        <item>Pokot</item>
+        <item>Kuliak</item>
+        <item>Soo</item>
+        <item>Aringa</item>
+        <item>Ndo</item>
+        <item>Lugbara</item>
+        <item> Ma'di</item>
+        <item>Ugandan Sign Language</item>
+<!--        <item>Madi (okollo)</item>-->
+<!--        <item>Lugbara</item>-->
+<!--        <item>Kakwa</item>-->
+<!--        <item>Madi(moyo and adjumani)</item>-->
+<!--        <item>Kebu</item>-->
+<!--        <item>Lendu</item>-->
+<!--        <item>Lugbara(aringa)</item>-->
+
+
+
+
 
 
     </array>
@@ -793,6 +826,22 @@
         <item>Wheatgrass</item>
         <item>Weeds grasses perennials</item>
         <item>Weeds dicotyledons</item>
+
+    </string-array>
+
+    <string-array name="source_of_income">
+        <item>Select</item>
+        <item>Farming</item>
+        <item>Employment Earnings</item>
+        <item>Employment Income</item>
+        <item>Business Enterprises</item>
+        <item> Cottage Industry</item>
+        <item>Property Income</item>
+        <item>Family/Friends/Relatives Support</item>
+        <item>Organization Support</item>
+        <item>Sale of Assets</item>
+
+
 
     </string-array>
 </resources>

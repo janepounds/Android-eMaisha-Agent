@@ -39,8 +39,8 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
     String district, sub_county,village, business_type,commodities,business_name,phone,email,full_address,owner;
     CheckBox chkIndividualFarmer, chkRuralTraders, chkFarmerOrganisation;
     CheckBox chkWithInDistrict, chkOutsideDistrict, chkOutsideCountry;
-    CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkVillageSavings, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution;
-    CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency;
+    CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkVillageSavings, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution,chkSavings;
+    CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency,chkFarmerTofarmer;
 
     AutoCompleteTextView actCommodities;
 
@@ -115,6 +115,8 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         chkExtensionWorkers = view.findViewById(R.id.marketing_channels_extension_workers_cb);
         chkFellowTraders = view.findViewById(R.id.marketing_channels_traders_cb);
         chkGovernmentAgency = view.findViewById(R.id.marketing_channels_govt_agency_cb);
+        chkSavings = view.findViewById(R.id.funding_source_savings_cb);
+        chkFarmerTofarmer = view.findViewById(R.id.marketing_channels_famer_to_farmer_cb);
 
         actCommodities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -179,6 +181,9 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     if (chMicroFinanceInstitution.isChecked()) {
                         funding_source += "\nMicro-Finance Institutions";
                     }
+                    if (chkSavings.isChecked()) {
+                        funding_source += "\nSavings";
+                    }
                     if (chkInternet.isChecked()) {
                         marketing_channels += "\nInternet";
                     }
@@ -206,7 +211,9 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     if (chkGovernmentAgency.isChecked()) {
                         marketing_channels += "\nGovernment Agency";
                     }
-
+                    if (chkFarmerTofarmer.isChecked()) {
+                        marketing_channels += "\nFarmer to Farmer";
+                    }
 
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();

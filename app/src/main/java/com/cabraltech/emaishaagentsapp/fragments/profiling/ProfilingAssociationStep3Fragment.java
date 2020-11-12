@@ -49,7 +49,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     private LinearLayout cropvalueLayout,livestockLayout;
     private  EditText etxtMalesNumber,etxtFemalesNumber;
     private  Spinner spinLivestockValueChain,spinCropValueChain;
-    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
+//    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
     public ProfilingAssociationStep3Fragment() {
         // Required empty public constructor
     }
@@ -156,12 +156,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         chkTrainingOnInstitutionalDevt = view.findViewById(R.id.additional_services_training_institutional_devt_cb);
         cropvalueLayout = view.findViewById(R.id.crop_layout);
         livestockLayout = view.findViewById(R.id.livestock_layout);
-        mainActivitiesLayout = view.findViewById(R.id.main_activities_layout);
-        assetOwnerShipLayout = view.findViewById(R.id.asset_ownership_layout);
-        marketLayout = view.findViewById(R.id.market_layout);
-        marketingchannelsLayout = view.findViewById(R.id.marketing_channels_layout);
-        fundingsourceLayout = view.findViewById(R.id.funding_source_layout);
-        additionalserviceLayout = view.findViewById(R.id.additional_services_layout);
+
 
 
         spinCropValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
