@@ -1,5 +1,6 @@
 package com.cabraltech.emaishaagentsapp.network;
 
+import com.cabraltech.emaishaagentsapp.models.CommissionResponse;
 import com.cabraltech.emaishaagentsapp.models.Regions;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
@@ -7,10 +8,13 @@ import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationRespons
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface APIRequests {
 
@@ -208,5 +212,10 @@ public interface APIRequests {
             @Field("supplier_location") String supplier_location,
             @Field("funding_source") String funding_source,
             @Field("marketing_channels") String marketing_channels
+    );
+
+    @GET("agent/get/commission")
+    Call<CommissionResponse> getCommission(
+            @Query("agentID") int agentID
     );
 }
