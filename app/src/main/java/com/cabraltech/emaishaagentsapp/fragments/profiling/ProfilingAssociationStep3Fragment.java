@@ -386,8 +386,9 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+//                        startActivity(intent);
+                        navController.navigate(R.id.action_profilingAssociationStep3Fragment_to_sucessDialogFragment);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 

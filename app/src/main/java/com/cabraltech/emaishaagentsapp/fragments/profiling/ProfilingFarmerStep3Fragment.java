@@ -285,8 +285,12 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
                         Toast.makeText(getActivity(), "Farmer Profiled Successfully", Toast.LENGTH_SHORT).show();
                         //resume broadcast service
                         getActivity().startService(new Intent(getActivity(),BroadcastService.class));
-                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                        startActivity(intent);
+                        
+                        
+                        //load dialog
+                        navController.navigate(R.id.action_profilingFarmerStep3Fragment_to_sucessDialogFragment);
+//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+//                        startActivity(intent);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occur red", Toast.LENGTH_SHORT).show();
 

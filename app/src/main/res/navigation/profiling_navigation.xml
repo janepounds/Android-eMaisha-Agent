@@ -73,7 +73,11 @@
         android:id="@+id/profilingFarmerStep3Fragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingFarmerStep3Fragment"
         android:label="fragment_profiling_farmer_step3"
-        tools:layout="@layout/fragment_profiling_farmer_step3" />
+        tools:layout="@layout/fragment_profiling_farmer_step3" >
+        <action
+            android:id="@+id/action_profilingFarmerStep3Fragment_to_sucessDialogFragment"
+            app:destination="@id/sucessDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilingAssociationStep2Fragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAssociationStep2Fragment"
@@ -87,7 +91,11 @@
         android:id="@+id/profilingAssociationStep3Fragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAssociationStep3Fragment"
         android:label="fragment_profiling_association_step3"
-        tools:layout="@layout/fragment_profiling_association_step3" />
+        tools:layout="@layout/fragment_profiling_association_step3" >
+        <action
+            android:id="@+id/action_profilingAssociationStep3Fragment_to_sucessDialogFragment"
+            app:destination="@id/sucessDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilingAgroInputDealerStep2Fragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAgroInputDealerStep2Fragment"
@@ -101,10 +109,22 @@
         android:id="@+id/profilingAgroInputDealerStep3Fragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingAgroInputDealerStep3Fragment"
         android:label="fragment_profiling_agro_input_dealer_step3"
-        tools:layout="@layout/fragment_profiling_agro_input_dealer_step3" />
+        tools:layout="@layout/fragment_profiling_agro_input_dealer_step3" >
+        <action
+            android:id="@+id/action_profilingAgroInputDealerStep3Fragment_to_sucessDialogFragment"
+            app:destination="@id/sucessDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilingBulkBuyersStep2Fragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.profiling.ProfilingBulkBuyersStep2Fragment"
         android:label="fragment_profiling_bulk_buyers_step2"
-        tools:layout="@layout/fragment_profiling_bulk_buyers_step2" />
+        tools:layout="@layout/fragment_profiling_bulk_buyers_step2" >
+        <action
+            android:id="@+id/action_profilingBulkBuyersStep2Fragment_to_sucessDialogFragment"
+            app:destination="@id/sucessDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/sucessDialogFragment"
+        android:name="com.cabraltech.emaishaagentsapp.dialogs.SucessDialogFragment"
+        android:label="SucessDialogFragment" />
 </navigation>
