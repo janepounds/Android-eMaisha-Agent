@@ -77,6 +77,7 @@
                     android:entries="@array/commodities_array" />
 
                 <LinearLayout
+                    android:id="@+id/bulk_buyers_add_new_commodity"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -112,6 +113,10 @@
         </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bulk_buyers_more_commodities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -324,6 +329,14 @@
                         android:text="@string/village_savings_lending_associations"
                         android:checked="false"
                         android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/funding_source_savings_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/Savings"
+                        android:checked="false"
+                        android:layout_weight="1"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -443,6 +456,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/buyers_fom_bigger_markets"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/funding_source_farmer_to_farmer_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/farmer_to_farmer"
                         android:checked="false"
                         android:layout_weight="1"/>
 

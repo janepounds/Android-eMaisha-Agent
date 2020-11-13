@@ -278,8 +278,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/gender"
-                        android:layout_marginBottom="4dp" />
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/gender" />
                     <LinearLayout
                         android:id="@+id/gender_layout"
                         android:layout_width="match_parent"
@@ -393,19 +393,19 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_edit_text"
                         android:padding="8dp">
-                        <Spinner
+                        <AutoCompleteTextView
                             android:id="@+id/language_used_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/language_used_array" />
+                            android:background="@android:color/transparent" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:layout_marginStart="@dimen/dimen_10dp"
                     android:layout_marginLeft="@dimen/dimen_10dp">
 
@@ -414,15 +414,21 @@
                         android:layout_height="wrap_content"
                         android:text="@string/source_of_income"
                         android:layout_marginBottom="4dp"/>
-                    <EditText
+                    <LinearLayout
+                        android:id="@+id/income_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        android:padding="8dp">
+                    <Spinner
                         android:id="@+id/source_of_income_et"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:inputType="text"/>
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:entries="@array/source_of_income" />
 
                 </LinearLayout>
+            </LinearLayout>
 
 
             </LinearLayout>

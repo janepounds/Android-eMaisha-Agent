@@ -33,8 +33,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
         String agro_traders_query = " CREATE TABLE IF NOT EXISTS " + "agro_traders" + " ( " + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
                 "business_name" + " TEXT, " + "owner" + " TEXT NOT NULL, " + "commodities" + " TEXT NOT NULL, " + "phone_number" + " TEXT, " +
-                "email_address" + " TEXT NOT NULL, " + "district" + " TEXT NOT NULL, " + "sub_county" + " TEXT , " + "full_address" + " TEXT , " + "sync_status" + " TEXT DEFAULT 0 ," + "business_type" + " TEXT ,"
-                + "supply_source" + " TEXT, " + "supplier_location" + " TEXT NOT NULL, " + "funding_source" + " TEXT NOT NULL, " + "marketing_channels" + " TEXT, "
+                "email_address" + " TEXT , " +  "district" + " TEXT NOT NULL, " + "sub_county" + " TEXT , " + "full_address" + " TEXT , " +  "sync_status" + " TEXT DEFAULT 0 ," +  "business_type" + " TEXT ,"
+                +  "supply_source" + " TEXT, " + "supplier_location" + " TEXT NOT NULL, " + "funding_source" + " TEXT NOT NULL, " + "marketing_channels" + " TEXT, "
                 + "village" + " TEXT NOT NULL " +
                 " ) ";
 

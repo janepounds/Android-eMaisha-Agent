@@ -37,7 +37,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
     CheckBox chkMaaif, chkUnada, chkNda;
     private Spinner spinCertificationType,spinRegistrationStatus,spinAssociationMember;
     private EditText etxtRegistrationYear,etxtCertificationNumber,etxtAssociationName;
-    private LinearLayout assMembershipLayout,certTypeLayout,regBodyLayout,regStatusLayout;
+    private LinearLayout assMembershipLayout,certTypeLayout,regBodyLayout,regStatusLayout,associationNameLayout;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -104,6 +104,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         certTypeLayout = view.findViewById(R.id.certificate_type_layout);
         regBodyLayout = view.findViewById(R.id.registration_body_layout);
         regStatusLayout = view.findViewById(R.id.registration_status_layout);
+        associationNameLayout = view.findViewById(R.id.association_name_layout);
 
 
         spinCertificationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -134,6 +135,9 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 association_membership = adapterView.getItemAtPosition(i).toString();
+                if(association_membership.toLowerCase().equals("yes")){
+                    associationNameLayout.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -250,7 +254,6 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         if (!hasText(etxtRegistrationYear)|| etxtRegistrationYear.getText().toString().trim().length() < 4) check = false;
         if(!selectedText(spinCertificationType,certTypeLayout)) check = false;
         if (!hasText(etxtCertificationNumber)) check = false;
-        if (!hasText(etxtAssociationName)) check = false;
         if(!selectedText(spinAssociationMember,assMembershipLayout)) check = false;
 
         return check;

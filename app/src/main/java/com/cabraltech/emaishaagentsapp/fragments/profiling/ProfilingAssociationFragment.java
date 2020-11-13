@@ -153,16 +153,16 @@ public class ProfilingAssociationFragment extends Fragment {
                 }
             }
         });
-        etxtEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && hasValidEmail(etxtEmail,"Invalid Email") ) {
-                    // code to execute when EditText loses focus
-                    etxtEmail.setError("Invalid Email");
-
-                }
-            }
-        });
+//        etxtEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus && hasValidEmail(etxtEmail,"Invalid Email") ) {
+//                    // code to execute when EditText loses focus
+//                    etxtEmail.setError("Invalid Email");
+//
+//                }
+//            }
+//        });
 
         Button next_button = view.findViewById(R.id.next_button);
 
@@ -497,7 +497,7 @@ public class ProfilingAssociationFragment extends Fragment {
 //        if (!hasValidEmail(etxtEmail,getString(R.string.enter_valid_email))) check = false;
         if (!hasText(etxtFull_address)) check = false;
         if (!hasText(etxtTelephone)) check = false;
-        if (!hasText(etxtEmail) || !hasValidEmail(etxtEmail,"Email invalid")) check = false;
+        if (!hasValidEmail(etxtEmail,"Email invalid")) check = false;
         if (!hasAutoText(spinDistrict,districtLayout)) check = false;
         if (!hasAutoText(spinSubCounty,subcountyLayout)) check = false;
         if (!hasAutoText(spinVillage,villageLayout)) check = false;

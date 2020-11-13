@@ -38,8 +38,8 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
     String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
     String business_type, type_of_sales, registration_year, association_name, certification_number, registration_body, certification_type, registration_status, association_membership, district, sub_county, village, certification, business_name, full_address,owner,owner_contact;
     CheckBox chkSeed, chkPesticide, chkFoodStuff, chkGeneralMerchandise, chkFertilizer, chkFarmEquipment, chkHardware, chkVetDrugs;
-    CheckBox chkInternet, chkTelevision, chkCallCenter, chkBuyers, chkRadio, chkFellowTraders, chkExtensionWorkers;
-    CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution;
+    CheckBox chkInternet, chkTelevision, chkCallCenter, chkBuyers, chkRadio, chkFellowTraders, chkExtensionWorkers,chkFarmerToFarmer,chkNone;
+    CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution,chkSavings;
     CheckBox chkTraining, chkAdvisory, chkCredit, chkTechnology, chkMarketInformation, chkPrintedMaterial;
     private EditText etxtNumberOfOutlets;
     private Spinner spinBusinessType,spinTypeOfSales;
@@ -129,6 +129,9 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
         chkPrintedMaterial = view.findViewById(R.id.additional_services_printed_material_cb);
         businessTypeLayout = view.findViewById(R.id.business_type_layout);
         salesTypeLayout = view.findViewById(R.id.type_of_sales_layout);
+        chkFarmerToFarmer = view.findViewById(R.id.marketing_channels_famer_to_farmer_cb);
+        chkNone = view.findViewById(R.id.marketing_channels_none_cb);
+        chkSavings = view.findViewById(R.id.funding_source_savings_cb);
 
 
         spinBusinessType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -219,6 +222,12 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
                     if (chkFellowTraders.isChecked()) {
                         marketing_channels += "\nFellow Traders";
                     }
+                    if(chkNone.isChecked()){
+                        marketing_channels += "\nNone";
+                    }
+                    if(chkFarmerToFarmer.isChecked()){
+                        marketing_channels += "\nFarmer to Farmer";
+                    }
                     if (chkFriendsOrRelatives.isChecked()) {
                         funding_source += "\nFriends or Relatives";
                     }
@@ -233,6 +242,9 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
                     }
                     if (chMicroFinanceInstitution.isChecked()) {
                         funding_source += "\nMicro-Finance Institutions";
+                    }
+                    if (chkSavings.isChecked()) {
+                        funding_source += "\nSavings";
                     }
                     if (chkTraining.isChecked()) {
                         additional_services += "\nTraning";
@@ -262,8 +274,9 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Agro Input Dealer Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+//                        startActivity(intent);
+                        navController.navigate(R.id.action_profilingAgroInputDealerStep3Fragment_to_sucessDialogFragment);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
