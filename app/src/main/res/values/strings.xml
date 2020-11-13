@@ -168,7 +168,7 @@
     <string name="main_source_of_funding">Main Source of Funding</string>
     <string name="certificate_type">Certificate Type</string>
     <string name="category">Category</string>
-    <string name="commodities">Commodities</string>
+    <string name="commodities">Commodity</string>
     <string name="market_name">Market Name</string>
     <string name="town">Town</string>
     <string name="variety">Variety</string>
@@ -393,6 +393,31 @@
     <string name="nin_message">NIN should have atleast 14 characters</string>
     <string name="farmer_to_farmer">Farmer to Farmer</string>
     <string name="Savings">Savings</string>
+    <string name="cattle">Cattle</string>
+    <string name="sheep">Sheep</string>
+    <string name="goat">Goats</string>
+    <string name="pigs">Pigs</string>
+    <string name="poultry">Poultry</string>
+    <string name="coffee">Coffee</string>
+    <string name="tea">Tea</string>
+    <string name="cotton">Cotton</string>
+    <string name="tobacco">Tobacco</string>
+    <string name="maize">Maize</string>
+    <string name="millet">Millet</string>
+    <string name="sorghum">Sorghum</string>
+    <string name="rice">Rice</string>
+    <string name="plantains">Plantains</string>
+    <string name="cassava">Cassava</string>
+    <string name="yams">Yams</string>
+    <string name="beans">Beans</string>
+    <string name="sweet_potatoes">Sweet Potatoes</string>
+    <string name="irish_potatoes">Irish Potatoes</string>
+    <string name="cow_peas">Cow Peas</string>
+    <string name="g_nuts">Ground nuts</string>
+    <string name="sim_sim">Sim Sim</string>
+    <string name="soya_beans">Soya Beans</string>
+    <string name="field_peas">Field Peas</string>
+    <string name="pigeon_peas">Pigeon Peas</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>
@@ -460,18 +485,35 @@
         <item>Lugbara</item>
         <item> Ma'di</item>
         <item>Ugandan Sign Language</item>
-<!--        <item>Madi (okollo)</item>-->
-<!--        <item>Lugbara</item>-->
-<!--        <item>Kakwa</item>-->
-<!--        <item>Madi(moyo and adjumani)</item>-->
-<!--        <item>Kebu</item>-->
-<!--        <item>Lendu</item>-->
-<!--        <item>Lugbara(aringa)</item>-->
 
-
-
-
-
+    </array>
+    <array name="commodities">
+    <item>Select</item>
+    <item>Coffee</item>
+    <item>Tea</item>
+    <item>Cotton</item>
+    <item>Tobacco</item>
+    <item>Maize</item>
+    <item>Millet</item>
+    <item>Sorghum</item>
+    <item>Rice</item>
+    <item>Plantains</item>
+    <item>Cassava</item>
+    <item>Yams</item>
+    <item>Sweet potatoes</item>
+    <item>Irish potatoes</item>
+    <item>Beans</item>
+    <item>Cow peas</item>
+    <item>Field peas</item>
+    <item>Pigeon peas</item>
+    <item>Groundnuts</item>
+    <item>Soya beans</item>
+    <item>Sim sim</item>
+    <item>Cattle</item>
+    <item>sheep</item>
+    <item>goat</item>
+    <item>pigs</item>
+    <item>poultry</item>
 
     </array>
     <array name="crop_array">
@@ -595,8 +637,12 @@
     </array>
     <array name="measurement_units_array">
         <item>Select</item>
-        <item>Kgs</item>
+        <item>Kg</item>
         <item>Tonnes</item>
+        <item>Boxes</item>
+        <item>Bags</item>
+        <item>Bushels</item>
+        <item>Pieces</item>
     </array>
     <array name="infested_array">
         <item>Select</item>

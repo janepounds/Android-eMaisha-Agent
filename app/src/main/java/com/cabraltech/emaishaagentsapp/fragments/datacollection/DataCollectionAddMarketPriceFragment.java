@@ -51,10 +51,9 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
     private Context context;
     private NavController navController;
     String  market_name,commodities,varieties,units;
-    private Spinner spinMarket_name,spinVarieties,spinUnits;
-    private AutoCompleteTextView spinCommodities;
-    private EditText etxtWholeSale,etxtRetailSale;
-    private TextView txtDate;
+    private Spinner spinMarket_name,spinUnits,spinCommodities;
+    private EditText etxtWholeSale,etxtRetailSale,extVarieties;
+    private TextView txtDate,txtWholesaleUnit,txtRetailUnit;
     private  LinearLayout commoditiesLayout,varietyLayout,marketLayout,unitsLayout;
 
     @Override
@@ -93,7 +92,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
         spinMarket_name = view.findViewById(R.id.market_spinner);
         spinCommodities = view.findViewById(R.id.commodities_spinner);
-        spinVarieties = view.findViewById(R.id.variety_spinner);
+        extVarieties = view.findViewById(R.id.variety_spinner);
         spinUnits = view.findViewById(R.id.measurement_units_spinner);
 
 
@@ -103,6 +102,8 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         varietyLayout  = view.findViewById(R.id.variety_layout);
         marketLayout  = view.findViewById(R.id.market_layout);
         unitsLayout  = view.findViewById(R.id.units_layout);
+        txtRetailUnit  = view.findViewById(R.id.retail_price_per_unit_tv);
+        txtWholesaleUnit  = view.findViewById(R.id.wholesale_price_per_unit_tv);
 
         Button btnSubmit = view.findViewById(R.id.submit_button);
 
@@ -121,44 +122,30 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         });
 
 
-        spinVarieties.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                varieties = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        ArrayAdapter<String> commodityListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
-        spinCommodities.setThreshold(1);
-        spinCommodities.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                spinCommodities.showDropDown();
-
-            }
-        });
-        spinCommodities.setAdapter(commodityListAdapter);
-
         spinUnits.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 units = adapterView.getItemAtPosition(i).toString();
+                if(units.toLowerCase().equals("kg")){
+                    txtRetailUnit.setText("Per Kg");
+                    txtWholesaleUnit.setText("Per Kg");
+                }
+                else if(units.toLowerCase().equals("tonnes")){
+                    txtRetailUnit.setText("Per Tonne");
+                    txtWholesaleUnit.setText("Per Tonne");
+                } else if(units.toLowerCase().equals("boxes")){
+                    txtRetailUnit.setText("Per Box");
+                    txtWholesaleUnit.setText("Per Box");
+                } else if(units.toLowerCase().equals("bags")){
+                    txtRetailUnit.setText("Per Bag");
+                    txtWholesaleUnit.setText("Per Bag");
+                } else if(units.toLowerCase().equals("bushels")){
+                    txtRetailUnit.setText("Per Bushel");
+                    txtWholesaleUnit.setText("Per Bushel");
+                } else if(units.toLowerCase().equals("pieces")){
+                    txtRetailUnit.setText("Per Piece");
+                    txtWholesaleUnit.setText("Per Piece");
+                }
             }
 
             @Override
@@ -175,13 +162,14 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
                     String date = txtDate.getText().toString().trim();
                     String wholesale_price = etxtWholeSale.getText().toString().trim();
                     String retail_sale = etxtRetailSale.getText().toString().trim();
+                    varieties = extVarieties.getText().toString().trim();
 
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();
 
-                    Log.d(TAG, "onClick: " + date + spinCommodities.getText().toString() + varieties + market_name + units + wholesale_price + retail_sale);
+                    Log.d(TAG, "onClick: " + date + spinCommodities.getSelectedItem().toString() + varieties + market_name + units + wholesale_price + retail_sale);
 
-                    boolean check = databaseAccess.addMarketPrice(date, spinCommodities.getText().toString(), varieties, market_name, units, wholesale_price, retail_sale);
+                    boolean check = databaseAccess.addMarketPrice(date, spinCommodities.getSelectedItem().toString(), varieties, market_name, units, wholesale_price, retail_sale);
                     if (check) {
                         Toast.makeText(getActivity(), "Market Price Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
@@ -331,8 +319,8 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
     public boolean validateEntries(){
         boolean check = true;
         if (!hasTextView(txtDate)) check = false;
-        if (!autoText(spinCommodities,commoditiesLayout)) check = false;
-        if(!selectedText(spinVarieties,varietyLayout)) check = false;
+        if (!selectedText(spinCommodities,commoditiesLayout)) check = false;
+        if(!hasText(extVarieties)) check = false;
         if(!selectedText(spinMarket_name,marketLayout)) check = false;
         if(!selectedText(spinUnits,unitsLayout)) check = false;
         if(!hasText(etxtWholeSale)) check = false;

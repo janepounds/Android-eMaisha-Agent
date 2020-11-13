@@ -41,7 +41,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
     CheckBox chkWithInDistrict, chkOutsideDistrict, chkOutsideCountry;
     CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkVillageSavings, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution,chkSavings;
     CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency,chkFarmerTofarmer;
-
+    private LinearLayout addNewcommodity,moreCommodities;
     AutoCompleteTextView actCommodities;
 
     @Override
@@ -117,6 +117,8 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         chkGovernmentAgency = view.findViewById(R.id.marketing_channels_govt_agency_cb);
         chkSavings = view.findViewById(R.id.funding_source_savings_cb);
         chkFarmerTofarmer = view.findViewById(R.id.marketing_channels_famer_to_farmer_cb);
+        addNewcommodity = view.findViewById(R.id.bulk_buyers_add_new_commodity);
+        moreCommodities = view.findViewById(R.id.bulk_buyers_more_commodities);
 
         actCommodities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -131,7 +133,14 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         });
 
         navController = Navigation.findNavController(view);
+        addNewcommodity.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                EditText t = new EditText(context);
+                moreCommodities.addView(t);
+            }
+        });
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
