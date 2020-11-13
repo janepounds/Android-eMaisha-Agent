@@ -69,4 +69,10 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/background_cutom_dialog</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
+    </style>
+
+
 </resources>

@@ -288,7 +288,12 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
                         
                         
                         //load dialog
-                        navController.navigate(R.id.action_profilingFarmerStep3Fragment_to_sucessDialogFragment);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("farmer","Farmer");
+                        bundle.putString("farmer_name",first_name +" "+ last_name);
+                        bundle.putString("village",village);
+
+                        navController.navigate(R.id.action_profilingFarmerStep3Fragment_to_sucessDialogFragment,bundle);
 //                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
 //                        startActivity(intent);
                     } else {
