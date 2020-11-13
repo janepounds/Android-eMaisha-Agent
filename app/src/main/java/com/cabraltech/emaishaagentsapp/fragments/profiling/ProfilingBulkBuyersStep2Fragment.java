@@ -39,9 +39,9 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
     String district, sub_county,village, business_type,commodities,business_name,phone,email,full_address,owner;
     CheckBox chkIndividualFarmer, chkRuralTraders, chkFarmerOrganisation;
     CheckBox chkWithInDistrict, chkOutsideDistrict, chkOutsideCountry;
-    CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkVillageSavings, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution;
-    CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency;
-
+    CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkVillageSavings, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution,chkSavings;
+    CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency,chkFarmerTofarmer;
+    private LinearLayout addNewcommodity,moreCommodities;
     AutoCompleteTextView actCommodities;
 
     @Override
@@ -115,6 +115,10 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         chkExtensionWorkers = view.findViewById(R.id.marketing_channels_extension_workers_cb);
         chkFellowTraders = view.findViewById(R.id.marketing_channels_traders_cb);
         chkGovernmentAgency = view.findViewById(R.id.marketing_channels_govt_agency_cb);
+        chkSavings = view.findViewById(R.id.funding_source_savings_cb);
+        chkFarmerTofarmer = view.findViewById(R.id.marketing_channels_famer_to_farmer_cb);
+        addNewcommodity = view.findViewById(R.id.bulk_buyers_add_new_commodity);
+        moreCommodities = view.findViewById(R.id.bulk_buyers_more_commodities);
 
         actCommodities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -129,7 +133,15 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         });
 
         navController = Navigation.findNavController(view);
-
+        addNewcommodity.setOnClickListener(new View.OnClickListener() {
+            int index =0;
+            @Override
+            public void onClick(View v) {
+                EditText t = new EditText(context);
+                moreCommodities.addView(t);
+                index++;
+            }
+        });
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +151,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     String supplier_location = "";
                     String funding_source = "";
                     String marketing_channels = "";
+                    String commodities = "";
 
                     if (chkFarmerOrganisation.isChecked()) {
                         supply_source += "\nFarmer Organisations";
@@ -179,6 +192,9 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     if (chMicroFinanceInstitution.isChecked()) {
                         funding_source += "\nMicro-Finance Institutions";
                     }
+                    if (chkSavings.isChecked()) {
+                        funding_source += "\nSavings";
+                    }
                     if (chkInternet.isChecked()) {
                         marketing_channels += "\nInternet";
                     }
@@ -206,17 +222,32 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     if (chkGovernmentAgency.isChecked()) {
                         marketing_channels += "\nGovernment Agency";
                     }
+                    if (chkFarmerTofarmer.isChecked()) {
+                        marketing_channels += "\nFarmer to Farmer";
+                    }
+                    String firstCommodity = actCommodities.getText().toString();
+                    commodities +="\n " + firstCommodity;
+                    for (int i = 0; i < moreCommodities.getChildCount(); i++) {
+                        v = moreCommodities.getChildAt(i);
+                            String etValue = null;
+                            if (v instanceof EditText) {
+                                etValue = ((EditText) v).getText().toString();
+                                commodities += "\n" + etValue;
+                            }
 
+
+                    }
 
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();
 
-                    boolean check = databaseAccess.addTrader(business_type, business_name, owner, actCommodities.getText().toString(), phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
+                    boolean check = databaseAccess.addTrader(business_type, business_name, owner, commodities, phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
                     if (check) {
                         Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+//                        startActivity(intent);
+                        navController.navigate(R.id.action_profilingBulkBuyersStep2Fragment_to_sucessDialogFragment);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 

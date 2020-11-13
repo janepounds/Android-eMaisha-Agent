@@ -39,6 +39,8 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
 
     String[] descriptionData = {"Contact\nDetails", "Governance", "Association\nDetails"};
     String livestock_value_chain, crop_value_chain, district, sub_county, village, registration_level, organisation_type;
+    CheckBox chkCoffee,chkTea,chkCotton,chkTobacco,chkMaize,chkMillet,chkSorghum,chkRice,chkPlantains,chkCassava,chkYams,chkSweetPotatoes,chkIrishPotatoes,chkBeans,chkCowPeas,chkFieldPeas,chkPigeonPeas,chkGnuts,chkSoyaBeans,chkSimsim,chkCNone;
+    CheckBox chkCattle,chkSheep,chkGoat,chkPigs,chkPoultry,chkLNone;
     CheckBox chkProduction, chkStorage, chkBulking, chkProcessing, chkAgriculturalMarketing;
     CheckBox chkSprayPump, chkTractor, chkShelter, chkWeeder, chkCombinedHarvester, chkNone, chkDryer, chkMillingMachine, chkOxPlough, ChkPlanter, chkWetProcessingMachine;
     CheckBox chkTraders, chkProcessors, chkFinalConsumer;
@@ -48,11 +50,12 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     String respondent_position, name, year_of_registration, full_address, telephone, email, chairperson, chairperson_contact, secretary, secretary_contact, respondent, respondent_contact;
     private LinearLayout cropvalueLayout,livestockLayout;
     private  EditText etxtMalesNumber,etxtFemalesNumber;
-    private  Spinner spinLivestockValueChain,spinCropValueChain;
-    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
+//    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
     public ProfilingAssociationStep3Fragment() {
         // Required empty public constructor
     }
+
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -110,8 +113,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
 
         etxtMalesNumber = view.findViewById(R.id.etxt_number_of_males);
         etxtFemalesNumber = view.findViewById(R.id.etxt_number_of_females);
-        spinLivestockValueChain = view.findViewById(R.id.livestock_value_chain_spinner);
-        spinCropValueChain = view.findViewById(R.id.crop_value_chains_spinner);
+
         chkAgriculturalMarketing = view.findViewById(R.id.main_activities_agricultural_marketing_cb);
         chkBulking = view.findViewById(R.id.main_activities_bulking_cb);
         chkProcessing = view.findViewById(R.id.main_activities_processing_cb);
@@ -154,40 +156,34 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         chkSubsidizedInput = view.findViewById(R.id.additional_services_subsidized_inputs_cb);
         chkAgroEquipment = view.findViewById(R.id.additional_services_agricultural_equipment_cb);
         chkTrainingOnInstitutionalDevt = view.findViewById(R.id.additional_services_training_institutional_devt_cb);
-        cropvalueLayout = view.findViewById(R.id.crop_layout);
-        livestockLayout = view.findViewById(R.id.livestock_layout);
-        mainActivitiesLayout = view.findViewById(R.id.main_activities_layout);
-        assetOwnerShipLayout = view.findViewById(R.id.asset_ownership_layout);
-        marketLayout = view.findViewById(R.id.market_layout);
-        marketingchannelsLayout = view.findViewById(R.id.marketing_channels_layout);
-        fundingsourceLayout = view.findViewById(R.id.funding_source_layout);
-        additionalserviceLayout = view.findViewById(R.id.additional_services_layout);
+        chkCoffee = view.findViewById(R.id.crop_value_chain_coffee_cb);
+        chkTea = view.findViewById(R.id.crop_value_chain_tea_cb);
+        chkCotton = view.findViewById(R.id.crop_value_chain_cotton_cb);
+        chkTobacco = view.findViewById(R.id.crop_value_chain_tobacco_cb);
+        chkMaize = view.findViewById(R.id.crop_value_chain_maize_cb);
+        chkMillet = view.findViewById(R.id.crop_value_chain_millet_cb);
+        chkSorghum = view.findViewById(R.id.crop_value_chain_sorghum_cb);
+        chkRice = view.findViewById(R.id.crop_value_chain_rice_cb);
+        chkPlantains = view.findViewById(R.id.crop_value_chain_plantains_cb);
+        chkCassava = view.findViewById(R.id.crop_value_chain_cassava_cb);
+        chkYams = view.findViewById(R.id.crop_value_chain_yams_cb);
+        chkSweetPotatoes = view.findViewById(R.id.crop_value_chain_sweet_potatoes_cb);
+        chkIrishPotatoes = view.findViewById(R.id.crop_value_chain_irish_potatoes_cb);
+        chkBeans = view.findViewById(R.id.crop_value_chain_beans_cb);
+        chkCowPeas = view.findViewById(R.id.crop_value_chain_cow_peas_cb);
+        chkFieldPeas = view.findViewById(R.id.crop_value_chain_field_peas_cb);
+        chkPigeonPeas = view.findViewById(R.id.crop_value_chain_pigeon_peas_cb);
+        chkGnuts = view.findViewById(R.id.crop_value_chain_g_nuts_cb);
+        chkSoyaBeans = view.findViewById(R.id.crop_value_chain_soya_beans_cb);
+        chkSimsim = view.findViewById(R.id.crop_value_chain_sim_sim_cb);
+        chkCattle = view.findViewById(R.id.livestock_value_chain_cattle_cb);
+        chkSheep = view.findViewById(R.id.livestock_value_chain_sheep_cb);
+        chkGoat = view.findViewById(R.id.livestock_value_chain_goat_cb);
+        chkPigs = view.findViewById(R.id.livestock_value_chain_pigs_cb);
+        chkPoultry = view.findViewById(R.id.livestock_value_chain_poultry_cb);
+        chkCNone = view.findViewById(R.id.crop_value_chain_none_cb);
+        chkLNone = view.findViewById(R.id.livestock_value_chain_none_cb);
 
-
-        spinCropValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                crop_value_chain = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        spinLivestockValueChain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                livestock_value_chain = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
 
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +198,8 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
                     String marketing_channels = "";
                     String funding_source = "";
                     String additional_services = "";
+                    String crop_value_chain = "";
+                    String livestock_value_chain = "";
                     if (chkAgriculturalMarketing.isChecked()) {
                         main_activities += "\nAgricultural Marketing";
                     }
@@ -325,6 +323,61 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
                     if (chkTrainingOrTechnicalAssistance.isChecked()) {
                         additional_services += "\nTraining or technical assistance in agricultural practices of technology";
                     }
+                    if (chkCoffee.isChecked()) {
+                        crop_value_chain += "\nCoffee";
+                    } if (chkTea.isChecked()) {
+                        crop_value_chain += "\nTea";
+                    } if (chkCotton.isChecked()) {
+                        crop_value_chain += "\nCotton";
+                    } if (chkTobacco.isChecked()) {
+                        crop_value_chain += "\nTobacco";
+                    } if (chkMaize.isChecked()) {
+                        crop_value_chain += "\nMaize";
+                    } if (chkMillet.isChecked()) {
+                        crop_value_chain += "\nMillet";
+                    } if (chkSorghum.isChecked()) {
+                        crop_value_chain += "\nSorghum";
+                    } if (chkRice.isChecked()) {
+                        crop_value_chain += "\nRice";
+                    } if (chkPlantains.isChecked()) {
+                        crop_value_chain += "\nPlantains";
+                    } if (chkCassava.isChecked()) {
+                        crop_value_chain += "\nCassava";
+                    } if (chkYams.isChecked()) {
+                        crop_value_chain += "\nYams";
+                    } if (chkSweetPotatoes.isChecked()) {
+                        crop_value_chain += "\nSweet Potatoes";
+                    } if (chkIrishPotatoes.isChecked()) {
+                        crop_value_chain += "\nIrish Potatoes";
+                    } if (chkBeans.isChecked()) {
+                        crop_value_chain += "\nBeans";
+                    } if (chkCowPeas.isChecked()) {
+                        crop_value_chain += "\nCow Peas";
+                    } if (chkFieldPeas.isChecked()) {
+                        crop_value_chain += "\nField Peas";
+                    } if (chkPigeonPeas.isChecked()) {
+                        crop_value_chain += "\nPigeon Peas";
+                    } if (chkGnuts.isChecked()) {
+                        crop_value_chain += "\nGround Nuts";
+                    } if (chkSoyaBeans.isChecked()) {
+                        crop_value_chain += "\nSoya Beans";
+                    } if (chkSimsim.isChecked()) {
+                        crop_value_chain += "\nSim Sim";
+                    } if (chkCNone.isChecked()) {
+                        crop_value_chain += "\nNone";
+                    } if (chkCattle.isChecked()) {
+                        livestock_value_chain += "\nCattle";
+                    } if (chkSheep.isChecked()) {
+                        livestock_value_chain += "\nSheep";
+                    } if (chkGoat.isChecked()) {
+                        livestock_value_chain += "\nGoats";
+                    } if (chkPigs.isChecked()) {
+                        livestock_value_chain += "\nPigs";
+                    } if (chkPoultry.isChecked()) {
+                        livestock_value_chain += "\nPoultry";
+                    } if (chkLNone.isChecked()) {
+                        livestock_value_chain += "\nNone";
+                    }
 
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();
@@ -333,8 +386,9 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+//                        startActivity(intent);
+                        navController.navigate(R.id.action_profilingAssociationStep3Fragment_to_sucessDialogFragment);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
@@ -455,14 +509,6 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         boolean check = true;
         if (!hasText(etxtMalesNumber)) check = false;
         if (!hasText(etxtFemalesNumber)) check = false;
-        if(!selectedText(spinCropValueChain,cropvalueLayout)) check = false;
-        if(!selectedText(spinLivestockValueChain,livestockLayout)) check = false;
-//        if(!TestCheckBox(mainActivitiesLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-//        if(!TestCheckBox(assetOwnerShipLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-//        if(!TestCheckBox(marketLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-//        if(!TestCheckBox(marketingchannelsLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-//        if(!TestCheckBox(fundingsourceLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
-//        if(!TestCheckBox(additionalserviceLayout,getString(R.string.select_atleast_one_checkbox))) check = false;
 
 
 

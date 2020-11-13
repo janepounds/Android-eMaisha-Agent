@@ -44,7 +44,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
         if (activeNetwork != null && activeNetwork.isConnected()) {
             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                Toast.makeText(context, "Internet is on", Toast.LENGTH_LONG).show();
+
                 for (int i = 0; i < farmersList.size(); i++) {
                     saveFarmersList(
                             farmersList.get(i).get("id"),

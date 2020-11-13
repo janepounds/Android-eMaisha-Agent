@@ -135,72 +135,306 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
             android:layout_marginBottom="15dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginLeft="10dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/crop_value_chain"
+                android:layout_marginBottom="4dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp">
+                android:background="@drawable/check_box_bg">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/livestock_value_chain"
-                    android:layout_marginBottom="4dp" />
                 <LinearLayout
-                    android:id="@+id/livestock_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_spinner"
-                    android:padding="8dp">
-                    <Spinner
-                        android:id="@+id/livestock_value_chain_spinner"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_coffee_cb"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:entries="@array/livestock_value_chain_array" />
+                        android:text="@string/coffee"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_tea_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/tea"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_yams_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/yams"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/crop_value_chain"
-                    android:layout_marginBottom="4dp"
-                    />
                 <LinearLayout
-                    android:id="@+id/crop_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_spinner"
-                    android:padding="7dp">
-                    <Spinner
-                        android:id="@+id/crop_value_chains_spinner"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_cotton_cb"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:entries="@array/crop_array" />
+                        android:text="@string/cotton"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_tobacco_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/tobacco"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_beans_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/beans"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_maize_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/maize"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_millet_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/millet"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_sweet_potatoes_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/sweet_potatoes"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_sorghum_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/sorghum"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_irish_potatoes_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/irish_potatoes"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_rice_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/rice"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_plantains_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/plantains"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_cassava_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cassava"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_cow_peas_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cow_peas"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_g_nuts_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/g_nuts"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_soya_beans_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/soya_beans"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_sim_sim_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/sim_sim"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_field_peas_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/field_peas"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_pigeon_peas_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/pigeon_peas"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/crop_value_chain_none_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/none"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginLeft="10dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/livestock_value_chain"
+                android:layout_marginBottom="4dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/check_box_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_cattle_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cattle"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_sheep_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/sheep"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_goat_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/goat"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_pigs_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/pigs"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_poultry_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/poultry"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_none_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/none"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

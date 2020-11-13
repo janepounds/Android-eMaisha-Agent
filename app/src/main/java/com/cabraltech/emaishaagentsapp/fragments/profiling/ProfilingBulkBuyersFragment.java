@@ -377,7 +377,6 @@ public class ProfilingBulkBuyersFragment extends Fragment {
         if (!hasText(etxtBusinessName)) check = false;
         if (!hasText(etxtOwner)) check = false;
         if (!hasText(etxtPhone) || etxtPhone.getText().toString().trim().length() < 9) check = false;
-        if (!hasText(etxtEmail)) check = false;
         if (!hasText(etxtFullAddress)) check = false;
         if(!selectedText(spinBusinessType,businessLayout)) check = false;
         if(!autoText(spinDistrict,districtLayout)) check = false;

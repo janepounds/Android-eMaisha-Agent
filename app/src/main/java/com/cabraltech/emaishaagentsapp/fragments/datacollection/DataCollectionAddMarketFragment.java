@@ -51,8 +51,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
 
-    private Spinner spinMarket_name;
-    private EditText etxtStreet_address, etxtContatc, etxtPhone;
+    private EditText etxtStreet_address, etxtContatc, etxtPhone,extMarket;
     private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
     private LinearLayout marketLayout,districtLayout,subcountyLayout,villageLayout;
 
@@ -91,7 +90,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
 
 //        navController = Navigation.findNavController(view);
 
-        spinMarket_name = view.findViewById(R.id.market_name_spinner);
+        extMarket = view.findViewById(R.id.market_name_spinner);
         etxtStreet_address = view.findViewById(R.id.street_address_et);
         spinDistrict = view.findViewById(R.id.district_spinner);
         spinSubCounty = view.findViewById(R.id.sub_county_spinner);
@@ -251,17 +250,9 @@ public class DataCollectionAddMarketFragment extends Fragment {
 
             }
         });
-        spinMarket_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                market_name = adapterView.getItemAtPosition(i).toString();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
+
 
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -271,6 +262,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
                     String street_address = etxtStreet_address.getText().toString();
                     String contact = etxtContatc.getText().toString().trim();
                     String phone = etxtPhone.getText().toString().trim();
+                    market_name = extMarket.getText().toString();
 
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();
@@ -279,8 +271,9 @@ public class DataCollectionAddMarketFragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Market Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+//                        startActivity(intent);
+                        navController.navigate(R.id.action_dataCollectionAddMarketFragment_to_sucessDialogFragment2);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
@@ -371,7 +364,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
         if (!hasText(etxtStreet_address)) check = false;
         if (!hasText(etxtContatc)) check = false;
         if (!hasText(etxtPhone) || etxtPhone.getText().toString().trim().length() < 9) check = false;
-        if(!selectedText(spinMarket_name,marketLayout)) check = false;
+        if(!hasText(extMarket)) check = false;
         if(!autoText(spinDistrict,districtLayout)) check = false;
         if(!autoText(spinSubCounty,subcountyLayout)) check = false;
         if(!autoText(spinVillage,villageLayout)) check = false;

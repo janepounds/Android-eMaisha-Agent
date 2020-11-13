@@ -18,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -58,10 +60,11 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     private NavController navController;
     private FragmentProfilingFarmerStep1Binding binding;
     String gender, marital_status, religion, education_level, language_used, nationality;
-    private EditText etxtFirstName, etxtLastName, etxtAge, etxtHouseholdSize, etxtSourceOfIncome,ninExt;
-    private Spinner spinGender, spinNationality, spinReligion, spinEducation, spinLanguage, spinMarital, etxtHouseholdHead;
+    private EditText etxtFirstName, etxtLastName, etxtAge, etxtHouseholdSize, ninExt;
+    private Spinner spinGender, spinNationality, spinReligion, spinEducation,  spinMarital, etxtHouseholdHead,spinSourceOfIncome;
     private TextView txtDob;
-    private LinearLayout genderLayout, nationalityLayout, religionLayout, educationLayout, languageLayout, maritalLayout, househeadLayout;
+    private AutoCompleteTextView language;
+    private LinearLayout genderLayout, nationalityLayout, religionLayout, educationLayout, languageLayout, maritalLayout, househeadLayout,incomeLayout;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -112,9 +115,9 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         spinReligion = view.findViewById(R.id.religion_spinner);
         spinEducation = view.findViewById(R.id.level_of_education_spinner);
         spinMarital = view.findViewById(R.id.marital_status_spinner);
-        spinLanguage = view.findViewById(R.id.language_used_spinner);
+        language = view.findViewById(R.id.language_used_spinner);
         etxtHouseholdSize = view.findViewById(R.id.household_size_et);
-        etxtSourceOfIncome = view.findViewById(R.id.source_of_income_et);
+        spinSourceOfIncome = view.findViewById(R.id.source_of_income_et);
         etxtHouseholdHead = view.findViewById(R.id.household_head_et);
         genderLayout = view.findViewById(R.id.gender_layout);
         nationalityLayout = view.findViewById(R.id.nationality_layout);
@@ -124,6 +127,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         maritalLayout = view.findViewById(R.id.marital_layout);
         househeadLayout = view.findViewById(R.id.head_layout);
         ninExt = view.findViewById(R.id.nin_et);
+        incomeLayout = view.findViewById(R.id.income_layout);
 
 
         txtDob.setOnClickListener(new View.OnClickListener() {
@@ -170,17 +174,28 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             }
         });
 
-        spinLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.language_used_array));
+        language.setThreshold(1);
+        language.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                language.showDropDown();
 
             }
         });
+        language.setAdapter(languageAdapter);
+
 
         spinNationality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -219,14 +234,14 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
                     String age = etxtAge.getText().toString().trim();
                     String household_size = etxtHouseholdSize.getText().toString().trim();
                     String household_head = etxtHouseholdHead.getSelectedItem().toString().trim();
-                    String source_of_income = etxtSourceOfIncome.getText().toString().trim();
+                    String source_of_income = spinSourceOfIncome.getSelectedItem().toString().trim();
                     String nin = ninExt.getText().toString().trim();
                     gender =  spinGender.getSelectedItem().toString();
                     religion = spinReligion.getSelectedItem().toString();
                     nationality = spinNationality.getSelectedItem().toString();
                     education_level = spinEducation.getSelectedItem().toString();
                     marital_status = spinMarital.getSelectedItem().toString();
-                    language_used = spinLanguage.getSelectedItem().toString();
+                    language_used = language.getText().toString();
 
 
                     Bundle bundle = new Bundle();
@@ -355,6 +370,24 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         }
         return true;
     }
+
+    public boolean ninLength(EditText editText,String message){
+        String text = editText.getText().toString().trim();
+        int bottom = editText.getPaddingBottom();
+        int top = editText.getPaddingTop();
+        int right = editText.getPaddingRight();
+        int left = editText.getPaddingLeft();
+
+        if(text.length() < 14 || text.length() >14) {
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            editText.setPadding(left, top, right, bottom);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            Toast.makeText(context,message,Toast.LENGTH_LONG);
+            return false;
+        }
+        return true;
+    }
     public boolean validateEntries() {
         boolean check = true;
         if (!hasText(etxtFirstName)) check = false;
@@ -362,14 +395,15 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         if (!hasTextView(txtDob)) check = false;
         if (!hasText(etxtAge)) check = false;
         if (!hasText(etxtHouseholdSize)) check = false;
-        if (!hasText(etxtSourceOfIncome)) check = false;
+        if (!selectedText(spinSourceOfIncome,incomeLayout)) check = false;
+        if (!hasText(language)) check = false;
         if(!selectedText(spinGender,genderLayout)) check = false;
         if(!selectedText(spinNationality,nationalityLayout)) check = false;
         if(!selectedText(spinReligion,religionLayout)) check = false;
         if(!selectedText(spinEducation,educationLayout)) check = false;
         if(!selectedText(spinMarital,maritalLayout)) check = false;
-        if(!selectedText(spinLanguage,languageLayout)) check = false;
         if(!selectedText(etxtHouseholdHead,househeadLayout)) check = false;
+        if(ninLength(ninExt,getString(R.string.nin_message)))  check = false;;
 
         return check;
 

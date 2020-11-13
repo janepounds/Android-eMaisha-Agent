@@ -265,10 +265,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <CheckBox
-                        android:id="@+id/marketing_channels_internet_cb"
+                        android:id="@+id/marketing_channels_none_cb"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/internet"
+                        android:text="@string/none"
                         android:checked="false"
                         android:layout_weight="1"/>
                     <CheckBox
@@ -307,6 +307,28 @@
                     android:orientation="horizontal">
                     <CheckBox
                         android:id="@+id/marketing_channels_call_center_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/farmer_to_farmer"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+
+                    <CheckBox
+                        android:id="@+id/marketing_channels_internet_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/internet"
+                        android:checked="false"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/marketing_channels_famer_to_farmer_cb"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/call_center"
@@ -421,6 +443,18 @@
 
 
 
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/funding_source_savings_cb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/Savings"
+                        android:checked="false"
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
             </LinearLayout>
