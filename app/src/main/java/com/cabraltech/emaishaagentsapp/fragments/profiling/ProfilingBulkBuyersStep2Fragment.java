@@ -134,11 +134,12 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
 
         navController = Navigation.findNavController(view);
         addNewcommodity.setOnClickListener(new View.OnClickListener() {
-
+            int index =0;
             @Override
             public void onClick(View v) {
                 EditText t = new EditText(context);
                 moreCommodities.addView(t);
+                index++;
             }
         });
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +151,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     String supplier_location = "";
                     String funding_source = "";
                     String marketing_channels = "";
+                    String commodities = "";
 
                     if (chkFarmerOrganisation.isChecked()) {
                         supply_source += "\nFarmer Organisations";
@@ -223,11 +225,23 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                     if (chkFarmerTofarmer.isChecked()) {
                         marketing_channels += "\nFarmer to Farmer";
                     }
+                    String firstCommodity = actCommodities.getText().toString();
+                    commodities +="\n " + firstCommodity;
+                    for (int i = 0; i < moreCommodities.getChildCount(); i++) {
+                        v = moreCommodities.getChildAt(i);
+                            String etValue = null;
+                            if (v instanceof EditText) {
+                                etValue = ((EditText) v).getText().toString();
+                                commodities += "\n" + etValue;
+                            }
+
+
+                    }
 
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                     databaseAccess.open();
 
-                    boolean check = databaseAccess.addTrader(business_type, business_name, owner, actCommodities.getText().toString(), phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
+                    boolean check = databaseAccess.addTrader(business_type, business_name, owner, commodities, phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
                     if (check) {
                         Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));

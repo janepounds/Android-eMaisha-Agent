@@ -457,37 +457,7 @@
         <item>Widowed</item>
     </array>
 
-    <array name="language_used_array">
-        <item>Select</item>
-        <item>English</item>
-        <item>Swahili</item>
-        <item>Luganda</item>
-        <item>Lusoga</item>
-        <item>Runyankore</item>
-        <item>Rutooro</item>
-        <item>Rukiga</item>
-        <item>Runyoro</item>
-        <item>Acholi</item>
-        <item>Alur</item>
-        <item>Lugubarati</item>
-        <item>Lango</item>
-        <item>Adhola</item>
-        <item>Kuman</item>
-        <item>Bari</item>
-        <item>Teso</item>
-        <item>Bari</item>
-        <item>Karamojong</item>
-        <item>Elgon</item>
-        <item>Pokot</item>
-        <item>Kuliak</item>
-        <item>Soo</item>
-        <item>Aringa</item>
-        <item>Ndo</item>
-        <item>Lugbara</item>
-        <item>Ma'di</item>
-        <item>Ugandan Sign Language</item>
 
-    </array>
     <array name="commodities">
         <item>Select</item>
         <item>Coffee</item>
@@ -890,4 +860,35 @@
 
 
     </string-array>
+    <string-array name="language_used_array">
+        <item>Select</item>
+        <item>English</item>
+        <item>Swahili</item>
+        <item>Luganda</item>
+        <item>Lusoga</item>
+        <item>Runyankore</item>
+        <item>Rutooro</item>
+        <item>Rukiga</item>
+        <item>Runyoro</item>
+        <item>Acholi</item>
+        <item>Alur</item>
+        <item>Lugubarati</item>
+        <item>Lango</item>
+        <item>Adhola</item>
+        <item>Kuman</item>
+        <item>Bari</item>
+        <item>Teso</item>
+        <item>Bari</item>
+        <item>Karamojong</item>
+        <item>Elgon</item>
+        <item>Pokot</item>
+        <item>Kuliak</item>
+        <item>Soo</item>
+        <item>Aringa</item>
+        <item>Ndo</item>
+        <item>Lugbara</item>
+        <item>Ma\'di</item>
+        <item>Ugandan Sign Language</item>
+    </string-array>
+
 </resources>
