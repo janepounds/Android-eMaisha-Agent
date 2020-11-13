@@ -148,6 +148,8 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
                 if (!spinMainCrop.getText().toString().toLowerCase().equals("none")) {
                     moreCropsLayout.setVisibility(View.VISIBLE);
 
+                }else{
+                    moreCropsLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -390,6 +392,11 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         if (!hasText(etxtFarmingSize)) check = false;
         if (!autoText(spinMainCrop,mainCropLayout)) check = false;
         if (!autoText(spinMainLivestock,mainLivestockLayout)) check = false;
+        if(spinMainCrop.getText().toString().toLowerCase().equals("none") && spinMainLivestock.getText().toString().toLowerCase().equals("none")){
+             Toast.makeText(context, getString(R.string.select_crop_or_livestock), Toast.LENGTH_LONG).show();
+             spinMainCrop.requestFocus();
+             spinMainLivestock.requestFocus();
+        }
         // Toast.makeText(context, getString(R.string.missing_fields_message), Toast.LENGTH_LONG).show();
         return check;
 

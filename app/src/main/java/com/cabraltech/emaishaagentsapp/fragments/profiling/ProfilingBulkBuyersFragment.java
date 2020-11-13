@@ -108,6 +108,10 @@ public class ProfilingBulkBuyersFragment extends Fragment {
         spinVillage = view.findViewById(R.id.village_spinner);
         etxtFullAddress = view.findViewById(R.id.full_address_et);
         Button btnSubmit = view.findViewById(R.id.next_button);
+        businessLayout = view.findViewById(R.id.business_type_layout);
+        districtLayout = view.findViewById(R.id.district_layout);
+        subcountyLayout = view.findViewById(R.id.subcounty_layout);
+        villageLayout = view.findViewById(R.id.village_layout);
 
         //load district, subcounty and village data
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);

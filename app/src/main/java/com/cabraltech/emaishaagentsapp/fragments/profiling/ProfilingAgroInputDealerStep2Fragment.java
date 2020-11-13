@@ -177,7 +177,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
                     bundle.putString("owner", owner);
                     bundle.putString("owner_contact", owner_contact);
                     bundle.putString("district", district);
-                    bundle.putString("sub_country", sub_county);
+                    bundle.putString("sub_county", sub_county);
                     bundle.putString("village", village);
                     bundle.putString("registration_year", registration_year);
                     bundle.putString("association_name", association_name);

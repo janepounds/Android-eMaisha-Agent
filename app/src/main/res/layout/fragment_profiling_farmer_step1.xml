@@ -176,6 +176,7 @@
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,33 +184,6 @@
                     android:orientation="vertical"
                     android:layout_marginRight="10dp"
                     android:layout_marginEnd="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/gender"
-                        android:layout_marginBottom="4dp" />
-                    <LinearLayout
-                        android:id="@+id/gender_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rounded_rectangle_edit_text"
-                        android:padding="8dp">
-                        <Spinner
-                            android:id="@+id/gender_spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:entries="@array/gender_array" />
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginStart="@dimen/dimen_10dp"
-                    android:layout_marginLeft="@dimen/dimen_10dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -231,7 +205,28 @@
                             android:entries="@array/nationality_array" />
                     </LinearLayout>
                 </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_10dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NIN"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/nin_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:background="@drawable/rounded_rectangle_edit_text"
+                    android:inputType="text"/>
+
+            </LinearLayout>
 
             </LinearLayout>
             <LinearLayout
@@ -270,6 +265,8 @@
                             android:entries="@array/religion_array" />
                     </LinearLayout>
                 </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -281,21 +278,20 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/level_of_education"
-                        android:layout_marginBottom="4dp"
-                        />
+                        android:text="@string/gender"
+                        android:layout_marginBottom="4dp" />
                     <LinearLayout
-                        android:id="@+id/education_layout"
+                        android:id="@+id/gender_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_edit_text"
                         android:padding="8dp">
                         <Spinner
-                            android:id="@+id/level_of_education_spinner"
+                            android:id="@+id/gender_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:entries="@array/level_of_education_array" />
+                            android:entries="@array/gender_array" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -336,30 +332,36 @@
                             android:entries="@array/marital_status_array" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:layout_marginStart="@dimen/dimen_10dp"
                     android:layout_marginLeft="@dimen/dimen_10dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/household_size"
-                        android:layout_marginBottom="4dp"/>
-                    <EditText
-                        android:id="@+id/household_size_et"
+                        android:text="@string/level_of_education"
+                        android:layout_marginBottom="4dp"
+                        />
+                    <LinearLayout
+                        android:id="@+id/education_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:inputType="number"
+                        android:layout_height="match_parent"
                         android:background="@drawable/rounded_rectangle_edit_text"
-                        android:maxLength="2"/>
+                        android:padding="8dp">
 
+                        <Spinner
+                            android:id="@+id/level_of_education_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="29dp"
+                            android:layout_gravity="center"
+                            android:entries="@array/level_of_education_array" />
+                    </LinearLayout>
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -473,15 +475,16 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/NIN"
+                        android:text="@string/household_size"
                         android:layout_marginBottom="4dp"/>
                     <EditText
-                        android:id="@+id/nin_et"
+                        android:id="@+id/household_size_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
+                        android:inputType="number"
                         android:background="@drawable/rounded_rectangle_edit_text"
-                        android:inputType="text"/>
+                        android:maxLength="2"/>
 
                 </LinearLayout>
 
