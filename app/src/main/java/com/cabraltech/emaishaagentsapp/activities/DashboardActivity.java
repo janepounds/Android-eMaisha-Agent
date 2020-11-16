@@ -50,7 +50,6 @@ public class DashboardActivity extends AppCompatActivity {
     public static final String TASK_BACKUP_DATA_TAG = "SYNC_SERVICE";
     public static final String TASK_SEND_NOTIFICATIONS_TAG = "SEND_NOTIFICATIONS";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

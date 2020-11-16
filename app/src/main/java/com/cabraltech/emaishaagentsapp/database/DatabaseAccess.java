@@ -247,7 +247,6 @@ public class DatabaseAccess {
         } else {
             return true;
         }
-
     }
 
     //delete farmer
@@ -263,9 +262,7 @@ public class DatabaseAccess {
         } else {
             return true;
         }
-
     }
-
 
     //get un synced farmers
     public ArrayList<HashMap<String, String>> getUnSyncedFarmers() {
@@ -358,7 +355,6 @@ public class DatabaseAccess {
         }
     }
 
-
     //get un synced associations
     public ArrayList<HashMap<String, String>> getUnSyncedAssociations() {
         ArrayList<HashMap<String, String>> associations = new ArrayList<>();
@@ -437,7 +433,6 @@ public class DatabaseAccess {
         }
     }
 
-
     //insert dealer
     public boolean addDealer(String name, String district, String sub_county, String village, String full_address,  String certification_type, String certification_number, String registration_body, String registration_year, String registration_status, String association_membership, String association_name, String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services,String owner,String owner_contact) {
         this.database = openHelper.getWritableDatabase();
@@ -475,7 +470,6 @@ public class DatabaseAccess {
             return true;
         }
     }
-
 
     //get un synced dealers
     public ArrayList<HashMap<String, String>> getUnSyncedDealers() {
@@ -516,7 +510,6 @@ public class DatabaseAccess {
         return agro_dealers;
     }
 
-
     //update dealer sync status
     public boolean updateDealerSyncStatus(String id, String sync_status) {
         ContentValues values = new ContentValues();
@@ -548,7 +541,6 @@ public class DatabaseAccess {
             return true;
         }
     }
-
 
     //insert trader
     public boolean addTrader(String business_type, String business_name,String owner, String commodities, String phone_number, String email_address, String district, String sub_county, String village, String actual_address, String supplier_location, String supply_source, String funding_source, String marketing_channels) {
@@ -611,7 +603,6 @@ public class DatabaseAccess {
         return agro_traders;
     }
 
-
     //update trader sync status
     public boolean updateTraderSyncStatus(String id, String sync_status) {
         ContentValues values = new ContentValues();
@@ -628,7 +619,6 @@ public class DatabaseAccess {
         }
 
     }
-
 
     //insert market
     public boolean addMarket(String name, String street_address, String phone_number, String district, String sub_county, String village, String contact_person) {
@@ -711,7 +701,6 @@ public class DatabaseAccess {
         }
     }
 
-
     //insert market price
     public boolean addMarketPrice(String date, String commodities, String variety, String market, String measurement_units, String wholesale_price, String retail_price) {
         this.database = openHelper.getWritableDatabase();
@@ -735,7 +724,6 @@ public class DatabaseAccess {
             return true;
         }
     }
-
 
     //get un synced market prices
     public ArrayList<HashMap<String, String>> getUnSyncedMarketprices() {
@@ -973,6 +961,4 @@ public class DatabaseAccess {
         }
 
     }
-
-
 }

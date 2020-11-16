@@ -58,9 +58,9 @@
     <string name="wind_default">12 m/h</string>
     <string name="humidity_default2">30.9% Min</string>
     <string name="label_wallet_balance">WALLET BALANCE</string>
-    <string name="wallet_balance_default">UGX 10,000</string>
+    <string name="wallet_balance_default">UGX 0.0</string>
     <string name="label_commissions">Commissions</string>
-    <string name="commissions_default">UGX 175,000</string>
+    <string name="commissions_default">UGX 0.0</string>
     <string name="label_profiling">Profiling</string>
     <string name="label_wallet">Wallet</string>
     <string name="data_collection">Data Collection</string>

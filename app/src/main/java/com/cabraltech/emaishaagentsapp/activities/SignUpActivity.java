@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
     private AutoCompleteTextView district, subCounty, village;
     private Button submitBtn;
     private int pickedDistrictId;
-    private int pickedSubcountyId;
+    private int pickedSubCountyId;
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
     private Context context;
@@ -137,8 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setMessage("Signing you up ...");
         progressDialog.setCancelable(false);
 
-
-        //load district, subcounty and village data
+        // load district, sub-county and village data
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
         databaseAccess.open();
         ArrayList<SpinnerItem> districtList = new ArrayList<>();
@@ -161,9 +160,11 @@ public class SignUpActivity extends AppCompatActivity {
                 });
 
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         Log.d(TAG, "onCreate: "+ districtList + districtList.size());
         ArrayAdapter<SpinnerItem> districtListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, districtList);
         district.setThreshold(1);
@@ -198,8 +199,6 @@ public class SignUpActivity extends AppCompatActivity {
                                         return String.valueOf(x.getId());
                                     }
 
-
-
                                     @NonNull
                                     @Override
                                     public String toString() {
@@ -207,24 +206,19 @@ public class SignUpActivity extends AppCompatActivity {
                                     }
                                 });
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                         Log.d(TAG, "onCreate: "+ subcountyList);
                         ArrayAdapter<SpinnerItem> subcountryListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, subcountyList);
                         subCounty.setThreshold(1);
                         subCounty.setAdapter(subcountryListAdapter);
                     }
-
-
                 }
             }
         });
-
-
-
-
-
 
         subCounty.addTextChangedListener(new TextWatcher() {
             @Override
@@ -244,13 +238,13 @@ public class SignUpActivity extends AppCompatActivity {
                 for (int i = 0; i < subcountyList.size(); i++) {
 
                     if (subcountyList.get(i).toString().equals(subCounty.getText().toString())) {
-                        pickedSubcountyId =Integer.parseInt(subcountyList.get(i).getId());
+                        pickedSubCountyId =Integer.parseInt(subcountyList.get(i).getId());
 
-                        Log.d(TAG, "onCreate: "+ pickedSubcountyId);
+                        Log.d(TAG, "onCreate: "+ pickedSubCountyId);
 
                         villageList.clear();
                         try {
-                            for (RegionDetails x : databaseAccess.getVillageDetails(String.valueOf(pickedSubcountyId),"village")) {
+                            for (RegionDetails x : databaseAccess.getVillageDetails(String.valueOf(pickedSubCountyId),"village")) {
                                 villageList.add(x.getRegion());
                             }
                         } catch (JSONException e) {

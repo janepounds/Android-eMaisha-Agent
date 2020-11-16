@@ -74,7 +74,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             if (response.isSuccessful()) {
 
-
                 Regions regionsData = null;
                 regionsData = response.body();
                 //Log.e("DataCheck0: ",appSettingsData.getAppDetails().getMaintenance_text());
