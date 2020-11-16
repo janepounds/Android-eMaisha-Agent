@@ -3,10 +3,13 @@ package com.cabraltech.emaishaagentsapp.fragments.profiling;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -24,6 +27,7 @@ import androidx.navigation.Navigation;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
+import com.cabraltech.emaishaagentsapp.adapters.SpinnerItem;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingBulkBuyersStep2Binding;
 import com.cabraltech.emaishaagentsapp.network.BroadcastService;
@@ -120,6 +124,27 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         addNewcommodity = view.findViewById(R.id.bulk_buyers_add_new_commodity);
         moreCommodities = view.findViewById(R.id.bulk_buyers_more_commodities);
 
+
+        ArrayAdapter<String> commodityListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
+        actCommodities.setThreshold(1);
+        actCommodities.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                actCommodities.showDropDown();
+
+            }
+        });
+        actCommodities.setAdapter(commodityListAdapter);
         actCommodities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -137,7 +162,28 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
             int index =0;
             @Override
             public void onClick(View v) {
-                EditText t = new EditText(context);
+
+                AutoCompleteTextView t = new AutoCompleteTextView(context);
+                t.setPadding(8,8,8,8);
+                t.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_edit_text));
+                t.setThreshold(1);
+                t.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        t.showDropDown();
+                    }
+                });
+                t.setAdapter(commodityListAdapter);
                 moreCommodities.addView(t);
                 index++;
             }

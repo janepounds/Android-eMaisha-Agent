@@ -63,7 +63,7 @@ public class SucessDialogFragment extends DialogFragment {
 
             contents = getArguments().getString("farmer_name");
             contents1 = getArguments().getString("village");
-            popContents.setText("Farmer " + contents +  "based in\\n" +contents1 +"has been successfully\\nRegistered and his profile created");
+            popContents.setText("Farmer " + contents +  "based in" +contents1 +"has been successfully registered and his profile created");
         }else if(getArguments().containsKey("association")){
 
         }
