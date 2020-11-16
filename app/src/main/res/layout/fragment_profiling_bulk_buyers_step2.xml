@@ -116,7 +116,9 @@
         <LinearLayout
             android:id="@+id/bulk_buyers_more_commodities"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
