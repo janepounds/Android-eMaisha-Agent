@@ -120,7 +120,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         chkFellowTraders = view.findViewById(R.id.marketing_channels_traders_cb);
         chkGovernmentAgency = view.findViewById(R.id.marketing_channels_govt_agency_cb);
         chkSavings = view.findViewById(R.id.funding_source_savings_cb);
-        chkFarmerTofarmer = view.findViewById(R.id.marketing_channels_famer_to_farmer_cb);
+        chkFarmerTofarmer = view.findViewById(R.id.funding_source_farmer_to_farmer_cb);
         addNewcommodity = view.findViewById(R.id.bulk_buyers_add_new_commodity);
         moreCommodities = view.findViewById(R.id.bulk_buyers_more_commodities);
 
@@ -162,9 +162,15 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
             int index =0;
             @Override
             public void onClick(View v) {
-
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                );
+                params.setMargins(20, 0, 20, 20);
                 AutoCompleteTextView t = new AutoCompleteTextView(context);
                 t.setPadding(8,8,8,8);
+                t.setTextSize(14);
+                t.setLayoutParams(params);
                 t.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_edit_text));
                 t.setThreshold(1);
                 t.addTextChangedListener(new TextWatcher() {
