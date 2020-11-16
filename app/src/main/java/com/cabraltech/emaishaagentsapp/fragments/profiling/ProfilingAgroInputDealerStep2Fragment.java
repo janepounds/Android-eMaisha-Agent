@@ -44,7 +44,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
     CheckBox chkMaaif, chkUnada, chkNda;
     private Spinner spinCertificationType,spinRegistrationStatus,spinAssociationMember;
     private EditText etxtRegistrationYear,etxtCertificationNumber,etxtAssociationName;
-    private LinearLayout assMembershipLayout,certTypeLayout,regBodyLayout,regStatusLayout,associationNameLayout;
+    private LinearLayout assMembershipLayout,certTypeLayout,regBodyLayout,regStatusLayout,associationNameLayout,regGenLayout,regYearLayout;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -112,6 +112,8 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         regBodyLayout = view.findViewById(R.id.registration_body_layout);
         regStatusLayout = view.findViewById(R.id.registration_status_layout);
         associationNameLayout = view.findViewById(R.id.association_name_layout);
+        regGenLayout = view.findViewById(R.id.registration_body_general_layout);
+        regYearLayout = view.findViewById(R.id.registration_year_layout);
 
         etxtRegistrationYear.addTextChangedListener(new TextWatcher() {
             @Override
@@ -158,6 +160,13 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 registration_status = adapterView.getItemAtPosition(i).toString();
+                if(registration_status.toLowerCase().equals("no")){
+                    regGenLayout.setVisibility(View.GONE);
+                    regYearLayout.setVisibility(View.GONE);
+                }else{
+                    regGenLayout.setVisibility(View.VISIBLE);
+                    regYearLayout.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -172,6 +181,8 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
                 association_membership = adapterView.getItemAtPosition(i).toString();
                 if(association_membership.toLowerCase().equals("yes")){
                     associationNameLayout.setVisibility(View.VISIBLE);
+                }else{
+                    associationNameLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -286,7 +297,6 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
     public boolean validateEntries() {
         boolean check = true;
         if (!selectedText(spinRegistrationStatus,regStatusLayout)) check = false;
-        if (!hasText(etxtRegistrationYear)) check = false;
         if(!selectedText(spinCertificationType,certTypeLayout)) check = false;
         if (!hasText(etxtCertificationNumber)) check = false;
         if(!selectedText(spinAssociationMember,assMembershipLayout)) check = false;
