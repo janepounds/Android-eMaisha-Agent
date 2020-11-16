@@ -458,7 +458,7 @@
     </array>
 
 
-    <array name="commodities">
+    <string-array name="commodities">
         <item>Select</item>
         <item>Coffee</item>
         <item>Tea</item>
@@ -486,7 +486,7 @@
         <item>pigs</item>
         <item>poultry</item>
 
-    </array>
+    </string-array>
     <array name="crop_array">
         <item>Select</item>
         <item>None</item>
