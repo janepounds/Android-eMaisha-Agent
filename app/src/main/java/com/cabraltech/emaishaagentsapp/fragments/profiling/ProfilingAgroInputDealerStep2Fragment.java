@@ -2,6 +2,11 @@ package com.cabraltech.emaishaagentsapp.fragments.profiling;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +30,8 @@ import androidx.navigation.Navigation;
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAgroInputDealerStep2Binding;
 import com.kofigyan.stateprogressbar.StateProgressBar;
+
+import java.util.Calendar;
 
 
 public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
@@ -106,6 +113,34 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         regStatusLayout = view.findViewById(R.id.registration_status_layout);
         associationNameLayout = view.findViewById(R.id.association_name_layout);
 
+        etxtRegistrationYear.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                etxtRegistrationYear.setFilters(new InputFilter[]{new InputFilterMinMax(0, Calendar.getInstance().get(Calendar.YEAR))});
+
+            }
+        });
+        etxtRegistrationYear.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && Integer.parseInt(etxtRegistrationYear.getText().toString())<1900 ) {
+                    // code to execute when EditText loses focus
+                    etxtRegistrationYear.setError("Invalid Year");
+
+                }
+            }
+        });
 
         spinCertificationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,7 +171,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 association_membership = adapterView.getItemAtPosition(i).toString();
                 if(association_membership.toLowerCase().equals("yes")){
-                    associationNameLayout.setVisibility(View.GONE);
+                    associationNameLayout.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -251,12 +286,44 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
     public boolean validateEntries() {
         boolean check = true;
         if (!selectedText(spinRegistrationStatus,regStatusLayout)) check = false;
-        if (!hasText(etxtRegistrationYear)|| etxtRegistrationYear.getText().toString().trim().length() < 4) check = false;
+        if (!hasText(etxtRegistrationYear)) check = false;
         if(!selectedText(spinCertificationType,certTypeLayout)) check = false;
         if (!hasText(etxtCertificationNumber)) check = false;
         if(!selectedText(spinAssociationMember,assMembershipLayout)) check = false;
 
         return check;
 
+    }
+
+    class InputFilterMinMax implements InputFilter {
+
+        private int min, max;
+
+        public InputFilterMinMax(int min, int max) {
+            this.min = min;
+            this.max = max;
+        }
+
+        public InputFilterMinMax(String min, String max) {
+            this.min = Integer.parseInt(min);
+            this.max = Integer.parseInt(max);
+        }
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            try {
+                int input = Integer.parseInt(dest.toString() + source.toString());
+                if (isInRange(min, max, input))
+                    return null;
+            } catch (NumberFormatException nfe) {
+                Log.e("FilterError", nfe.getMessage());
+            }
+            etxtRegistrationYear.setError("Invalid Year");
+            return "";
+        }
+
+        private boolean isInRange(int a, int b, int c) {
+            return b > a ? c >= a && c <= b : c >= b && c <= a;
+        }
     }
 }
