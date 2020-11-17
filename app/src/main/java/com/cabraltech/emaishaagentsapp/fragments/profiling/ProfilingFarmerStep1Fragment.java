@@ -48,6 +48,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -64,7 +65,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     private Spinner spinGender, spinNationality, spinReligion, spinEducation, spinMarital, etxtHouseholdHead, spinSourceOfIncome;
     private TextView txtDob;
     private AutoCompleteTextView language;
-    private LinearLayout genderLayout, nationalityLayout, religionLayout, educationLayout, languageLayout, maritalLayout, househeadLayout, incomeLayout;
+    private LinearLayout genderLayout, nationalityLayout, religionLayout, educationLayout, languageLayout, maritalLayout, househeadLayout, incomeLayout,ninLayout;
 
     // TODO: Rename parameter arguments, choose names that match
 
@@ -121,8 +122,29 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         househeadLayout = view.findViewById(R.id.head_layout);
         ninExt = view.findViewById(R.id.nin_et);
         incomeLayout = view.findViewById(R.id.income_layout);
+        ninLayout = view.findViewById(R.id.nin_layout);
 
 
+        etxtAge.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    computedob(etxtAge.getText().toString());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                    computedob(etxtAge.getText().toString());
+
+            }
+        });
         txtDob.setOnClickListener(v -> addDatePicker(txtDob, getActivity()));
 
         spinGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -185,6 +207,11 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         spinNationality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(spinNationality.getSelectedItem().toString().toLowerCase().equals("refugee")){
+                    ninLayout.setVisibility(View.GONE);
+                }else{
+                    ninLayout.setVisibility(View.VISIBLE);
+                }
 
             }
 
@@ -269,6 +296,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
                     if (validateDob()) {
                         computeAge(ed_.getText().toString());
                     }
+
+
                 }
             }, mYear, mMonth, mDay);
             mDatePicker.show();
@@ -420,6 +449,26 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String computedob(String age){
+        String dateOfBirth = "";
+        try {
+
+            int formattedage = Integer.parseInt(age);
+            LocalDate now = LocalDate.now();
+            LocalDate dob = now.minusYears(formattedage);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dateOfBirth = dob.format(formatter);
+            txtDob.setText(dateOfBirth);
+
+
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+        }
+        return dateOfBirth;
+    }
+
     public static long daysBetween(Date startDate, Date endDate) {
         Calendar sDate = getDatePart(startDate);
         Calendar eDate = getDatePart(endDate);
@@ -451,5 +500,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             return true;
         }
     }
+
+
 }
 
