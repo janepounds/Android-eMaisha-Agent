@@ -58,11 +58,8 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
     String  certification_type, certification_status;
      String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
 
-
-
     @Override
     public void onAttach(@NonNull Context context) {
-
         super.onAttach(context);
         this.context = context;
     }
@@ -71,11 +68,9 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

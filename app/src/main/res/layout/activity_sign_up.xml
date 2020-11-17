@@ -28,7 +28,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/login_form_layout"
                 android:layout_width="match_parent"
@@ -92,6 +91,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_rectangle_edit_text"
+                            android:minEms="3"
                             android:textSize="14sp" />
 
                     </LinearLayout>
@@ -115,9 +115,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_rectangle_edit_text"
+                            android:minEms="3"
                             android:textSize="14sp" />
 
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -145,17 +147,18 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:padding="8dp"
-                            android:background="@drawable/rounded_rectangle_spinner">
+                            android:background="@drawable/rounded_rectangle_spinner"
+                            android:padding="8dp">
 
                             <AutoCompleteTextView
                                 android:id="@+id/district_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textSize="14sp"
-                                android:background="@android:color/transparent" />
+                                android:background="@android:color/transparent"
+                                android:textSize="14sp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -175,19 +178,19 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
+                            android:background="@drawable/rounded_rectangle_spinner"
                             android:orientation="horizontal"
-                            android:padding="8dp"
-                            android:background="@drawable/rounded_rectangle_spinner">
+                            android:padding="8dp">
 
                             <AutoCompleteTextView
                                 android:id="@+id/sub_county_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textSize="14sp"
-                                android:background="@android:color/transparent" />
+                                android:background="@android:color/transparent"
+                                android:textSize="14sp" />
                         </LinearLayout>
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -216,17 +219,18 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:padding="8dp"
-                            android:background="@drawable/rounded_rectangle_spinner">
+                            android:background="@drawable/rounded_rectangle_spinner"
+                            android:padding="8dp">
 
                             <AutoCompleteTextView
                                 android:id="@+id/village_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -242,11 +246,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4dp"
                             android:text="@string/phone_number" />
+
                         <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:background="@drawable/edittext_corner"
-                                android:orientation="horizontal">
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/edittext_corner"
+                            android:orientation="horizontal">
+
                             <TextView
                                 android:id="@+id/text_country_code"
                                 android:layout_width="0dp"
@@ -255,25 +261,24 @@
                                 android:background="@drawable/edittext_left_corners_green"
                                 android:gravity="center"
                                 android:text="+256"
-                                android:textStyle="bold"
                                 android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/phone_number_et"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.7"
+                                android:background="@android:color/transparent"
+                                android:inputType="phone"
+                                android:maxLength="9"
+                                android:padding="6dp"
                                 android:textSize="14sp" />
 
-                        <EditText
-                            android:id="@+id/phone_number_et"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.7"
-                            android:padding="6dp"
-                            android:background="@android:color/transparent"
-                            android:inputType="phone"
-                            android:textSize="14sp"
-                            android:maxLength="9"
-                            />
                         </LinearLayout>
 
                     </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -304,8 +309,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_rectangle_edit_text"
-                            android:textSize="14sp"
-                            android:inputType="textEmailAddress"/>
+                            android:inputType="textEmailAddress"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -327,11 +332,12 @@
                             android:id="@+id/password_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text"
                             android:inputType="textPassword"
-                            android:textSize="14sp"
-                            android:background="@drawable/rounded_rectangle_edit_text" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -360,9 +366,9 @@
                             android:id="@+id/confirm_password_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_rectangle_edit_text"
                             android:inputType="textPassword"
-                            android:textSize="14sp"
-                            android:background="@drawable/rounded_rectangle_edit_text" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -384,11 +390,12 @@
                             android:id="@+id/next_of_kin_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
+                            android:background="@drawable/rounded_rectangle_edit_text"
                             android:inputType="text"
-                            android:background="@drawable/rounded_rectangle_edit_text" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -417,9 +424,9 @@
                             android:id="@+id/next_of_kin_relation_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
+                            android:background="@drawable/rounded_rectangle_edit_text"
                             android:inputType="text"
-                            android:background="@drawable/rounded_rectangle_edit_text" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -436,11 +443,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4dp"
                             android:text="@string/next_of_kin_contact" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="@drawable/edittext_corner"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -448,25 +457,25 @@
                                 android:background="@drawable/edittext_left_corners_green"
                                 android:gravity="center"
                                 android:text="+256"
-                                android:textStyle="bold"
                                 android:textColor="@color/white"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
 
                             <EditText
                                 android:id="@+id/next_of_kin_contact_et"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.7"
-                                android:padding="6dp"
                                 android:background="@android:color/transparent"
                                 android:inputType="phone"
-                                android:textSize="14sp"
-                                android:maxLength="9"/>
+                                android:maxLength="9"
+                                android:padding="6dp"
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                     </LinearLayout>
-                </LinearLayout>
 
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -487,11 +496,10 @@
                         android:id="@+id/nin_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:background="@drawable/rounded_rectangle_edit_text" />
+                        android:background="@drawable/rounded_rectangle_edit_text"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -516,10 +524,7 @@
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="4dp"
                             android:background="@drawable/circle"
-                            android:src="@android:drawable/ic_menu_camera"
-
-
-                            />
+                            android:src="@android:drawable/ic_menu_camera" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -527,8 +532,8 @@
                             android:gravity="center_horizontal"
                             android:text="@string/upload_your_photo"
                             android:textAlignment="center" />
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -546,16 +551,15 @@
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="4dp"
                             android:background="@drawable/circle"
-                            android:src="@android:drawable/ic_menu_camera"
-
-
-                            />
+                            android:src="@android:drawable/ic_menu_camera" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/upload_your_nid" />
+
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <Button
@@ -565,6 +569,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="@string/submit" />
+
             </LinearLayout>
 
             <TextView
@@ -584,9 +589,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/app_terms_services"
-                android:layout_gravity="center_horizontal"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:gravity="center_horizontal">
 
@@ -633,6 +638,7 @@
                     android:textStyle="bold" />
 
             </RelativeLayout>
+
         </RelativeLayout>
 
     </ScrollView>

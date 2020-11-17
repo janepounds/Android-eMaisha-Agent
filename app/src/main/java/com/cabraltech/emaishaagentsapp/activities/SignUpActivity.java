@@ -2,17 +2,13 @@ package com.cabraltech.emaishaagentsapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -24,14 +20,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -41,16 +35,10 @@ import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.models.RegionDetails;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
-import com.cabraltech.emaishaagentsapp.utils.CheckPermissions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -76,7 +64,6 @@ public class SignUpActivity extends AppCompatActivity {
     private int pickedSubCountyId;
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
-    private Context context;
     private ProgressDialog progressDialog;
 
     // image picker code
@@ -99,11 +86,6 @@ public class SignUpActivity extends AppCompatActivity {
     //Custom Dialog Vies
     private Dialog dialogOTP;
     private EditText ed_otp;
-
-    public SignUpActivity(Context context){
-        this.context = context;
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +120,7 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         // load district, sub-county and village data
-        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
         ArrayList<SpinnerItem> districtList = new ArrayList<>();
 
@@ -149,7 +131,6 @@ public class SignUpActivity extends AppCompatActivity {
                     public String getId() {
                         return String.valueOf(x.getId());
                     }
-
 
 
                     @NonNull
@@ -165,8 +146,8 @@ public class SignUpActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.d(TAG, "onCreate: "+ districtList + districtList.size());
-        ArrayAdapter<SpinnerItem> districtListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, districtList);
+        Log.d(TAG, "onCreate: " + districtList + districtList.size());
+        ArrayAdapter<SpinnerItem> districtListAdapter = new ArrayAdapter<SpinnerItem>(this, android.R.layout.simple_dropdown_item_1line, districtList);
         district.setThreshold(1);
         district.setAdapter(districtListAdapter);
         district.addTextChangedListener(new TextWatcher() {
@@ -186,13 +167,13 @@ public class SignUpActivity extends AppCompatActivity {
                 for (int i = 0; i < districtList.size(); i++) {
 
                     if (districtList.get(i).toString().equals(district.getText().toString())) {
-                        pickedDistrictId =Integer.parseInt(districtList.get(i).getId());
+                        pickedDistrictId = Integer.parseInt(districtList.get(i).getId());
 
-                        Log.d(TAG, "onCreate: "+ pickedDistrictId);
+                        Log.d(TAG, "onCreate: " + pickedDistrictId);
 
                         subcountyList.clear();
                         try {
-                            for (RegionDetails x : databaseAccess.getSubcountyDetails(String.valueOf(pickedDistrictId),"subcounty")) {
+                            for (RegionDetails x : databaseAccess.getSubcountyDetails(String.valueOf(pickedDistrictId), "subcounty")) {
                                 subcountyList.add(new SpinnerItem() {
                                     @Override
                                     public String getId() {
@@ -211,8 +192,8 @@ public class SignUpActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        Log.d(TAG, "onCreate: "+ subcountyList);
-                        ArrayAdapter<SpinnerItem> subcountryListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, subcountyList);
+                        Log.d(TAG, "onCreate: " + subcountyList);
+                        ArrayAdapter<SpinnerItem> subcountryListAdapter = new ArrayAdapter<SpinnerItem>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, subcountyList);
                         subCounty.setThreshold(1);
                         subCounty.setAdapter(subcountryListAdapter);
                     }
@@ -238,20 +219,20 @@ public class SignUpActivity extends AppCompatActivity {
                 for (int i = 0; i < subcountyList.size(); i++) {
 
                     if (subcountyList.get(i).toString().equals(subCounty.getText().toString())) {
-                        pickedSubCountyId =Integer.parseInt(subcountyList.get(i).getId());
+                        pickedSubCountyId = Integer.parseInt(subcountyList.get(i).getId());
 
-                        Log.d(TAG, "onCreate: "+ pickedSubCountyId);
+                        Log.d(TAG, "onCreate: " + pickedSubCountyId);
 
                         villageList.clear();
                         try {
-                            for (RegionDetails x : databaseAccess.getVillageDetails(String.valueOf(pickedSubCountyId),"village")) {
+                            for (RegionDetails x : databaseAccess.getVillageDetails(String.valueOf(pickedSubCountyId), "village")) {
                                 villageList.add(x.getRegion());
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.d(TAG, "onCreate: "+ villageList);
-                        ArrayAdapter<String> villageListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line, villageList);
+                        Log.d(TAG, "onCreate: " + villageList);
+                        ArrayAdapter<String> villageListAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, villageList);
                         village.setThreshold(1);
                         village.setAdapter(villageListAdapter);
                     }
@@ -317,11 +298,17 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         submitBtn.setOnClickListener(v -> {
-            String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$*";
+            // String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$*";
+            String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
             if (firstName.getText().toString().trim().isEmpty()) {
                 firstName.setError("Required");
+            } else if (firstName.getText().toString().length() < 3) {
+                firstName.setError("Name should have at least 3 characters");
             } else if (lastName.getText().toString().trim().isEmpty()) {
                 lastName.setError("Required");
+            } else if (lastName.getText().toString().length() < 3) {
+                lastName.setError("Name should have at least 3 characters");
             } else if (district.getText().toString().trim().isEmpty()) {
                 district.setError("Required");
             } else if (subCounty.getText().toString().trim().isEmpty()) {
@@ -330,9 +317,11 @@ public class SignUpActivity extends AppCompatActivity {
                 village.setError("Required");
             } else if (phoneNumber.getText().toString().trim().isEmpty()) {
                 phoneNumber.setError("Required");
+            } else if (phoneNumber.getText().toString().length() < 9) {
+                phoneNumber.setError("9 Characters required");
             } else if (email.getText().toString().trim().isEmpty()) {
                 email.setError("Required");
-            } else if (!email.getText().toString().trim().matches(regex)) {
+            } else if (!email.getText().toString().trim().matches(emailPattern)) {
                 email.setError(getString(R.string.enter_valid_email));
             } else if (password.getText().toString().trim().isEmpty()) {
                 password.setError("Required");
@@ -347,8 +336,12 @@ public class SignUpActivity extends AppCompatActivity {
                 nextOfKinRelation.setError("Required");
             } else if (nextOfKinContact.getText().toString().trim().isEmpty()) {
                 nextOfKinContact.setError("Required");
+            } else if (nextOfKinContact.getText().toString().length() < 9) {
+                nextOfKinContact.setError("9 Characters required");
             } else if (nin.getText().toString().trim().isEmpty()) {
                 nin.setError("Required");
+            } else if (nin.getText().toString().length() < 14) {
+                nin.setError("NIN should have at least 14 characters");
             } else if (agentPhoto == null) {
                 Snackbar.make(findViewById(android.R.id.content), "Picture is empty", Snackbar.LENGTH_SHORT).show();
             } else if (nationalIdPhoto == null) {

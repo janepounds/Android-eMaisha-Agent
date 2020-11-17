@@ -53,7 +53,7 @@ import java.util.Date;
 
 
 public class ProfilingFarmerStep1Fragment extends Fragment {
-
+    private static final String TAG = "ProfilingFarmerStep1";
     //Progressbar labels
     String[] descriptionData = {"Personal\nDetails", "Contact\nDetails", "Farming\nDetails"};
     private Context context;
@@ -61,27 +61,22 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     private FragmentProfilingFarmerStep1Binding binding;
     String gender, marital_status, religion, education_level, language_used, nationality;
     private EditText etxtFirstName, etxtLastName, etxtAge, etxtHouseholdSize, ninExt;
-    private Spinner spinGender, spinNationality, spinReligion, spinEducation,  spinMarital, etxtHouseholdHead,spinSourceOfIncome;
+    private Spinner spinGender, spinNationality, spinReligion, spinEducation, spinMarital, etxtHouseholdHead, spinSourceOfIncome;
     private TextView txtDob;
     private AutoCompleteTextView language;
-    private LinearLayout genderLayout, nationalityLayout, religionLayout, educationLayout, languageLayout, maritalLayout, househeadLayout,incomeLayout;
-
+    private LinearLayout genderLayout, nationalityLayout, religionLayout, educationLayout, languageLayout, maritalLayout, househeadLayout, incomeLayout;
 
     // TODO: Rename parameter arguments, choose names that match
-
 
     public ProfilingFarmerStep1Fragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public void onAttach(@NonNull Context context) {
-
         super.onAttach(context);
         this.context = context;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,7 +87,6 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         StateProgressBar stateProgressBar = (StateProgressBar) binding.farmerProfilingStateProgressBar;
         stateProgressBar.setStateDescriptionData(descriptionData);
         stateProgressBar.setStateDescriptionTypeface("fonts/JosefinSans-Bold.ttf");
-
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -105,7 +99,6 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         etxtFirstName = view.findViewById(R.id.first_name_et);
         etxtLastName = view.findViewById(R.id.last_name_et);
         txtDob = view.findViewById(R.id.date_of_birth_tv);
@@ -130,13 +123,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         incomeLayout = view.findViewById(R.id.income_layout);
 
 
-        txtDob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addDatePicker(txtDob, getActivity());
-            }
-        });
-
+        txtDob.setOnClickListener(v -> addDatePicker(txtDob, getActivity()));
 
         spinGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -174,8 +161,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             }
         });
 
-
-        ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.language_used_array));
+        ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.language_used_array));
         language.setThreshold(1);
         language.addTextChangedListener(new TextWatcher() {
             @Override
@@ -195,7 +181,6 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             }
         });
         language.setAdapter(languageAdapter);
-
 
         spinNationality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -221,105 +206,90 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             }
         });
 
-
         navController = Navigation.findNavController(view);
 
-        binding.nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validateEntries()) {
-                    String first_name = etxtFirstName.getText().toString().trim();
-                    String last_name = etxtLastName.getText().toString().trim();
-                    String dob = txtDob.getText().toString().toString().trim();
-                    String age = etxtAge.getText().toString().trim();
-                    String household_size = etxtHouseholdSize.getText().toString().trim();
-                    String household_head = etxtHouseholdHead.getSelectedItem().toString().trim();
-                    String source_of_income = spinSourceOfIncome.getSelectedItem().toString().trim();
-                    String nin = ninExt.getText().toString().trim();
-                    gender =  spinGender.getSelectedItem().toString();
-                    religion = spinReligion.getSelectedItem().toString();
-                    nationality = spinNationality.getSelectedItem().toString();
-                    education_level = spinEducation.getSelectedItem().toString();
-                    marital_status = spinMarital.getSelectedItem().toString();
-                    language_used = language.getText().toString();
+        binding.nextButton.setOnClickListener(v -> {
+            if (validateEntries()) {
+                String first_name = etxtFirstName.getText().toString().trim();
+                String last_name = etxtLastName.getText().toString().trim();
+                String dob = txtDob.getText().toString().toString().trim();
+                String age = etxtAge.getText().toString().trim();
+                String household_size = etxtHouseholdSize.getText().toString().trim();
+                String household_head = etxtHouseholdHead.getSelectedItem().toString().trim();
+                String source_of_income = spinSourceOfIncome.getSelectedItem().toString().trim();
+                String nin = ninExt.getText().toString().trim();
+                gender = spinGender.getSelectedItem().toString();
+                religion = spinReligion.getSelectedItem().toString();
+                nationality = spinNationality.getSelectedItem().toString();
+                education_level = spinEducation.getSelectedItem().toString();
+                marital_status = spinMarital.getSelectedItem().toString();
+                language_used = language.getText().toString();
 
+                Bundle bundle = new Bundle();
+                bundle.putString("first_name", first_name);
+                bundle.putString("last_name", last_name);
+                bundle.putString("dob", dob);
+                bundle.putString("age", age);
+                bundle.putString("gender", gender);
+                bundle.putString("religion", religion);
+                bundle.putString("level_of_education", education_level);
+                bundle.putString("marital_status", marital_status);
+                bundle.putString("language_used", language_used);
+                bundle.putString("nationality", nationality);
+                bundle.putString("household_size", household_size);
+                bundle.putString("household_head", household_head);
+                bundle.putString("source_of_income", source_of_income);
+                bundle.putString("nin", nin);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("first_name", first_name);
-                    bundle.putString("last_name", last_name);
-                    bundle.putString("dob", dob);
-                    bundle.putString("age", age);
-                    bundle.putString("gender",gender);
-                    bundle.putString("religion", religion);
-                    bundle.putString("level_of_education", education_level);
-                    bundle.putString("marital_status",marital_status);
-                    bundle.putString("language_used",language_used);
-                    bundle.putString("nationality",nationality );
-                    bundle.putString("household_size", household_size);
-                    bundle.putString("household_head", household_head);
-                    bundle.putString("source_of_income", source_of_income);
-                    bundle.putString("nin", nin);
+                //navigation to step 2
+                navController.navigate(R.id.action_profilingFarmerFragment_to_profilingFarmerStep2Fragment, bundle);
 
-                    //navigation to step 2
-                    navController.navigate(R.id.action_profilingFarmerFragment_to_profilingFarmerStep2Fragment, bundle);
-
-                }
             }
         });
-
-
     }
 
     public void addDatePicker(final TextView ed_, final Context context) {
-        ed_.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar mcurrentDate = Calendar.getInstance();
-                mcurrentDate.add(Calendar.YEAR,-15);
-                int mYear = mcurrentDate.get(Calendar.YEAR);
-                int mMonth = mcurrentDate.get(Calendar.MONTH);
-                int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+        ed_.setOnClickListener(view -> {
+            Calendar mcurrentDate = Calendar.getInstance();
+            mcurrentDate.add(Calendar.YEAR, -15);
+            int mYear = mcurrentDate.get(Calendar.YEAR);
+            int mMonth = mcurrentDate.get(Calendar.MONTH);
+            int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+            final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+
+                    int month = selectedmonth + 1;
+                    int year = selectedyear;
+                    NumberFormat formatter = new DecimalFormat("00");
+                    ed_.setText(selectedyear + "-" + formatter.format(month) + "-" + formatter.format(selectedday));
 
 
-
-                final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
-                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-
-                        int month = selectedmonth + 1;
-                        int year = selectedyear ;
-                        NumberFormat formatter = new DecimalFormat("00");
-                        ed_.setText(selectedyear + "-" + formatter.format(month) + "-" + formatter.format(selectedday));
-
-
-                        if (validateDob()) {
-                            computeAge(ed_.getText().toString());
-                        }
-
-
+                    if (validateDob()) {
+                        computeAge(ed_.getText().toString());
                     }
-                }, mYear, mMonth, mDay);
-                mDatePicker.show();
-
-            }
+                }
+            }, mYear, mMonth, mDay);
+            mDatePicker.show();
         });
         ed_.setInputType(InputType.TYPE_NULL);
     }
 
-    public  boolean hasText(EditText editText) {
+    public boolean hasText(EditText editText) {
 
         String text = editText.getText().toString().trim();
         int bottom = editText.getPaddingBottom();
         int top = editText.getPaddingTop();
         int right = editText.getPaddingRight();
         int left = editText.getPaddingLeft();
-        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        editText.setPadding(left,top,right,bottom);
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        editText.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            editText.setPadding(left,top,right,bottom);
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
             editText.requestFocus();
             return false;
@@ -328,21 +298,22 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
 
         return true;
     }
-    public  boolean selectedText(Spinner spinner,LinearLayout layout) {
+
+    public boolean selectedText(Spinner spinner, LinearLayout layout) {
 
         int position = spinner.getSelectedItemPosition();
         int bottom = layout.getPaddingBottom();
         int top = layout.getPaddingTop();
         int right = layout.getPaddingRight();
         int left = layout.getPaddingLeft();
-        layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        layout.setPadding(left,top,right,bottom);
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
 
         // length 0 means there is no text
         if (position == 0) {
 
-            layout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.spinner_error_border,null));
-            layout.setPadding(left,top,right,bottom);
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
             return false;
@@ -351,19 +322,19 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         return true;
     }
 
-    public boolean hasTextView(TextView textView){
+    public boolean hasTextView(TextView textView) {
         String text = textView.getText().toString().trim();
         int bottom = textView.getPaddingBottom();
         int top = textView.getPaddingTop();
         int right = textView.getPaddingRight();
         int left = textView.getPaddingLeft();
-        textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        textView.setPadding(left,top,right,bottom);
+        textView.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        textView.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            textView.setPadding(left,top,right,bottom);
+            textView.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            textView.setPadding(left, top, right, bottom);
             textView.setFocusable(true);
             textView.requestFocus();
             return false;
@@ -371,43 +342,44 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         return true;
     }
 
-    public boolean ninLength(EditText editText,String message){
-        String text = editText.getText().toString().trim();
-        int bottom = editText.getPaddingBottom();
-        int top = editText.getPaddingTop();
-        int right = editText.getPaddingRight();
-        int left = editText.getPaddingLeft();
-
-        if(text.length() < 14 || text.length() >14) {
-            editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
-            editText.setPadding(left, top, right, bottom);
-            editText.setFocusable(true);
-            editText.requestFocus();
-            Toast.makeText(context,message,Toast.LENGTH_LONG);
-            return false;
-        }
-        return true;
-    }
     public boolean validateEntries() {
         boolean check = true;
+
+        if (binding.firstNameEt.getText().toString().length() < 3) {
+            check = false;
+            binding.firstNameEt.setError("Name should have at least 3 characters");
+        }
+
+        if (binding.lastNameEt.getText().toString().length() < 3) {
+            check = false;
+            binding.lastNameEt.setError("Name should have at least 3 characters");
+        }
+
+        if (binding.nationalitySpinner.getSelectedItem().toString().equals("National") && (binding.ninEt.length() < 14)) {
+            check = false;
+
+            binding.ninEt.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            binding.ninEt.setPadding(binding.ninEt.getPaddingLeft(), binding.ninEt.getPaddingTop(), binding.ninEt.getPaddingRight(), binding.ninEt.getPaddingBottom());
+            binding.ninEt.setFocusable(true);
+            binding.ninEt.requestFocus();
+            binding.ninEt.setError(getString(R.string.nin_message));
+        }
+
         if (!hasText(etxtFirstName)) check = false;
         if (!hasText(etxtLastName)) check = false;
         if (!hasTextView(txtDob)) check = false;
         if (!hasText(etxtAge)) check = false;
         if (!hasText(etxtHouseholdSize)) check = false;
-        if (!selectedText(spinSourceOfIncome,incomeLayout)) check = false;
+        if (!selectedText(spinSourceOfIncome, incomeLayout)) check = false;
         if (!hasText(language)) check = false;
-        if(!selectedText(spinGender,genderLayout)) check = false;
-        if(!selectedText(spinNationality,nationalityLayout)) check = false;
-        if(!selectedText(spinReligion,religionLayout)) check = false;
-        if(!selectedText(spinEducation,educationLayout)) check = false;
-        if(!selectedText(spinMarital,maritalLayout)) check = false;
-        if(!selectedText(etxtHouseholdHead,househeadLayout)) check = false;
-        if(ninLength(ninExt,getString(R.string.nin_message)))  check = false;;
+        if (!selectedText(spinGender, genderLayout)) check = false;
+        if (!selectedText(spinNationality, nationalityLayout)) check = false;
+        if (!selectedText(spinReligion, religionLayout)) check = false;
+        if (!selectedText(spinEducation, educationLayout)) check = false;
+        if (!selectedText(spinMarital, maritalLayout)) check = false;
+        if (!selectedText(etxtHouseholdHead, househeadLayout)) check = false;
 
         return check;
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -430,7 +402,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             Log.d("DATES", dob + " " + convertedDate.toString() + " - " + today.getTime().toString() + " days = " + daysBetween);
             String age = "";
             if (years > 0) {
-                age += years ;
+                age += years;
                 etxtAge.setText(age);
 
             }
@@ -454,13 +426,14 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
 
         long daysBetween = 0;
         while (sDate.before(eDate)) {
-            sDate.add(Calendar.DAY_OF_MONTH,1);
+            sDate.add(Calendar.DAY_OF_MONTH, 1);
             //Log.d("Day "+daysBetween,sDate.getTime().toString());
             daysBetween++;
         }
         return daysBetween;
     }
-    public static Calendar getDatePart(Date date){
+
+    public static Calendar getDatePart(Date date) {
         Calendar cal = Calendar.getInstance();       // get calendar instance
         cal.setTime(date);
         cal.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
@@ -471,14 +444,12 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         return cal;                                  // return the date part
     }
 
-    public boolean validateDob(){
-        if(txtDob.getText().toString().isEmpty()){
+    public boolean validateDob() {
+        if (txtDob.getText().toString().isEmpty()) {
             return false;
-        }else{
+        } else {
             return true;
         }
-
     }
-
 }
 
