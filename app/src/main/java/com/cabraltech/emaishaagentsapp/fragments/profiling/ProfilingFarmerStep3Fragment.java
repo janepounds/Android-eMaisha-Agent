@@ -137,45 +137,19 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 spinMainCrop.showDropDown();
+                if (spinMainCrop.getText().toString().toLowerCase().equals("none")) {
+
+                    moreCropsLayout.setVisibility(View.GONE);
+
+                }else{
+                    moreCropsLayout.setVisibility(View.VISIBLE);
+                }
 
             }
         });
         spinMainCrop.setAdapter(commodityListAdapter);
-        spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                if (!spinMainCrop.getText().toString().toLowerCase().equals("none")) {
-                    moreCropsLayout.setVisibility(View.VISIBLE);
-
-                }else{
-                    moreCropsLayout.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        spinMainLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
 
-                if (spinMainLivestock.getText().toString().toLowerCase().equals("none")) {
-                    moreLivestockLayout.setVisibility(View.GONE);
-
-                } else {
-                    moreLivestockLayout.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
 
         ArrayAdapter<String> secondcropListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
@@ -236,6 +210,13 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 spinMainLivestock.showDropDown();
+
+                if (spinMainLivestock.getText().toString().toLowerCase().equals("none")) {
+                    moreLivestockLayout.setVisibility(View.GONE);
+
+                } else {
+                    moreLivestockLayout.setVisibility(View.VISIBLE);
+                }
 
             }
         });
@@ -365,6 +346,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 
@@ -387,6 +369,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             linearLayout.setPadding(left,top,right,bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
+            autoCompleteTextView.setError("please enter a value");
             return false;
         }
 
@@ -398,9 +381,25 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     public boolean validateEntries() {
         boolean check = true;
 
-        if (!hasText(etxtFarmingSize)) check = false;
-        if (!autoText(spinMainCrop,mainCropLayout)) check = false;
-        if (!autoText(spinMainLivestock,mainLivestockLayout)) check = false;
+        if (!hasText(etxtFarmingSize)) {
+            check = false;
+        }
+
+        if (!autoText(spinMainCrop,mainCropLayout)) {
+            check = false;
+        }
+        if (spinMainCrop.getText().toString().length()<3) {
+            spinMainCrop.setError("main crop should have 3 character or more");
+            check = false;
+        }
+        if (!autoText(spinMainLivestock,mainLivestockLayout))
+        {
+            check = false;
+        }
+        if (spinMainLivestock.getText().toString().length()<3) {
+            spinMainLivestock.setError("main livestock should have 3 character or more");
+            check = false;
+        }
         if(spinMainCrop.getText().toString().toLowerCase().equals("none") && spinMainLivestock.getText().toString().toLowerCase().equals("none")){
              Toast.makeText(context, getString(R.string.select_crop_or_livestock), Toast.LENGTH_LONG).show();
              spinMainCrop.requestFocus();

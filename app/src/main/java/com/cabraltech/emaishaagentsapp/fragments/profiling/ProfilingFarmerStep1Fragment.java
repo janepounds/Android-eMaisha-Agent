@@ -321,6 +321,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 
@@ -344,6 +345,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             layout.requestFocus();
             return false;
         }
@@ -370,12 +372,33 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         }
         return true;
     }
+    public boolean autoTextView(AutoCompleteTextView textView, LinearLayout layout) {
+        String text = textView.getText().toString().trim();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            layout .setPadding(left, top, right, bottom);
+            textView.setFocusable(true);
+            textView.requestFocus();
+            textView.setError("Please enter a value");
+            return false;
+        }
+        return true;
+    }
 
     public boolean validateEntries() {
         boolean check = true;
 
         if (binding.firstNameEt.getText().toString().length() < 3) {
             check = false;
+
             binding.firstNameEt.setError("Name should have at least 3 characters");
         }
 
@@ -400,7 +423,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         if (!hasText(etxtAge)) check = false;
         if (!hasText(etxtHouseholdSize)) check = false;
         if (!selectedText(spinSourceOfIncome, incomeLayout)) check = false;
-        if (!hasText(language)) check = false;
+        if (!autoTextView(language, languageLayout)) check = false;
         if (!selectedText(spinGender, genderLayout)) check = false;
         if (!selectedText(spinNationality, nationalityLayout)) check = false;
         if (!selectedText(spinReligion, religionLayout)) check = false;
