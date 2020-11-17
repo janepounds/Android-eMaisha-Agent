@@ -371,6 +371,25 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         }
         return true;
     }
+    public boolean autoTextView(AutoCompleteTextView textView, LinearLayout layout) {
+        String text = textView.getText().toString().trim();
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+        layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        layout.setPadding(left, top, right, bottom);
+        // length 0 means there is no text
+        if (text.isEmpty()) {
+
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            layout .setPadding(left, top, right, bottom);
+            textView.setFocusable(true);
+            textView.requestFocus();
+            return false;
+        }
+        return true;
+    }
 
     public boolean validateEntries() {
         boolean check = true;
@@ -402,10 +421,8 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         if (!hasText(etxtAge)) check = false;
         if (!hasText(etxtHouseholdSize)) check = false;
         if (!selectedText(spinSourceOfIncome, incomeLayout)) check = false;
-        if (!hasText(language)) check = false;
-        if (!selectedText(spinGender, genderLayout))
-
-            check = false;
+        if (!autoTextView(language, languageLayout)) check = false;
+        if (!selectedText(spinGender, genderLayout)) check = false;
         if (!selectedText(spinNationality, nationalityLayout)) check = false;
         if (!selectedText(spinReligion, religionLayout)) check = false;
         if (!selectedText(spinEducation, educationLayout)) check = false;
