@@ -344,6 +344,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             layout.requestFocus();
             return false;
         }
@@ -402,7 +403,9 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         if (!hasText(etxtHouseholdSize)) check = false;
         if (!selectedText(spinSourceOfIncome, incomeLayout)) check = false;
         if (!hasText(language)) check = false;
-        if (!selectedText(spinGender, genderLayout)) check = false;
+        if (!selectedText(spinGender, genderLayout))
+
+            check = false;
         if (!selectedText(spinNationality, nationalityLayout)) check = false;
         if (!selectedText(spinReligion, religionLayout)) check = false;
         if (!selectedText(spinEducation, educationLayout)) check = false;

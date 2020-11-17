@@ -366,6 +366,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 
@@ -388,6 +389,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             linearLayout.setPadding(left,top,right,bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
+            autoCompleteTextView.setError("please enter a value");
             return false;
         }
 
@@ -401,7 +403,12 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
 
         if (!hasText(etxtFarmingSize)) check = false;
         if (!autoText(spinMainCrop,mainCropLayout)) check = false;
+        if (spinMainCrop.getText().toString().length()<3)
+            spinMainCrop.setError("main crop should have 3 character or more");
+            check = false;
         if (!autoText(spinMainLivestock,mainLivestockLayout)) check = false;
+        if (spinMainLivestock.getText().toString().length()<3)
+            spinMainLivestock.setError("main livestock should have 3 character or more");
         if(spinMainCrop.getText().toString().toLowerCase().equals("none") && spinMainLivestock.getText().toString().toLowerCase().equals("none")){
              Toast.makeText(context, getString(R.string.select_crop_or_livestock), Toast.LENGTH_LONG).show();
              spinMainCrop.requestFocus();
