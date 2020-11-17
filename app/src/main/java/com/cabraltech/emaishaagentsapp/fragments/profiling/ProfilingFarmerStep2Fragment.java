@@ -367,47 +367,64 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
 
 
     public boolean validateEntries() {
-
         boolean check = true;
-        if (!hasText(etxtPhone))
+        if (!hasText(etxtPhone)) {
             check = false;
-            if( etxtPhone.getText().toString().trim().length() < 9)
+        }
+            if( etxtPhone.getText().toString().trim().length() < 9) {
                 etxtPhone.setError("enter valid phone number");
+                check = false;
+            }
+        if (!hasText(etxt_next_of_kin)) {
             check = false;
-
-        if (!hasText(etxt_next_of_kin))
-            check = false;
-        if(etxt_next_of_kin.getText().toString().trim().length() <3)
+        }
+        if(etxt_next_of_kin.getText().toString().trim().length() <3) {
             etxt_next_of_kin.setError("Next of kin should have 3 character or more");
             check = false;
-        if (!hasText(etxt_next_of_kin_contact))
+        }
+        if (!hasText(etxt_next_of_kin_contact)) {
             check = false;
-            if(etxt_next_of_kin_contact.getText().toString().trim().length() < 9)
+        }
+            if(etxt_next_of_kin_contact.getText().toString().trim().length() < 9) {
                 etxt_next_of_kin_contact.setError("Enter valid next of kin contact");
                 check = false;
-        if (!hasText(etxt_next_of_kin_address))
+            }
+        if (!hasText(etxt_next_of_kin_address)) {
             check = false;
-        if(etxt_next_of_kin_address.getText().toString().trim().length() < 3)
+        }
+        if(etxt_next_of_kin_address.getText().toString().trim().length() < 3) {
             etxt_next_of_kin_address.setError("Address should be more than 3 characters");
             check = false;
-        if (!hasText(etxt_next_of_kin_relation))
+        }
+        if (!hasText(etxt_next_of_kin_relation)) {
             check = false;
-            if(etxt_next_of_kin_relation.getText().toString().trim().length()<3)
+        }
+            if(etxt_next_of_kin_relation.getText().toString().trim().length()<3) {
                 etxt_next_of_kin_relation.setError("Next of kin relation should have 3 characters or more");
-        if (!autoText(spinDistrict,districtLayout))
+            }
+        if (!autoText(spinDistrict,districtLayout)) {
             check = false;
-        if(spinDistrict.getText().toString().length()<3)
+        }
+        if(spinDistrict.getText().toString().length()<3) {
             spinDistrict.setError("district should have 3 character or more");
             check = false;
-        if (!autoText(spinSubCounty,subCountyLayout)) check = false;
-        if(spinSubCounty.getText().toString().length()<3)
+        }
+        if (!autoText(spinSubCounty,subCountyLayout))
+        {
+            check = false;
+        }
+        if(spinSubCounty.getText().toString().length()<3) {
             spinSubCounty.setError("subcounty should have 3 character or more");
-        check = false;
-        if (!autoText(spinVillage,villageLayout)) check = false;
-        if(spinVillage.getText().toString().length()<3)
-            spinVillage.setError("village should have 3 character or more");
-        check = false;
-        // Toast.makeText(context, getString(R.string.missing_fields_message), Toast.LENGTH_LONG).show();
+            check = false;
+        }
+            if (!autoText(spinVillage, villageLayout)) {
+                check = false;
+            }
+            if (spinVillage.getText().toString().length() < 3){
+                spinVillage.setError("village should have 3 character or more");
+            check = false;
+        }
+
         return check;
 
 
