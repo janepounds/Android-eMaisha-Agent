@@ -384,6 +384,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
         if (!hasText(etxtFarmingSize)) {
             check = false;
         }
+
         if (!autoText(spinMainCrop,mainCropLayout)) {
             check = false;
         }
