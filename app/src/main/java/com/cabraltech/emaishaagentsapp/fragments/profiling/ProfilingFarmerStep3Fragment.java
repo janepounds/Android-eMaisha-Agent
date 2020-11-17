@@ -137,14 +137,6 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 spinMainCrop.showDropDown();
-
-            }
-        });
-        spinMainCrop.setAdapter(commodityListAdapter);
-        spinMainCrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                 if (spinMainCrop.getText().toString().toLowerCase().equals("none")) {
 
                     moreCropsLayout.setVisibility(View.GONE);
@@ -152,31 +144,12 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
                 }else{
                     moreCropsLayout.setVisibility(View.VISIBLE);
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        spinMainLivestock.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        spinMainCrop.setAdapter(commodityListAdapter);
 
 
-                if (spinMainLivestock.getText().toString().toLowerCase().equals("none")) {
-                    moreLivestockLayout.setVisibility(View.GONE);
-
-                } else {
-                    moreLivestockLayout.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
 
         ArrayAdapter<String> secondcropListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
@@ -237,6 +210,13 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 spinMainLivestock.showDropDown();
+
+                if (spinMainLivestock.getText().toString().toLowerCase().equals("none")) {
+                    moreLivestockLayout.setVisibility(View.GONE);
+
+                } else {
+                    moreLivestockLayout.setVisibility(View.VISIBLE);
+                }
 
             }
         });
