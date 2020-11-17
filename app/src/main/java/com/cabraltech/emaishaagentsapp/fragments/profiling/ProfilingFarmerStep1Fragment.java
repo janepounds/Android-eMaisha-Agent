@@ -376,6 +376,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
 
         if (binding.firstNameEt.getText().toString().length() < 3) {
             check = false;
+
             binding.firstNameEt.setError("Name should have at least 3 characters");
         }
 

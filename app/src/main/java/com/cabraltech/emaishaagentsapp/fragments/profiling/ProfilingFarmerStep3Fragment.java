@@ -145,11 +145,12 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (!spinMainCrop.getText().toString().toLowerCase().equals("none")) {
-                    moreCropsLayout.setVisibility(View.VISIBLE);
+                if (spinMainCrop.getText().toString().toLowerCase().equals("none")) {
+
+                    moreCropsLayout.setVisibility(View.GONE);
 
                 }else{
-                    moreCropsLayout.setVisibility(View.GONE);
+                    moreCropsLayout.setVisibility(View.VISIBLE);
                 }
             }
 
