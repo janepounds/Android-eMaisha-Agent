@@ -269,6 +269,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             linearLayout.setPadding(left,top,right,bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
+            autoCompleteTextView.setError("Please enter a value");
             return false;
         }
 
@@ -292,6 +293,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
@@ -312,6 +314,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             textView.setPadding(left,top,right,bottom);
             textView.setFocusable(true);
             textView.requestFocus();
+            textView.setError("Please enter a value");
             return false;
         }
         return true;
@@ -321,6 +324,9 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         if (!hasTextView(txtDate)) check = false;
         if (!selectedText(spinCommodities,commoditiesLayout)) check = false;
         if(!hasText(extVarieties)) check = false;
+        if(extVarieties.getText().toString().length()<3)
+            extVarieties.setError("Variety should be 3 characters or more");
+            check = false;
         if(!selectedText(spinMarket_name,marketLayout)) check = false;
         if(!selectedText(spinUnits,unitsLayout)) check = false;
         if(!hasText(etxtWholeSale)) check = false;

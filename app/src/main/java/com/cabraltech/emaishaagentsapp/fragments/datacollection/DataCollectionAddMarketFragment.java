@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -308,6 +309,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please select a value");
             return false;
         }
 
@@ -330,6 +332,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
             linearLayout.setPadding(left,top,right,bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
+            autoCompleteTextView.setError("Please enter a value");
             return false;
         }
 
@@ -353,6 +356,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
@@ -361,14 +365,40 @@ public class DataCollectionAddMarketFragment extends Fragment {
 
     public boolean validateEntries(){
         boolean check = true;
-        if (!hasText(etxtStreet_address)) check = false;
-        if (!hasText(etxtContatc)) check = false;
-        if (!hasText(etxtPhone) || etxtPhone.getText().toString().trim().length() < 9) check = false;
+        if (!hasText(etxtStreet_address))
+        {
+            check = false;
+        }
+        if (!hasText(etxtContatc)) {
+            check = false;
+        }
+        if (!hasText(etxtPhone)) {
+            check = false;
+        }
+       if(etxtPhone.getText().toString().trim().length() < 9) {
+           etxtPhone.setError("enter valid phone number");
+           check = false;
+       }
         if(!hasText(extMarket)) check = false;
+        if(extMarket.getText().toString().length()<3){
+            extMarket.setError("Market should have 3 characters or more");
+            check = false;
+        }
         if(!autoText(spinDistrict,districtLayout)) check = false;
+        if(spinDistrict.getText().toString().length()<3){
+            spinDistrict.setError("district name should be 3 characters and more");
+            check = false;
+        }
         if(!autoText(spinSubCounty,subcountyLayout)) check = false;
+        if(spinSubCounty.getText().toString().length()<3){
+            spinSubCounty.setError("subcounty  should be 3 characters and more");
+            check = false;
+        }
         if(!autoText(spinVillage,villageLayout)) check = false;
-
+        if(spinVillage.getText().toString().length()<3){
+            spinVillage.setError("village  should be 3 characters and more");
+            check = false;
+        }
         return check;
 
 
