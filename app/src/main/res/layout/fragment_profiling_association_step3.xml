@@ -403,80 +403,93 @@
                     android:layout_marginBottom="4dp"
                     android:text="@string/livestock_value_chain" />
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/check_box_bg"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_cattle_cb"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:checked="false"
+                        android:text="@string/cattle"
+                        app:layout_constraintBottom_toTopOf="@+id/livestock_value_chain_goat_cb"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <CheckBox
-                            android:id="@+id/livestock_value_chain_cattle_cb"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="false"
-                            android:text="@string/cattle" />
-
-                        <CheckBox
-                            android:id="@+id/livestock_value_chain_sheep_cb"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="false"
-                            android:text="@string/sheep" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_goat_cb"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:checked="false"
+                        android:text="@string/goat"
+                        app:layout_constraintBottom_toTopOf="@+id/livestock_value_chain_poultry_cb"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/livestock_value_chain_cattle_cb" />
 
-                        <CheckBox
-                            android:id="@+id/livestock_value_chain_goat_cb"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="false"
-                            android:text="@string/goat" />
-
-                        <CheckBox
-                            android:id="@+id/livestock_value_chain_pigs_cb"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="false"
-                            android:text="@string/pigs" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_poultry_cb"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:checked="false"
+                        android:text="@string/poultry"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/livestock_value_chain_goat_cb" />
 
-                        <CheckBox
-                            android:id="@+id/livestock_value_chain_poultry_cb"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="false"
-                            android:text="@string/poultry" />
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_sheep_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/sheep"
+                        app:layout_constraintBottom_toTopOf="@+id/livestock_value_chain_pigs_cb"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <CheckBox
-                            android:id="@+id/livestock_value_chain_none_cb"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="false"
-                            android:text="@string/none" />
-                    </LinearLayout>
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_pigs_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/pigs"
+                        app:layout_constraintBottom_toTopOf="@+id/livestock_value_chain_none_cb"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/livestock_value_chain_sheep_cb" />
 
-                </LinearLayout>
+                    <CheckBox
+                        android:id="@+id/livestock_value_chain_none_cb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/none"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/livestock_value_chain_pigs_cb" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
 
             <LinearLayout
