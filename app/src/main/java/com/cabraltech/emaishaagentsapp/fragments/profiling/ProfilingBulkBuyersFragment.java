@@ -374,7 +374,10 @@ public class ProfilingBulkBuyersFragment extends Fragment {
     }
     public boolean validateEntries() {
         boolean check = true;
-        if (!hasText(etxtBusinessName)) check = false;
+        if (!hasText(etxtBusinessName)){
+
+
+            check = false;}
         if (!hasText(etxtOwner)) check = false;
         if (!hasText(etxtPhone) || etxtPhone.getText().toString().trim().length() < 9) check = false;
         if (!hasText(etxtFullAddress)) check = false;
