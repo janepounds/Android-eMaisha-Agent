@@ -450,7 +450,6 @@ public class DataCollectionAddScoutingFragment extends Fragment {
             linearLayout.setPadding(left,top,right,bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
-            autoCompleteTextView.setError("Please enter a value");
             return false;
         }
 
@@ -474,7 +473,6 @@ public class DataCollectionAddScoutingFragment extends Fragment {
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
-            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
@@ -503,40 +501,17 @@ public class DataCollectionAddScoutingFragment extends Fragment {
         boolean check = true;
         if (!hasText(etxtDate)) check = false;
         if (!hasText(etxtFarmerName)) check = false;
-        if (etxtFarmerName.getText().toString().length()<3) {
-            etxtFarmerName.setError("Farmer's name should be 3 characters and more");
-            check = false;
-        }
         if(!autoText(spinDistrict,districtLayout)) check = false;
-        if(spinDistrict.getText().toString().length()<3){
-            spinDistrict.setError("district name should be 3 characters and more");
-            check = false;
-        }
         if(!autoText(spinSubCounty,subcountyLayout)) check = false;
-        if(spinSubCounty.getText().toString().length()<3){
-            spinSubCounty.setError("subcounty  should be 3 characters and more");
-            check = false;
-        }
         if(!autoText(spinVillage,villageLayout)) check = false;
-        if(spinVillage.getText().toString().length()<3){
-            spinVillage.setError("village  should be 3 characters and more");
-            check = false;
-        }
         if (!hasText(etxtFarmerPhone)) check = false;
-        if(etxtFarmerPhone.getText().toString().length()<9){
-            etxtFarmerPhone.setError("please enter valid phone number");
-            check = false;
-        }
         if(!selectedText(spinInfested,infestedLayout)) check = false;
         if(!selectedText(spinInfestationType,infestationTypeLayout)) check = false;
         if(!selectedText(spinInfestation,infestationLayout)) check = false;
         if(!selectedText(spinInfestationLevel,infestationLevelLayout)) check = false;
         if (!hasText(etxtRecommendations)) check = false;
 
-        if(etxtRecommendations.getText().toString().length()<3){
-            etxtRecommendations.setError("recommendation should have 3 characters and more");
-            check = false;
-        }
+
         return check;
 
     }
