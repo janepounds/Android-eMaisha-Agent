@@ -321,6 +321,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 
@@ -386,6 +387,7 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
             layout .setPadding(left, top, right, bottom);
             textView.setFocusable(true);
             textView.requestFocus();
+            textView.setError("Please enter a value");
             return false;
         }
         return true;

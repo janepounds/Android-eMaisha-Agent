@@ -381,14 +381,25 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     public boolean validateEntries() {
         boolean check = true;
 
-        if (!hasText(etxtFarmingSize)) check = false;
-        if (!autoText(spinMainCrop,mainCropLayout)) check = false;
-        if (spinMainCrop.getText().toString().length()<3)
+        if (!hasText(etxtFarmingSize)) {
+            check = false;
+        }
+
+        if (!autoText(spinMainCrop,mainCropLayout)) {
+            check = false;
+        }
+        if (spinMainCrop.getText().toString().length()<3) {
             spinMainCrop.setError("main crop should have 3 character or more");
             check = false;
-        if (!autoText(spinMainLivestock,mainLivestockLayout)) check = false;
-        if (spinMainLivestock.getText().toString().length()<3)
+        }
+        if (!autoText(spinMainLivestock,mainLivestockLayout))
+        {
+            check = false;
+        }
+        if (spinMainLivestock.getText().toString().length()<3) {
             spinMainLivestock.setError("main livestock should have 3 character or more");
+            check = false;
+        }
         if(spinMainCrop.getText().toString().toLowerCase().equals("none") && spinMainLivestock.getText().toString().toLowerCase().equals("none")){
              Toast.makeText(context, getString(R.string.select_crop_or_livestock), Toast.LENGTH_LONG).show();
              spinMainCrop.requestFocus();
