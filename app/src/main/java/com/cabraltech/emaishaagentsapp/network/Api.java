@@ -70,10 +70,7 @@ public interface Api {
             @Field("market") String market,
             @Field("funding_source") String funding_source,
             @Field("additional_services") String additional_services
-
-
     );
-
 
     @FormUrlEncoded
     @POST("dealer/save")
@@ -98,7 +95,6 @@ public interface Api {
             @Field("marketing_channels") String marketing_channels,
             @Field("funding_source") String funding_source,
             @Field("additional_services") String additional_services
-
     );
 
     @FormUrlEncoded
@@ -118,7 +114,6 @@ public interface Api {
             @Field("marketing_channels") String marketing_channels,
             @Field("village") String village
     );
-
 
     @FormUrlEncoded
     @POST("market/save")

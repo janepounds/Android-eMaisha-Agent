@@ -6,13 +6,10 @@ import com.cabraltech.emaishaagentsapp.models.ResponseData;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -80,7 +77,6 @@ public interface APIRequests {
             @Field("second_livestock") String second_livestock
     );
 
-
     @FormUrlEncoded
     @POST("agent/store/pestreport")
     Call<ResponseData> postPestReport(
@@ -123,8 +119,6 @@ public interface APIRequests {
             @Field("wholesale_price") int wholesale_price,
             @Field("retail_price") int retail_price,
             @Field("commodity") String commodity
-
-
     );
 
     @FormUrlEncoded
