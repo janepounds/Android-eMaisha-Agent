@@ -322,6 +322,7 @@ public class ProfilingBulkBuyersFragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 
@@ -342,8 +343,9 @@ public class ProfilingBulkBuyersFragment extends Fragment {
 
             linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
             linearLayout.setPadding(left,top,right,bottom);
-            linearLayout.setFocusable(true);
-            linearLayout.requestFocus();
+            autoCompleteTextView.setFocusable(true);
+            autoCompleteTextView.requestFocus();
+            autoCompleteTextView.setError("Please enter a value");
             return false;
         }
 
@@ -367,16 +369,48 @@ public class ProfilingBulkBuyersFragment extends Fragment {
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
         return true;
     }
+
     public boolean validateEntries() {
         boolean check = true;
+        if (etxtBusinessName.getText().toString().length() < 3) {
+            check = false;
+
+            etxtBusinessName.setError("Name must have at least 3 characters");
+        }
+        if (etxtPhone.getText().toString().length() < 9) {
+            check = false;
+
+            etxtPhone.setError("Phone number must have at least 9 digits");
+        }
+        if (!binding.emailAddressEt.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+            check = false;
+
+            binding.emailAddressEt.setError("Invalid email");
+        }
+        if(spinDistrict.getText().toString().length()<3) {
+            spinDistrict.setError("District must have at least 3 characters");
+            check = false;
+        }
+        if(spinSubcounty.getText().toString().length()<3) {
+            spinSubcounty.setError("Sub-County must have at least 3 characters");
+            check = false;
+        }
+
+        if (spinVillage.getText().toString().length() < 3){
+            spinVillage.setError("village must have at least 3 characters");
+            check = false;
+        }
+        if (!hasText(etxtEmail)) check = false;
+
         if (!hasText(etxtBusinessName)) check = false;
         if (!hasText(etxtOwner)) check = false;
-        if (!hasText(etxtPhone) || etxtPhone.getText().toString().trim().length() < 9) check = false;
+        if (!hasText(etxtPhone)) check = false;
         if (!hasText(etxtFullAddress)) check = false;
         if(!selectedText(spinBusinessType,businessLayout)) check = false;
         if(!autoText(spinDistrict,districtLayout)) check = false;

@@ -43,8 +43,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 "village" + " TEXT NOT NULL, " + "full_address" + " TEXT NOT NULL, " + "association_telephone" + " TEXT , " + "association_email" + " TEXT , " + "number_of_male_members" + " TEXT  ," + "crop_value_chain" + " TEXT ,"
                 + "livestock_value_chain" + " TEXT, " + "chairperson" + " TEXT NOT NULL, " + "chairperson_contact" + " TEXT NOT NULL, " + "secretary" + " TEXT, "
                 + "secretary_contact" + " TEXT NOT NULL, " + "sync_status" + " TEXT DEFAULT 0, " + "number_of_female_members" + " TEXT NOT NULL, " + "organisation_type" + " TEXT NOT NULL, " + "registration_level" + " TEXT, " +
-                "respondent" + " TEXT NOT NULL, " + "respondent_contact" + " TEXT, " + "main_activities" + " TEXT NOT NULL, " + "asset_ownership" + " TEXT NOT NULL, " + "market" + " TEXT, " +
-                "marketing_channels" + " TEXT NOT NULL, " + "funding_source" + " TEXT, " + "additional_services" + " TEXT NOT NULL " +
+                "respondent" + " TEXT NOT NULL, " + "respondent_contact" + " TEXT, " + "main_activities" + " TEXT DEFAULT 'none', " + "asset_ownership" + " TEXT  DEFAULT 'none', " + "market" + " TEXT, " +
+                "marketing_channels" + " TEXT  DEFAULT 'none', " + "funding_source" + " TEXT  DEFAULT 'none', " + "additional_services" + " TEXT  DEFAULT 'none'" +
                 " ) ";
 
         String farmers_query = " CREATE TABLE IF NOT EXISTS " + "farmers" + " ( " + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT , " +

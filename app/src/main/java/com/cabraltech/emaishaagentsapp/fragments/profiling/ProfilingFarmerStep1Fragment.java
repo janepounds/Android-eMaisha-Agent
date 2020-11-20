@@ -399,18 +399,18 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         if (binding.firstNameEt.getText().toString().length() < 3) {
             check = false;
 
-            binding.firstNameEt.setError("Name should have at least 3 characters");
+            binding.firstNameEt.setError("Name must have at least 3 characters");
         }
 
         if (binding.lastNameEt.getText().toString().length() < 3) {
             check = false;
-            binding.lastNameEt.setError("Name should have at least 3 characters");
+            binding.lastNameEt.setError("Name must have at least 3 characters");
         }
 
         if (binding.nationalitySpinner.getSelectedItem().toString().equals("National") && (binding.ninEt.length() < 14)) {
             check = false;
 
-            binding.ninEt.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
+            binding.ninEt.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
             binding.ninEt.setPadding(binding.ninEt.getPaddingLeft(), binding.ninEt.getPaddingTop(), binding.ninEt.getPaddingRight(), binding.ninEt.getPaddingBottom());
             binding.ninEt.setFocusable(true);
             binding.ninEt.requestFocus();

@@ -372,41 +372,41 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
             check = false;
         }
             if( etxtPhone.getText().toString().trim().length() < 9) {
-                etxtPhone.setError("enter valid phone number");
+                etxtPhone.setError("Phone number must have at least 9 digits");
                 check = false;
             }
         if (!hasText(etxt_next_of_kin)) {
             check = false;
         }
         if(etxt_next_of_kin.getText().toString().trim().length() <3) {
-            etxt_next_of_kin.setError("Next of kin should have 3 character or more");
+            etxt_next_of_kin.setError("Next of kin must have at least 3 characters");
             check = false;
         }
         if (!hasText(etxt_next_of_kin_contact)) {
             check = false;
         }
             if(etxt_next_of_kin_contact.getText().toString().trim().length() < 9) {
-                etxt_next_of_kin_contact.setError("Enter valid next of kin contact");
+                etxt_next_of_kin_contact.setError("Contact must have at least 9 digits");
                 check = false;
             }
         if (!hasText(etxt_next_of_kin_address)) {
             check = false;
         }
         if(etxt_next_of_kin_address.getText().toString().trim().length() < 3) {
-            etxt_next_of_kin_address.setError("Address should be more than 3 characters");
+            etxt_next_of_kin_address.setError("Address must have at least 3 characters");
             check = false;
         }
         if (!hasText(etxt_next_of_kin_relation)) {
             check = false;
         }
             if(etxt_next_of_kin_relation.getText().toString().trim().length()<3) {
-                etxt_next_of_kin_relation.setError("Next of kin relation should have 3 characters or more");
+                etxt_next_of_kin_relation.setError("Next of kin relation must have at least 3 characters");
             }
         if (!autoText(spinDistrict,districtLayout)) {
             check = false;
         }
         if(spinDistrict.getText().toString().length()<3) {
-            spinDistrict.setError("district should have 3 character or more");
+            spinDistrict.setError("District must have at least 3 characters");
             check = false;
         }
         if (!autoText(spinSubCounty,subCountyLayout))
@@ -414,14 +414,14 @@ public class ProfilingFarmerStep2Fragment extends Fragment {
             check = false;
         }
         if(spinSubCounty.getText().toString().length()<3) {
-            spinSubCounty.setError("subcounty should have 3 character or more");
+            spinSubCounty.setError("Sub-County must have at least 3 characters");
             check = false;
         }
             if (!autoText(spinVillage, villageLayout)) {
                 check = false;
             }
             if (spinVillage.getText().toString().length() < 3){
-                spinVillage.setError("village should have 3 character or more");
+                spinVillage.setError("village must have at least 3 characters");
             check = false;
         }
 

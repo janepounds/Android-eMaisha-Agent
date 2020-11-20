@@ -115,34 +115,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         regGenLayout = view.findViewById(R.id.registration_body_general_layout);
         regYearLayout = view.findViewById(R.id.registration_year_layout);
 
-        etxtRegistrationYear.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                etxtRegistrationYear.setFilters(new InputFilter[]{new InputFilterMinMax(0, Calendar.getInstance().get(Calendar.YEAR))});
-
-            }
-        });
-        etxtRegistrationYear.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && Integer.parseInt(etxtRegistrationYear.getText().toString())<1900 ) {
-                    // code to execute when EditText loses focus
-                    etxtRegistrationYear.setError("Invalid Year");
-
-                }
-            }
-        });
 
         spinCertificationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -160,12 +133,31 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 registration_status = adapterView.getItemAtPosition(i).toString();
-                if(registration_status.toLowerCase().equals("no")){
-                    regGenLayout.setVisibility(View.GONE);
-                    regYearLayout.setVisibility(View.GONE);
-                }else{
+                if(registration_status.toLowerCase().equals("yes")){
                     regGenLayout.setVisibility(View.VISIBLE);
                     regYearLayout.setVisibility(View.VISIBLE);
+                    etxtRegistrationYear.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+
+                            etxtRegistrationYear.setFilters(new InputFilter[]{new InputFilterMinMax(0, Calendar.getInstance().get(Calendar.YEAR))});
+
+                        }
+                    });
+
+                }else{
+                    regGenLayout.setVisibility(View.GONE);
+                    regYearLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -263,6 +255,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 
@@ -286,6 +279,7 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
             layout.setPadding(left,top,right,bottom);
             layout.setFocusable(true);
             layout.requestFocus();
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
@@ -300,10 +294,19 @@ public class ProfilingAgroInputDealerStep2Fragment extends Fragment {
         if(!selectedText(spinCertificationType,certTypeLayout)) check = false;
         if (!hasText(etxtCertificationNumber)) check = false;
         if(!selectedText(spinAssociationMember,assMembershipLayout)) check = false;
+        if(regYearLayout.getVisibility()==View.VISIBLE && !hasText(etxtRegistrationYear)) check = false;
+        if(associationNameLayout.getVisibility()==View.VISIBLE && !hasText(etxtAssociationName)) check = false;
 
         return check;
 
     }
+//    public boolean validateRegYear() {
+//        boolean check = true;
+//        if (!hasText(etxtRegistrationYear)) check = false;
+//
+//        return check;
+//
+//    }
 
     class InputFilterMinMax implements InputFilter {
 
