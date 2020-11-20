@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -305,6 +306,7 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter value");
             return false;
         }
 
@@ -328,6 +330,7 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
             layout.setPadding(left,top,right,bottom);
             layout.setFocusable(true);
             layout.requestFocus();
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
