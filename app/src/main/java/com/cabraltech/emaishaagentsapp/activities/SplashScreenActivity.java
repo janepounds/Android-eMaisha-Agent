@@ -1,12 +1,17 @@
 package com.cabraltech.emaishaagentsapp.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
@@ -18,6 +23,7 @@ import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.cabraltech.emaishaagentsapp.network.NetworkStateChecker;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -43,7 +49,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         t = new Thread(() -> {
             RequestAllRegions();
             Intent service = new Intent(getBaseContext(), BroadcastService.class);
-                startService(service);
+            startService(service);
             try {
                 t.sleep(2000);
             } catch (InterruptedException e) {
@@ -59,7 +65,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         });
         t.start();
     }
-
 
     public void RequestAllRegions() {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
@@ -94,5 +99,4 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
 
     }
-
 }

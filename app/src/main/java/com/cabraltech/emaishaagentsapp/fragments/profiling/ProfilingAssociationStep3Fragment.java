@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -47,7 +48,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     CheckBox chkMemberFees, chkSales, chkProcessingFees, chkGrants, chkCredit;
     CheckBox chkCropInsurance, chkMarketIntelligence, chkAgroInputsOnCredit, chkAgroEquipment, chkTrainingOnBusinessDevt, chkTrainingOnInstitutionalDevt, chkCashLoansAgriculturalPurposes, chkNonCashLoansAgriculturalPurposes, chkTrainingOrTechnicalAssistance, chkSubsidizedInput;
     String respondent_position, name, year_of_registration, full_address, telephone, email, chairperson, chairperson_contact, secretary, secretary_contact, respondent, respondent_contact;
-    private LinearLayout layout_crop_value_chain;
+    private ConstraintLayout layout_livestock_value_chain;
     private EditText etxtMalesNumber, etxtFemalesNumber;
 
     //    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
@@ -183,10 +184,16 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         chkCNone = view.findViewById(R.id.crop_value_chain_none_cb);
         chkLNone = view.findViewById(R.id.livestock_value_chain_none_cb);
 
-        layout_crop_value_chain = view.findViewById(R.id.layout_crop_value_chain);
+        layout_livestock_value_chain = view.findViewById(R.id.layout_livestock_value_chain);
 
-        for (int i = 0; i < layout_crop_value_chain.getChildCount(); i++) {
-//            Log.d(TAG, "onViewCreated: Child Text" + layout_crop_value_chain.getChildAt(i).getAccessibilityClassName());
+        Log.d(TAG, "onViewCreated: Child count " + layout_livestock_value_chain.getChildCount());
+
+        for (int i = 0; i < layout_livestock_value_chain.getChildCount(); i++) {
+            View v = layout_livestock_value_chain.getChildAt(i);
+
+            if (v instanceof CheckBox) {
+                Log.d(TAG, "onViewCreated: Checkbox count " + layout_livestock_value_chain.getChildCount());
+            }
         }
 
         binding.submitButton.setOnClickListener(v -> {
