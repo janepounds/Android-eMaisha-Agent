@@ -53,15 +53,12 @@ public class DatabaseAccess {
     /**
      * Close the database connection.
      */
+
     public void close() {
         if (database != null) {
             this.database.close();
         }
     }
-
-
-
-
 
     private int getFarmerID(String id) {
         this.database = openHelper.getWritableDatabase();
@@ -72,7 +69,6 @@ public class DatabaseAccess {
         c.close();
         return -1;
     }
-
 
     //insert farmer
     public boolean addFarmer(String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String education_level, String marital_status, String household_size, String language_used, String source_of_income, String household_head, String district, String sub_county, String village, String phone_number, String next_of_kin, String next_of_kin_relation, String next_of_kin_contact, String next_of_kin_address, String farming_land_size, String main_crop, String second_crop, String third_crop, String main_livestock, String second_livestock,String nin) {
@@ -953,6 +949,23 @@ public class DatabaseAccess {
 
         long check = -1;
         check = database.delete("scouting_reports",  "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    //update bulk buyers sync status
+    public boolean updateBulkBuyersSyncStatus(String id, String sync_status) {
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("sync_status", sync_status);
+        long check = -1;
+        check = database.update("agro_traders", values, "id=?", new String[]{id});
 
         if (check == -1) {
             return false;

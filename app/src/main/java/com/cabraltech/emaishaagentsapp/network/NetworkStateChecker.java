@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -205,40 +207,33 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     );
                 }
 
+                bulkBuyers = databaseAccess.getUnSyncedTrader();
+                for (int i = 0; i < bulkBuyers.size(); i++) {
+                    saveBulkBuyer(
+                            bulkBuyers.get(i).get("id"),
+                            bulkBuyers.get(i).get("business_name"),
+                            bulkBuyers.get(i).get("business_type"),
+                            bulkBuyers.get(i).get("owner"),
+                            bulkBuyers.get(i).get("phone_number"),
+                            bulkBuyers.get(i).get("email_address"),
+                            bulkBuyers.get(i).get("district"),
+                            bulkBuyers.get(i).get("sub_county"),
+                            bulkBuyers.get(i).get("village"),
+                            bulkBuyers.get(i).get("full_address"),
+                            bulkBuyers.get(i).get("commodities"),
+                            bulkBuyers.get(i).get("supply_source"),
+                            bulkBuyers.get(i).get("supplier_location"),
+                            bulkBuyers.get(i).get("funding_source"),
+                            bulkBuyers.get(i).get("marketing_channels")
+                    );
+                }
             }
         }
     }
 
-    private void saveFarmersList(
-            String id,
-            String first_name,
-            String last_name,
-            String dob,
-            String age,
-            String gender,
-            String nationality,
-            String religion,
-            String level_of_education,
-            String marital_status,
-            String household_size,
-            String language_used,
-            String source_of_income,
-            String household_head,
-            String district,
-            String sub_county,
-            String village,
-            String phone_number,
-            String next_of_kin,
-            String next_of_kin_relation,
-            String next_of_kin_contact,
-            String next_of_kin_address,
-            String farming_land_size,
-            String main_crop,
-            String second_crop,
-            String third_crop,
-            String main_livestock,
-            String second_livestock
-
+    private void saveFarmersList(String id, String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String level_of_education, String marital_status,
+                                 String household_size, String language_used, String source_of_income, String household_head, String district, String sub_county, String village, String phone_number, String next_of_kin, String next_of_kin_relation,
+                                 String next_of_kin_contact, String next_of_kin_address, String farming_land_size, String main_crop, String second_crop, String third_crop, String main_livestock, String second_livestock
     ) {
         Call<ResponseData> call = APIClient.getInstance()
                 .postFarmersList(
@@ -341,7 +336,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
                 if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Scouting Report Synced");
-
 
                     //update status locally
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
@@ -453,7 +447,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 Log.d(TAG, "Market  Sync failed");
             }
         });
-
     }
 
     private void saveAssociation(
@@ -513,11 +506,9 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 if (response.body().getMessage().equalsIgnoreCase("Successful")) {
                     Log.d(TAG, "Agro Input Dealer  Synced");
 
-
                     //update status locally
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
                     databaseAccess.open();
-
 
                     if (databaseAccess.updateDealerSyncStatus(id, response.body().getStatus())) {
                         Log.d(TAG, "onResponse: status updated succesfully");
@@ -546,35 +537,44 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
     }
 
-    private void saveBulkBuyer(
-            String id,
-            String first_name,
-            String last_name,
-            String dob,
-            String age,
-            String gender,
-            String nationality,
-            String religion,
-            String level_of_education,
-            String marital_status,
-            String household_size,
-            String language_used,
-            String source_of_income,
-            String household_head,
-            String district,
-            String sub_county,
-            String village,
-            String phone_number,
-            String next_of_kin,
-            String next_of_kin_relation,
-            String next_of_kin_contact,
-            String next_of_kin_address,
-            String farming_land_size,
-            String main_crop,
-            String second_crop,
-            String third_crop,
-            String main_livestock,
-            String second_livestock
+    private void saveBulkBuyer(String id, String business_name, String business_type, String owner, String phone_number, String email_address, String district, String sub_county, String village,
+                               String full_address, String commodities, String supply_source, String supplier_location, String funding_source, String marketing_channels
+    ) {
+        Call<ResponseData> call = APIClient.getInstance().postBulkBuyer(business_name, business_type, owner, phone_number, email_address, district, sub_county, village, full_address,
+                commodities, supply_source, supplier_location, funding_source, marketing_channels);
 
-    ) {}
+        call.enqueue(new Callback<ResponseData>() {
+            @Override
+            public void onResponse(@NotNull Call<ResponseData> call, @NotNull Response<ResponseData> response) {
+                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
+                    Log.d(TAG, "Bulk buyer Synced");
+
+                    //update status locally
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+
+                    if (databaseAccess.updateBulkBuyersSyncStatus(id, response.body().getStatus())) {
+                        Log.d(TAG, "onResponse: status updated succesfully");
+                        //delete local database copy
+                        if (databaseAccess.deleteAgroInputDealer(id)) {
+                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        } else {
+                            Log.d(TAG, "onResponse: database record delete failed");
+                        }
+
+                    } else {
+                        Log.d(TAG, "onResponse: status update failed");
+                    }
+                } else {
+                    Log.d(TAG, "Bulk buyer sync failed");
+                    Log.d(TAG, String.valueOf(response));
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ResponseData> call, @NotNull Throwable t) {
+                Log.d(TAG, "Bulk buyer sync failed");
+            }
+        });
+    }
 }
