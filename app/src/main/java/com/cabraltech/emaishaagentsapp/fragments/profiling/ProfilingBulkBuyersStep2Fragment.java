@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,19 +34,22 @@ import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingBulkBuyersSt
 import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
+import java.util.ArrayList;
+
 
 public class ProfilingBulkBuyersStep2Fragment extends Fragment {
+    private static final String TAG = "ProfilingBulkBuyers";
     private Context context;
     private NavController navController;
     private FragmentProfilingBulkBuyersStep2Binding binding;
 
     String[] descriptionData = {"Contact\nDetails", "Business\nDetails"};
-    String district, sub_county,village, business_type,commodities,business_name,phone,email,full_address,owner;
+    String district, sub_county, village, business_type, commodities, business_name, phone, email, full_address, owner;
     CheckBox chkIndividualFarmer, chkRuralTraders, chkFarmerOrganisation;
     CheckBox chkWithInDistrict, chkOutsideDistrict, chkOutsideCountry;
-    CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkVillageSavings, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution,chkSavings;
-    CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency,chkFarmerTofarmer;
-    private LinearLayout addNewcommodity,moreCommodities;
+    CheckBox chkFriendsOrRelatives, chkPrivateMoneyLender, chkSaccos, chkVillageSavings, chkPrivateEquity, chkCommercialBank, chMicroFinanceInstitution, chkSavings;
+    CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency, chkFarmerTofarmer;
+    private LinearLayout addNewcommodity, moreCommodities;
     AutoCompleteTextView actCommodities;
 
     @Override
@@ -94,8 +98,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-      actCommodities = view.findViewById(R.id.commodities_spinner);
-
+        actCommodities = view.findViewById(R.id.commodities_spinner);
 
         chkIndividualFarmer = view.findViewById(R.id.supply_source_individual_farmer_cb);
         chkRuralTraders = view.findViewById(R.id.supply_source_rural_traders_cb);
@@ -120,12 +123,11 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
         chkFellowTraders = view.findViewById(R.id.marketing_channels_traders_cb);
         chkGovernmentAgency = view.findViewById(R.id.marketing_channels_govt_agency_cb);
         chkSavings = view.findViewById(R.id.funding_source_savings_cb);
-        chkFarmerTofarmer = view.findViewById(R.id.funding_source_farmer_to_farmer_cb);
+        chkFarmerTofarmer = view.findViewById(R.id.marketing_channels_farmer_to_farmer_cb);
         addNewcommodity = view.findViewById(R.id.bulk_buyers_add_new_commodity);
         moreCommodities = view.findViewById(R.id.bulk_buyers_more_commodities);
 
-
-        ArrayAdapter<String> commodityListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.crop_array));
+        ArrayAdapter<String> commodityListAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.crop_array));
         actCommodities.setThreshold(1);
         actCommodities.addTextChangedListener(new TextWatcher() {
             @Override
@@ -144,6 +146,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
 
             }
         });
+
         actCommodities.setAdapter(commodityListAdapter);
         actCommodities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -159,7 +162,8 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
 
         navController = Navigation.findNavController(view);
         addNewcommodity.setOnClickListener(new View.OnClickListener() {
-            int index =0;
+            int index = 0;
+
             @Override
             public void onClick(View v) {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -168,7 +172,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                 );
                 params.setMargins(20, 0, 20, 20);
                 AutoCompleteTextView t = new AutoCompleteTextView(context);
-                t.setPadding(8,8,8,8);
+                t.setPadding(8, 8, 8, 8);
                 t.setTextSize(14);
                 t.setLayoutParams(params);
                 t.setBackground(getResources().getDrawable(R.drawable.rounded_rectangle_edit_text));
@@ -194,157 +198,229 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                 index++;
             }
         });
-        binding.submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //submit
-                if (validateEntries()) {
-                    String supply_source = "";
-                    String supplier_location = "";
-                    String funding_source = "";
-                    String marketing_channels = "";
-                    String commodities = "";
 
-                    if (chkFarmerOrganisation.isChecked()) {
-                        supply_source += "\nFarmer Organisations";
-                    }
-                    if (chkIndividualFarmer.isChecked()) {
-                        supply_source += "\nIndividual Farmer";
-                    }
-                    if (chkFarmerOrganisation.isChecked()) {
-                        supply_source += "\nRural Traders";
-                    }
-                    if (chkWithInDistrict.isChecked()) {
-                        supplier_location += "\nWitIn The District";
-                    }
-                    if (chkOutsideDistrict.isChecked()) {
-                        supplier_location += "\nOutside The District";
-                    }
-                    if (chkOutsideCountry.isChecked()) {
-                        supplier_location += "\nOutside The Country";
-                    }
-                    if (chkPrivateMoneyLender.isChecked()) {
-                        funding_source += "\nPrivate Money Lender";
-                    }
-                    if (chkFriendsOrRelatives.isChecked()) {
-                        funding_source += "\nFriends or Relatives";
-                    }
-                    if (chkSaccos.isChecked()) {
-                        funding_source += "\nSaccos";
-                    }
-                    if (chkVillageSavings.isChecked()) {
-                        funding_source += "\nVillage Savings and Lending Associations";
-                    }
-                    if (chkPrivateEquity.isChecked()) {
-                        funding_source += "\nPrivate Equity";
-                    }
-                    if (chkCommercialBank.isChecked()) {
-                        funding_source += "\nCommercial Bank";
-                    }
-                    if (chMicroFinanceInstitution.isChecked()) {
-                        funding_source += "\nMicro-Finance Institutions";
-                    }
-                    if (chkSavings.isChecked()) {
-                        funding_source += "\nSavings";
-                    }
-                    if (chkInternet.isChecked()) {
-                        marketing_channels += "\nInternet";
-                    }
-                    if (chkTelevision.isChecked()) {
-                        marketing_channels += "\nTelevision";
-                    }
-                    if (chkCallCenter.isChecked()) {
-                        marketing_channels += "\nCall Center";
-                    }
-                    if (chkNgo.isChecked()) {
-                        marketing_channels += "\nNGO";
-                    }
-                    if (chkBuyers.isChecked()) {
-                        marketing_channels += "\nBuyers from bigger markets";
-                    }
-                    if (chkRadio.isChecked()) {
-                        marketing_channels += "\nRadio";
-                    }
-                    if (chkExtensionWorkers.isChecked()) {
-                        marketing_channels += "\nExtension Workers";
-                    }
-                    if (chkFellowTraders.isChecked()) {
-                        marketing_channels += "\nFellow Traders";
-                    }
-                    if (chkGovernmentAgency.isChecked()) {
-                        marketing_channels += "\nGovernment Agency";
-                    }
-                    if (chkFarmerTofarmer.isChecked()) {
-                        marketing_channels += "\nFarmer to Farmer";
-                    }
-                    String firstCommodity = actCommodities.getText().toString();
-                    commodities +="\n " + firstCommodity;
-                    for (int i = 0; i < moreCommodities.getChildCount(); i++) {
-                        v = moreCommodities.getChildAt(i);
-                            String etValue = null;
-                            if (v instanceof EditText) {
-                                etValue = ((EditText) v).getText().toString();
-                                commodities += "\n" + etValue;
-                            }
+        binding.submitButton.setOnClickListener(v -> {
+            //submit
+            if (validateEntries()) {
+                String supply_source = "";
+                String supplier_location = "";
+                String funding_source = "";
+                String marketing_channels = "";
+                String commodities = "";
 
-
+                if (chkFarmerOrganisation.isChecked()) {
+                    supply_source += "\nFarmer Organisations";
+                }
+                if (chkIndividualFarmer.isChecked()) {
+                    supply_source += "\nIndividual Farmer";
+                }
+                if (chkFarmerOrganisation.isChecked()) {
+                    supply_source += "\nRural Traders";
+                }
+                if (chkWithInDistrict.isChecked()) {
+                    supplier_location += "\nWitIn The District";
+                }
+                if (chkOutsideDistrict.isChecked()) {
+                    supplier_location += "\nOutside The District";
+                }
+                if (chkOutsideCountry.isChecked()) {
+                    supplier_location += "\nOutside The Country";
+                }
+                if (chkPrivateMoneyLender.isChecked()) {
+                    funding_source += "\nPrivate Money Lender";
+                }
+                if (chkFriendsOrRelatives.isChecked()) {
+                    funding_source += "\nFriends or Relatives";
+                }
+                if (chkSaccos.isChecked()) {
+                    funding_source += "\nSaccos";
+                }
+                if (chkVillageSavings.isChecked()) {
+                    funding_source += "\nVillage Savings and Lending Associations";
+                }
+                if (chkPrivateEquity.isChecked()) {
+                    funding_source += "\nPrivate Equity";
+                }
+                if (chkCommercialBank.isChecked()) {
+                    funding_source += "\nCommercial Bank";
+                }
+                if (chMicroFinanceInstitution.isChecked()) {
+                    funding_source += "\nMicro-Finance Institutions";
+                }
+                if (chkSavings.isChecked()) {
+                    funding_source += "\nSavings";
+                }
+                if (chkInternet.isChecked()) {
+                    marketing_channels += "\nInternet";
+                }
+                if (chkTelevision.isChecked()) {
+                    marketing_channels += "\nTelevision";
+                }
+                if (chkCallCenter.isChecked()) {
+                    marketing_channels += "\nCall Center";
+                }
+                if (chkNgo.isChecked()) {
+                    marketing_channels += "\nNGO";
+                }
+                if (chkBuyers.isChecked()) {
+                    marketing_channels += "\nBuyers from bigger markets";
+                }
+                if (chkRadio.isChecked()) {
+                    marketing_channels += "\nRadio";
+                }
+                if (chkExtensionWorkers.isChecked()) {
+                    marketing_channels += "\nExtension Workers";
+                }
+                if (chkFellowTraders.isChecked()) {
+                    marketing_channels += "\nFellow Traders";
+                }
+                if (chkGovernmentAgency.isChecked()) {
+                    marketing_channels += "\nGovernment Agency";
+                }
+                if (chkFarmerTofarmer.isChecked()) {
+                    marketing_channels += "\nFarmer to Farmer";
+                }
+                String firstCommodity = actCommodities.getText().toString();
+                commodities += "\n " + firstCommodity;
+                for (int i = 0; i < moreCommodities.getChildCount(); i++) {
+                    v = moreCommodities.getChildAt(i);
+                    String etValue = null;
+                    if (v instanceof EditText) {
+                        etValue = ((EditText) v).getText().toString();
+                        commodities += "\n" + etValue;
                     }
+                }
 
-                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
-                    databaseAccess.open();
+                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
+                databaseAccess.open();
 
-                    boolean check = databaseAccess.addTrader(business_type, business_name, owner, commodities, phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
-                    if (check) {
-                        Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
-                        getActivity().startService(new Intent(getActivity(), BroadcastService.class));
+                boolean check = databaseAccess.addTrader(business_type, business_name, owner, commodities, phone, email, district, sub_county, village, full_address, supplier_location, supply_source, funding_source, marketing_channels);
+                if (check) {
+                    Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
+                    getActivity().startService(new Intent(getActivity(), BroadcastService.class));
 //                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
 //                        startActivity(intent);
-                        navController.navigate(R.id.action_profilingBulkBuyersStep2Fragment_to_sucessDialogFragment);
-                    } else {
-                        Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
-
-                    }
-
+                    navController.navigate(R.id.action_profilingBulkBuyersStep2Fragment_to_sucessDialogFragment);
+                } else {
+                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        binding.previousButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //submit
-                navController.popBackStack();
-            }
+
+        binding.previousButton.setOnClickListener(v -> {
+            //submit
+            navController.popBackStack();
         });
-
-
     }
-    public  boolean autoText(AutoCompleteTextView editText) {
+
+    public boolean autoText(AutoCompleteTextView editText) {
 
         String text = editText.getText().toString().trim();
         int bottom = editText.getPaddingBottom();
         int top = editText.getPaddingTop();
         int right = editText.getPaddingRight();
         int left = editText.getPaddingLeft();
-        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        editText.setPadding(left,top,right,bottom);
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        editText.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            editText.setPadding(left,top,right,bottom);
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
             editText.requestFocus();
             editText.setError("Please enter a value");
             return false;
         }
 
-
         return true;
     }
+
     public boolean validateEntries() {
         boolean check = true;
-       if(!autoText(actCommodities)) check = false;
+        if (!autoText(actCommodities)) check = false;
+
+        // Supply source
+        ArrayList<CheckBox> supplySource = new ArrayList<>();
+        supplySource.add(binding.supplySourceIndividualFarmerCb);
+        supplySource.add(binding.supplySourceRuralTradersCb);
+        supplySource.add(binding.supplySourceFarmerOrganizationsCb);
+
+        if (!setCheckBoxError(binding.layoutSupplySource, isAnyCheckBoxChecked(supplySource)))
+            check = false;
+
+        // Supplier location
+        ArrayList<CheckBox> supplierLocation = new ArrayList<>();
+        supplierLocation.add(binding.supplierLocationWithinDistrictCb);
+        supplierLocation.add(binding.supplierLocationOutsideDistrictCb);
+        supplierLocation.add(binding.supplierLocationOutsideCountryCb);
+
+        if (!setCheckBoxError(binding.layoutSupplierLocation, isAnyCheckBoxChecked(supplierLocation)))
+            check = false;
+
+        // Funding source
+        ArrayList<CheckBox> fundingSource = new ArrayList<>();
+        fundingSource.add(binding.fundingSourceFriendsRelativesCb);
+        fundingSource.add(binding.fundingSourcePrivateMoneyLenderCb);
+        fundingSource.add(binding.fundingSourceSaccosCb);
+        fundingSource.add(binding.fundingSourceVillageSavingsCb);
+        fundingSource.add(binding.fundingSourcePrivateEquityCb);
+        fundingSource.add(binding.fundingSourceCommercialBankCb);
+        fundingSource.add(binding.fundingSourceMicroFinanceCb);
+        fundingSource.add(binding.fundingSourceSavingsCb);
+
+        if (!setCheckBoxError(binding.layoutFundingSource, isAnyCheckBoxChecked(fundingSource)))
+            check = false;
+
+        // Funding source
+        ArrayList<CheckBox> marketingChannels = new ArrayList<>();
+        marketingChannels.add(binding.marketingChannelsInternetCb);
+        marketingChannels.add(binding.marketingChannelsTelevisionCb);
+        marketingChannels.add(binding.marketingChannelsCallCenterCb);
+        marketingChannels.add(binding.marketingChannelsNgoCb);
+        marketingChannels.add(binding.marketingChannelsBuyersCb);
+        marketingChannels.add(binding.marketingChannelsRadioCb);
+        marketingChannels.add(binding.marketingChannelsExtensionWorkersCb);
+        marketingChannels.add(binding.marketingChannelsTradersCb);
+        marketingChannels.add(binding.marketingChannelsGovtAgencyCb);
+        marketingChannels.add(binding.marketingChannelsFarmerToFarmerCb);
+
+        if (!setCheckBoxError(binding.layoutMarketingChannels, isAnyCheckBoxChecked(marketingChannels)))
+            check = false;
 
         return check;
+    }
+
+    private boolean isAnyCheckBoxChecked(ArrayList<CheckBox> checkBoxes) {
+        boolean isAnyChecked = false;
+
+        for (int i = 0; i < checkBoxes.size(); i++) {
+            if (checkBoxes.get(i).isChecked()) {
+                isAnyChecked = true;
+            }
+
+        }
+
+        return isAnyChecked;
+    }
+
+    private boolean setCheckBoxError(LinearLayout layout, boolean anyChecked) {
+        boolean checked = false;
+
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+
+        if (!anyChecked) {
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+        } else {
+            checked = true;
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        }
+
+        layout.setPadding(left, top, right, bottom);
+
+        return checked;
     }
 }

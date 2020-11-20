@@ -190,16 +190,9 @@ public class ProfilingBulkBuyersFragment extends Fragment {
                         spinSubcounty.setThreshold(1);
                         spinSubcounty.setAdapter(subcountryListAdapter);
                     }
-
-
                 }
             }
         });
-
-
-
-
-
 
         spinSubcounty.addTextChangedListener(new TextWatcher() {
             @Override
@@ -236,8 +229,6 @@ public class ProfilingBulkBuyersFragment extends Fragment {
                         spinVillage.setThreshold(1);
                         spinVillage.setAdapter(villageListAdapter);
                     }
-
-
                 }
             }
         });
@@ -274,34 +265,31 @@ public class ProfilingBulkBuyersFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validateEntries()) {
-                    String business_name = etxtBusinessName.getText().toString().trim();
-                    String phone = etxtPhone.getText().toString().trim();
-                    String email = etxtEmail.getText().toString().trim();
-                    String full_address = etxtFullAddress.getText().toString().trim();
-                    String owner = etxtOwner.getText().toString().trim();
+        btnSubmit.setOnClickListener(view1 -> {
+            if (validateEntries()) {
+                String business_name = etxtBusinessName.getText().toString().trim();
+                String phone = etxtPhone.getText().toString().trim();
+                String email = etxtEmail.getText().toString().trim();
+                String full_address = etxtFullAddress.getText().toString().trim();
+                String owner = etxtOwner.getText().toString().trim();
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("business_name", business_name);
-                    bundle.putString("phone", phone);
-                    bundle.putString("owner", owner);
-                    bundle.putString("full_address", full_address);
-                    bundle.putString("email", email);
-                    bundle.putString("district", spinDistrict.getText().toString());
-                    bundle.putString("sub_country", spinSubcounty.getText().toString());
-                    bundle.putString("village", spinVillage.getText().toString());
-                    bundle.putString("business_type", business_type);
+                Bundle bundle = new Bundle();
+                bundle.putString("business_name", business_name);
+                bundle.putString("phone", phone);
+                bundle.putString("owner", owner);
+                bundle.putString("full_address", full_address);
+                bundle.putString("email", email);
+                bundle.putString("district", spinDistrict.getText().toString());
+                bundle.putString("sub_country", spinSubcounty.getText().toString());
+                bundle.putString("village", spinVillage.getText().toString());
+                bundle.putString("business_type", business_type);
 
 
-                    navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment, bundle);
-
-                }
-
+                navController.navigate(R.id.action_profilingBulkBuyersFragment_to_profilingBulkBuyersStep2Fragment, bundle);
 
             }
+
+
         });
 
 

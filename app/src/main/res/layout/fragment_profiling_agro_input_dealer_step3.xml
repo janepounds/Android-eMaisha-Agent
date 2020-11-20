@@ -149,11 +149,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/items_sold"
                 android:layout_marginBottom="4dp"/>
+
             <LinearLayout
+                android:id="@+id/layout_item_sold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/check_box_bg">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -255,15 +258,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/marketing_channels"
                 android:layout_marginBottom="4dp"/>
+
             <LinearLayout
+                android:id="@+id/layout_marketing_channels"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/check_box_bg">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:id="@+id/marketing_channels_none_cb"
                         android:layout_width="match_parent"
@@ -376,11 +383,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/funding_source"
                 android:layout_marginBottom="4dp"/>
+
             <LinearLayout
+                android:id="@+id/layout_funding_source"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/check_box_bg">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -475,7 +485,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/additional_services"
                 android:layout_marginBottom="4dp"/>
+
             <LinearLayout
+                android:id="@+id/layout_additional_services"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

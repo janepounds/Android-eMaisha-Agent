@@ -31,6 +31,8 @@ import com.cabraltech.emaishaagentsapp.databinding.FragmentProfilingAssociationS
 import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
+import java.util.ArrayList;
+
 public class ProfilingAssociationStep3Fragment extends Fragment {
     private static final String TAG = "ProfilingAssociation";
     private Context context;
@@ -56,19 +58,15 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onAttach(@NonNull Context context) {
-
         super.onAttach(context);
         this.context = context;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -91,7 +89,6 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         village = getArguments().getString("village");
         registration_level = getArguments().getString("registration_level");
         organisation_type = getArguments().getString("organisation_type");
-
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profiling_association_step3, container, false);
@@ -435,52 +432,6 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         });
     }
 
-//    public boolean TestCheckBox(LinearLayout linearLayout, String message) {
-//        boolean result = false;
-//        int checked = 0;
-//        View v = null;
-//        int bottom = linearLayout.getPaddingBottom();
-//        int top = linearLayout.getPaddingTop();
-//        int right = linearLayout.getPaddingRight();
-//        int left = linearLayout.getPaddingLeft();
-//        int count = linearLayout.getChildCount();
-//
-//        for (int n = 0; n < count; ++n) {
-//            v = linearLayout.getChildAt(n);
-//            Log.d(TAG, "TestCheckBox: " + v + count);
-//
-//            if (v instanceof LinearLayout) {
-//                int count1 = ((LinearLayout) v).getChildCount();
-//                for (int i = 0; i < count1; i++) {
-//                    v = ((LinearLayout) v).getChildAt(i);
-//                    Log.d(TAG, "TestCheckBoxx: " + v + count);
-//
-//                    if (v instanceof CheckBox) {
-//                        String checkboxName = ((CheckBox) v).getText().toString();
-//                        ++checked;
-//                        Log.d(TAG, "TestCheckBox: checked" + checked + checkboxName);
-//
-//                        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
-//                        linearLayout.setPadding(left, top, right, bottom);
-//                        result = true;
-//                    }
-//
-////                 else {
-////                    Log.d(TAG, "TestCheckBox: not checked");
-////                    linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
-////                    linearLayout.setPadding(left, top, right, bottom);
-////                    linearLayout.setFocusable(true);
-////                    linearLayout.requestFocus();
-////                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-////                    result = false;
-////                }
-//                }
-//            }
-//        }
-//
-//        return result;
-//    }
-
     public boolean hasText(EditText editText) {
 
         String text = editText.getText().toString().trim();
@@ -490,6 +441,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         int left = editText.getPaddingLeft();
         editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
         editText.setPadding(left, top, right, bottom);
+
         // length 0 means there is no text
         if (text.isEmpty()) {
             editText.setError("Required");
@@ -500,7 +452,6 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
             editText.requestFocus();
             return false;
         }
-
 
         return true;
     }
@@ -533,8 +484,54 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         if (!hasText(etxtMalesNumber)) check = false;
         if (!hasText(etxtFemalesNumber)) check = false;
 
+        // Additional services
+        ArrayList<CheckBox> additionalServices = new ArrayList<>();
+        additionalServices.add(binding.additionalServicesCropInsuranceCb);
+        additionalServices.add(binding.additionalServicesMarketIntelligenceCb);
+        additionalServices.add(binding.additionalServicesSubsidizedInputsCb);
+        additionalServices.add(binding.additionalServicesAgriculturalInputsCb);
+        additionalServices.add(binding.additionalServicesAgriculturalEquipmentCb);
+        additionalServices.add(binding.additionalServicesTrainingBusinessDevtCb);
+        additionalServices.add(binding.additionalServicesTrainingInstitutionalDevtCb);
+        additionalServices.add(binding.additionalServicesCashLoansNonAgricCb);
+        additionalServices.add(binding.additionalServicesTrainingAgriculturalPracticesCb);
+
+        if (!setCheckBoxError(binding.layoutAdditionalServices, isAnyCheckBoxChecked(additionalServices)))
+            check = false;
+
         return check;
     }
 
+    private boolean isAnyCheckBoxChecked(ArrayList<CheckBox> checkBoxes) {
+        boolean isAnyChecked = false;
 
+        for (int i = 0; i < checkBoxes.size(); i++) {
+            if (checkBoxes.get(i).isChecked()) {
+                isAnyChecked = true;
+            }
+
+        }
+
+        return isAnyChecked;
+    }
+
+    private boolean setCheckBoxError(LinearLayout layout, boolean anyChecked) {
+        boolean checked = false;
+
+        int bottom = layout.getPaddingBottom();
+        int top = layout.getPaddingTop();
+        int right = layout.getPaddingRight();
+        int left = layout.getPaddingLeft();
+
+        if (!anyChecked) {
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+        } else {
+            checked = true;
+            layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        }
+
+        layout.setPadding(left, top, right, bottom);
+
+        return checked;
+    }
 }

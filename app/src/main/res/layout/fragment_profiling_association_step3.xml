@@ -1032,7 +1032,7 @@
                     android:text="@string/additional_services" />
 
                 <LinearLayout
-                    android:id="@+id/additional_services_layout"
+                    android:id="@+id/layout_additional_services"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/check_box_bg"
