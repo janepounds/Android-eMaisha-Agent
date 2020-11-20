@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -163,14 +164,14 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
         editText.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
-            editText.setError("Required");
+            editText.setError("Please enter a value ");
             editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
             editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
             editText.requestFocus();
             return false;
         } else if (text.length() < minCharacters) {
-            editText.setError("" + name + " Must have at least " + minCharacters + " characters");
+            editText.setError("" + name + " must have at least " + minCharacters + " characters");
             editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
             editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
@@ -198,6 +199,7 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
@@ -207,11 +209,11 @@ public class ProfilingAssociationStep2Fragment extends Fragment {
     public boolean validateEntries() {
         boolean check = true;
         if (!hasText("Name", etxtChairperson, 3)) check = false;
-        if (!hasText("Phone", etxtChairpersonContact, 9)) check = false;
+        if (!hasText("Phone number", etxtChairpersonContact, 9)) check = false;
         if (!hasText("Name", etxtSecretary, 3)) check = false;
-        if (!hasText("Phone", etxtSecretaryContact, 9)) check = false;
+        if (!hasText("Phone number", etxtSecretaryContact, 9)) check = false;
         if (!hasText("Name", etxtRespondent, 3)) check = false;
-        if (!hasText("Phone", etxtRespondentContact, 9)) check = false;
+        if (!hasText("Phone number", etxtRespondentContact, 9)) check = false;
         if (!selectedText(spinRespondentPosition, respondentPositionLayout)) check = false;
 
         return check;

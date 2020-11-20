@@ -372,14 +372,14 @@ public class ProfilingAssociationFragment extends Fragment {
         editText.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
-            editText.setError("Required");
+            editText.setError("Please enter a value ");
             editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
             editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
             editText.requestFocus();
             return false;
         } else if (text.length() < minCharacters) {
-            editText.setError("" + name + " Must have at least " + minCharacters + " characters");
+            editText.setError("" + name + " must have at least " + minCharacters + " characters");
             editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
             editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
@@ -406,6 +406,7 @@ public class ProfilingAssociationFragment extends Fragment {
             linearLayout.setPadding(left, top, right, bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
+            autoCompleteTextView.setError("Please enter a value ");
             return false;
         }
 
@@ -429,6 +430,7 @@ public class ProfilingAssociationFragment extends Fragment {
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
+            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
