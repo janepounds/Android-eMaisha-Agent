@@ -334,6 +334,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 

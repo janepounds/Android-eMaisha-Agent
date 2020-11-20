@@ -309,6 +309,7 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 
@@ -331,6 +332,7 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
             linearLayout.setPadding(left,top,right,bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
+            autoCompleteTextView.setError("Please enter a value");
             return false;
         }
 
@@ -342,9 +344,38 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
     public boolean validateEntries() {
 
       boolean check = true;
+        if (etxtBusinessName.getText().toString().length() < 3) {
+            check = false;
+
+            etxtBusinessName.setError("Name must have at least 3 characters");
+        }
+        if (etxtOwner.getText().toString().length() < 3) {
+            check = false;
+
+            etxtOwner.setError("Owner name must have at least 3 characters");
+        }
+        if (etxtOwnerContact.getText().toString().length() < 9) {
+            check = false;
+
+            etxtOwnerContact.setError("Contact must have at least 9 digits");
+        }
+
+        if(spinDistrict.getText().toString().length()<3) {
+            spinDistrict.setError("District must have at least 3 characters");
+            check = false;
+        }
+        if(spinSubCounty.getText().toString().length()<3) {
+            spinSubCounty.setError("Sub-County must have at least 3 characters");
+            check = false;
+        }
+
+        if (spinVillage.getText().toString().length() < 3){
+            spinVillage.setError("village must have at least 3 characters");
+            check = false;
+        }
       if (!hasText(etxtBusinessName)) check = false;
        if (!hasText(etxtOwner)) check = false;
-        if (!hasText(etxtOwnerContact) || etxtOwnerContact.getText().toString().trim().length() < 9) check = false;
+        if (!hasText(etxtOwnerContact)) check = false;
         if (!hasText(etxtFull_address)) check = false;
           if (!autoText(spinDistrict,districtLayout)) check = false;
          if (!autoText(spinSubCounty,subCountyLayout)) check = false;
