@@ -492,7 +492,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         editText.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
-            editText.setError("Required");
+            editText.setError("Please enter a value ");
 
             editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
             editText.setPadding(left, top, right, bottom);

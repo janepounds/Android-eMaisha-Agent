@@ -93,14 +93,13 @@
                             android:id="@+id/etxt_number_of_males"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="0.7"
                             android:background="@android:color/transparent"
                             android:fontFamily="@font/josefin_sans"
-                            android:gravity="start"
+                            android:gravity="center_vertical"
                             android:inputType="number"
                             android:padding="8dp"
-                            android:textAlignment="viewStart"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -128,14 +127,13 @@
                             android:id="@+id/etxt_number_of_females"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="start"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="0.7"
                             android:background="@android:color/transparent"
                             android:fontFamily="@font/josefin_sans"
-                            android:gravity="start"
+                            android:gravity="center_vertical"
                             android:inputType="number"
                             android:padding="8dp"
-                            android:textAlignment="viewStart"
                             android:textSize="14sp" />
 
                     </LinearLayout>
