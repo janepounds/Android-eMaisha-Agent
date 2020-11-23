@@ -34,6 +34,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
@@ -105,7 +106,7 @@ public class DataCollectionReportPestFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        navController = Navigation.findNavController(view);
         etxtDate = view.findViewById(R.id.reporting_date_et);
         etxtFarmName = view.findViewById(R.id.farm_name_et);
         spinDistrict = view.findViewById(R.id.district_spinner);
@@ -321,7 +322,7 @@ public class DataCollectionReportPestFragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Pest Report Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        navController.navigate(R.id.action_dataCollectionReportPestFragment_to_sucessDialogFragment2);
+                        navController.navigate(R.id.action_dataCollectionReportPestFragment_to_sucessDialogFragment);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 

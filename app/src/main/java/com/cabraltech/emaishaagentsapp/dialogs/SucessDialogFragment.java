@@ -59,14 +59,7 @@ public class SucessDialogFragment extends DialogFragment {
 
     public void fillViews(View view){
         popContents = view.findViewById(R.id.pop_up_content);
-//        if(getArguments().containsKey("farmer")){
-//
-//            contents = getArguments().getString("farmer_name");
-//            contents1 = getArguments().getString("village");
-//            popContents.setText("Farmer " + contents +  "based in" +contents1 +"has been successfully registered and his profile created");
-//        }else if(getArguments().containsKey("association")){
-//
-//        }
+
 
 
 

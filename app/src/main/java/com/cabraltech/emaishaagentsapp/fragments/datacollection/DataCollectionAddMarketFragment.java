@@ -89,7 +89,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
 
         extMarket = view.findViewById(R.id.market_name_spinner);
         etxtStreet_address = view.findViewById(R.id.street_address_et);
@@ -274,7 +274,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
 //                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
 //                        startActivity(intent);
-                        navController.navigate(R.id.action_dataCollectionAddMarketFragment_to_sucessDialogFragment2);
+                        navController.navigate(R.id.action_dataCollectionAddMarketFragment_to_sucessDialogFragment);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 

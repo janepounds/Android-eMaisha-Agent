@@ -172,7 +172,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Market Price Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_sucessDialogFragment2);
+                        navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_sucessDialogFragment);
 
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();

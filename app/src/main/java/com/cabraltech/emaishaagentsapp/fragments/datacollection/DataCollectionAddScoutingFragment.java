@@ -30,6 +30,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
@@ -95,7 +96,7 @@ public class DataCollectionAddScoutingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        navController = Navigation.findNavController(view);
         etxtDate = view.findViewById(R.id.scouting_date_et);
         etxtFarmerName = view.findViewById(R.id.scouting_farm_name_et);
         etxtFarmerPhone = view.findViewById(R.id.scouting_farmer_phone_number_et);
@@ -363,7 +364,7 @@ public class DataCollectionAddScoutingFragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Scouting Report Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        navController.navigate(R.id.action_dataCollectionAddScoutingFragment_to_sucessDialogFragment2);
+                        navController.navigate(R.id.action_dataCollectionAddScoutingFragment_to_sucessDialogFragment);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
