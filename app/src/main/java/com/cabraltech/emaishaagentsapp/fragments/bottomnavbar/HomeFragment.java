@@ -23,12 +23,14 @@ import com.cabraltech.emaishaagentsapp.activities.ProfilingActivity;
 import com.cabraltech.emaishaagentsapp.models.CommissionResponse;
 import com.cabraltech.emaishaagentsapp.models.HomeViewModel;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
+import com.cabraltech.emaishaagentsapp.models.weather.WeatherResponse;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import okhttp3.ResponseBody;
@@ -39,9 +41,11 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
 
-    private TextView textCommissions;
+    private TextView textCommissions,temp,visibility,humidity;
     LinearLayout profilingLayout, walletLayout, dataCollectionLayout, marketServicesLayout;
     private HomeViewModel homeViewModel;
+
+    public static final String WEATHER_API_KEY = "0CHwh88HI3G4GK62bu6glx6K4Nfxv6Uy";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +70,9 @@ public class HomeFragment extends Fragment {
         walletLayout = view.findViewById(R.id.layout_dashboard_wallet);
         dataCollectionLayout = view.findViewById(R.id.layout_dashboard_data_collection);
         marketServicesLayout = view.findViewById(R.id.layout_dashboard_markets_service);
+        temp = view.findViewById(R.id.weather_temp_max);
+        visibility = view.findViewById(R.id.visibility_default);
+        humidity = view.findViewById(R.id.humidity_max);
 
         updateCommission();
 
@@ -87,6 +94,50 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
 //            Intent intent = new Intent(getContext(), MarketAndServicesActivity.class);
 //            v.getContext().startActivity(intent);
+        });
+
+
+        ArrayList<String> fieldValues =new ArrayList<>();
+        fieldValues.add("temp");
+        fieldValues.add("visibility");
+        fieldValues.add("humidity");
+
+        //*******************WEATHER API INTEGRATION*************************//
+
+
+        Call<WeatherResponse> call = APIClient.getWeatherInstance()
+                .getRealtimeWeather(WEATHER_API_KEY,0.3186962165260835f,32.55752216728469f,null,"si",fieldValues);
+        call.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                if(response.isSuccessful()){
+                    //set temperature
+                    double temperature_value = response.body().getTemp().getValue();
+                    String temperature_units = response.body().getTemp().getUnits();
+                    temp.setText(temperature_value + " " + "\u2103");
+
+
+                    //set visibility
+                    int visibility_value = response.body().getVisibility().getValue();
+                    String visibility_units = response.body().getVisibility().getUnits();
+                    visibility.setText(visibility_value+ " " +visibility_units);
+
+                    //set humidity
+                    double humidity_value = response.body().getHumidity().getValue();
+                    String humidity_units = response.body().getHumidity().getUnits();
+                    humidity.setText(humidity_value+ " " +humidity_units);
+
+                }else{
+                    Toast.makeText(getContext(),response.message(),Toast.LENGTH_LONG);
+                    Log.d(TAG, "onResponse:  "+response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG);
+
+            }
         });
     }
 

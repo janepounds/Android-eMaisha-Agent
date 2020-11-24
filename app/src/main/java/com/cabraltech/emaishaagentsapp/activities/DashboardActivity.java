@@ -8,6 +8,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.cabraltech.emaishaagentsapp.R;
+import com.cabraltech.emaishaagentsapp.models.Regions;
+import com.cabraltech.emaishaagentsapp.models.weather.Fields;
+import com.cabraltech.emaishaagentsapp.models.weather.WeatherResponse;
+import com.cabraltech.emaishaagentsapp.network.APIClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -24,7 +28,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -50,6 +59,8 @@ public class DashboardActivity extends AppCompatActivity {
     public static final String TASK_BACKUP_DATA_TAG = "SYNC_SERVICE";
     public static final String TASK_SEND_NOTIFICATIONS_TAG = "SEND_NOTIFICATIONS";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +83,10 @@ public class DashboardActivity extends AppCompatActivity {
         {
             requestPermission();
         }
+
+
+
+
     }
 
     @Override
@@ -125,4 +140,9 @@ public class DashboardActivity extends AppCompatActivity {
                 .onSameThread()
                 .check();
     }
+
+
+
+
+
 }

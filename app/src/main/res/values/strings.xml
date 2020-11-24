@@ -294,7 +294,7 @@
     <string name="access_to_agricultural_equipment">Access to agricultural equipment</string>
     <string name="market_intelligence">Market Intelligence</string>
     <string name="secretary">Secretary</string>
-    <string name="max">&#xb0;C Max</string>
+    <string name="max"> Max</string>
     <string name="min">&#xb0;C Min</string>
     <string name="permission_rejected"> Permission not Granted! </string>
     <string name="permission_camera_storage"> Need Camera and Storage Permissions! </string>

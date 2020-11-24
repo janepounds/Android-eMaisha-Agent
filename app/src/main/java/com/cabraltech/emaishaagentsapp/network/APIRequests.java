@@ -5,6 +5,10 @@ import com.cabraltech.emaishaagentsapp.models.Regions;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
+import com.cabraltech.emaishaagentsapp.models.weather.Fields;
+import com.cabraltech.emaishaagentsapp.models.weather.WeatherResponse;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -212,4 +216,7 @@ public interface APIRequests {
     Call<CommissionResponse> getCommission(
             @Query("agentID") int agentID
     );
+
+
+
 }
