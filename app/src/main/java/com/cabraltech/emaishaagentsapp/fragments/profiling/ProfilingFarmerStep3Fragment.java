@@ -38,6 +38,9 @@ import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.cabraltech.emaishaagentsapp.network.NetworkStateChecker;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ProfilingFarmerStep3Fragment extends Fragment {
 
@@ -51,6 +54,7 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
     private EditText etxtFarmingSize;
     private AutoCompleteTextView spinMainCrop,spinSecondCrop,spinThirdCrop,spinMainLivestock,etxtSecondLivestock;
     private LinearLayout moreCropsLayout, moreLivestockLayout, mainCropLayout,mainLivestockLayout;
+    private String profiledUser = "farmer";
     public ProfilingFarmerStep3Fragment() {
         // Required empty public constructor
     }
@@ -270,8 +274,8 @@ public class ProfilingFarmerStep3Fragment extends Fragment {
                         
                         //load dialog
                         Bundle bundle = new Bundle();
-                        bundle.putString("farmer","Farmer");
-                        bundle.putString("farmer_name",first_name +" "+ last_name);
+                        bundle.putString("profiledUser",profiledUser);
+                        bundle.putString("farmername",first_name +" "+ last_name);
                         bundle.putString("village",village);
 
                         navController.navigate(R.id.action_profilingFarmerStep3Fragment_to_sucessDialogFragment,bundle);

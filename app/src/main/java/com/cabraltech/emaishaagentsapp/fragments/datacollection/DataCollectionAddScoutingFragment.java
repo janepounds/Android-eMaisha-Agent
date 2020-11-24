@@ -63,6 +63,7 @@ public class DataCollectionAddScoutingFragment extends Fragment {
     private Spinner spinInfested,spinInfestationLevel,spinInfestationType,spinInfestation;
     private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
     private LinearLayout districtLayout,subcountyLayout,villageLayout,infestedLayout,infestationTypeLayout,infestationLayout,infestationLevelLayout;
+    private String profiledUser = "scouting";
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -364,7 +365,10 @@ public class DataCollectionAddScoutingFragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Scouting Report Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        navController.navigate(R.id.action_dataCollectionAddScoutingFragment_to_sucessDialogFragment);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("profiledUser",profiledUser);
+
+                        navController.navigate(R.id.action_dataCollectionAddScoutingFragment_to_sucessDialogFragment,bundle);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 

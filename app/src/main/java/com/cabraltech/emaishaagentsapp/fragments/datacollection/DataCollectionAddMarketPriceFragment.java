@@ -172,7 +172,15 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
                     if (check) {
 
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("date",date);
+                        bundle.putString("commodity",commodities);
+                        bundle.putString("variety",varieties);
+                        bundle.putString("market_name",market_name);
+                        bundle.putString("units",units);
+                        bundle.putString("wholesale_price",wholesale_price);
+                        bundle.putString("retail_sale",retail_sale);
+                        navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment,bundle);
 
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();

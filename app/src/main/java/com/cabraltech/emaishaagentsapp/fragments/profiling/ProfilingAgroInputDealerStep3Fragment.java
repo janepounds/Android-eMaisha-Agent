@@ -47,6 +47,7 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
     private EditText etxtNumberOfOutlets;
     private Spinner spinBusinessType, spinTypeOfSales;
     private LinearLayout businessTypeLayout, salesTypeLayout;
+    private String profiledUser = "agroinput";
 
 
     @Override
@@ -276,9 +277,13 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
                 if (check) {
                     Toast.makeText(getActivity(), "Agro Input Dealer Added Successfully", Toast.LENGTH_SHORT).show();
                     getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-//                        startActivity(intent);
-                    navController.navigate(R.id.action_profilingAgroInputDealerStep3Fragment_to_sucessDialogFragment);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("profiledUser",profiledUser);
+                    bundle.putString("agrobiz",business_name);
+                    bundle.putString("agro_village",village);
+
+                    navController.navigate(R.id.action_profilingAgroInputDealerStep3Fragment_to_sucessDialogFragment,bundle);
                 } else {
                     Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 

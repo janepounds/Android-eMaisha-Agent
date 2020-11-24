@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionConfirmMarketPriceBinding;
@@ -20,6 +21,12 @@ import com.cabraltech.emaishaagentsapp.databinding.FragmentDataCollectionConfirm
 public class DataCollectionConfirmMarketPriceFragment extends Fragment {
     private NavController navController;
     private FragmentDataCollectionConfirmMarketPriceBinding binding;
+    private String date,commodity,variety,market_name,units,wholesale_price,retail_price;
+    private String profiledUser = "market_price";
+    private TextView dateTv,varietyTv,marketTv,retailTv,wholesaleTv;
+
+
+
 
 
     public DataCollectionConfirmMarketPriceFragment() {
@@ -42,6 +49,15 @@ public class DataCollectionConfirmMarketPriceFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Price Details");
 
+        date = getArguments().getString("date");
+        commodity = getArguments().getString("commodity");
+        variety = getArguments().getString("variety");
+        market_name = getArguments().getString("market_name");
+        units = getArguments().getString("units");
+        wholesale_price = getArguments().getString("wholesale_price");
+        retail_price = getArguments().getString("retail_sale");
+
+
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
@@ -50,7 +66,24 @@ public class DataCollectionConfirmMarketPriceFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        binding.confirmDetailsLayout.setOnClickListener(v -> navController.navigate(R.id.action_dataCollectionConfirmMarketPriceFragment_to_sucessDialogFragment));
+        dateTv = view.findViewById(R.id.conform_date);
+        varietyTv = view.findViewById(R.id.variety);
+        marketTv = view.findViewById(R.id.market);
+        retailTv = view.findViewById(R.id.retail);
+        wholesaleTv = view.findViewById(R.id.wholesale);
+
+
+
+        dateTv.setText(date);
+        varietyTv.setText(variety);
+        marketTv.setText(market_name);
+        retailTv.setText(retail_price +" /"+ units);
+        wholesaleTv.setText(wholesale_price +" /"+ units);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("profiledUser",profiledUser);
+        bundle.putString("market_name",market_name);
+        binding.confirmDetailsLayout.setOnClickListener(v -> navController.navigate(R.id.action_dataCollectionConfirmMarketPriceFragment_to_sucessDialogFragment,bundle));
 
 
 

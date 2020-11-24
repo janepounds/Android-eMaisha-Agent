@@ -22,13 +22,17 @@ import android.widget.TextView;
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.activities.DashboardActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SucessDialogFragment extends DialogFragment {
     private Context context;
     private NavController navController;
     private TextView popContents;
     private String contents;
-    private String contents1;
+    private List<String> farmer = new ArrayList<String>();
+
 
 
 
@@ -38,6 +42,48 @@ public class SucessDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.CustomAlertDialog);
         // Get the layout inflater
         // Inflate and set the layout for the dialog
+
+        //loop thru bundle and set textview
+        if(getArguments()!=null) {
+            if(getArguments().getString("profiledUser").equalsIgnoreCase("farmer")){
+                String name = getArguments().getString("farmername");
+                String village = getArguments().getString("village");
+                popContents.setText("Farmer " + name +" based in " +village+ "  has been successfully\nRegistered and his profile created");
+
+            }else if(getArguments().getString("profiledUser").equalsIgnoreCase("association")){
+                String ass_name = getArguments().getString("association_name");
+                String village = getArguments().getString("assc_village");
+                popContents.setText("Association " + ass_name +" based in " +village+ "  has been profiled successfully");
+
+            }else if(getArguments().getString("profiledUser").equalsIgnoreCase("agroinput")){
+                String agroinput = getArguments().getString("agrobiz");
+                String village = getArguments().getString("agro_village");
+                popContents.setText("Agro Input Buyer " + agroinput +" based in " +village+ "  has been profiled successfully");
+
+            }else if(getArguments().getString("profiledUser").equalsIgnoreCase("bulkbuyer")){
+                String bulkbuyer = getArguments().getString("bizname");
+                String village = getArguments().getString("bulkvillage");
+                popContents.setText("Association " + bulkbuyer +" based in " +village+ "  has been profiled successfully");
+
+            }else if(getArguments().getString("profiledUser").equalsIgnoreCase("market")){
+                String market = getArguments().getString("market_name");
+                popContents.setText("Market " + market +" has been successfully created");
+
+            }else if(getArguments().getString("profiledUser").equalsIgnoreCase("market_price")){
+                popContents.setText("Market price has been successfully created");
+
+            }else if(getArguments().getString("profiledUser").equalsIgnoreCase("scouting")){
+                popContents.setText("Scouting Report has been successfully created");
+
+            }else if(getArguments().getString("profiledUser").equalsIgnoreCase("pest")){
+                popContents.setText("Pest Report has been successfully created");
+
+            }
+
+
+
+        }
+
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         // Pass null as the parent view because its going in the dialog layout
         View view =inflater.inflate(R.layout.fragment_sucess_dialog, null);

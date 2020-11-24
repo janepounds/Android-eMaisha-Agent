@@ -51,6 +51,7 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
     CheckBox chkInternet, chkTelevision, chkCallCenter, chkNgo, chkBuyers, chkRadio, chkExtensionWorkers, chkFellowTraders, chkGovernmentAgency, chkFarmerTofarmer;
     private LinearLayout addNewcommodity, moreCommodities;
     AutoCompleteTextView actCommodities;
+    private String profiledUser = "bulkbuyer";
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -298,9 +299,13 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                 if (check) {
                     Toast.makeText(getActivity(), "Agro Trader Added Successfully", Toast.LENGTH_SHORT).show();
                     getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-//                        startActivity(intent);
-                    navController.navigate(R.id.action_profilingBulkBuyersStep2Fragment_to_sucessDialogFragment);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("profiledUser",profiledUser);
+                    bundle.putString("bizname",business_name);
+                    bundle.putString("bulkvillage",village);
+
+                    navController.navigate(R.id.action_profilingBulkBuyersStep2Fragment_to_sucessDialogFragment,bundle);
                 } else {
                     Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
                 }

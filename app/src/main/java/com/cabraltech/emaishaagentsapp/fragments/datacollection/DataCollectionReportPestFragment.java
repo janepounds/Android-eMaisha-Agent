@@ -72,6 +72,7 @@ public class DataCollectionReportPestFragment extends Fragment {
     private int pickedSubcountyId;
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
+    private String profiledUser = "pest";
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -322,7 +323,10 @@ public class DataCollectionReportPestFragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Pest Report Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        navController.navigate(R.id.action_dataCollectionReportPestFragment_to_sucessDialogFragment);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("profiledUser",profiledUser);
+                        navController.navigate(R.id.action_dataCollectionReportPestFragment_to_sucessDialogFragment,bundle);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
