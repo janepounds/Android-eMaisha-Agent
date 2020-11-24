@@ -280,7 +280,7 @@ public class ProfilingBulkBuyersFragment extends Fragment {
                 bundle.putString("full_address", full_address);
                 bundle.putString("email", email);
                 bundle.putString("district", spinDistrict.getText().toString());
-                bundle.putString("sub_country", spinSubcounty.getText().toString());
+                bundle.putString("sub_county", spinSubcounty.getText().toString());
                 bundle.putString("village", spinVillage.getText().toString());
                 bundle.putString("business_type", business_type);
 
