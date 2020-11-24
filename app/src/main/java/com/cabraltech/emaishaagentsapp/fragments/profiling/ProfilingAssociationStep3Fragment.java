@@ -52,6 +52,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     String respondent_position, name, year_of_registration, full_address, telephone, email, chairperson, chairperson_contact, secretary, secretary_contact, respondent, respondent_contact;
     private LinearLayout layout_livestock_value_chain;
     private EditText etxtMalesNumber, etxtFemalesNumber;
+    private String profiledUser= "association";
 
     //    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
     public ProfilingAssociationStep3Fragment() {
@@ -417,7 +418,13 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
                 if (check) {
                     Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
                     getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                    navController.navigate(R.id.action_profilingAssociationStep3Fragment_to_sucessDialogFragment);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("profiledUser",profiledUser);
+                    bundle.putString("association_name",name);
+                    bundle.putString("assc_village",village);
+
+                    navController.navigate(R.id.action_profilingAssociationStep3Fragment_to_sucessDialogFragment,bundle);
                 } else {
                     Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 

@@ -680,6 +680,7 @@
         <item>High</item>
     </string-array>
     <string-array name="sp_crop_scouting_infestation_disease">
+        <item>Select</item>
         <item>Acariasis</item>
         <item>Acariosis bronzed</item>
         <item>Alternario</item>
@@ -741,12 +742,14 @@
     </string-array>
 
     <string-array name="sp_crop_scouting_infestation_nematode">
+        <item>Select</item>
         <item>Nematodes</item>
         <item>Nematodes+Fungi</item>
         <item>Nematodes with galls</item>
         <item>Wetting</item>
     </string-array>
     <string-array name="sp_crop_scouting_infestation_pest">
+        <item>Select</item>
         <item>Acariasis</item>
         <item>Aleurodes</item>
         <item>Aphids</item>
@@ -808,6 +811,7 @@
     </string-array>
 
     <string-array name="sp_crop_scouting_infestation_rodent">
+        <item>Select</item>
         <item>Field Rats</item>
         <item>Mouse</item>
         <item>Rats</item>
@@ -815,6 +819,7 @@
     </string-array>
 
     <string-array name="sp_crop_scouting_infestation_weed">
+        <item>Select</item>
         <item>Advent</item>
         <item>Annual broadleaf weeds</item>
         <item>Annual grass weeds</item>

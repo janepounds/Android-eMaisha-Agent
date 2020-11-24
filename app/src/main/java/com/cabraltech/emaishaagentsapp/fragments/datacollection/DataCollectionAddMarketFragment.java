@@ -55,6 +55,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
     private EditText etxtStreet_address, etxtContatc, etxtPhone,extMarket;
     private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
     private LinearLayout marketLayout,districtLayout,subcountyLayout,villageLayout;
+    private String profiledUser = "market";
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -89,7 +90,7 @@ public class DataCollectionAddMarketFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
 
         extMarket = view.findViewById(R.id.market_name_spinner);
         etxtStreet_address = view.findViewById(R.id.street_address_et);
@@ -272,9 +273,12 @@ public class DataCollectionAddMarketFragment extends Fragment {
                     if (check) {
                         Toast.makeText(getActivity(), "Market Added Successfully", Toast.LENGTH_SHORT).show();
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-//                        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-//                        startActivity(intent);
-                        navController.navigate(R.id.action_dataCollectionAddMarketFragment_to_sucessDialogFragment2);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("profiledUser",profiledUser);
+                        bundle.putString("market_name",market_name);
+
+                        navController.navigate(R.id.action_dataCollectionAddMarketFragment_to_sucessDialogFragment,bundle);
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 

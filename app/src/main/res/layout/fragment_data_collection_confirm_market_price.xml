@@ -25,6 +25,7 @@
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
     <TextView
+        android:id="@+id/conform_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -52,6 +53,7 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/variety"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,6 +81,7 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/market"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -106,6 +109,7 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/retail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -133,6 +137,7 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/wholesale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

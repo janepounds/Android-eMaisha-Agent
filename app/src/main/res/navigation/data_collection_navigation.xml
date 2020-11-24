@@ -47,8 +47,8 @@
         android:label="fragment_data_collection_add_market"
         tools:layout="@layout/fragment_data_collection_add_market" >
         <action
-            android:id="@+id/action_dataCollectionAddMarketFragment_to_sucessDialogFragment2"
-            app:destination="@id/sucessDialogFragment2" />
+            android:id="@+id/action_dataCollectionAddMarketFragment_to_sucessDialogFragment"
+            app:destination="@id/sucessDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataCollectionAddMarketPriceFragment"
@@ -58,9 +58,6 @@
         <action
             android:id="@+id/action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment"
             app:destination="@id/dataCollectionConfirmMarketPriceFragment" />
-        <action
-            android:id="@+id/action_dataCollectionAddMarketPriceFragment_to_sucessDialogFragment2"
-            app:destination="@id/sucessDialogFragment2" />
     </fragment>
     <fragment
         android:id="@+id/dataCollectionReportPestFragment"
@@ -68,8 +65,8 @@
         android:label="fragment_data_collection_report_pest"
         tools:layout="@layout/fragment_data_collection_report_pest" >
         <action
-            android:id="@+id/action_dataCollectionReportPestFragment_to_sucessDialogFragment2"
-            app:destination="@id/sucessDialogFragment2" />
+            android:id="@+id/action_dataCollectionReportPestFragment_to_sucessDialogFragment"
+            app:destination="@id/sucessDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataCollectionAddScoutingFragment"
@@ -77,16 +74,21 @@
         android:label="fragment_data_collection_add_scouting"
         tools:layout="@layout/fragment_data_collection_add_scouting" >
         <action
-            android:id="@+id/action_dataCollectionAddScoutingFragment_to_sucessDialogFragment2"
-            app:destination="@id/sucessDialogFragment2" />
+            android:id="@+id/action_dataCollectionAddScoutingFragment_to_sucessDialogFragment"
+            app:destination="@id/sucessDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataCollectionConfirmMarketPriceFragment"
         android:name="com.cabraltech.emaishaagentsapp.fragments.datacollection.DataCollectionConfirmMarketPriceFragment"
         android:label="fragment_data_collection_confirm_market_price"
-        tools:layout="@layout/fragment_data_collection_confirm_market_price" />
-    <fragment
-        android:id="@+id/sucessDialogFragment2"
+        tools:layout="@layout/fragment_data_collection_confirm_market_price" >
+        <action
+            android:id="@+id/action_dataCollectionConfirmMarketPriceFragment_to_sucessDialogFragment"
+            app:destination="@id/sucessDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/sucessDialogFragment"
         android:name="com.cabraltech.emaishaagentsapp.dialogs.SucessDialogFragment"
-        android:label="SucessDialogFragment" />
+        android:label="SucessDialogFragment"
+        tools:layout="@layout/fragment_sucess_dialog"/>
 </navigation>
