@@ -14,6 +14,7 @@ import com.cabraltech.emaishaagentsapp.models.ResponseData;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -567,7 +568,11 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     }
                 } else {
                     Log.d(TAG, "Bulk buyer sync failed");
-                    Log.d(TAG, String.valueOf(response));
+                    try {
+                        Log.d(TAG, String.valueOf(response.errorBody().string()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
