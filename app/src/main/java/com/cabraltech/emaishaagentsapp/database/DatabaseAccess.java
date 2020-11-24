@@ -467,7 +467,7 @@ public class DatabaseAccess {
         }
     }
 
-    //get un synced dealers
+    // get un synced dealers
     public ArrayList<HashMap<String, String>> getUnSyncedDealers() {
         ArrayList<HashMap<String, String>> agro_dealers = new ArrayList<>();
         this.database = openHelper.getWritableDatabase();
@@ -481,22 +481,23 @@ public class DatabaseAccess {
                 map.put("sub_county", cursor.getString(3));
                 map.put("village", cursor.getString(4));
                 map.put("full_address", cursor.getString(5));
-                map.put("certification_type", cursor.getString(7));
-                map.put("certification_number", cursor.getString(8));
-                map.put("registration_body", cursor.getString(10));
-                map.put("registration_year", cursor.getString(11));
-                map.put("registration_status", cursor.getString(12));
-                map.put("association_membership", cursor.getString(13));
-                map.put("association_name", cursor.getString(14));
-                map.put("business_type", cursor.getString(15));
-                map.put("number_of_outlets", cursor.getString(16));
-                map.put("types_of_sales", cursor.getString(17));
-                map.put("items_sold", cursor.getString(18));
-                map.put("marketing_channels", cursor.getString(19));
-                map.put("funding_source", cursor.getString(20));
-                map.put("additional_services", cursor.getString(21));
-                map.put("owner", cursor.getString(22));
-                map.put("owner_contact", cursor.getString(23));
+                map.put("certification_type", cursor.getString(6));
+                map.put("certification_number", cursor.getString(7));
+                map.put("sync_status", cursor.getString(8));
+                map.put("registration_body", cursor.getString(9));
+                map.put("registration_year", cursor.getString(10));
+                map.put("registration_status", cursor.getString(11));
+                map.put("association_membership", cursor.getString(12));
+                map.put("association_name", cursor.getString(13));
+                map.put("business_type", cursor.getString(14));
+                map.put("number_of_outlets", cursor.getString(15));
+                map.put("types_of_sales", cursor.getString(16));
+                map.put("items_sold", cursor.getString(17));
+                map.put("marketing_channels", cursor.getString(18));
+                map.put("funding_source", cursor.getString(19));
+                map.put("additional_services", cursor.getString(20));
+                map.put("owner", cursor.getString(21));
+                map.put("owner_contact", cursor.getString(22));
                 agro_dealers.add(map);
             } while (cursor.moveToNext());
         }

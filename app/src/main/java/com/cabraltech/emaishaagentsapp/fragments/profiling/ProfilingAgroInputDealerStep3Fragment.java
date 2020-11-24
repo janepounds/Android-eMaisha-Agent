@@ -34,7 +34,7 @@ import com.kofigyan.stateprogressbar.StateProgressBar;
 import java.util.ArrayList;
 
 public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
-    private static final String TAG = "ProfilingAgroInputDeale";
+    private static final String TAG = "ProfilingAgroInputD";
     private Context context;
     private NavController navController;
     private FragmentProfilingAgroInputDealerStep3Binding binding;
@@ -49,7 +49,6 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
     private LinearLayout businessTypeLayout, salesTypeLayout;
     private String profiledUser = "agroinput";
 
-
     @Override
     public void onAttach(@NonNull Context context) {
 
@@ -61,11 +60,9 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -162,16 +159,13 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
             }
         });
 
-
         navController = Navigation.findNavController(view);
-        binding.previousButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //navigation to step 2
-                navController.popBackStack();
 
-            }
+        binding.previousButton.setOnClickListener(v -> {
+            //navigation to step 2
+            navController.popBackStack();
         });
+
         binding.submitButton.setOnClickListener(v -> {
 
             if (validateEntries()) {
@@ -234,6 +228,9 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
                 if (chkFriendsOrRelatives.isChecked()) {
                     funding_source += "\nFriends or Relatives";
                 }
+                if (binding.fundingSourcePrivateMoneyLenderCb.isChecked()) {
+                    funding_source += "\nPrivate Money Lender";
+                }
                 if (chkSaccos.isChecked()) {
                     funding_source += "\nSaccos";
                 }
@@ -246,9 +243,11 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
                 if (chMicroFinanceInstitution.isChecked()) {
                     funding_source += "\nMicro-Finance Institutions";
                 }
+
                 if (chkSavings.isChecked()) {
                     funding_source += "\nSavings";
                 }
+
                 if (chkTraining.isChecked()) {
                     additional_services += "\nTraning";
                 }
@@ -268,34 +267,31 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
                     additional_services += "\nDissemination of Printed Material";
                 }
 
-
                 DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
                 databaseAccess.open();
                 Log.d(TAG, "onClick: " + association_name + certification);
 
-                boolean check = databaseAccess.addDealer(business_name, district, sub_county, village, full_address, owner, owner_contact, certification_type, certification_number, registration_body, registration_year, registration_status, association_membership, association_name, business_type, number_of_outlets, type_of_sales, item_sold, marketing_channels, funding_source, additional_services);
+                boolean check = databaseAccess.addDealer(business_name, district, sub_county, village, full_address, certification_type, certification_number, registration_body, registration_year, registration_status, association_membership, association_name, business_type, number_of_outlets, type_of_sales, item_sold, marketing_channels, funding_source, additional_services, owner, owner_contact);
+
                 if (check) {
                     Toast.makeText(getActivity(), "Agro Input Dealer Added Successfully", Toast.LENGTH_SHORT).show();
                     getActivity().startService(new Intent(getActivity(), BroadcastService.class));
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("profiledUser",profiledUser);
-                    bundle.putString("agrobiz",business_name);
-                    bundle.putString("agro_village",village);
+                    bundle.putString("profiledUser", profiledUser);
+                    bundle.putString("agrobiz", business_name);
+                    bundle.putString("agro_village", village);
 
-                    navController.navigate(R.id.action_profilingAgroInputDealerStep3Fragment_to_sucessDialogFragment,bundle);
+                    navController.navigate(R.id.action_profilingAgroInputDealerStep3Fragment_to_sucessDialogFragment, bundle);
                 } else {
                     Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
 
                 }
-
             }
-
         });
     }
 
     public boolean hasText(EditText editText) {
-
         String text = editText.getText().toString().trim();
         int bottom = editText.getPaddingBottom();
         int top = editText.getPaddingTop();
@@ -303,9 +299,9 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
         int left = editText.getPaddingLeft();
         editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
         editText.setPadding(left, top, right, bottom);
+
         // length 0 means there is no text
         if (text.isEmpty()) {
-
             editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
             editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
@@ -314,12 +310,10 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
             return false;
         }
 
-
         return true;
     }
 
     public boolean selectedText(Spinner spinner, LinearLayout layout) {
-
         int position = spinner.getSelectedItemPosition();
         int bottom = layout.getPaddingBottom();
         int top = layout.getPaddingTop();
@@ -330,7 +324,6 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
 
         // length 0 means there is no text
         if (position == 0) {
-
             layout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.spinner_error_border, null));
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
@@ -412,7 +405,6 @@ public class ProfilingAgroInputDealerStep3Fragment extends Fragment {
             if (checkBoxes.get(i).isChecked()) {
                 isAnyChecked = true;
             }
-
         }
 
         return isAnyChecked;
