@@ -85,7 +85,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        navController = Navigation.findNavController(view);
 
         txtDate = view.findViewById(R.id.date_tv);
 
@@ -170,9 +170,9 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
                     boolean check = databaseAccess.addMarketPrice(date, spinCommodities.getSelectedItem().toString(), varieties, market_name, units, wholesale_price, retail_sale);
                     if (check) {
-                        Toast.makeText(getActivity(), "Market Price Added Successfully", Toast.LENGTH_SHORT).show();
+
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
-                        navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_sucessDialogFragment);
+                        navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment);
 
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
@@ -193,17 +193,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             }
         });
 
-//        navController = Navigation.findNavController(view);
-//
-//        fragmentDataCollectionAddMarketPriceBinding.submitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //navigation to step 1
-//
-//                navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment);
-//
-//            }
-//        });
+
 
     }
 
@@ -246,6 +236,7 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             editText.setPadding(left,top,right,bottom);
             editText.setFocusable(true);
             editText.requestFocus();
+            editText.setError("Please enter a value");
             return false;
         }
 
@@ -320,16 +311,32 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
     }
     public boolean validateEntries(){
         boolean check = true;
-        if (!hasTextView(txtDate)) check = false;
-        if (!selectedText(spinCommodities,commoditiesLayout)) check = false;
-        if(!hasText(extVarieties)) check = false;
-        if(extVarieties.getText().toString().length()<3)
+
+        if (!hasTextView(txtDate)){
+            check = false;
+        }
+        if (!selectedText(spinCommodities,commoditiesLayout)){
+            check = false;
+        }
+        if(!hasText(extVarieties)){
+            check = false;
+        }
+        if(extVarieties.getText().toString().length()<3) {
             extVarieties.setError("Variety should be 3 characters or more");
-        check = false;
-        if(!selectedText(spinMarket_name,marketLayout)) check = false;
-        if(!selectedText(spinUnits,unitsLayout)) check = false;
-        if(!hasText(etxtWholeSale)) check = false;
-        if(!hasText(etxtRetailSale)) check = false;
+            check = false;
+        }
+        if(!selectedText(spinMarket_name,marketLayout)) {
+            check = false;
+        }
+        if(!selectedText(spinUnits,unitsLayout)) {
+            check = false;
+        }
+        if(!hasText(etxtWholeSale)) {
+            check = false;
+        }
+        if(!hasText(etxtRetailSale)){
+            check = false;
+        }
 
         return check;
 
