@@ -553,11 +553,11 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
                     databaseAccess.open();
 
-                    if (databaseAccess.updateBulkBuyersSyncStatus(id, response.body().getStatus())) {
-                        Log.d(TAG, "onResponse: status updated succesfully");
+                    if (databaseAccess.updateTraderSyncStatus(id, response.body().getStatus())) {
+                        Log.d(TAG, "onResponse: status updated successfully");
                         //delete local database copy
-                        if (databaseAccess.deleteAgroInputDealer(id)) {
-                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                        if (databaseAccess.deleteTrader(id)) {
+                            Log.d(TAG, "onResponse: database record deleted successfully");
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
                         }

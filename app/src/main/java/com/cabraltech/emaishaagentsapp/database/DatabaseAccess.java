@@ -616,6 +616,21 @@ public class DatabaseAccess {
 
     }
 
+    // Delete trader
+    public boolean deleteTrader(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("agro_traders", "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     //insert market
     public boolean addMarket(String name, String street_address, String phone_number, String district, String sub_county, String village, String contact_person) {
         this.database = openHelper.getWritableDatabase();

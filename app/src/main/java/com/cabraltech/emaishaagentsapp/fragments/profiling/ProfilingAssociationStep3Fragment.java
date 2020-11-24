@@ -50,7 +50,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     CheckBox chkMemberFees, chkSales, chkProcessingFees, chkGrants, chkCredit;
     CheckBox chkCropInsurance, chkMarketIntelligence, chkAgroInputsOnCredit, chkAgroEquipment, chkTrainingOnBusinessDevt, chkTrainingOnInstitutionalDevt, chkCashLoansAgriculturalPurposes, chkNonCashLoansAgriculturalPurposes, chkTrainingOrTechnicalAssistance, chkSubsidizedInput;
     String respondent_position, name, year_of_registration, full_address, telephone, email, chairperson, chairperson_contact, secretary, secretary_contact, respondent, respondent_contact;
-    private ConstraintLayout layout_livestock_value_chain;
+    private LinearLayout layout_livestock_value_chain;
     private EditText etxtMalesNumber, etxtFemalesNumber;
 
     //    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
@@ -484,6 +484,109 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         if (!hasText(etxtMalesNumber)) check = false;
         if (!hasText(etxtFemalesNumber)) check = false;
 
+        // Crop value chain
+        ArrayList<CheckBox> cropValueChain = new ArrayList<>();
+        cropValueChain.add(binding.cropValueChainCoffeeCb);
+        cropValueChain.add(binding.cropValueChainCottonCb);
+        cropValueChain.add(binding.cropValueChainMaizeCb);
+        cropValueChain.add(binding.cropValueChainSorghumCb);
+        cropValueChain.add(binding.cropValueChainPlantainsCb);
+        cropValueChain.add(binding.cropValueChainGNutsCb);
+        cropValueChain.add(binding.cropValueChainFieldPeasCb);
+
+        cropValueChain.add(binding.cropValueChainTeaCb);
+        cropValueChain.add(binding.cropValueChainTobaccoCb);
+        cropValueChain.add(binding.cropValueChainMilletCb);
+        cropValueChain.add(binding.cropValueChainIrishPotatoesCb);
+        cropValueChain.add(binding.cropValueChainCassavaCb);
+        cropValueChain.add(binding.cropValueChainSoyaBeansCb);
+        cropValueChain.add(binding.cropValueChainPigeonPeasCb);
+
+        cropValueChain.add(binding.cropValueChainYamsCb);
+        cropValueChain.add(binding.cropValueChainBeansCb);
+        cropValueChain.add(binding.cropValueChainSweetPotatoesCb);
+        cropValueChain.add(binding.cropValueChainRiceCb);
+        cropValueChain.add(binding.cropValueChainCowPeasCb);
+        cropValueChain.add(binding.cropValueChainSimSimCb);
+        cropValueChain.add(binding.cropValueChainNoneCb);
+
+        if (!setCheckBoxError(binding.layoutCropValueChain, isAnyCheckBoxChecked(cropValueChain)))
+            check = false;
+
+        // Livestock value chain
+        ArrayList<CheckBox> livestockValueChain = new ArrayList<>();
+        livestockValueChain.add(binding.livestockValueChainCattleCb);
+        livestockValueChain.add(binding.livestockValueChainGoatCb);
+        livestockValueChain.add(binding.livestockValueChainPoultryCb);
+        livestockValueChain.add(binding.livestockValueChainSheepCb);
+        livestockValueChain.add(binding.livestockValueChainPigsCb);
+        livestockValueChain.add(binding.livestockValueChainNoneCb);
+
+        if (!setCheckBoxError(binding.layoutLivestockValueChain, isAnyCheckBoxChecked(livestockValueChain)))
+            check = false;
+
+        // Main Activities
+        ArrayList<CheckBox> mainActivities = new ArrayList<>();
+        mainActivities.add(binding.mainActivitiesProductionCb);
+        mainActivities.add(binding.mainActivitiesStorageCb);
+        mainActivities.add(binding.mainActivitiesAgriculturalMarketingCb);
+        mainActivities.add(binding.mainActivitiesBulkingCb);
+        mainActivities.add(binding.mainActivitiesProcessingCb);
+
+        if (!setCheckBoxError(binding.mainActivitiesLayout, isAnyCheckBoxChecked(mainActivities)))
+            check = false;
+
+        // Asset Ownership
+        ArrayList<CheckBox> assetOwnership = new ArrayList<>();
+        assetOwnership.add(binding.assetOwnershipSprayPumpCb);
+        assetOwnership.add(binding.assetOwnershipMillingMachineCb);
+        assetOwnership.add(binding.assetOwnershipTractorCb);
+        assetOwnership.add(binding.assetOwnershipWeederCb);
+        assetOwnership.add(binding.assetOwnershipCombinedHarvesterCb);
+        assetOwnership.add(binding.assetOwnershipNoneCb);
+        assetOwnership.add(binding.assetOwnershipDryerCb);
+        assetOwnership.add(binding.assetOwnershipShellerCb);
+        assetOwnership.add(binding.assetOwnershipOxPloughCb);
+        assetOwnership.add(binding.assetOwnershipPlanterCb);
+        assetOwnership.add(binding.assetOwnershipWetProcessingMachineCb);
+
+        if (!setCheckBoxError(binding.assetOwnershipLayout, isAnyCheckBoxChecked(assetOwnership)))
+            check = false;
+
+        // Market
+        ArrayList<CheckBox> market = new ArrayList<>();
+        market.add(binding.marketTradersCb);
+        market.add(binding.marketFinalConsumerCb);
+        market.add(binding.marketProcessorsCb);
+
+        if (!setCheckBoxError(binding.marketLayout, isAnyCheckBoxChecked(market)))
+            check = false;
+
+        // Marketing channels
+        ArrayList<CheckBox> marketingChannels = new ArrayList<>();
+        marketingChannels.add(binding.marketingChannelsBuyerCb);
+        marketingChannels.add(binding.marketingChannelsNgoCb);
+        marketingChannels.add(binding.marketingChannelsCallCenterCb);
+        marketingChannels.add(binding.marketingChannelsGovtExtensionWorkersCb);
+        marketingChannels.add(binding.marketingChannelsPrivateExtensionWorkersCb);
+        marketingChannels.add(binding.marketingChannelsFarmerOrganisationMarketeersCb);
+        marketingChannels.add(binding.marketingChannelsRadioTvCb);
+        marketingChannels.add(binding.marketingChannelsMediaOnlineCb);
+
+        if (!setCheckBoxError(binding.marketingChannelsLayout, isAnyCheckBoxChecked(marketingChannels)))
+            check = false;
+
+        // Funding source
+        ArrayList<CheckBox> fundingSource = new ArrayList<>();
+        fundingSource.add(binding.fundingSourceMembershipFeesCb);
+        fundingSource.add(binding.fundingSourceSalesCb);
+        fundingSource.add(binding.fundingSourceProcessingFeesCb);
+        fundingSource.add(binding.fundingSourceGrantsCb);
+        fundingSource.add(binding.fundingSourceCreditCb);
+
+        if (!setCheckBoxError(binding.fundingSourceLayout, isAnyCheckBoxChecked(fundingSource)))
+            check = false;
+
         // Additional services
         ArrayList<CheckBox> additionalServices = new ArrayList<>();
         additionalServices.add(binding.additionalServicesCropInsuranceCb);
@@ -493,6 +596,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
         additionalServices.add(binding.additionalServicesAgriculturalEquipmentCb);
         additionalServices.add(binding.additionalServicesTrainingBusinessDevtCb);
         additionalServices.add(binding.additionalServicesTrainingInstitutionalDevtCb);
+        additionalServices.add(binding.additionalServicesCashLoansAgricCb);
         additionalServices.add(binding.additionalServicesCashLoansNonAgricCb);
         additionalServices.add(binding.additionalServicesTrainingAgriculturalPracticesCb);
 
