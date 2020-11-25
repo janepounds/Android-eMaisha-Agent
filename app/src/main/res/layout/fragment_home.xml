@@ -63,7 +63,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/weather_layout_temp_max"
                         app:layout_constraintStart_toEndOf="@id/weather_item1"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textAllCaps="true"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/weather_layout_temp_max"
