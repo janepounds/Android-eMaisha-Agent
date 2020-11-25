@@ -112,6 +112,7 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_rectangle_edit_text"
                             android:inputType="text"
+                            android:focusable="true"
                             android:textSize="14sp" />
 
                     </LinearLayout>
@@ -146,6 +147,7 @@
                             android:layout_height="40sp"
                             android:background="@drawable/rounded_rectangle_edit_text"
                             android:textSize="14sp"
+                            android:focusable="true"
                             app:drawableEndCompat="@drawable/calendar" />
 
                     </LinearLayout>
@@ -171,7 +173,8 @@
                             android:background="@drawable/rounded_rectangle_edit_text"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:focusable="true"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -209,6 +212,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:focusable="true"
                                 android:entries="@array/nationality_array" />
                         </LinearLayout>
                     </LinearLayout>
@@ -276,6 +280,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:focusable="true"
                                 android:entries="@array/religion_array" />
                         </LinearLayout>
                     </LinearLayout>
@@ -307,6 +312,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:focusable="true"
                                 android:entries="@array/gender_array" />
                         </LinearLayout>
                     </LinearLayout>
@@ -346,6 +352,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:focusable="true"
                                 android:entries="@array/marital_status_array" />
                         </LinearLayout>
                     </LinearLayout>
@@ -376,6 +383,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="29dp"
                                 android:layout_gravity="center"
+                                android:focusable="true"
                                 android:entries="@array/level_of_education_array" />
                         </LinearLayout>
                     </LinearLayout>
@@ -416,6 +424,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:focusable="true"
                                 android:background="@android:color/transparent" />
                         </LinearLayout>
                     </LinearLayout>
@@ -446,6 +455,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:focusable="true"
                                 android:entries="@array/source_of_income" />
 
                         </LinearLayout>
@@ -489,6 +499,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:focusable="true"
                                 android:entries="@array/gender_array" />
                         </LinearLayout>
                     </LinearLayout>
@@ -514,7 +525,8 @@
                             android:background="@drawable/rounded_rectangle_edit_text"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:focusable="true"/>
 
                     </LinearLayout>
 
@@ -529,7 +541,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="@dimen/dimen_10dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@string/next" />
+                    android:text="@string/next"
+                    android:focusable="true"/>
 
             </LinearLayout>
 
