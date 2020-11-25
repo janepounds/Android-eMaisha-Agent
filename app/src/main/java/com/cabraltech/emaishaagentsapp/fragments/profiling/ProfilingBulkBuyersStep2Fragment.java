@@ -215,11 +215,11 @@ public class ProfilingBulkBuyersStep2Fragment extends Fragment {
                 if (chkIndividualFarmer.isChecked()) {
                     supply_source += "\nIndividual Farmer";
                 }
-                if (chkFarmerOrganisation.isChecked()) {
+                if (chkRuralTraders.isChecked()) {
                     supply_source += "\nRural Traders";
                 }
                 if (chkWithInDistrict.isChecked()) {
-                    supplier_location += "\nWitIn The District";
+                    supplier_location += "\nWithIn The District";
                 }
                 if (chkOutsideDistrict.isChecked()) {
                     supplier_location += "\nOutside The District";

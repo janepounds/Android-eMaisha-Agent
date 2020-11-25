@@ -328,6 +328,8 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
                 }
                 if (chkTrainingOrTechnicalAssistance.isChecked()) {
                     additional_services += "\nTraining or technical assistance in agricultural practices of technology";
+                }if (chkSubsidizedInput.isChecked()) {
+                    additional_services += "\nSubsidized inputs";
                 }
                 if (chkCoffee.isChecked()) {
                     crop_value_chain += "\nCoffee";

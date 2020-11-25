@@ -1,7 +1,9 @@
 package com.cabraltech.emaishaagentsapp.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -10,7 +12,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseOpenHelper";
     public static final String DATABASE_NAME = "emaisha_agent_db.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private Context mContext;
     private SQLiteDatabase sqLiteDatabase;
 
@@ -100,7 +102,51 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        if (oldVersion == 1 && newVersion == 2) {
+            upGradingTablesFromVersion1ToVersion2(sqLiteDatabase);
 
+
+        }
+        onCreate(sqLiteDatabase);
     }
+    public void upGradingTablesFromVersion1ToVersion2(SQLiteDatabase db) {
+        sqLiteDatabase = db;
+        if (!columnExistsInTable(db,"farmers","next_of_kin_contact")) {
+            db.execSQL("ALTER TABLE " + "farmers" + " ADD COLUMN  " + "next_of_kin_contact " + " TEXT");
+
+        }
+        if (!columnExistsInTable(db,"agro_input_dealers","full_address")) {
+            db.execSQL(" ALTER TABLE " + "agro_input_dealers" + " ADD COLUMN " + "full_address " + " TEXT ");
+        }
+    }
+    public static boolean columnExistsInTable(SQLiteDatabase db, String table, String columnToCheck) {
+        Cursor cursor = null;
+        try {
+            //query a row. don't acquire db lock
+            cursor = db.rawQuery("SELECT * FROM " + table + " LIMIT 0", null);
+
+            // getColumnIndex()  will return the index of the column
+            //in the table if it exists, otherwise it will return -1
+            if (cursor.getColumnIndex(columnToCheck) != -1) {
+                //great, the column exists
+                return true;
+            }else {
+                //sorry, the column does not exist
+                return false;
+            }
+
+        } catch (SQLiteException Exp) {
+            //Something went wrong with SQLite.
+            //If the table exists and your query was good,
+            //the problem is likely that the column doesn't exist in the table.
+            return false;
+        } finally {
+
+            //close the cursor
+            if (cursor != null) cursor.close();
+        }
+    }
+
+
 }

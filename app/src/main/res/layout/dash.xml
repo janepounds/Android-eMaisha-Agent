@@ -31,7 +31,7 @@
                 android:id="@+id/weather_item1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_wind"
+                android:src="@drawable/ic_weather"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
@@ -219,7 +219,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:src="@drawable/ic_rain"
+                    android:src="@drawable/ic_rain2"
                     app:layout_constraintTop_toBottomOf="@id/text_view_rain"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

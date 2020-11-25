@@ -58,7 +58,7 @@ public class SucessDialogFragment extends DialogFragment {
             } else if (getArguments().getString("profiledUser").equalsIgnoreCase("association")) {
                 String ass_name = getArguments().getString("association_name").toUpperCase();
                 String village = getArguments().getString("assc_village").toUpperCase();
-                popContents.setText("Association " + ass_name + " based in " + village + "  has been profiled successfully");
+                popContents.setText("Association " + ass_name + " based in " + village + "  has been profiled successfully waiting approval");
 
             } else if (getArguments().getString("profiledUser").equalsIgnoreCase("agroinput")) {
                 String agroinput = getArguments().getString("agrobiz").toUpperCase();
