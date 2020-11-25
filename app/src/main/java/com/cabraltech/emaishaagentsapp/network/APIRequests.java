@@ -1,6 +1,7 @@
 package com.cabraltech.emaishaagentsapp.network;
 
 import com.cabraltech.emaishaagentsapp.models.CommissionResponse;
+import com.cabraltech.emaishaagentsapp.models.MarketResponse;
 import com.cabraltech.emaishaagentsapp.models.Regions;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
@@ -217,6 +218,6 @@ public interface APIRequests {
             @Query("agentID") int agentID
     );
 
-
-
+    @GET("agent/get/markets")
+    Call<MarketResponse> getMarkets();
 }

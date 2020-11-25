@@ -84,6 +84,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 + "recommendation" + " TEXT , " + "sync_status" + " TEXT DEFAULT 0" +
                 " ) ";
 
+        String online_markets_query = " CREATE TABLE IF NOT EXISTS " + "online_markets" + " ( " + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+                "market_id" + " TEXT NOT NULL, " + "market_name" + " TEXT NOT NULL" + " ) ";
+
         sqLiteDatabase.execSQL(agro_input_dealers_query);
         sqLiteDatabase.execSQL(agro_traders_query);
         sqLiteDatabase.execSQL(associations_query);
@@ -93,6 +96,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(pest_reports_query);
         sqLiteDatabase.execSQL(regions_query);
         sqLiteDatabase.execSQL(scouting_reports_query);
+        sqLiteDatabase.execSQL(online_markets_query);
 
         Log.d(TAG, "onCreate: successfully created tables");
     }

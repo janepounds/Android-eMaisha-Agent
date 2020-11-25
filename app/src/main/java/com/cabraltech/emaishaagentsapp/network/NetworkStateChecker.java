@@ -10,7 +10,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
+import com.cabraltech.emaishaagentsapp.models.Market;
+import com.cabraltech.emaishaagentsapp.models.MarketResponse;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
+import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +38,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         this.context = context;
         checkConnectivity(context);
-
     }
 
     public void checkConnectivity(Context context) {
@@ -48,6 +50,8 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
         if (activeNetwork != null && activeNetwork.isConnected()) {
             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+
+                getMarkets();
 
                 for (int i = 0; i < farmersList.size(); i++) {
                     saveFarmersList(
@@ -232,6 +236,36 @@ public class NetworkStateChecker extends BroadcastReceiver {
         }
     }
 
+    private void getMarkets() {
+        Call<MarketResponse> call = APIClient.getInstance().getMarkets();
+
+        call.enqueue(new Callback<MarketResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<MarketResponse> call, @NotNull Response<MarketResponse> response) {
+                if (response.isSuccessful()) {
+
+                    List<Market> markets = response.body().getDataList();
+                    for (int i = 0; i < markets.size(); i++) {
+                        Market market = markets.get(i);
+                        Log.d(TAG, "onResponse: Market Id = " + market.getId());
+                        Log.d(TAG, "onResponse: Market Name = " + market.getName());
+                    }
+
+                    DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+                    databaseAccess.open();
+
+                    if (databaseAccess.deleteOnlineMarkets())
+                        databaseAccess.addMarkets(response.body().getDataList());
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<MarketResponse> call, @NotNull Throwable t) {
+                Log.d(TAG, "onResponse: Get markets error " + t.getMessage());
+            }
+        });
+    }
+
     private void saveFarmersList(String id, String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String level_of_education, String marital_status,
                                  String household_size, String language_used, String source_of_income, String household_head, String district, String sub_county, String village, String phone_number, String next_of_kin, String next_of_kin_relation,
                                  String next_of_kin_contact, String next_of_kin_address, String farming_land_size, String main_crop, String second_crop, String third_crop, String main_livestock, String second_livestock
@@ -255,7 +289,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     //update synced status
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
                     databaseAccess.open();
-
 
                     if (databaseAccess.updateFarmerSyncStatus(id, response.body().getStatus())) {
                         Log.d(TAG, "onResponse: status updated succesfully");

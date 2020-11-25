@@ -52,7 +52,7 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
     String respondent_position, name, year_of_registration, full_address, telephone, email, chairperson, chairperson_contact, secretary, secretary_contact, respondent, respondent_contact;
     private LinearLayout layout_livestock_value_chain;
     private EditText etxtMalesNumber, etxtFemalesNumber;
-    private String profiledUser= "association";
+    private String profiledUser = "association";
 
     //    private  LinearLayout mainActivitiesLayout,assetOwnerShipLayout,marketLayout,marketingchannelsLayout,fundingsourceLayout,additionalserviceLayout;
     public ProfilingAssociationStep3Fragment() {
@@ -418,18 +418,16 @@ public class ProfilingAssociationStep3Fragment extends Fragment {
 
                 boolean check = databaseAccess.addAssociation(name, year_of_registration, district, sub_county, village, full_address, telephone, email, crop_value_chain, livestock_value_chain, chairperson, chairperson_contact, secretary, secretary_contact, number_of_males, number_of_females, registration_level, respondent, respondent_contact, asset_ownership, organisation_type, main_activities, market, marketing_channels, funding_source, additional_services);
                 if (check) {
-                    Toast.makeText(getActivity(), "Association Added Successfully", Toast.LENGTH_SHORT).show();
                     getActivity().startService(new Intent(getActivity(), BroadcastService.class));
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("profiledUser",profiledUser);
-                    bundle.putString("association_name",name);
-                    bundle.putString("assc_village",village);
+                    bundle.putString("profiledUser", profiledUser);
+                    bundle.putString("association_name", name);
+                    bundle.putString("assc_village", village);
 
-                    navController.navigate(R.id.action_profilingAssociationStep3Fragment_to_sucessDialogFragment,bundle);
+                    navController.navigate(R.id.action_profilingAssociationStep3Fragment_to_sucessDialogFragment, bundle);
                 } else {
-                    Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getActivity(), "Addition Failed, try again", Toast.LENGTH_SHORT).show();
                 }
             }
 

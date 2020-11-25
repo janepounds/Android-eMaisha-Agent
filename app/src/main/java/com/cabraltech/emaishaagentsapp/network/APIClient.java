@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
-    private static final String BASE_URL ="http://emaishaadmin.myfarmnow.com/api/";
+    private static final String BASE_URL ="https://emaisha.com/api/";
     private static final String WEATHER_BASE_URL ="https://api.climacell.co/v3/";
     private static APIRequests apiRequests;
     private static WeatherApiRequests weatherApiRequests;

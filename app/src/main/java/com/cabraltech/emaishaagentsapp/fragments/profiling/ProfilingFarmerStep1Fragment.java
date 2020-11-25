@@ -52,7 +52,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class ProfilingFarmerStep1Fragment extends Fragment {
     private static final String TAG = "ProfilingFarmerStep1";
     //Progressbar labels
@@ -97,7 +96,6 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         return binding.getRoot();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         etxtFirstName = view.findViewById(R.id.first_name_et);
@@ -277,28 +275,25 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
 
     public void addDatePicker(final TextView ed_, final Context context) {
         ed_.setOnClickListener(view -> {
-            Calendar mcurrentDate = Calendar.getInstance();
-            mcurrentDate.add(Calendar.YEAR, -15);
-            int mYear = mcurrentDate.get(Calendar.YEAR);
-            int mMonth = mcurrentDate.get(Calendar.MONTH);
-            int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+            Calendar mCurrentDate = Calendar.getInstance();
+            mCurrentDate.add(Calendar.YEAR, -15);
+            int mYear = mCurrentDate.get(Calendar.YEAR);
+            int mMonth = mCurrentDate.get(Calendar.MONTH);
+            int mDay = mCurrentDate.get(Calendar.DAY_OF_MONTH);
 
-            final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+            final DatePickerDialog mDatePicker = new DatePickerDialog(context, (datePicker, selectedYear, selectedMonth, selectedDay) -> {
 
-                    int month = selectedmonth + 1;
-                    int year = selectedyear;
-                    NumberFormat formatter = new DecimalFormat("00");
-                    ed_.setText(selectedyear + "-" + formatter.format(month) + "-" + formatter.format(selectedday));
+                int month = selectedMonth + 1;
+                int year = selectedYear;
+                NumberFormat formatter = new DecimalFormat("00");
+                ed_.setText(selectedYear + "-" + formatter.format(month) + "-" + formatter.format(selectedDay));
 
 
-                    if (validateDob()) {
-                        computeAge(ed_.getText().toString());
-                    }
-
-
+                if (validateDob()) {
+                    computeAge(ed_.getText().toString());
                 }
+
+
             }, mYear, mMonth, mDay);
             mDatePicker.show();
         });
@@ -434,7 +429,6 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         return check;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public String computeAge(String dob) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date convertedDate = new Date();
