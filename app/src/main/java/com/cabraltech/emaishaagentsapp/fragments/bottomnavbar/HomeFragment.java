@@ -53,13 +53,22 @@ import retrofit2.Response;
 import static android.content.Context.LOCATION_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
-public class HomeFragment extends Fragment implements LocationListener{
+public class HomeFragment extends Fragment implements LocationListener {
     private static final String TAG = "HomeFragment";
 
-    private TextView textCommissions,temp,visibility,humidity,wind_speed,precipitation_type,precipitation,weather_day;
+    boolean isGPSEnabled = false;// flag for network status
+    boolean isNetworkEnabled = false;// flag for GPS status
+    boolean canGetLocation = false;
+    Location location; // location
+    double latitude; // latitude
+    double longitude; // longitude// The minimum distance to change Updates in meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters// The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 200 * 10; // 2 seconds// Declaring a Location Manager
+    protected LocationManager locationManager;
+
+    private TextView textCommissions, temp, visibility, humidity, wind_speed, precipitation_type, precipitation, weather_day;
     LinearLayout profilingLayout, walletLayout, dataCollectionLayout, marketServicesLayout;
     private HomeViewModel homeViewModel;
-    private double latitude,longitude;
 
     public static final String WEATHER_API_KEY = "0CHwh88HI3G4GK62bu6glx6K4Nfxv6Uy";
 
@@ -73,57 +82,81 @@ public class HomeFragment extends Fragment implements LocationListener{
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("eMaisha Agent");
-        // ((AppCompatActivity)getActivity()).getSupportActionBar().getTitle().
-        getCooardinates();
 
+        location = getLocation();
 
         InitializeDashboard(view);
         return view;
-
     }
 
-    public void getCooardinates() {
-        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M){
-            if ((ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-                Log.d(TAG, "onCreateView: if");
-                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+    public boolean canGetLocation() {
+        return this.canGetLocation;
+    }
 
-            } else {
-                //pick coordinates
-                LocationManager locationManager = (LocationManager) requireContext().getSystemService(LOCATION_SERVICE);
-                boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-                boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-                if (isGpsEnabled) {
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10f, this);
-
-                    if (locationManager != null) {
-                        latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
-                        longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
-                    }
-
-
-                }
-                Log.d(TAG, "onCreateView: " + "latitude:" + latitude + " longitude:" + longitude);
-            }
-        }else {
-
-                //pick coordinates
-                LocationManager locationManager = (LocationManager) requireContext().getSystemService(LOCATION_SERVICE);
-                boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-                boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-                if (isGpsEnabled) {
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10f, this);
-
-                    if (locationManager != null) {
-                        latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
-                        longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
-                    }
-
-
-
-                Log.d(TAG, "onCreateView: " + "latitude:" + latitude + " longitude:" + longitude);
-            }
+    public double getLatitude() {
+        if (location != null) {
+            latitude = location.getLatitude();
         }
+        return latitude;
+    }
+
+    public double getLongitude() {
+        if (location != null) {
+            longitude = location.getLongitude();
+        }
+        return longitude;
+    }
+
+    public Location getLocation() {
+        try {
+            locationManager = (LocationManager) requireContext().getSystemService(LOCATION_SERVICE);// getting GPS status
+            isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);// getting network status
+            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            if (!isGPSEnabled && !isNetworkEnabled) {
+                // No network provider is enabled
+                Log.e("Network-GPS", "Disabled");
+            } else {
+                this.canGetLocation = true;
+                // First get location from Network Provider
+                if (isNetworkEnabled) {
+                    if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                        } else {
+                            return null;
+                        }
+                    }
+
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    // Log.e(“Network”, “Network”);
+                    if (locationManager != null) {
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                    }
+                } else
+                    // if GPS Enabled get lat/long using GPS Services
+                    if (isGPSEnabled) {
+                        if (location == null) {
+                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                            //Log.e(“GPS Enabled”, “GPS Enabled”);
+                            if (locationManager != null) {
+                                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                if (location != null) {
+                                    latitude = location.getLatitude();
+                                    longitude = location.getLongitude();
+                                }
+                            }
+                        }
+                    }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return location;
     }
 
     public void InitializeDashboard(View view) {
@@ -167,7 +200,7 @@ public class HomeFragment extends Fragment implements LocationListener{
         });
 
 
-        ArrayList<String> fieldValues =new ArrayList<>();
+        ArrayList<String> fieldValues = new ArrayList<>();
         fieldValues.add("temp");
         fieldValues.add("visibility");
         fieldValues.add("humidity");
@@ -179,11 +212,11 @@ public class HomeFragment extends Fragment implements LocationListener{
 
 
         Call<WeatherResponse> call = APIClient.getWeatherInstance()
-                .getRealtimeWeather(WEATHER_API_KEY,(float)latitude,(float)longitude,null,"si",fieldValues);
+                .getRealtimeWeather(WEATHER_API_KEY, (float) getLatitude(), (float) getLongitude(), null, "si", fieldValues);
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-                if(response.isSuccessful()){
+            public void onResponse(@NotNull Call<WeatherResponse> call, @NotNull Response<WeatherResponse> response) {
+                if (response.isSuccessful()) {
                     //set temperature
                     double temperature_value = response.body().getTemp().getValue();
                     String temperature_units = response.body().getTemp().getUnits();
@@ -193,22 +226,22 @@ public class HomeFragment extends Fragment implements LocationListener{
                     //set visibility
                     int visibility_value = response.body().getVisibility().getValue();
                     String visibility_units = response.body().getVisibility().getUnits();
-                    visibility.setText(visibility_value+ " " +visibility_units);
+                    visibility.setText(visibility_value + " " + visibility_units);
 
                     //set humidity
                     double humidity_value = response.body().getHumidity().getValue();
                     String humidity_units = response.body().getHumidity().getUnits();
-                    humidity.setText(humidity_value+ " " +humidity_units);
+                    humidity.setText(humidity_value + " " + humidity_units);
 
                     //set wind speed
                     double wind_speed_value = response.body().getWindSpeed().getValue();
                     String wind_speed_units = response.body().getWindSpeed().getUnits();
-                    wind_speed.setText(wind_speed_value + " "+wind_speed_units);
+                    wind_speed.setText(wind_speed_value + " " + wind_speed_units);
 
                     //set precipitation
                     double precipitation_value = response.body().getPrecipitation().getValue();
                     String precipitation_units = response.body().getPrecipitation().getUnits();
-                    precipitation.setText(precipitation_value+ " "+precipitation_units);
+                    precipitation.setText(precipitation_value + " " + precipitation_units);
 
 
                     //set precipitation type
@@ -216,19 +249,15 @@ public class HomeFragment extends Fragment implements LocationListener{
                     String precipitation_type_capitalized = precipitation_type_value.substring(0, 1).toUpperCase() + precipitation_type_value.substring(1);
                     precipitation_type.setText(precipitation_type_capitalized);
 
-
-
-
-                }else{
-                    Toast.makeText(getContext(),response.message(),Toast.LENGTH_LONG);
-                    Log.d(TAG, "onResponse:  "+response.errorBody());
+                } else {
+                    Toast.makeText(getContext(), response.message(), Toast.LENGTH_LONG);
+                    Log.d(TAG, "onResponse:  " + response.errorBody());
                 }
             }
 
             @Override
-            public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG);
-
+            public void onFailure(@NotNull Call<WeatherResponse> call, @NotNull Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG);
             }
         });
     }
@@ -264,30 +293,33 @@ public class HomeFragment extends Fragment implements LocationListener{
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-
+        // Do nothing
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        // Do nothing
     }
 
     @Override
     public void onProviderEnabled(@NonNull String provider) {
-
+        // Do nothing
     }
 
     @Override
     public void onProviderDisabled(@NonNull String provider) {
-
+        // Do nothing
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==1){
-            getCooardinates();
-
+        if (requestCode == 1) {
+            if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                location = getLocation();
+            } else {
+                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
