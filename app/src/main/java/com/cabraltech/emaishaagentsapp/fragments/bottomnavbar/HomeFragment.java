@@ -1,6 +1,7 @@
 package com.cabraltech.emaishaagentsapp.fragments.bottomnavbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +38,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
@@ -167,7 +170,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateCommission() {
-        Call<CommissionResponse> call = APIClient.getInstance().getCommission(1);
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserInfo", MODE_PRIVATE);
+
+        Call<CommissionResponse> call = APIClient.getInstance().getCommission(Integer.parseInt(sharedPreferences.getString(DashboardActivity.PREFERENCES_USER_ID, "")));
 
         call.enqueue(new Callback<CommissionResponse>() {
             @Override

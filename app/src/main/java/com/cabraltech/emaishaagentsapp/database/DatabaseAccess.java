@@ -71,7 +71,7 @@ public class DatabaseAccess {
     }
 
     //insert farmer
-    public boolean addFarmer(String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String education_level, String marital_status, String household_size, String language_used, String source_of_income, String household_head, String district, String sub_county, String village, String phone_number, String next_of_kin, String next_of_kin_relation, String next_of_kin_contact, String next_of_kin_address, String farming_land_size, String main_crop, String second_crop, String third_crop, String main_livestock, String second_livestock,String nin) {
+    public boolean addFarmer(String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String education_level, String marital_status, String household_size, String language_used, String source_of_income, String household_head, String district, String sub_county, String village, String phone_number, String next_of_kin, String next_of_kin_relation, String next_of_kin_contact, String next_of_kin_address, String farming_land_size, String main_crop, String second_crop, String third_crop, String main_livestock, String second_livestock, String nin) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
@@ -102,8 +102,8 @@ public class DatabaseAccess {
         values.put("third_crop", third_crop);
         values.put("main_livestock", main_livestock);
         values.put("second_livestock", second_livestock);
-        values.put("sync_status",0);
-        values.put("nin",nin);
+        values.put("sync_status", 0);
+        values.put("nin", nin);
 
         long check = database.insert("farmers", null, values);
         database.close();
@@ -137,7 +137,7 @@ public class DatabaseAccess {
     public void insertRegionDetails(List<RegionDetails> regionDetails) {
         this.database = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        for(RegionDetails regionDetail : regionDetails) {
+        for (RegionDetails regionDetail : regionDetails) {
             contentValues.put("id", regionDetail.getId());
             contentValues.put("regionType", regionDetail.getRegionType());
             contentValues.put("region", regionDetail.getRegion());
@@ -149,7 +149,7 @@ public class DatabaseAccess {
 
     //******GET DISTRICTS*****//
 
-    public ArrayList<RegionDetails> getRegionDetails( String district) throws JSONException {
+    public ArrayList<RegionDetails> getRegionDetails(String district) throws JSONException {
         this.database = openHelper.getWritableDatabase();
         ArrayList<RegionDetails> array_list = new ArrayList();
 
@@ -176,7 +176,7 @@ public class DatabaseAccess {
 
     //******GET SUB COUNTY*****//
 
-    public ArrayList<RegionDetails> getSubcountyDetails( String belongs_to, String subcounty) throws JSONException {
+    public ArrayList<RegionDetails> getSubcountyDetails(String belongs_to, String subcounty) throws JSONException {
         this.database = openHelper.getWritableDatabase();
         ArrayList<RegionDetails> array_list = new ArrayList();
 
@@ -203,7 +203,7 @@ public class DatabaseAccess {
 
     //******GET VILLAGES*****//
 
-    public ArrayList<RegionDetails> getVillageDetails( String belongs_to, String subcounty) throws JSONException {
+    public ArrayList<RegionDetails> getVillageDetails(String belongs_to, String subcounty) throws JSONException {
         this.database = openHelper.getWritableDatabase();
         ArrayList<RegionDetails> array_list = new ArrayList();
 
@@ -251,7 +251,7 @@ public class DatabaseAccess {
         this.database = openHelper.getWritableDatabase();
 
         long check = -1;
-        check = database.delete("farmers",  "id = ?", new String[]{id});
+        check = database.delete("farmers", "id = ?", new String[]{id});
 
         if (check == -1) {
             return false;
@@ -268,7 +268,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("id",cursor.getString(0));
+                map.put("id", cursor.getString(0));
                 map.put("first_name", cursor.getString(1));
                 map.put("last_name", cursor.getString(2));
                 map.put("dob", cursor.getString(3));
@@ -359,7 +359,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("id",cursor.getString(0));
+                map.put("id", cursor.getString(0));
                 map.put("name", cursor.getString(1));
                 map.put("year_of_registration", cursor.getString(2));
                 map.put("district", cursor.getString(3));
@@ -430,7 +430,7 @@ public class DatabaseAccess {
     }
 
     //insert dealer
-    public boolean addDealer(String name, String district, String sub_county, String village, String full_address,  String certification_type, String certification_number, String registration_body, String registration_year, String registration_status, String association_membership, String association_name, String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services,String owner,String owner_contact) {
+    public boolean addDealer(String name, String district, String sub_county, String village, String full_address, String certification_type, String certification_number, String registration_body, String registration_year, String registration_status, String association_membership, String association_name, String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services, String owner, String owner_contact) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
@@ -467,7 +467,7 @@ public class DatabaseAccess {
         }
     }
 
-    //get un synced dealers
+    // get un synced dealers
     public ArrayList<HashMap<String, String>> getUnSyncedDealers() {
         ArrayList<HashMap<String, String>> agro_dealers = new ArrayList<>();
         this.database = openHelper.getWritableDatabase();
@@ -475,28 +475,29 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("id",cursor.getString(0));
+                map.put("id", cursor.getString(0));
                 map.put("business_name", cursor.getString(1));
                 map.put("district", cursor.getString(2));
                 map.put("sub_county", cursor.getString(3));
                 map.put("village", cursor.getString(4));
                 map.put("full_address", cursor.getString(5));
-                map.put("certification_type", cursor.getString(7));
-                map.put("certification_number", cursor.getString(8));
-                map.put("registration_body", cursor.getString(10));
-                map.put("registration_year", cursor.getString(11));
-                map.put("registration_status", cursor.getString(12));
-                map.put("association_membership", cursor.getString(13));
-                map.put("association_name", cursor.getString(14));
-                map.put("business_type", cursor.getString(15));
-                map.put("number_of_outlets", cursor.getString(16));
-                map.put("types_of_sales", cursor.getString(17));
-                map.put("items_sold", cursor.getString(18));
-                map.put("marketing_channels", cursor.getString(19));
-                map.put("funding_source", cursor.getString(20));
-                map.put("additional_services", cursor.getString(21));
-                map.put("owner", cursor.getString(22));
-                map.put("owner_contact", cursor.getString(23));
+                map.put("certification_type", cursor.getString(6));
+                map.put("certification_number", cursor.getString(7));
+                map.put("sync_status", cursor.getString(8));
+                map.put("registration_body", cursor.getString(9));
+                map.put("registration_year", cursor.getString(10));
+                map.put("registration_status", cursor.getString(11));
+                map.put("association_membership", cursor.getString(12));
+                map.put("association_name", cursor.getString(13));
+                map.put("business_type", cursor.getString(14));
+                map.put("number_of_outlets", cursor.getString(15));
+                map.put("types_of_sales", cursor.getString(16));
+                map.put("items_sold", cursor.getString(17));
+                map.put("marketing_channels", cursor.getString(18));
+                map.put("funding_source", cursor.getString(19));
+                map.put("additional_services", cursor.getString(20));
+                map.put("owner", cursor.getString(21));
+                map.put("owner_contact", cursor.getString(22));
                 agro_dealers.add(map);
             } while (cursor.moveToNext());
         }
@@ -539,7 +540,7 @@ public class DatabaseAccess {
     }
 
     //insert trader
-    public boolean addTrader(String business_type, String business_name,String owner, String commodities, String phone_number, String email_address, String district, String sub_county, String village, String actual_address, String supplier_location, String supply_source, String funding_source, String marketing_channels) {
+    public boolean addTrader(String business_type, String business_name, String owner, String commodities, String phone_number, String email_address, String district, String sub_county, String village, String actual_address, String supplier_location, String supply_source, String funding_source, String marketing_channels) {
         this.database = openHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         this.database = openHelper.getWritableDatabase();
@@ -585,11 +586,13 @@ public class DatabaseAccess {
                 map.put("district", cursor.getString(6));
                 map.put("sub_county", cursor.getString(7));
                 map.put("full_address", cursor.getString(8));
+                map.put("village", cursor.getString(9));
                 map.put("business_type", cursor.getString(10));
                 map.put("supply_source", cursor.getString(11));
                 map.put("supplier_location", cursor.getString(12));
-                map.put("marketing_channels", cursor.getString(13));
-                map.put("village", cursor.getString(9));
+                map.put("funding_source", cursor.getString(13));
+                map.put("marketing_channels", cursor.getString(14));
+
                 agro_traders.add(map);
             } while (cursor.moveToNext());
         }
@@ -614,6 +617,21 @@ public class DatabaseAccess {
             return true;
         }
 
+    }
+
+    // Delete trader
+    public boolean deleteTrader(String id) {
+
+        this.database = openHelper.getWritableDatabase();
+
+        long check = -1;
+        check = database.delete("agro_traders", "id = ?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //insert market
@@ -648,7 +666,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("id",cursor.getString(0));
+                map.put("id", cursor.getString(0));
                 map.put("name", cursor.getString(1));
                 map.put("street_address", cursor.getString(2));
                 map.put("district", cursor.getString(3));
@@ -729,7 +747,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("id",cursor.getString(0));
+                map.put("id", cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("variety", cursor.getString(2));
                 map.put("market", cursor.getString(3));
@@ -794,7 +812,7 @@ public class DatabaseAccess {
         values.put("damage_assesment", damage_assesment);
         values.put("recommendation", recommendation);
         values.put("photo_of_damage", photo_of_damage);
-        values.put("sync_status",0);
+        values.put("sync_status", 0);
         long check = database.insert("pest_reports", null, values);
         database.close();
 
@@ -814,7 +832,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("id",cursor.getString(0));
+                map.put("id", cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("district", cursor.getString(2));
                 map.put("sub_county", cursor.getString(3));
@@ -825,7 +843,7 @@ public class DatabaseAccess {
                 map.put("damage_assesment", cursor.getString(8));
                 map.put("recommendation", cursor.getString(9));
                 map.put("photo_of_damage", cursor.getString(10));
-                map.put("farmer_name",cursor.getString(11));
+                map.put("farmer_name", cursor.getString(11));
                 pest_reports.add(map);
             } while (cursor.moveToNext());
         }
@@ -858,7 +876,7 @@ public class DatabaseAccess {
         this.database = openHelper.getWritableDatabase();
 
         long check = -1;
-        check = database.delete("pest_reports",  "id = ?", new String[]{id});
+        check = database.delete("pest_reports", "id = ?", new String[]{id});
 
         if (check == -1) {
             return false;
@@ -904,7 +922,7 @@ public class DatabaseAccess {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("id",cursor.getString(0));
+                map.put("id", cursor.getString(0));
                 map.put("date", cursor.getString(1));
                 map.put("farmer_name", cursor.getString(2));
                 map.put("district", cursor.getString(3));
@@ -948,7 +966,7 @@ public class DatabaseAccess {
         this.database = openHelper.getWritableDatabase();
 
         long check = -1;
-        check = database.delete("scouting_reports",  "id = ?", new String[]{id});
+        check = database.delete("scouting_reports", "id = ?", new String[]{id});
 
         if (check == -1) {
             return false;

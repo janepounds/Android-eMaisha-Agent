@@ -62,6 +62,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/business_name"
                     android:layout_marginBottom="4dp"/>
+
                 <EditText
                     android:id="@+id/business_name_et"
                     android:layout_width="match_parent"
@@ -96,12 +97,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/district"
                     android:layout_marginBottom="4dp" />
+
                 <LinearLayout
                     android:id="@+id/district_layout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/rounded_rectangle_spinner"
                     android:padding="8dp">
+
                     <AutoCompleteTextView
                         android:id="@+id/district_spinner"
                         android:layout_width="match_parent"
@@ -109,8 +112,11 @@
                         android:textSize="14sp"
                         android:inputType="text"
                         android:background="@android:color/transparent"/>
+
                 </LinearLayout>
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -227,6 +233,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/owner"
                     android:layout_marginBottom="4dp"/>
+
                 <EditText
                     android:id="@+id/owner_et"
                     android:layout_width="match_parent"

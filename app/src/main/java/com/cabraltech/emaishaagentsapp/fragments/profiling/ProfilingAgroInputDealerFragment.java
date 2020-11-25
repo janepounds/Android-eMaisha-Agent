@@ -40,7 +40,6 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-
 public class ProfilingAgroInputDealerFragment extends Fragment {
     private static final String TAG = "ProfilingAgroInputDeale";
     private Context context;
@@ -51,12 +50,12 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
     private ArrayList<SpinnerItem> subcountyList = new ArrayList<>();
     private ArrayList<String> villageList = new ArrayList<>();
 
-    private EditText etxtBusinessName,etxtFull_address,etxtOwner,etxtOwnerContact;
-    private AutoCompleteTextView spinDistrict,spinSubCounty,spinVillage;
-    private LinearLayout districtLayout,subCountyLayout, villageLayout,ownerContactLayout;
+    private EditText etxtBusinessName, etxtFull_address, etxtOwner, etxtOwnerContact;
+    private AutoCompleteTextView spinDistrict, spinSubCounty, spinVillage;
+    private LinearLayout districtLayout, subCountyLayout, villageLayout, ownerContactLayout;
 
-    String  certification_type, certification_status;
-     String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
+    String certification_type, certification_status;
+    String[] descriptionData = {"Contact\nDetails", "Registration\nDetails", "Business\nDetails"};
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -107,7 +106,7 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         ownerContactLayout = view.findViewById(R.id.owner_contact_layout);
 
 
-       // final EditText etxtProprietorContact = view.findViewById(R.id.proprietor_contact_et);
+        // final EditText etxtProprietorContact = view.findViewById(R.id.proprietor_contact_et);
         Spinner spinCertificationType = view.findViewById(R.id.certificate_type_spinner);
         final EditText etxtCertificationNumber = view.findViewById(R.id.certificate_number_et);
 
@@ -125,7 +124,6 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
                     }
 
 
-
                     @NonNull
                     @Override
                     public String toString() {
@@ -137,8 +135,8 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d(TAG, "onCreate: "+ districtList + districtList.size());
-        ArrayAdapter<SpinnerItem> districtListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, districtList);
+        Log.d(TAG, "onCreate: " + districtList + districtList.size());
+        ArrayAdapter<SpinnerItem> districtListAdapter = new ArrayAdapter<SpinnerItem>(context, android.R.layout.simple_dropdown_item_1line, districtList);
         spinDistrict.setThreshold(1);
         spinDistrict.setAdapter(districtListAdapter);
         spinDistrict.addTextChangedListener(new TextWatcher() {
@@ -158,19 +156,18 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
                 for (int i = 0; i < districtList.size(); i++) {
 
                     if (districtList.get(i).toString().equals(spinDistrict.getText().toString())) {
-                        pickedDistrictId =Integer.parseInt(districtList.get(i).getId());
+                        pickedDistrictId = Integer.parseInt(districtList.get(i).getId());
 
-                        Log.d(TAG, "onCreate: "+ pickedDistrictId);
+                        Log.d(TAG, "onCreate: " + pickedDistrictId);
 
                         subcountyList.clear();
                         try {
-                            for (RegionDetails x : databaseAccess.getSubcountyDetails(String.valueOf(pickedDistrictId),"subcounty")) {
+                            for (RegionDetails x : databaseAccess.getSubcountyDetails(String.valueOf(pickedDistrictId), "subcounty")) {
                                 subcountyList.add(new SpinnerItem() {
                                     @Override
                                     public String getId() {
                                         return String.valueOf(x.getId());
                                     }
-
 
 
                                     @NonNull
@@ -183,8 +180,8 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.d(TAG, "onCreate: "+ subcountyList);
-                        ArrayAdapter<SpinnerItem> subcountryListAdapter = new ArrayAdapter<SpinnerItem>(context,  android.R.layout.simple_dropdown_item_1line, subcountyList);
+                        Log.d(TAG, "onCreate: " + subcountyList);
+                        ArrayAdapter<SpinnerItem> subcountryListAdapter = new ArrayAdapter<SpinnerItem>(context, android.R.layout.simple_dropdown_item_1line, subcountyList);
                         spinSubCounty.setThreshold(1);
                         spinSubCounty.setAdapter(subcountryListAdapter);
                     }
@@ -193,10 +190,6 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
                 }
             }
         });
-
-
-
-
 
 
         spinSubCounty.addTextChangedListener(new TextWatcher() {
@@ -217,20 +210,20 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
                 for (int i = 0; i < subcountyList.size(); i++) {
 
                     if (subcountyList.get(i).toString().equals(spinSubCounty.getText().toString())) {
-                        pickedSubcountyId =Integer.parseInt(subcountyList.get(i).getId());
+                        pickedSubcountyId = Integer.parseInt(subcountyList.get(i).getId());
 
-                        Log.d(TAG, "onCreate: "+ pickedSubcountyId);
+                        Log.d(TAG, "onCreate: " + pickedSubcountyId);
 
                         villageList.clear();
                         try {
-                            for (RegionDetails x : databaseAccess.getVillageDetails(String.valueOf(pickedSubcountyId),"village")) {
+                            for (RegionDetails x : databaseAccess.getVillageDetails(String.valueOf(pickedSubcountyId), "village")) {
                                 villageList.add(x.getRegion());
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.d(TAG, "onCreate: "+ villageList);
-                        ArrayAdapter<String> villageListAdapter = new ArrayAdapter<String>(context,  android.R.layout.simple_dropdown_item_1line, villageList);
+                        Log.d(TAG, "onCreate: " + villageList);
+                        ArrayAdapter<String> villageListAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, villageList);
                         spinVillage.setThreshold(1);
                         spinVillage.setAdapter(villageListAdapter);
                     }
@@ -259,54 +252,36 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         Button nextButton = view.findViewById(R.id.next_button);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validateEntries()) {
-                    // int selectedId = radioGroup.getCheckedRadioButtonId();
-                    String business_name = etxtBusinessName.getText().toString().trim();
-                    String full_address = etxtFull_address.getText().toString().trim();
-                    String owner = etxtOwner.getText().toString().trim();
-                    String owner_contact = etxtOwnerContact.getText().toString().trim();
+        nextButton.setOnClickListener(view1 -> {
+            if (validateEntries()) {
+                Bundle bundle = new Bundle();
+                bundle.putString("business_name", binding.businessNameEt.getText().toString());
+                bundle.putString("district", binding.districtSpinner.getText().toString());
+                bundle.putString("sub_county", binding.subCountySpinner.getText().toString());
+                bundle.putString("village", binding.villageSpinner.getText().toString());
+                bundle.putString("full_address", binding.fullAddressEt.getText().toString());
+                bundle.putString("owner", binding.ownerEt.getText().toString());
+                bundle.putString("owner_contact", binding.ownerContactEt.getText().toString());
 
-
-                    //  View radioButton = radioGroup.findViewById(selectedId);
-                    //  int radioId = radioGroup.indexOfChild(radioButton);
-                    //  certification_radioButton = (RadioButton) radioGroup.getChildAt(radioId);
-                    //  certification_status = (String) certification_radioButton.getText();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("business_name", business_name);
-                    bundle.putString("full_address", full_address);
-                    bundle.putString("owner", owner);
-                    bundle.putString("owner_contact", owner_contact);
-                    bundle.putString("district", spinDistrict.getText().toString());
-                    bundle.putString("sub_county", spinSubCounty.getText().toString());
-                    bundle.putString("village", spinVillage.getText().toString());
-
-
-                    navController.navigate(R.id.action_profilingAgroInputDealersFragment_to_profilingAgroInputDealerStep2Fragment, bundle);
-
-
-                }
-
+                navController.navigate(R.id.action_profilingAgroInputDealersFragment_to_profilingAgroInputDealerStep2Fragment, bundle);
             }
         });
-
     }
-    public  boolean hasText(EditText editText) {
+
+    public boolean hasText(EditText editText) {
 
         String text = editText.getText().toString().trim();
         int bottom = editText.getPaddingBottom();
         int top = editText.getPaddingTop();
         int right = editText.getPaddingRight();
         int left = editText.getPaddingLeft();
-        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        editText.setPadding(left,top,right,bottom);
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        editText.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            editText.setPadding(left,top,right,bottom);
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
             editText.requestFocus();
             editText.setError("Please enter a value");
@@ -316,20 +291,21 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
 
         return true;
     }
-    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+    public boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
 
         String text = autoCompleteTextView.getText().toString().trim();
         int bottom = linearLayout.getPaddingBottom();
         int top = linearLayout.getPaddingTop();
         int right = linearLayout.getPaddingRight();
         int left = linearLayout.getPaddingLeft();
-        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        linearLayout.setPadding(left,top,right,bottom);
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        linearLayout.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            linearLayout.setPadding(left, top, right, bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
             autoCompleteTextView.setError("Please enter a value");
@@ -343,7 +319,7 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
 
     public boolean validateEntries() {
 
-      boolean check = true;
+        boolean check = true;
         if (etxtBusinessName.getText().toString().length() < 3) {
             check = false;
 
@@ -360,28 +336,28 @@ public class ProfilingAgroInputDealerFragment extends Fragment {
             etxtOwnerContact.setError("Contact must have at least 9 digits");
         }
 
-        if(spinDistrict.getText().toString().length()<3) {
+        if (spinDistrict.getText().toString().length() < 3) {
             spinDistrict.setError("District must have at least 3 characters");
             check = false;
         }
-        if(spinSubCounty.getText().toString().length()<3) {
+        if (spinSubCounty.getText().toString().length() < 3) {
             spinSubCounty.setError("Sub-County must have at least 3 characters");
             check = false;
         }
 
-        if (spinVillage.getText().toString().length() < 3){
+        if (spinVillage.getText().toString().length() < 3) {
             spinVillage.setError("village must have at least 3 characters");
             check = false;
         }
-      if (!hasText(etxtBusinessName)) check = false;
-       if (!hasText(etxtOwner)) check = false;
+        if (!hasText(etxtBusinessName)) check = false;
+        if (!hasText(etxtOwner)) check = false;
         if (!hasText(etxtOwnerContact)) check = false;
         if (!hasText(etxtFull_address)) check = false;
-          if (!autoText(spinDistrict,districtLayout)) check = false;
-         if (!autoText(spinSubCounty,subCountyLayout)) check = false;
-          if (!autoText(spinVillage,villageLayout)) check = false;
-       // Toast.makeText(context, getString(R.string.missing_fields_message), Toast.LENGTH_LONG).show();
-           return check;
+        if (!autoText(spinDistrict, districtLayout)) check = false;
+        if (!autoText(spinSubCounty, subCountyLayout)) check = false;
+        if (!autoText(spinVillage, villageLayout)) check = false;
+        // Toast.makeText(context, getString(R.string.missing_fields_message), Toast.LENGTH_LONG).show();
+        return check;
 
 
     }
