@@ -472,19 +472,35 @@ public class ProfilingFarmerStep1Fragment extends Fragment {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     public String computedob(String age){
         String dateOfBirth = "";
+        int formattedage = Integer.parseInt(age);
         try {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
-            int formattedage = Integer.parseInt(age);
-            LocalDate now = LocalDate.now();
-            LocalDate dob = now.minusYears(formattedage);
+                LocalDate now = LocalDate.now();
+                LocalDate dob = null;
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            dateOfBirth = dob.format(formatter);
-            txtDob.setText(dateOfBirth);
+                dob = now.minusYears(formattedage);
 
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                dateOfBirth = dob.format(formatter);
+                txtDob.setText(dateOfBirth);
+
+            }else{
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(new Date());
+                cal.add(Calendar.YEAR, -formattedage);
+                Date dateBefore = cal.getTime();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                dateOfBirth = formatter.format(dateBefore);
+                txtDob.setText(dateOfBirth);
+
+
+
+            }
 
         }catch (NumberFormatException e){
             e.printStackTrace();

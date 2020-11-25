@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.CarrierConfigManager;
 import android.util.Log;
@@ -82,26 +83,46 @@ public class HomeFragment extends Fragment implements LocationListener{
     }
 
     public void getCooardinates() {
-        if ((ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            Log.d(TAG, "onCreateView: if");
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M){
+            if ((ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+                Log.d(TAG, "onCreateView: if");
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 
-        } else {
-            //pick coordinates
-            LocationManager locationManager = (LocationManager) requireContext().getSystemService(LOCATION_SERVICE);
-            boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-            if (isGpsEnabled) {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10f, this);
+            } else {
+                //pick coordinates
+                LocationManager locationManager = (LocationManager) requireContext().getSystemService(LOCATION_SERVICE);
+                boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                if (isGpsEnabled) {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10f, this);
 
-                if (locationManager != null) {
-                    latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
-                    longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+                    if (locationManager != null) {
+                        latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
+                        longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+                    }
+
+
                 }
-
-
+                Log.d(TAG, "onCreateView: " + "latitude:" + latitude + " longitude:" + longitude);
             }
-            Log.d(TAG, "onCreateView: " + "latitude:" + latitude + " longitude:" + longitude);
+        }else {
+
+                //pick coordinates
+                LocationManager locationManager = (LocationManager) requireContext().getSystemService(LOCATION_SERVICE);
+                boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                if (isGpsEnabled) {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10f, this);
+
+                    if (locationManager != null) {
+                        latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
+                        longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+                    }
+
+
+
+                Log.d(TAG, "onCreateView: " + "latitude:" + latitude + " longitude:" + longitude);
+            }
         }
     }
 
