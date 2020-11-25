@@ -337,23 +337,18 @@ public class ProfilingAssociationFragment extends Fragment {
 
     public void addDatePicker(final TextView ed_, final Context context) {
         ed_.setOnClickListener(view -> {
-            Calendar mcurrentDate = Calendar.getInstance();
-            int mYear = mcurrentDate.get(Calendar.YEAR);
-            int mMonth = mcurrentDate.get(Calendar.MONTH);
-            int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+            Calendar mCurrentDate = Calendar.getInstance();
+            int mYear = mCurrentDate.get(Calendar.YEAR);
+            int mMonth = mCurrentDate.get(Calendar.MONTH);
+            int mDay = mCurrentDate.get(Calendar.DAY_OF_MONTH);
 
+            final DatePickerDialog mDatePicker = new DatePickerDialog(context, (datePicker, selectedYear, selectedMonth, selectedDay) -> {
 
-            final DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                int month = selectedMonth + 1;
+                int year = selectedYear;
+                NumberFormat formatter = new DecimalFormat("00");
+                ed_.setText(String.valueOf(selectedYear));
 
-                    int month = selectedmonth + 1;
-                    int year = selectedyear;
-                    NumberFormat formatter = new DecimalFormat("00");
-                    ed_.setText(selectedyear + "");
-
-
-                }
             }, mYear, mMonth, mDay);
             mDatePicker.show();
 
@@ -430,7 +425,7 @@ public class ProfilingAssociationFragment extends Fragment {
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
-            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
+            ((TextView) spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 

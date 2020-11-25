@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.cabraltech.emaishaagentsapp.models.Market;
 import com.cabraltech.emaishaagentsapp.models.RegionDetails;
 
 import org.json.JSONException;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseAccess {
+    private static final String TAG = "DatabaseAccess";
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase database;
     private static DatabaseAccess instance;
@@ -134,6 +136,7 @@ public class DatabaseAccess {
     }
 
     ///**********************insert regions**************************//////////////////
+
     public void insertRegionDetails(List<RegionDetails> regionDetails) {
         this.database = openHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -976,20 +979,42 @@ public class DatabaseAccess {
 
     }
 
-    //update bulk buyers sync status
-    public boolean updateBulkBuyersSyncStatus(String id, String sync_status) {
-        ContentValues values = new ContentValues();
+    // get online markets
+    public void addMarkets(List<Market> markets) {
         this.database = openHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        for (Market market : markets) {
+            contentValues.put("market_id", market.getId());
+            contentValues.put("market_name", market.getName());
+            database.insert("online_markets", null, contentValues);
+        }
+        Log.d(TAG, "Added Markets");
+        database.close();
+    }
 
-        values.put("sync_status", sync_status);
-        long check = -1;
-        check = database.update("agro_traders", values, "id=?", new String[]{id});
-
-        if (check == -1) {
-            return false;
-        } else {
-            return true;
+    //get local markets
+    public ArrayList<String> getOnlineMarkets() {
+        ArrayList<String> markets = new ArrayList<>();
+        this.database = openHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM online_markets", null);
+        if (cursor.moveToFirst()) {
+            do {
+                markets.add(cursor.getString(1));
+            } while (cursor.moveToNext());
         }
 
+        cursor.close();
+        database.close();
+        return markets;
+    }
+
+    // delete markets
+    public boolean deleteOnlineMarkets() {
+        this.database = openHelper.getWritableDatabase();
+
+        long check;
+        check = database.delete("online_markets", null, null);
+
+        return check != -1;
     }
 }
