@@ -44,23 +44,25 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class DataCollectionAddMarketPriceFragment extends Fragment {
     private static final String TAG = "DataCollectionAddMarket";
     private FragmentDataCollectionAddMarketPriceBinding fragmentDataCollectionAddMarketPriceBinding;
     private Context context;
     private NavController navController;
-    String  market_name,commodities,varieties,units;
-    private Spinner spinMarket_name,spinUnits,spinCommodities;
-    private EditText etxtWholeSale,etxtRetailSale,extVarieties;
-    private TextView txtDate,txtWholesaleUnit,txtRetailUnit;
-    private  LinearLayout commoditiesLayout,varietyLayout,marketLayout,unitsLayout;
+    String market_name, commodities, varieties, units;
+    private Spinner spinMarket_name, spinUnits, spinCommodities;
+    private EditText etxtWholeSale, etxtRetailSale, extVarieties;
+    private TextView txtDate, txtWholesaleUnit, txtRetailUnit;
+    private LinearLayout commoditiesLayout, varietyLayout, marketLayout, unitsLayout;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
     }
+
     public DataCollectionAddMarketPriceFragment() {
         // Required empty public constructor
     }
@@ -75,13 +77,14 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fragmentDataCollectionAddMarketPriceBinding= DataBindingUtil.inflate(inflater,R.layout.fragment_data_collection_add_market_price, container, false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Add Commodity Price");
+        fragmentDataCollectionAddMarketPriceBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_data_collection_add_market_price, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Add Commodity Price");
         return fragmentDataCollectionAddMarketPriceBinding.getRoot();
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -96,17 +99,25 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
 
         etxtWholeSale = view.findViewById(R.id.wholesale_price_et);
-        etxtRetailSale  = view.findViewById(R.id.retail_price_et);
-        commoditiesLayout  = view.findViewById(R.id.commodoties_layout);
-        varietyLayout  = view.findViewById(R.id.variety_layout);
-        marketLayout  = view.findViewById(R.id.market_layout);
-        unitsLayout  = view.findViewById(R.id.units_layout);
-        txtRetailUnit  = view.findViewById(R.id.retail_price_per_unit_tv);
-        txtWholesaleUnit  = view.findViewById(R.id.wholesale_price_per_unit_tv);
+        etxtRetailSale = view.findViewById(R.id.retail_price_et);
+        commoditiesLayout = view.findViewById(R.id.commodoties_layout);
+        varietyLayout = view.findViewById(R.id.variety_layout);
+        marketLayout = view.findViewById(R.id.market_layout);
+        unitsLayout = view.findViewById(R.id.units_layout);
+        txtRetailUnit = view.findViewById(R.id.retail_price_per_unit_tv);
+        txtWholesaleUnit = view.findViewById(R.id.wholesale_price_per_unit_tv);
 
         Button btnSubmit = view.findViewById(R.id.submit_button);
 
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
+        databaseAccess.open();
 
+        ArrayList<String> markets = databaseAccess.getOnlineMarkets();
+        Log.d(TAG, "onResponse: Markets = " + markets);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_spinner_item, markets);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinMarket_name.setAdapter(adapter);
 
         spinMarket_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -125,23 +136,22 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 units = adapterView.getItemAtPosition(i).toString();
-                if(units.toLowerCase().equals("kg")){
+                if (units.toLowerCase().equals("kg")) {
                     txtRetailUnit.setText("Per Kg");
                     txtWholesaleUnit.setText("Per Kg");
-                }
-                else if(units.toLowerCase().equals("tonnes")){
+                } else if (units.toLowerCase().equals("tonnes")) {
                     txtRetailUnit.setText("Per Tonne");
                     txtWholesaleUnit.setText("Per Tonne");
-                } else if(units.toLowerCase().equals("boxes")){
+                } else if (units.toLowerCase().equals("boxes")) {
                     txtRetailUnit.setText("Per Box");
                     txtWholesaleUnit.setText("Per Box");
-                } else if(units.toLowerCase().equals("bags")){
+                } else if (units.toLowerCase().equals("bags")) {
                     txtRetailUnit.setText("Per Bag");
                     txtWholesaleUnit.setText("Per Bag");
-                } else if(units.toLowerCase().equals("bushels")){
+                } else if (units.toLowerCase().equals("bushels")) {
                     txtRetailUnit.setText("Per Bushel");
                     txtWholesaleUnit.setText("Per Bushel");
-                } else if(units.toLowerCase().equals("pieces")){
+                } else if (units.toLowerCase().equals("pieces")) {
                     txtRetailUnit.setText("Per Piece");
                     txtWholesaleUnit.setText("Per Piece");
                 }
@@ -173,14 +183,14 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
                         getActivity().startService(new Intent(getActivity(), BroadcastService.class));
                         Bundle bundle = new Bundle();
-                        bundle.putString("date",date);
-                        bundle.putString("commodity",commodities);
-                        bundle.putString("variety",varieties);
-                        bundle.putString("market_name",market_name);
-                        bundle.putString("units",units);
-                        bundle.putString("wholesale_price",wholesale_price);
-                        bundle.putString("retail_sale",retail_sale);
-                        navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment,bundle);
+                        bundle.putString("date", date);
+                        bundle.putString("commodity", commodities);
+                        bundle.putString("variety", varieties);
+                        bundle.putString("market_name", market_name);
+                        bundle.putString("units", units);
+                        bundle.putString("wholesale_price", wholesale_price);
+                        bundle.putString("retail_sale", retail_sale);
+                        navController.navigate(R.id.action_dataCollectionAddMarketPriceFragment_to_dataCollectionConfirmMarketPriceFragment, bundle);
 
                     } else {
                         Toast.makeText(getActivity(), "An Error Occurred", Toast.LENGTH_SHORT).show();
@@ -192,15 +202,12 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         });
 
 
-
-
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addDatePicker(txtDate, getActivity());
             }
         });
-
 
 
     }
@@ -228,20 +235,20 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         ed_.setInputType(InputType.TYPE_NULL);
     }
 
-    public  boolean hasText(EditText editText) {
+    public boolean hasText(EditText editText) {
 
         String text = editText.getText().toString().trim();
         int bottom = editText.getPaddingBottom();
         int top = editText.getPaddingTop();
         int right = editText.getPaddingRight();
         int left = editText.getPaddingLeft();
-        editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        editText.setPadding(left,top,right,bottom);
+        editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        editText.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            editText.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            editText.setPadding(left,top,right,bottom);
+            editText.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            editText.setPadding(left, top, right, bottom);
             editText.setFocusable(true);
             editText.requestFocus();
             editText.setError("Please enter a value");
@@ -251,20 +258,21 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
         return true;
     }
-    public  boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
+
+    public boolean autoText(AutoCompleteTextView autoCompleteTextView, LinearLayout linearLayout) {
 
         String text = autoCompleteTextView.getText().toString().trim();
         int bottom = linearLayout.getPaddingBottom();
         int top = linearLayout.getPaddingTop();
         int right = linearLayout.getPaddingRight();
         int left = linearLayout.getPaddingLeft();
-        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        linearLayout.setPadding(left,top,right,bottom);
+        linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        linearLayout.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            linearLayout.setPadding(left,top,right,bottom);
+            linearLayout.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            linearLayout.setPadding(left, top, right, bottom);
             linearLayout.setFocusable(true);
             linearLayout.requestFocus();
             autoCompleteTextView.setError("Please enter a value");
@@ -274,7 +282,8 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
 
         return true;
     }
-    public  boolean selectedText(Spinner spinner,LinearLayout layout) {
+
+    public boolean selectedText(Spinner spinner, LinearLayout layout) {
 
         int position = spinner.getSelectedItemPosition();
         int bottom = layout.getPaddingBottom();
@@ -291,25 +300,26 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
             layout.setPadding(left, top, right, bottom);
             layout.setFocusable(true);
             layout.requestFocus();
-            ((TextView)spinner.getSelectedView()).setError("Please select a value ");
+            ((TextView) spinner.getSelectedView()).setError("Please select a value ");
             return false;
         }
 
         return true;
     }
-    public boolean hasTextView(TextView textView){
+
+    public boolean hasTextView(TextView textView) {
         String text = textView.getText().toString().trim();
         int bottom = textView.getPaddingBottom();
         int top = textView.getPaddingTop();
         int right = textView.getPaddingRight();
         int left = textView.getPaddingLeft();
-        textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.rounded_rectangle_edit_text,null));
-        textView.setPadding(left,top,right,bottom);
+        textView.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_rectangle_edit_text, null));
+        textView.setPadding(left, top, right, bottom);
         // length 0 means there is no text
         if (text.isEmpty()) {
 
-            textView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_text_error_border,null));
-            textView.setPadding(left,top,right,bottom);
+            textView.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.edit_text_error_border, null));
+            textView.setPadding(left, top, right, bottom);
             textView.setFocusable(true);
             textView.requestFocus();
             textView.setError("Please enter a value");
@@ -317,32 +327,33 @@ public class DataCollectionAddMarketPriceFragment extends Fragment {
         }
         return true;
     }
-    public boolean validateEntries(){
+
+    public boolean validateEntries() {
         boolean check = true;
 
-        if (!hasTextView(txtDate)){
+        if (!hasTextView(txtDate)) {
             check = false;
         }
-        if (!selectedText(spinCommodities,commoditiesLayout)){
+        if (!selectedText(spinCommodities, commoditiesLayout)) {
             check = false;
         }
-        if(!hasText(extVarieties)){
+        if (!hasText(extVarieties)) {
             check = false;
         }
-        if(extVarieties.getText().toString().length()<3) {
+        if (extVarieties.getText().toString().length() < 3) {
             extVarieties.setError("Variety should be 3 characters or more");
             check = false;
         }
-        if(!selectedText(spinMarket_name,marketLayout)) {
+        if (!selectedText(spinMarket_name, marketLayout)) {
             check = false;
         }
-        if(!selectedText(spinUnits,unitsLayout)) {
+        if (!selectedText(spinUnits, unitsLayout)) {
             check = false;
         }
-        if(!hasText(etxtWholeSale)) {
+        if (!hasText(etxtWholeSale)) {
             check = false;
         }
-        if(!hasText(etxtRetailSale)){
+        if (!hasText(etxtRetailSale)) {
             check = false;
         }
 

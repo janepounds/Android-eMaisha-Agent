@@ -18,6 +18,7 @@ import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -256,6 +257,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                     if (databaseAccess.deleteOnlineMarkets())
                         databaseAccess.addMarkets(response.body().getDataList());
+
+                    ArrayList<String> marketss = new ArrayList<>();
+                    marketss = databaseAccess.getOnlineMarkets();
+                    Log.d(TAG, "onResponse: Markets = " + marketss);
                 }
             }
 

@@ -999,7 +999,7 @@ public class DatabaseAccess {
         Cursor cursor = database.rawQuery("SELECT * FROM online_markets", null);
         if (cursor.moveToFirst()) {
             do {
-                markets.add(cursor.getString(1));
+                markets.add(cursor.getString(2));
             } while (cursor.moveToNext());
         }
 
