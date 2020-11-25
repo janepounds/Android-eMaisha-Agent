@@ -241,13 +241,17 @@ public class HomeFragment extends Fragment implements LocationListener {
                     //set precipitation
                     double precipitation_value = response.body().getPrecipitation().getValue();
                     String precipitation_units = response.body().getPrecipitation().getUnits();
-                    precipitation.setText(precipitation_value + " " + precipitation_units);
+                    if(precipitation_value==0.0){
+                        precipitation.setText("No");
+                    }else {
+                        precipitation.setText(precipitation_value + " " + precipitation_units);
+                    }
 
-
-                    //set precipitation type
-                    String precipitation_type_value = response.body().getPrecipitationType().getValue();
-                    String precipitation_type_capitalized = precipitation_type_value.substring(0, 1).toUpperCase() + precipitation_type_value.substring(1);
-                    precipitation_type.setText(precipitation_type_capitalized);
+//
+//                    //set precipitation type
+//                    String precipitation_type_value = response.body().getPrecipitationType().getValue();
+//                    String precipitation_type_capitalized = precipitation_type_value.substring(0, 1).toUpperCase() + precipitation_type_value.substring(1);
+//                    precipitation_type.setText(precipitation_type_capitalized);
 
                 } else {
                     Toast.makeText(getContext(), response.message(), Toast.LENGTH_LONG);
