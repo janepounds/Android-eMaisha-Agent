@@ -10,7 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseOpenHelper";
     public static final String DATABASE_NAME = "emaisha_agent_db.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private Context mContext;
     private SQLiteDatabase sqLiteDatabase;
 
