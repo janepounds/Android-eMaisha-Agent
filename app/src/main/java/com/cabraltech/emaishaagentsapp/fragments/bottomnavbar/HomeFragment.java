@@ -41,7 +41,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
 
-    private TextView textCommissions,temp,visibility,humidity;
+    private TextView textCommissions,temp,visibility,humidity,wind_speed,precipitation_type,precipitation;
     LinearLayout profilingLayout, walletLayout, dataCollectionLayout, marketServicesLayout;
     private HomeViewModel homeViewModel;
 
@@ -73,6 +73,10 @@ public class HomeFragment extends Fragment {
         temp = view.findViewById(R.id.weather_temp_max);
         visibility = view.findViewById(R.id.visibility_default);
         humidity = view.findViewById(R.id.humidity_max);
+        wind_speed = view.findViewById(R.id.wind_default);
+        precipitation_type = view.findViewById(R.id.text_view_rain);
+        precipitation = view.findViewById(R.id.rain_status);
+
 
         updateCommission();
 
@@ -101,6 +105,9 @@ public class HomeFragment extends Fragment {
         fieldValues.add("temp");
         fieldValues.add("visibility");
         fieldValues.add("humidity");
+        fieldValues.add("wind_speed");
+        fieldValues.add("precipitation");
+        fieldValues.add("precipitation_type");
 
         //*******************WEATHER API INTEGRATION*************************//
 
@@ -126,6 +133,24 @@ public class HomeFragment extends Fragment {
                     double humidity_value = response.body().getHumidity().getValue();
                     String humidity_units = response.body().getHumidity().getUnits();
                     humidity.setText(humidity_value+ " " +humidity_units);
+
+                    //set wind speed
+                    double wind_speed_value = response.body().getWindSpeed().getValue();
+                    String wind_speed_units = response.body().getWindSpeed().getUnits();
+                    wind_speed.setText(wind_speed_value + " "+wind_speed_units);
+
+                    //set precipitation
+                    double precipitation_value = response.body().getPrecipitation().getValue();
+                    String precipitation_units = response.body().getPrecipitation().getUnits();
+                    precipitation.setText(precipitation_value+ " "+precipitation_units);
+
+
+                    //set precipitation type
+                    String precipitation_type_value = response.body().getPrecipitationType().getValue();
+                    precipitation_type.setText(precipitation_type_value);
+
+
+
 
                 }else{
                     Toast.makeText(getContext(),response.message(),Toast.LENGTH_LONG);

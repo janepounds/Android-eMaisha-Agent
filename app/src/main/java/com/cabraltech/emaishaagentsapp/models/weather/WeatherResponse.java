@@ -24,13 +24,22 @@ public class WeatherResponse {
     @SerializedName("wind_speed")
     @Expose
     private WindSpeed windSpeed;
+    @SerializedName("precipitation")
+    @Expose
+    private Precipitation precipitation;
+    @SerializedName("precipitation_type")
+    @Expose
+    private PrecipitationType precipitationType;
 
-    public WeatherResponse(String latitude, String longitude, Temp temp, Visibility visibility, Humidity humidity) {
+    public WeatherResponse(String latitude, String longitude, Temp temp, Visibility visibility, Humidity humidity, WindSpeed windSpeed, Precipitation precipitation, PrecipitationType precipitationType) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.temp = temp;
         this.visibility = visibility;
         this.humidity = humidity;
+        this.windSpeed = windSpeed;
+        this.precipitation = precipitation;
+        this.precipitationType = precipitationType;
     }
 
     public String getLatitude() {
@@ -71,6 +80,30 @@ public class WeatherResponse {
 
     public void setHumidity(Humidity humidity) {
         this.humidity = humidity;
+    }
+
+    public WindSpeed getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(WindSpeed windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
+    public Precipitation getPrecipitation() {
+        return precipitation;
+    }
+
+    public void setPrecipitation(Precipitation precipitation) {
+        this.precipitation = precipitation;
+    }
+
+    public PrecipitationType getPrecipitationType() {
+        return precipitationType;
+    }
+
+    public void setPrecipitationType(PrecipitationType precipitationType) {
+        this.precipitationType = precipitationType;
     }
 
     public class Temp{
@@ -163,7 +196,79 @@ public class WeatherResponse {
     }
 
     public class WindSpeed{
+        @SerializedName("value")
+        @Expose
+        private double value;
+        @SerializedName("units")
+        @Expose
+        private String units;
 
+        public WindSpeed(double value, String units) {
+            this.value = value;
+            this.units = units;
+        }
+
+        public double getValue() {
+            return value;
+        }
+
+        public void setValue(double value) {
+            this.value = value;
+        }
+
+        public String getUnits() {
+            return units;
+        }
+
+        public void setUnits(String units) {
+            this.units = units;
+        }
+    }
+    public class Precipitation{
+        @SerializedName("value")
+        @Expose
+        private double value;
+        @SerializedName("units")
+        @Expose
+        private String units;
+
+        public Precipitation(double value, String units) {
+            this.value = value;
+            this.units = units;
+        }
+
+        public double getValue() {
+            return value;
+        }
+
+        public void setValue(double value) {
+            this.value = value;
+        }
+
+        public String getUnits() {
+            return units;
+        }
+
+        public void setUnits(String units) {
+            this.units = units;
+        }
+    }
+    public class PrecipitationType{
+        @SerializedName("value")
+        @Expose
+        private String value;
+
+        public PrecipitationType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
     }
 
 }
