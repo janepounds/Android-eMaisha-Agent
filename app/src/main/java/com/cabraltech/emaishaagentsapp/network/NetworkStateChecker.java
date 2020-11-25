@@ -462,7 +462,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
+                if (response.isSuccessful()) {
                     Log.d(TAG, "Association  Synced");
 
                     //update status locally
