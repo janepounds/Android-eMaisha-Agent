@@ -201,20 +201,20 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/image_humidity" />
 
-                        <TextView
-                            android:id="@+id/humidity_min"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/josefin_sans"
-                            android:text="@string/humidity_default2"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/humidity_max" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/humidity_min"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_margin="5dp"-->
+<!--                            android:autoSizeTextType="uniform"-->
+<!--                            android:fontFamily="@font/josefin_sans"-->
+<!--                            android:text="@string/humidity_default2"-->
+<!--                            android:textColor="@android:color/white"-->
+<!--                            android:textSize="14sp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/humidity_max" />-->
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout

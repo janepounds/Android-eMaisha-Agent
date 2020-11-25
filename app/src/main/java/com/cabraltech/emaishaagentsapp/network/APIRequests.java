@@ -5,6 +5,10 @@ import com.cabraltech.emaishaagentsapp.models.Regions;
 import com.cabraltech.emaishaagentsapp.models.ResponseData;
 import com.cabraltech.emaishaagentsapp.models.authentication.LoginResponse;
 import com.cabraltech.emaishaagentsapp.models.authentication.RegistrationResponse;
+import com.cabraltech.emaishaagentsapp.models.weather.Fields;
+import com.cabraltech.emaishaagentsapp.models.weather.WeatherResponse;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -176,12 +180,12 @@ public interface APIRequests {
             @Field("certification_type") String certification_type,
             @Field("certification_number") String certification_number,
             @Field("registration_body") String registration_body,
-            @Field("registration_year") int registration_year,
+            @Field("registration_year") String registration_year,
             @Field("registration_status") String registration_status,
             @Field("association_membership") String association_membership,
             @Field("association_name") String association_name,
             @Field("business_type") String business_type,
-            @Field("number_of_outlets") int number_of_outlets,
+            @Field("number_of_outlets") String number_of_outlets,
             @Field("types_of_sales") String types_of_sales,
             @Field("items_sold") String items_sold,
             @Field("marketing_channels") String marketing_channels,
@@ -212,4 +216,7 @@ public interface APIRequests {
     Call<CommissionResponse> getCommission(
             @Query("agentID") int agentID
     );
+
+
+
 }

@@ -500,11 +500,11 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                      String registration_body, String registration_year, String registration_status, String association_membership, String association_name,
                                      String business_type, String number_of_outlets, String types_of_sales, String items_sold, String marketing_channels, String funding_source, String additional_services) {
         Call<ResponseData> call = APIClient.getInstance()
-                .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_type, certification_number, registration_body, Integer.parseInt(registration_year), registration_status, association_membership, association_name, business_type, Integer.parseInt(number_of_outlets), types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
+                .postAgroInputDealer(business_name, district, sub_county, village, full_address, certification, certification_type, certification_number, registration_body, registration_year, registration_status, association_membership, association_name, business_type, number_of_outlets, types_of_sales, items_sold, marketing_channels, funding_source, additional_services);
         call.enqueue(new Callback<ResponseData>() {
             @Override
-            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                if (response.body().getMessage().equalsIgnoreCase("Successful")) {
+            public void onResponse(@NotNull Call<ResponseData> call, @NotNull Response<ResponseData> response) {
+                if (response.isSuccessful()) {
                     Log.d(TAG, "Agro Input Dealer  Synced");
 
                     //update status locally
@@ -512,10 +512,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                     databaseAccess.open();
 
                     if (databaseAccess.updateDealerSyncStatus(id, response.body().getStatus())) {
-                        Log.d(TAG, "onResponse: status updated succesfully");
+                        Log.d(TAG, "onResponse: status updated successfully");
                         //delete local database copy
                         if (databaseAccess.deleteAgroInputDealer(id)) {
-                            Log.d(TAG, "onResponse: database record deleted succesfully");
+                            Log.d(TAG, "onResponse: database record deleted successfully");
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
                         }
@@ -524,14 +524,19 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         Log.d(TAG, "onResponse: status update failed");
                     }
                 } else {
-                    Log.d(TAG, "Agro Input Dealer Failed");
-                    Log.d(TAG, String.valueOf(response));
+                    Log.d(TAG, "Agro Input Dealer Sync failed");
+
+                    try {
+                        Log.d(TAG, response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseData> call, Throwable t) {
-                Log.d(TAG, "Agro Input Dealer   Sync failed");
+            public void onFailure(@NotNull Call<ResponseData> call, @NotNull Throwable t) {
+                Log.d(TAG, "Agro Input Dealer Sync failed");
             }
         });
 
@@ -569,7 +574,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 } else {
                     Log.d(TAG, "Bulk buyer sync failed");
                     try {
-                        Log.d(TAG, String.valueOf(response.errorBody().string()));
+                        Log.d(TAG, response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
