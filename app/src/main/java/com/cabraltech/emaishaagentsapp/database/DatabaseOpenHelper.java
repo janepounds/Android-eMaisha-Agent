@@ -96,7 +96,19 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        if (oldVersion == 1 && newVersion == 2) {
+            upGradingTablesFromVersion1ToVersion2(sqLiteDatabase);
 
+
+        }
+        onCreate(sqLiteDatabase);
     }
+    public void upGradingTablesFromVersion1ToVersion2(SQLiteDatabase db) {
+        sqLiteDatabase = db;
+        db.execSQL("ALTER TABLE " + "farmers" + " ADD COLUMN " + "next_of_kin_contact " + " TEXT");
+        db.execSQL(" ALTER TABLE " + "agro_input_dealers" + " ADD COLUMN " + "full_address " + " TEXT ");
+    }
+
+
 }
