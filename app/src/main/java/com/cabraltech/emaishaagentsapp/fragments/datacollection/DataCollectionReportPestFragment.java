@@ -495,6 +495,10 @@ public class DataCollectionReportPestFragment extends Fragment {
             etxtFarmName.setError("Farm name should be 3 characters and more");
             check = false;
         }
+        if(etxtPhone.getText().toString().length()< 9){
+            etxtPhone.setError("Enter valid phone number");
+            check = false;
+        }
         if(!autoText(spinDistrict,districtLayout)) check = false;
         if(spinDistrict.getText().toString().length()<3){
             spinDistrict.setError("district name should be 3 characters and more");

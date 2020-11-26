@@ -191,7 +191,7 @@
                     android:textSize="14sp"
                     android:inputType="phone"
                     android:background="@drawable/rounded_rectangle_edit_text"
-                    />
+                    android:maxLength="9"/>
 
             </LinearLayout>
 
