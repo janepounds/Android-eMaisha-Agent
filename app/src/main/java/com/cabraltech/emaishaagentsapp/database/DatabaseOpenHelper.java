@@ -87,6 +87,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         String online_markets_query = " CREATE TABLE IF NOT EXISTS " + "online_markets" + " ( " + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
                 "market_id" + " TEXT NOT NULL, " + "market_name" + " TEXT NOT NULL" + " ) ";
 
+        String total_entries_query = " CREATE TABLE IF NOT EXISTS " + "total_entries" + " ( " + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+                "farmers_count" + " INTEGER , "+ "association_count" + " INTEGER , " + "agro_input_count" + " INTEGER, " + "bulk_buyer_count" + " INTEGER ,"+ "market_count" + " INTEGER, "+ "market_price_count" + " INTEGER, "+ "pest_report_count" + " INTEGER, "+ "scouting_report_count" + " INTEGER " + " ) ";
+
         sqLiteDatabase.execSQL(agro_input_dealers_query);
         sqLiteDatabase.execSQL(agro_traders_query);
         sqLiteDatabase.execSQL(associations_query);
@@ -97,6 +100,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(regions_query);
         sqLiteDatabase.execSQL(scouting_reports_query);
         sqLiteDatabase.execSQL(online_markets_query);
+        sqLiteDatabase.execSQL(total_entries_query);
 
         Log.d(TAG, "onCreate: successfully created tables");
     }
@@ -119,6 +123,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         if (!columnExistsInTable(db,"agro_input_dealers","full_address")) {
             db.execSQL(" ALTER TABLE " + "agro_input_dealers" + " ADD COLUMN " + "full_address " + " TEXT ");
         }
+        db.execSQL(" CREATE TABLE IF NOT EXISTS " + "total_entries" + " ( " + "id" + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+                "farmers_count" + " INTEGER , "+ "association_count" + " INTEGER , " + "agro_input_count" + " INTEGER, " + "bulk_buyer_count" + " INTEGER ,"+ "market_count" + " INTEGER, "+ "market_price_count" + " INTEGER, "+ "pest_report_count" + " INTEGER, "+ "scouting_report_count" + " INTEGER " + " ) "
+                    );
+
     }
     public static boolean columnExistsInTable(SQLiteDatabase db, String table, String columnToCheck) {
         Cursor cursor = null;
