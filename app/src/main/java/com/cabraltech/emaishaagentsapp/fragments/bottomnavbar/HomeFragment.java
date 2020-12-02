@@ -39,11 +39,13 @@ import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -264,6 +266,32 @@ public class HomeFragment extends Fragment implements LocationListener {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG);
             }
         });
+
+        ArrayList<String> fieldValuess = new ArrayList<>();
+        fieldValuess.add("temp");
+
+        //******************FORECAST********//
+        Call<WeatherResponse> call_nowcast = APIClient.getWeatherInstance()
+                .getNowCastTemp(WEATHER_API_KEY, (float) getLatitude(), (float) getLongitude(), null, "si",5,"now",generateTodaysMidNightTimestamp(), fieldValuess);
+        call_nowcast.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                if (response.isSuccessful()) {
+                    //get maximum and minimum temperature
+
+//                    double temperature_value = response.body().getTemp().getValue();
+//                    String temperature_units = response.body().getTemp().getUnits();
+//                    temp.setText(temperature_value + " " + "\u2103");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private void updateCommission() {
@@ -325,5 +353,16 @@ public class HomeFragment extends Fragment implements LocationListener {
                 Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    //generate midnight timestamp
+
+    public  String generateTodaysMidNightTimestamp(){
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); // Quoted "Z" to indicate UTC, no timezone offset
+        df.setTimeZone(tz);
+        String nowAsISO = df.format(new Date());
+
+        return nowAsISO+"T23:59:00Z";
     }
 }
