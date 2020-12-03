@@ -16,3 +16,4 @@
 .idea/gradle.xml
 .idea/codeStyles/Project.xml
 *.log
+apikey.properties
