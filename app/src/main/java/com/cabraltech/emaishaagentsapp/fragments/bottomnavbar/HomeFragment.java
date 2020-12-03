@@ -365,6 +365,6 @@ public class HomeFragment extends Fragment implements LocationListener {
         df.setTimeZone(tz);
         String nowAsISO = df.format(new Date());
 
-        return nowAsISO+"T23:59:00Z";
+        return nowAsISO+"T23:59:00.000Z";
     }
 }
