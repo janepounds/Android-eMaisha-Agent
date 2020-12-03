@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     private static final long MIN_TIME_BW_UPDATES = 200 * 10; // 2 seconds// Declaring a Location Manager
     protected LocationManager locationManager;
 
-    private TextView textCommissions, temp, visibility, humidity, wind_speed, precipitation_type, precipitation, weather_day;
+    private TextView textCommissions, temp_min,temp_max, visibility, humidity, wind_speed, precipitation_type, precipitation, weather_day;
     LinearLayout profilingLayout, walletLayout, dataCollectionLayout, marketServicesLayout;
     private HomeViewModel homeViewModel;
 
@@ -167,7 +167,8 @@ public class HomeFragment extends Fragment implements LocationListener {
         walletLayout = view.findViewById(R.id.layout_dashboard_wallet);
         dataCollectionLayout = view.findViewById(R.id.layout_dashboard_data_collection);
         marketServicesLayout = view.findViewById(R.id.layout_dashboard_markets_service);
-        temp = view.findViewById(R.id.weather_temp_max);
+        temp_max = view.findViewById(R.id.weather_temp_max);
+        temp_min = view.findViewById(R.id.weather_temp_min);
         visibility = view.findViewById(R.id.visibility_default);
         humidity = view.findViewById(R.id.humidity_max);
         wind_speed = view.findViewById(R.id.wind_default);
@@ -222,7 +223,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                     //set temperature
                     double temperature_value = response.body().getTemp().getValue();
                     String temperature_units = response.body().getTemp().getUnits();
-                    temp.setText(temperature_value + " " + "\u2103");
+
 
 
                     //set visibility
@@ -271,17 +272,28 @@ public class HomeFragment extends Fragment implements LocationListener {
         fieldValuess.add("temp");
 
         //******************FORECAST********//
-        Call<WeatherResponse> call_nowcast = APIClient.getWeatherInstance()
-                .getNowCastTemp(WEATHER_API_KEY, (float) getLatitude(), (float) getLongitude(), null, "si",5,"now",generateTodaysMidNightTimestamp(), fieldValuess);
-        call_nowcast.enqueue(new Callback<WeatherResponse>() {
+        Call<WeatherResponse[]> call_hourlycast = APIClient.getWeatherInstance()
+                .getHourlyCastTemp(WEATHER_API_KEY, (float) getLatitude(), (float) getLongitude(), null, "si","now",generateTodaysMidNightTimestamp(), fieldValuess);
+        call_hourlycast.enqueue(new Callback<WeatherResponse[]>() {
             @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+            public void onResponse(Call<WeatherResponse[]> call, Response<WeatherResponse[]> response) {
                 if (response.isSuccessful()) {
                     //get maximum and minimum temperature
+                    double temperature_max=0, temperature_min=100; String temperature_units="C";
+                    for (WeatherResponse weather : response.body() ) {
 
-//                    double temperature_value = response.body().getTemp().getValue();
-//                    String temperature_units = response.body().getTemp().getUnits();
-//                    temp.setText(temperature_value + " " + "\u2103");
+                        if(weather.getTemp().getValue()>temperature_max)
+                            temperature_max=weather.getTemp().getValue();
+
+                        if(weather.getTemp().getValue()<temperature_min)
+                            temperature_min=weather.getTemp().getValue();
+
+                    }
+
+
+                    temp_min.setText(temperature_min + " " + "\u2103");
+                    temp_max.setText(temperature_max + " " + "\u2103");
+
                 }else{
                     Log.d(TAG, "onResponse: failed"+generateTodaysMidNightTimestamp());
                 }
@@ -289,7 +301,7 @@ public class HomeFragment extends Fragment implements LocationListener {
             }
 
             @Override
-            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+            public void onFailure(Call<WeatherResponse[]> call, Throwable t) {
 
             }
         });
