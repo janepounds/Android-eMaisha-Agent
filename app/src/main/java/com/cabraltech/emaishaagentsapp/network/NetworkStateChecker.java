@@ -32,8 +32,9 @@ import retrofit2.http.Field;
 public class NetworkStateChecker extends BroadcastReceiver {
     private static final String TAG = "NetworkStateChecker";
     private Context context;
-    private List<HashMap<String, String>> farmersList, pestReport, scoutingReport, marketPrices, marketDetails, association, agroInputDealers, bulkBuyers;
+    private List<HashMap<String, String>> farmersList, pestReport, scoutingReport, marketPrices, marketDetails, association, agroInputDealers, bulkBuyers,total_entries;
     private String sync_status;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -300,6 +301,31 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         //delete local database copy
                         if (databaseAccess.deleteFarmer(id)) {
                             Log.d(TAG, "onResponse: database record deleted succesfully");
+
+                            //update farmer count
+                            total_entries =  databaseAccess.getTotalCount();
+                            for (int i = 0; i < total_entries.size(); i++) {
+                                int  farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                int association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                int agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                int bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                int market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                int market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                int pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                int scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+
+                                farmers_count++;
+
+                                boolean check =  databaseAccess.upsert(farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count);
+                                if(check){
+                                    Log.d(TAG, "onResponse: count added/ updated successfully");
+                                    
+                                }else{
+                                    Log.d(TAG, "onResponse: failed to return count");
+                                }
+
+                            }
+
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
                         }
@@ -343,6 +369,30 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         //delete local database copy
                         if (databaseAccess.deletePestReport(id)) {
                             Log.d(TAG, "onResponse: database record deleted succesfully");
+
+                            //update pest report count
+                            total_entries =  databaseAccess.getTotalCount();
+                            for (int i = 0; i < total_entries.size(); i++) {
+                                int  farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                int association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                int agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                int bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                int market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                int market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                int pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                int scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+
+                                pest_report_count++;
+
+                                boolean check =  databaseAccess.upsert(farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count);
+                                if(check){
+                                    Log.d(TAG, "onResponse: count added/ updated successfully");
+
+                                }else{
+                                    Log.d(TAG, "onResponse: failed to return count");
+                                }
+
+                            }
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
                         }
@@ -387,6 +437,29 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         //delete local database copy
                         if (databaseAccess.deleteScoutingReport(id)) {
                             Log.d(TAG, "onResponse: database record deleted succesfully");
+                            //update scouting report count
+                            total_entries =  databaseAccess.getTotalCount();
+                            for (int i = 0; i < total_entries.size(); i++) {
+                                int  farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                int association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                int agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                int bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                int market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                int market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                int pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                int scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+
+                                scouting_report_count++;
+
+                                boolean check =  databaseAccess.upsert(farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count);
+                                if(check){
+                                    Log.d(TAG, "onResponse: count added/ updated successfully");
+
+                                }else{
+                                    Log.d(TAG, "onResponse: failed to return count");
+                                }
+
+                            }
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
                         }
@@ -429,6 +502,29 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: database record deleted succesfully");
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
+                            //update market price count
+                            total_entries =  databaseAccess.getTotalCount();
+                            for (int i = 0; i < total_entries.size(); i++) {
+                                int  farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                int association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                int agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                int bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                int market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                int market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                int pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                int scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+
+                                market_price_count++;
+
+                                boolean check =  databaseAccess.upsert(farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count);
+                                if(check){
+                                    Log.d(TAG, "onResponse: count added/ updated successfully");
+
+                                }else{
+                                    Log.d(TAG, "onResponse: failed to return count");
+                                }
+
+                            }
                         }
 
                     } else {
@@ -470,6 +566,30 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: database record deleted succesfully");
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
+
+                            //update market  count
+                            total_entries =  databaseAccess.getTotalCount();
+                            for (int i = 0; i < total_entries.size(); i++) {
+                                int  farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                int association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                int agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                int bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                int market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                int market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                int pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                int scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+
+                                market_count++;
+
+                                boolean check =  databaseAccess.upsert(farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count);
+                                if(check){
+                                    Log.d(TAG, "onResponse: count added/ updated successfully");
+
+                                }else{
+                                    Log.d(TAG, "onResponse: failed to return count");
+                                }
+
+                            }
                         }
 
                     } else {
@@ -513,6 +633,30 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         //delete local database copy
                         if (databaseAccess.deleteAssociation(id)) {
                             Log.d(TAG, "onResponse: database record deleted succesfully");
+
+                            //update association  count
+                            total_entries =  databaseAccess.getTotalCount();
+                            for (int i = 0; i < total_entries.size(); i++) {
+                                int  farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                int association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                int agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                int bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                int market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                int market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                int pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                int scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+
+                                association_count++;
+
+                                boolean check =  databaseAccess.upsert(farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count);
+                                if(check){
+                                    Log.d(TAG, "onResponse: count added/ updated successfully");
+
+                                }else{
+                                    Log.d(TAG, "onResponse: failed to return count");
+                                }
+
+                            }
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
                         }
@@ -554,6 +698,30 @@ public class NetworkStateChecker extends BroadcastReceiver {
                         //delete local database copy
                         if (databaseAccess.deleteAgroInputDealer(id)) {
                             Log.d(TAG, "onResponse: database record deleted successfully");
+
+                            //update agro_input  count
+                            total_entries =  databaseAccess.getTotalCount();
+                            for (int i = 0; i < total_entries.size(); i++) {
+                                int  farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                int association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                int agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                int bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                int market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                int market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                int pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                int scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+
+                                agro_input_count++;
+
+                                boolean check =  databaseAccess.upsert(farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count);
+                                if(check){
+                                    Log.d(TAG, "onResponse: count added/ updated successfully");
+
+                                }else{
+                                    Log.d(TAG, "onResponse: failed to return count");
+                                }
+
+                            }
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
                         }
@@ -604,6 +772,30 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: database record deleted successfully");
                         } else {
                             Log.d(TAG, "onResponse: database record delete failed");
+
+                            //update bulk_buyer  count
+                            total_entries =  databaseAccess.getTotalCount();
+                            for (int i = 0; i < total_entries.size(); i++) {
+                                int  farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                int association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                int agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                int bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                int market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                int market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                int pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                int scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+
+                                bulk_buyer_count++;
+
+                                boolean check =  databaseAccess.upsert(farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count);
+                                if(check){
+                                    Log.d(TAG, "onResponse: count added/ updated successfully");
+
+                                }else{
+                                    Log.d(TAG, "onResponse: failed to return count");
+                                }
+
+                            }
                         }
 
                     } else {
