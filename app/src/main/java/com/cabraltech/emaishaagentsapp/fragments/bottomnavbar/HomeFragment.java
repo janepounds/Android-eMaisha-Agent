@@ -282,6 +282,8 @@ public class HomeFragment extends Fragment implements LocationListener {
 //                    double temperature_value = response.body().getTemp().getValue();
 //                    String temperature_units = response.body().getTemp().getUnits();
 //                    temp.setText(temperature_value + " " + "\u2103");
+                }else{
+                    Log.d(TAG, "onResponse: failed"+generateTodaysMidNightTimestamp());
                 }
 
             }
