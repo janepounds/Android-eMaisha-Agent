@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     LinearLayout profilingLayout, walletLayout, dataCollectionLayout, marketServicesLayout;
     private HomeViewModel homeViewModel;
 
-    public static final String WEATHER_API_KEY = "0CHwh88HI3G4GK62bu6glx6K4Nfxv6Uy";
+    public  final String WEATHER_API_KEY = getString(R.string.WEATHER_API_KEY);
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
