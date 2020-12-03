@@ -83,6 +83,7 @@
                     android:paddingBottom="3dp"
                     android:fontFamily="@font/josefin_sans" />
                 <TextView
+                    android:id="@+id/farmers_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
@@ -149,6 +150,7 @@
                     android:paddingBottom="3dp"
                     android:fontFamily="@font/josefin_sans" />
                 <TextView
+                    android:id="@+id/association_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
@@ -227,6 +229,7 @@
                     android:paddingBottom="3dp"
                     android:fontFamily="@font/josefin_sans" />
                 <TextView
+                    android:id="@+id/agro_input_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
@@ -293,6 +296,7 @@
                     android:paddingBottom="3dp"
                     android:fontFamily="@font/josefin_sans" />
                 <TextView
+                    android:id="@+id/bulk_buyer_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
@@ -382,6 +386,7 @@
                     android:paddingBottom="3dp"
                     android:fontFamily="@font/josefin_sans" />
                 <TextView
+                    android:id="@+id/market_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
@@ -447,6 +452,7 @@
                     android:paddingBottom="3dp"
                     android:fontFamily="@font/josefin_sans" />
                 <TextView
+                    android:id="@+id/market_price_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
@@ -524,6 +530,7 @@
                     android:paddingBottom="3dp"
                     android:fontFamily="@font/josefin_sans" />
                 <TextView
+                    android:id="@+id/pest_report_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
@@ -589,6 +596,7 @@
                     android:paddingBottom="3dp"
                     android:fontFamily="@font/josefin_sans" />
                 <TextView
+                    android:id="@+id/scouting_report_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
