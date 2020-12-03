@@ -33,4 +33,18 @@ public interface WeatherApiRequests {
             @Query("fields") ArrayList<String> fields
 
     );
+
+    @GET("weather/nowcast")
+    Call<WeatherResponse> getNowCastTemp(
+            @Query("apikey") String apikey,
+            @Query("lat") float latitude,
+            @Query("lon") float longitude,
+            @Query("location_id") String location_id,
+            @Query("unit_system") String unit_system,
+            @Query("timestep") int timestep,
+            @Query("start_time") String start_time,
+            @Query("end_time") String end_time,
+            @Query("fields") ArrayList<String> fields
+    );
+
 }

@@ -418,6 +418,8 @@
     <string name="soya_beans">Soya Beans</string>
     <string name="field_peas">Field Peas</string>
     <string name="pigeon_peas">Pigeon Peas</string>
+    <string name="profiling_report">Profiling Report</string>
+    <string name="reports">REPORTS</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>
