@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     LinearLayout profilingLayout, walletLayout, dataCollectionLayout, marketServicesLayout;
     private HomeViewModel homeViewModel;
 
-    public  final String WEATHER_API_KEY = getString(R.string.WEATHER_API_KEY);
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -211,7 +211,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         fieldValues.add("precipitation_type");
 
         //*******************WEATHER API INTEGRATION*************************//
-
+        String WEATHER_API_KEY = getString(R.string.WEATHER_API_KEY);
 
         Call<WeatherResponse> call = APIClient.getWeatherInstance()
                 .getRealtimeWeather(WEATHER_API_KEY, (float) getLatitude(), (float) getLongitude(), null, "si", fieldValues);

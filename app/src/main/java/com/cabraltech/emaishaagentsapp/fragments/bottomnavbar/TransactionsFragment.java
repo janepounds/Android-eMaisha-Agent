@@ -99,7 +99,5 @@ public class TransactionsFragment extends Fragment {
 
         }
 
-
-
     }
 }
