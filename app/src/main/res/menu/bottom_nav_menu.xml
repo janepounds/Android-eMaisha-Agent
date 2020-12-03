@@ -17,7 +17,7 @@
         android:id="@+id/navigation_transactions"
         android:icon="@drawable/ic_transactions"
         android:enabled="true"
-        android:title="@string/title_transactions" />
+        android:title="@string/reports" />
     <item
         android:id="@+id/navigation_account"
         android:icon="@drawable/ic_account"

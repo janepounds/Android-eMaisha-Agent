@@ -7,16 +7,600 @@
     tools:context=".fragments.bottomnavbar.TransactionsFragment">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/label_profiling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_profiling"
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/josefin_sans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layout1"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"/>
+    <LinearLayout
+        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/label_profiling"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/layout_dashboard_profiling"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@drawable/background_round_white">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:paddingTop="@dimen/dimen_14dp"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/farmer" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:layout_weight=".5"
+                    android:text="Farmers "
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text=":"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight=".5"
+                    android:text="000"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccentGreen"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_dashboard_wallet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@drawable/background_round_white">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:paddingTop="@dimen/dimen_14dp"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_association" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:layout_weight=".5"
+                    android:text="Associations "
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text=":"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight=".5"
+                    android:text="000"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccentGreen"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/layout1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:id="@+id/layout_dashboard_data_collection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@drawable/background_round_white">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:paddingTop="@dimen/dimen_14dp"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_argo_input_dealer" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text="@string/label_agro_input_dealer"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text=":"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight=".5"
+                    android:text="000"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccentGreen"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_dashboard_markets_service"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/background_round_white"
+            android:layout_gravity="center" >
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingTop="@dimen/dimen_14dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:src="@drawable/bulk_buyer" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text="@string/label_bulk_buyers"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text=":"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight=".5"
+                    android:text="000"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccentGreen"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/label_data_collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/data_collection"
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/josefin_sans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout2"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"/>
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/label_data_collection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@drawable/background_round_white">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:paddingTop="@dimen/dimen_14dp"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/market" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:layout_weight=".5"
+                    android:text="Markets "
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text=":"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight=".5"
+                    android:text="000"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccentGreen"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@drawable/background_round_white">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:paddingTop="@dimen/dimen_14dp"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/market_price" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:layout_weight=".5"
+                    android:text="Market Prices "
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text=":"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight=".5"
+                    android:text="000"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccentGreen"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/layout3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@drawable/background_round_white">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:paddingTop="@dimen/dimen_14dp"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_argo_input_dealer" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text="Pest reports"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text=":"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight=".5"
+                    android:text="000"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccentGreen"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/background_round_white"
+            android:layout_gravity="center" >
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/dimen_20dp"
+                android:paddingTop="@dimen/dimen_14dp"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:src="@drawable/bulk_buyer" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text="@string/label_scouting"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight=".5"
+                    android:text=":"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/josefin_sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight=".5"
+                    android:text="000"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccentGreen"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/josefin_sans" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
