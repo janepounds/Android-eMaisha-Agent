@@ -18,7 +18,6 @@ import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.models.RegionDetails;
 import com.cabraltech.emaishaagentsapp.models.Regions;
 import com.cabraltech.emaishaagentsapp.network.APIClient;
-import com.cabraltech.emaishaagentsapp.network.Api;
 import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.cabraltech.emaishaagentsapp.network.NetworkStateChecker;
 import com.google.gson.Gson;
