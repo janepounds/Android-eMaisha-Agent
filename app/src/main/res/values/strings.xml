@@ -295,7 +295,7 @@
     <string name="market_intelligence">Market Intelligence</string>
     <string name="secretary">Secretary</string>
     <string name="max"> Max</string>
-    <string name="min">&#xb0;C Min</string>
+    <string name="min"> Min</string>
     <string name="permission_rejected"> Permission not Granted! </string>
     <string name="permission_camera_storage"> Need Camera and Storage Permissions! </string>
     <string name="permission_camera_storage_needed"> This app needs camera and storage permissions to take pictures from the gallery or with the camera. </string>
