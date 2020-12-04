@@ -1,4 +1,4 @@
-package com.cabraltech.emaishaagentsapp.fragments.bottomnavbar;
+ package com.cabraltech.emaishaagentsapp.fragments.bottomnavbar;
 
 import android.Manifest;
 import android.app.Activity;
