@@ -50,11 +50,11 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         t = new Thread(() -> {
             RequestAllRegions();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-              startForegroundService(new Intent(getBaseContext(),BroadcastService.class));
-            } else {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//              startForegroundService(new Intent(getBaseContext(),BroadcastService.class));
+//            } else {
                 startService(new Intent(getBaseContext(), BroadcastService.class));
-            }
+//            }
 
             try {
                 t.sleep(2000);
