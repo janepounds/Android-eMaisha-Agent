@@ -308,7 +308,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: "+ total_entries);
                             if(total_entries!=null) {
                                 for (int i = 0; i < total_entries.size(); i++) {
-                                    total_entries_id  = total_entries.get(i).get("id");
+                                    total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
                                     association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
                                     agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
@@ -319,10 +319,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                     scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
                                     Log.d(TAG, "onResponse: " + farmers_count + association_count + agro_input_count + bulk_buyer_count + market_count + market_price_count + pest_report_count + scouting_report_count);
 
-                                    farmers_count++;
+                                }
 
                                     //update total_entries
-                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
+                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count++, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
                                     if (check) {
                                         Log.d(TAG, "onResponse: count added/ updated successfully");
 
@@ -330,7 +330,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                         Log.d(TAG, "onResponse: failed to return count");
                                     }
 
-                                }
+
                             }else{
                                 //insert into total entries;
                                 boolean check = databaseAccess.add_total_entries(farmers_count++, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
@@ -392,7 +392,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: "+ total_entries);
                             if(total_entries!=null) {
                                 for (int i = 0; i < total_entries.size(); i++) {
-                                    total_entries_id  = total_entries.get(i).get("id");
+                                    total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
                                     association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
                                     agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
@@ -403,10 +403,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                     scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
                                     Log.d(TAG, "onResponse: " + farmers_count + association_count + agro_input_count + bulk_buyer_count + market_count + market_price_count + pest_report_count + scouting_report_count);
 
-                                    pest_report_count++;
+                                }
 
                                     //update total_entries
-                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
+                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count,   pest_report_count++, scouting_report_count);
                                     if (check) {
                                         Log.d(TAG, "onResponse: count added/ updated successfully");
 
@@ -414,7 +414,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                         Log.d(TAG, "onResponse: failed to return count");
                                     }
 
-                                }
+
                             }else{
                                 //insert into total entries;
                                 boolean check = databaseAccess.add_total_entries(farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count++, scouting_report_count);
@@ -475,7 +475,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: "+ total_entries);
                             if(total_entries!=null) {
                                 for (int i = 0; i < total_entries.size(); i++) {
-                                    total_entries_id  = total_entries.get(i).get("id");
+                                    total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
                                     association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
                                     agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
@@ -486,10 +486,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                     scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
                                     Log.d(TAG, "onResponse: " + farmers_count + association_count + agro_input_count + bulk_buyer_count + market_count + market_price_count + pest_report_count + scouting_report_count);
 
-                                    scouting_report_count++;
+                                }
 
                                     //update total_entries
-                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
+                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count++);
                                     if (check) {
                                         Log.d(TAG, "onResponse: count added/ updated successfully");
 
@@ -497,7 +497,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                         Log.d(TAG, "onResponse: failed to return count");
                                     }
 
-                                }
+
                             }else{
                                 //insert into total entries;
                                 boolean check = databaseAccess.add_total_entries(farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count++);
@@ -554,7 +554,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: "+ total_entries);
                             if(total_entries!=null) {
                                 for (int i = 0; i < total_entries.size(); i++) {
-                                    total_entries_id  = total_entries.get(i).get("id");
+                                    total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
                                     association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
                                     agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
@@ -565,10 +565,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                     scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
                                     Log.d(TAG, "onResponse: " + farmers_count + association_count + agro_input_count + bulk_buyer_count + market_count + market_price_count + pest_report_count + scouting_report_count);
 
-                                    market_price_count++;
+                                }
 
                                     //update total_entries
-                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
+                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count++, pest_report_count, scouting_report_count);
                                     if (check) {
                                         Log.d(TAG, "onResponse: count added/ updated successfully");
 
@@ -576,7 +576,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                         Log.d(TAG, "onResponse: failed to return count");
                                     }
 
-                                }
+
                             }else{
                                 //insert into total entries;
                                 boolean check = databaseAccess.add_total_entries(farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count++, pest_report_count, scouting_report_count);
@@ -635,7 +635,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: "+ total_entries);
                             if(total_entries!=null) {
                                 for (int i = 0; i < total_entries.size(); i++) {
-                                    total_entries_id  = total_entries.get(i).get("id");
+                                    total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
                                     association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
                                     agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
@@ -646,10 +646,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                     scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
                                     Log.d(TAG, "onResponse: " + farmers_count + association_count + agro_input_count + bulk_buyer_count + market_count + market_price_count + pest_report_count + scouting_report_count);
 
-                                    market_count++;
+                                }
 
                                     //update total_entries
-                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
+                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count++, market_price_count, pest_report_count, scouting_report_count);
                                     if (check) {
                                         Log.d(TAG, "onResponse: count added/ updated successfully");
 
@@ -657,7 +657,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                         Log.d(TAG, "onResponse: failed to return count");
                                     }
 
-                                }
+
                             }else{
                                 //insert into total entries;
                                 boolean check = databaseAccess.add_total_entries(farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count++, market_price_count, pest_report_count, scouting_report_count);
@@ -720,7 +720,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: "+ total_entries);
                             if(total_entries!=null) {
                                 for (int i = 0; i < total_entries.size(); i++) {
-                                    total_entries_id  = total_entries.get(i).get("id");
+                                    total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
                                     association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
                                     agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
@@ -731,10 +731,11 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                     scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
                                     Log.d(TAG, "onResponse: " + farmers_count + association_count + agro_input_count + bulk_buyer_count + market_count + market_price_count + pest_report_count + scouting_report_count);
 
-                                    association_count++;
+
+                                }
 
                                     //update total_entries
-                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
+                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count++, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
                                     if (check) {
                                         Log.d(TAG, "onResponse: count added/ updated successfully");
 
@@ -742,7 +743,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                         Log.d(TAG, "onResponse: failed to return count");
                                     }
 
-                                }
+
                             }else{
                                 //insert into total entries;
                                 boolean check = databaseAccess.add_total_entries(farmers_count, association_count++, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
@@ -801,7 +802,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             Log.d(TAG, "onResponse: total entries"+ total_entries);
                             if(total_entries!=null) {
                                 for (int i = 0; i < total_entries.size(); i++) {
-                                    total_entries_id  = total_entries.get(i).get("id");
+                                    total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
                                     association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
                                     agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
@@ -812,10 +813,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                     scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
                                     Log.d(TAG, "onResponse: " + farmers_count + association_count + agro_input_count + bulk_buyer_count + market_count + market_price_count + pest_report_count + scouting_report_count);
 
-                                    agro_input_count++;
+                                }
 
                                     //update total_entries
-                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
+                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count++, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
                                     if (check) {
                                         Log.d(TAG, "onResponse: count added/ updated successfully");
 
@@ -823,7 +824,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                         Log.d(TAG, "onResponse: failed to return count");
                                     }
 
-                                }
+
                             }else{
                                 //insert into total entries;
                                 boolean check = databaseAccess.add_total_entries(farmers_count, association_count, agro_input_count++, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
@@ -886,24 +887,25 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
                             //update bulk_buyer  count
                             total_entries =  databaseAccess.getTotalCount();
-                            Log.d(TAG, "onResponse: "+ total_entries);
+                            Log.d(TAG, "onResponse: total entries"+ total_entries);
                             if(total_entries!=null) {
                                 for (int i = 0; i < total_entries.size(); i++) {
-                                     total_entries_id  = total_entries.get(i).get("id");
-                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
-                                     association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
-                                     agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
-                                     bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
-                                     market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
-                                     market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
-                                     pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
-                                     scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
+                                    total_entries_id = total_entries.get(i).get("id");
+                                    farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
+                                    association_count = Integer.parseInt(total_entries.get(i).get("association_count"));
+                                    agro_input_count = Integer.parseInt(total_entries.get(i).get("agro_input_count"));
+                                    bulk_buyer_count = Integer.parseInt(total_entries.get(i).get("bulk_buyer_count"));
+                                    market_count = Integer.parseInt(total_entries.get(i).get("market_count"));
+                                    market_price_count = Integer.parseInt(total_entries.get(i).get("market_price_count"));
+                                    pest_report_count = Integer.parseInt(total_entries.get(i).get("pest_report_count"));
+                                    scouting_report_count = Integer.parseInt(total_entries.get(i).get("scouting_report_count"));
                                     Log.d(TAG, "onResponse: " + farmers_count + association_count + agro_input_count + bulk_buyer_count + market_count + market_price_count + pest_report_count + scouting_report_count);
 
-                                    bulk_buyer_count++;
+
+                                }
 
                                     //update total_entries
-                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count, market_count, market_price_count, pest_report_count, scouting_report_count);
+                                    boolean check = databaseAccess.update_total_entries(total_entries_id,farmers_count, association_count, agro_input_count, bulk_buyer_count++, market_count, market_price_count, pest_report_count, scouting_report_count);
                                     if (check) {
                                         Log.d(TAG, "onResponse: count added/ updated successfully");
 
@@ -911,7 +913,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                                         Log.d(TAG, "onResponse: failed to return count");
                                     }
 
-                                }
+
                             }else{
                                 //insert into total entries;
                                 boolean check = databaseAccess.add_total_entries(farmers_count, association_count, agro_input_count, bulk_buyer_count++, market_count, market_price_count, pest_report_count, scouting_report_count);

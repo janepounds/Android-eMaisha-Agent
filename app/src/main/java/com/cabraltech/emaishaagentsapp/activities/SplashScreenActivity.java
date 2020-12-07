@@ -51,7 +51,20 @@ public class SplashScreenActivity extends AppCompatActivity {
         t = new Thread(() -> {
             RequestAllRegions();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-              startForegroundService(new Intent(getBaseContext(),BroadcastService.class));
+//              startForegroundService(new Intent(getBaseContext(),BroadcastService.class));
+                Intent serviceIntent = new Intent(getBaseContext(), BroadcastService.class);
+                startService(serviceIntent);
+                bindService(serviceIntent, new ServiceConnection() {
+                    @Override
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        //retrieve an instance of the service here from the IBinder returned
+                        //from the onBind method to communicate with
+                    }
+
+                    @Override
+                    public void onServiceDisconnected(ComponentName name) {
+                    }
+                }, getBaseContext().BIND_AUTO_CREATE);
             } else {
                 startService(new Intent(getBaseContext(), BroadcastService.class));
             }

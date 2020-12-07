@@ -1129,7 +1129,7 @@ public class DatabaseAccess {
         values.put("pest_report_count",pest_report_count);
         values.put("scouting_report_count",scouting_report_count);
         long check = -1;
-        check = database.update("scouting_reports", values, "id=?", new String[]{id});
+        check = database.update("total_entries", values, "id=?", new String[]{id});
 
         if (check == -1) {
             return false;

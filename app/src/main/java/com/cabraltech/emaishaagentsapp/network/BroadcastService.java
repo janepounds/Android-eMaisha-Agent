@@ -17,7 +17,7 @@ public class BroadcastService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        startForeground(1,new Notification());
+//        startForeground(1,new Notification());
        new NetworkStateChecker().checkConnectivity(getApplicationContext());
     }
 }
