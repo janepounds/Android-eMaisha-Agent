@@ -120,6 +120,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + "farmers" + " ADD COLUMN  " + "next_of_kin_contact " + " TEXT");
 
         }
+        if (!columnExistsInTable(db,"farmers","nin")) {
+            db.execSQL("ALTER TABLE " + "farmers" + " ADD COLUMN  " + "nin " + " TEXT");
+
+        }
         if (!columnExistsInTable(db,"agro_input_dealers","full_address")) {
             db.execSQL(" ALTER TABLE " + "agro_input_dealers" + " ADD COLUMN " + "full_address " + " TEXT ");
         }
