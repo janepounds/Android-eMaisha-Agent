@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -47,8 +50,12 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         t = new Thread(() -> {
             RequestAllRegions();
-            Intent service = new Intent(getBaseContext(), BroadcastService.class);
-            startService(service);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+              startForegroundService(new Intent(getBaseContext(),BroadcastService.class));
+            } else {
+                startService(new Intent(getBaseContext(), BroadcastService.class));
+            }
+
             try {
                 t.sleep(2000);
             } catch (InterruptedException e) {

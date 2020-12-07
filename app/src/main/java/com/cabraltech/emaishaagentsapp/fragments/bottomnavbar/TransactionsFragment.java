@@ -75,6 +75,7 @@ public class TransactionsFragment extends Fragment {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getActivity());
         databaseAccess.open();
         total_entries = databaseAccess.getTotalCount();
+        if(total_entries!=null){
         for (int i = 0; i < total_entries.size(); i++) {
             int farmers_countt = Integer.parseInt(total_entries.get(i).get("farmers_count"));
             int association_countt = Integer.parseInt(total_entries.get(i).get("association_count"));
@@ -96,7 +97,7 @@ public class TransactionsFragment extends Fragment {
             pest_report_count.setText(pest_report_countt);
             scouting_report_count.setText(scouting_report_countt);
 
-
+        }
         }
 
     }
