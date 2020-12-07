@@ -306,7 +306,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             //update farmer count
                             total_entries =  databaseAccess.getTotalCount();
                             Log.d(TAG, "onResponse: "+ total_entries);
-                            if(total_entries!=null) {
+                            if(total_entries.size()>0) {
                                 for (int i = 0; i < total_entries.size(); i++) {
                                     total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
@@ -390,7 +390,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             //update pest report count
                             total_entries =  databaseAccess.getTotalCount();
                             Log.d(TAG, "onResponse: "+ total_entries);
-                            if(total_entries!=null) {
+                            if(total_entries.size()>0) {
                                 for (int i = 0; i < total_entries.size(); i++) {
                                     total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
@@ -473,7 +473,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             //update scouting report count
                             total_entries =  databaseAccess.getTotalCount();
                             Log.d(TAG, "onResponse: "+ total_entries);
-                            if(total_entries!=null) {
+                            if(total_entries.size()>0) {
                                 for (int i = 0; i < total_entries.size(); i++) {
                                     total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
@@ -552,7 +552,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             //update market price count
                             total_entries =  databaseAccess.getTotalCount();
                             Log.d(TAG, "onResponse: "+ total_entries);
-                            if(total_entries!=null) {
+                            if(total_entries.size()>0) {
                                 for (int i = 0; i < total_entries.size(); i++) {
                                     total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
@@ -633,7 +633,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             //update market count
                             total_entries =  databaseAccess.getTotalCount();
                             Log.d(TAG, "onResponse: "+ total_entries);
-                            if(total_entries!=null) {
+                            if(total_entries.size()>0) {
                                 for (int i = 0; i < total_entries.size(); i++) {
                                     total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
@@ -718,7 +718,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             //update association  count
                             total_entries =  databaseAccess.getTotalCount();
                             Log.d(TAG, "onResponse: "+ total_entries);
-                            if(total_entries!=null) {
+                            if(total_entries.size()>0) {
                                 for (int i = 0; i < total_entries.size(); i++) {
                                     total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
@@ -800,7 +800,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             //update agro_input  count
                             total_entries =  databaseAccess.getTotalCount();
                             Log.d(TAG, "onResponse: total entries"+ total_entries);
-                            if(total_entries!=null) {
+                            if(total_entries.size()>0) {
                                 for (int i = 0; i < total_entries.size(); i++) {
                                     total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));
@@ -888,7 +888,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                             //update bulk_buyer  count
                             total_entries =  databaseAccess.getTotalCount();
                             Log.d(TAG, "onResponse: total entries"+ total_entries);
-                            if(total_entries!=null) {
+                            if(total_entries.size()>0) {
                                 for (int i = 0; i < total_entries.size(); i++) {
                                     total_entries_id = total_entries.get(i).get("id");
                                     farmers_count = Integer.parseInt(total_entries.get(i).get("farmers_count"));

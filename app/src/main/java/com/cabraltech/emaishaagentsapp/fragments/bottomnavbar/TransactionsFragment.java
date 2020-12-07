@@ -88,14 +88,14 @@ public class TransactionsFragment extends Fragment {
 
 
             //set textviews
-            farmers_count.setText(farmers_countt);
-            association_count.setText(association_countt);
-            bulk_buyer_count.setText(bulk_buyer_countt);
-            agro_input_count.setText(agro_input_countt);
-            market_count.setText(market_countt);
-            market_price_count.setText(market_price_countt);
-            pest_report_count.setText(pest_report_countt);
-            scouting_report_count.setText(scouting_report_countt);
+            farmers_count.setText(farmers_countt+"");
+            association_count.setText(association_countt+ "");
+            bulk_buyer_count.setText(bulk_buyer_countt+ "");
+            agro_input_count.setText(agro_input_countt+"");
+            market_count.setText(market_countt+"");
+            market_price_count.setText(market_price_countt+"");
+            pest_report_count.setText(pest_report_countt+"");
+            scouting_report_count.setText(scouting_report_countt+ "");
 
         }
         }
