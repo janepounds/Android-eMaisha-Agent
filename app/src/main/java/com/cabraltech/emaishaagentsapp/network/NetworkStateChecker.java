@@ -55,7 +55,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
 
                 getMarkets();
-
                 for (int i = 0; i < farmersList.size(); i++) {
                     saveFarmersList(
                             farmersList.get(i).get("id"),
@@ -189,6 +188,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 }
 
                 agroInputDealers = databaseAccess.getUnSyncedDealers();
+                Log.w("AgroInputDealer",agroInputDealers.size()+"");
                 for (int i = 0; i < agroInputDealers.size(); i++) {
                     saveAgroInputDealer(
                             agroInputDealers.get(i).get("id"),
