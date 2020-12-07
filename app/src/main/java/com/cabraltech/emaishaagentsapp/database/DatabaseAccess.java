@@ -1090,4 +1090,53 @@ public class DatabaseAccess {
         database.close();
         return total_entries;
     }
+
+    //insert into total entries;
+    public boolean add_total_entries(int farmer_count,int association_count,int agro_input_count,int bulk_buyer_count,int market_count,int market_price_count,int pest_report_count, int scouting_report_count ){
+        this.database = openHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+        values.put("farmers_count",farmer_count);
+        values.put("association_count",association_count);
+        values.put("agro_input_count",agro_input_count);
+        values.put("bulk_buyer_count",bulk_buyer_count);
+        values.put("market_count",market_count);
+        values.put("market_price_count",market_price_count);
+        values.put("pest_report_count",pest_report_count);
+        values.put("scouting_report_count",scouting_report_count);
+        long check = database.insert("total_entries", null, values);
+        database.close();
+
+        //if data insert success, its return 1, if failed return -1
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //update total entries
+    public boolean update_total_entries(String id,int farmer_count,int association_count,int agro_input_count,int bulk_buyer_count,int market_count,int market_price_count,int pest_report_count, int scouting_report_count ){
+        ContentValues values = new ContentValues();
+        this.database = openHelper.getWritableDatabase();
+
+        values.put("farmers_count",farmer_count);
+        values.put("association_count",association_count);
+        values.put("agro_input_count",agro_input_count);
+        values.put("bulk_buyer_count",bulk_buyer_count);
+        values.put("market_count",market_count);
+        values.put("market_price_count",market_price_count);
+        values.put("pest_report_count",pest_report_count);
+        values.put("scouting_report_count",scouting_report_count);
+        long check = -1;
+        check = database.update("scouting_reports", values, "id=?", new String[]{id});
+
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
 }
