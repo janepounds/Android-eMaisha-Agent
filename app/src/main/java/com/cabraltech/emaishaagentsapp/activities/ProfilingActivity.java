@@ -1,18 +1,10 @@
 package com.cabraltech.emaishaagentsapp.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.cabraltech.emaishaagentsapp.R;
-import com.cabraltech.emaishaagentsapp.fragments.bottomnavbar.AccountFragment;
-import com.cabraltech.emaishaagentsapp.fragments.bottomnavbar.HomeFragment;
-import com.cabraltech.emaishaagentsapp.fragments.bottomnavbar.OffersFragment;
-import com.cabraltech.emaishaagentsapp.fragments.bottomnavbar.TransactionsFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ProfilingActivity extends AppCompatActivity {
 
@@ -43,7 +35,7 @@ public class ProfilingActivity extends AppCompatActivity {
                     selectedFragment = new OffersFragment();
                     break;
                 case R.id.navigation_transactions:
-                    selectedFragment = new TransactionsFragment();
+                    selectedFragment = new ReportsFragment();
                     break;
                 case R.id.navigation_account:
                     selectedFragment = new AccountFragment();

@@ -420,6 +420,7 @@
     <string name="pigeon_peas">Pigeon Peas</string>
     <string name="profiling_report">Profiling Report</string>
     <string name="reports">REPORTS</string>
+    <string name="title_report">Report</string>
     <array name="gender_array">
         <item>Select</item>
         <item>Female</item>

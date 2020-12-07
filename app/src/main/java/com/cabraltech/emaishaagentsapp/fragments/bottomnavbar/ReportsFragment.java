@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.cabraltech.emaishaagentsapp.R;
@@ -21,7 +20,7 @@ import com.cabraltech.emaishaagentsapp.models.TransactionsViewModel;
 import java.util.HashMap;
 import java.util.List;
 
-public class TransactionsFragment extends Fragment {
+public class ReportsFragment extends Fragment {
     private Context context;
 
     private TransactionsViewModel transactionsViewModel;
@@ -32,7 +31,7 @@ public class TransactionsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         transactionsViewModel =
                 ViewModelProviders.of(this).get(TransactionsViewModel.class);
-        View view = inflater.inflate(R.layout.fragment_transactions, container, false);
+        View view = inflater.inflate(R.layout.fragment_reports, container, false);
 //        final TextView textView = view.findViewById(R.id.text_notifications);
 ////        transactionsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 ////            @Override
@@ -43,7 +42,7 @@ public class TransactionsFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Transactions");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.title_report));
 
         initilizeviews(view);
 

@@ -28,9 +28,9 @@
 
     <fragment
         android:id="@+id/navigation_transactions"
-        android:name="com.cabraltech.emaishaagentsapp.fragments.bottomnavbar.TransactionsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_transactions" />
+        android:name="com.cabraltech.emaishaagentsapp.fragments.bottomnavbar.ReportsFragment"
+        android:label="@string/title_report"
+        tools:layout="@layout/fragment_reports" />
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.cabraltech.emaishaagentsapp.fragments.bottomnavbar.AccountFragment"
