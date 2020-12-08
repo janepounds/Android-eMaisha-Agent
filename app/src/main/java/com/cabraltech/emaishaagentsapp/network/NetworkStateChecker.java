@@ -44,6 +44,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
     }
 
     public void checkConnectivity(Context context) {
+
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(context);
@@ -237,6 +238,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 }
             }
         }
+
     }
 
     private void getMarkets() {

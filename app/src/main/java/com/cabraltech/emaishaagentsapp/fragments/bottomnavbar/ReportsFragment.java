@@ -1,8 +1,20 @@
 package com.cabraltech.emaishaagentsapp.fragments.bottomnavbar;
 
+import android.app.ProgressDialog;
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,17 +28,22 @@ import androidx.lifecycle.ViewModelProviders;
 import com.cabraltech.emaishaagentsapp.R;
 import com.cabraltech.emaishaagentsapp.database.DatabaseAccess;
 import com.cabraltech.emaishaagentsapp.models.TransactionsViewModel;
+import com.cabraltech.emaishaagentsapp.network.BroadcastService;
+import com.cabraltech.emaishaagentsapp.network.NetworkStateChecker;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class ReportsFragment extends Fragment {
+    private static final String TAG = "ReportsFragment";
     private Context context;
 
     private TransactionsViewModel transactionsViewModel;
     private TextView farmers_count,association_count,agro_input_count,bulk_buyer_count,market_count,market_price_count,pest_report_count,scouting_report_count;
     private List<HashMap<String, String>> total_entries;
-
+    private ProgressDialog progressDialog;
+    private BroadcastReceiver syncing_data;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         transactionsViewModel =
@@ -39,10 +56,12 @@ public class ReportsFragment extends Fragment {
 ////                textView.setText(s);
 ////            }
 ////        });
+
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.title_report));
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setIcon(R.drawable.ic_baseline_sync_24);
 
         initilizeviews(view);
 
@@ -100,4 +119,65 @@ public class ReportsFragment extends Fragment {
         }
 
     }
+
+
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getActivity().getMenuInflater();
+//        inflater.inflate(R.menu.sync, menu);
+//        return true;
+//    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.sync,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    //Handling Action Bar button click
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+
+            case R.id.action_sync_data:
+                // Initialize ProgressDialog
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setTitle(getString(R.string.processing));
+                progressDialog.setMessage("Syncing data Please Wait!!...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                //start syncing
+//                 syncing_data=new BroadcastReceiver() {
+//                    @Override
+//                    public void onReceive(Context context, Intent intent) {
+//                        new NetworkStateChecker().checkConnectivity(getContext());
+//                        progressDialog.dismiss();
+//                        Log.d(TAG, "onReceive: data syncing in progress");
+//                    }
+//                };
+
+                NetworkStateChecker networkStateChecker = new NetworkStateChecker();
+                networkStateChecker.checkConnectivity(getContext());
+
+
+
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+
+
+
 }
