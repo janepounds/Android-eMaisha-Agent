@@ -1,5 +1,6 @@
 package com.cabraltech.emaishaagentsapp.fragments.bottomnavbar;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -7,8 +8,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +35,8 @@ import com.cabraltech.emaishaagentsapp.models.TransactionsViewModel;
 import com.cabraltech.emaishaagentsapp.network.BroadcastService;
 import com.cabraltech.emaishaagentsapp.network.NetworkStateChecker;
 
+import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 import java.util.zip.Inflater;
@@ -44,6 +50,8 @@ public class ReportsFragment extends Fragment {
     private List<HashMap<String, String>> total_entries;
     private ProgressDialog progressDialog;
     private BroadcastReceiver syncing_data;
+    private WeakReference<Activity> weakReference;
+    Thread t;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         transactionsViewModel =
@@ -148,26 +156,9 @@ public class ReportsFragment extends Fragment {
         switch (item.getItemId()) {
 
             case R.id.action_sync_data:
-                // Initialize ProgressDialog
-                progressDialog = new ProgressDialog(getContext());
-                progressDialog.setTitle(getString(R.string.processing));
-                progressDialog.setMessage("Syncing data Please Wait!!...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-                //start syncing
-//                 syncing_data=new BroadcastReceiver() {
-//                    @Override
-//                    public void onReceive(Context context, Intent intent) {
-//                        new NetworkStateChecker().checkConnectivity(getContext());
-//                        progressDialog.dismiss();
-//                        Log.d(TAG, "onReceive: data syncing in progress");
-//                    }
-//                };
-
-                NetworkStateChecker networkStateChecker = new NetworkStateChecker();
-                networkStateChecker.checkConnectivity(getContext());
 
 
+                new MyTask(ReportsFragment.this).execute();
 
 
                 return true;
@@ -177,7 +168,62 @@ public class ReportsFragment extends Fragment {
 
     }
 
+    private class MyTask extends AsyncTask<String, Void, String> {
+        private WeakReference<ReportsFragment> fragmentReference;
+        private Context context;
 
+        // only retain a weak reference to the activity
+        MyTask(ReportsFragment context) {
+            fragmentReference = new WeakReference<>(context);
+            progressDialog = new ProgressDialog(context.context);
+            this.context = context.context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setIndeterminate(true);
+            progressDialog.setTitle(getString(R.string.processing));
+            progressDialog.setMessage("Syncing data Please Wait!!...");
+            progressDialog.setCancelable(false);
+            fragmentReference.get().requireActivity().runOnUiThread(() -> progressDialog.show());
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            NetworkStateChecker networkStateChecker = new NetworkStateChecker();
+            networkStateChecker.checkConnectivity(getContext());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                  requireActivity().runOnUiThread(new Runnable() {
+                      @Override
+                      public void run() {
+                          fragmentReference.get().requireActivity().runOnUiThread(() -> {
+                              Toast.makeText(context, "Successfully Synced data", Toast.LENGTH_SHORT).show();
+                              progressDialog.dismiss();
+
+                          Log.d(TAG, "run: reached !!");
+
+                      });
+                      }
+                  });
+
+
+
+                }
+            }, 3000);
+
+
+
+        }
+    }
 
 
 }

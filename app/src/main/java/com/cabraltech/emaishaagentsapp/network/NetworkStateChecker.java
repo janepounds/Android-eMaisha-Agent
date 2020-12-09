@@ -239,6 +239,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
             }
         }
 
+
     }
 
     private void getMarkets() {
@@ -273,6 +274,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 Log.d(TAG, "onResponse: Get markets error " + t.getMessage());
             }
         });
+
     }
 
     private void saveFarmersList(String id, String first_name, String last_name, String dob, String age, String gender, String nationality, String religion, String level_of_education, String marital_status,
